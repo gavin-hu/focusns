@@ -1,0 +1,13 @@
+<page>
+    <position name="menu">
+        <widget target="org.focusns.web.modules.system.common.SiteMenuWidget@doView" />
+    </position>
+    <!--
+    <position name="menubar">
+        <widget target="org.focusns.web.modules.system.common.ProjectWidget@doView" />
+    </position>
+    -->
+    <position name="submenu">
+        <widget target="org.focusns.web.modules.system.common.ProjectMenuWidget@doView" />
+    </position>
+</page>

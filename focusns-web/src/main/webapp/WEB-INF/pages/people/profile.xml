@@ -1,0 +1,7 @@
+<page extends="/global-project">
+	<position name="main">
+		<widget target="org.focusns.web.modules.profile.ProjectWidget@doView" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@input" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@output" />
+	</position>
+</page>

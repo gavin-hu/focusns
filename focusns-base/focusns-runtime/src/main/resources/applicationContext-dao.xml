@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="org.focusns.dao">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<context:property-placeholder location="classpath:/application.properties" />
+	
+	<tx:annotation-driven />
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="${jdbc.initSize}" />
+		<property name="maxActive" value="${jdbc.maxSize}" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+    
+    <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
+        <property name="dataSource" ref="dataSource" />
+        <property name="table" value="TB_SCHEMA_VERSION" />
+    </bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<set>
+				<!-- theme 
+				<value>classpath:/org/focusns/dao/theme/impl/PlaceholderDefinitionMapper.xml</value>
+				-->			
+				<!-- plugin 
+				<value>classpath:/org/focusns/dao/plugin/impl/PluginMapper.xml</value>
+				<value>classpath:/org/focusns/dao/plugin/impl/PluginRelationMapper.xml</value>
+				<value>classpath:/org/focusns/dao/plugin/impl/WidgetDefinitionMapper.xml</value>
+				<value>classpath:/org/focusns/dao/plugin/impl/ModuleDefinitionMapper.xml</value>
+				-->
+				<!-- core -->
+				<value>classpath:/org/focusns/dao/core/impl/UserMapper.xml</value>
+				<value>classpath:/org/focusns/dao/core/impl/ProjectMapper.xml</value>
+				<value>classpath:/org/focusns/dao/core/impl/ProjectFeatureMapper.xml</value>
+				<value>classpath:/org/focusns/dao/core/impl/ProjectAttributeMapper.xml</value>
+				<value>classpath:/org/focusns/dao/core/impl/ProjectHistroyMapper.xml</value>
+                <value>classpath:/org/focusns/dao/core/impl/ProjectCategoryMapper.xml</value>
+                
+                <!-- blog -->
+                <value>classpath:/org/focusns/dao/blog/impl/BlogTagMapper.xml</value>
+                <value>classpath:/org/focusns/dao/blog/impl/BlogPostMapper.xml</value>
+                <value>classpath:/org/focusns/dao/blog/impl/BlogCommentMapper.xml</value>
+			</set>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="org.focusns.web">
+    	<context:include-filter type="annotation" expression="org.focusns.web.widget.annotation.Widget"/>
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven />
+    
+    <!-- Configures Handler Interceptors -->
+    <mvc:interceptors>
+        <!-- pre -->
+        <ref local="portalInterceptor" />
+        <ref local="attributeInterceptor" />
+        <!-- post -->
+        <ref local="themeInterceptor" />
+        <ref local="redirectInterceptor" />
+        
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+    </mvc:interceptors>
+    
+    <!-- Handler Interceptors-->
+    <bean id="portalInterceptor" class="org.focusns.web.interceptor.PortalInterceptor" />
+    <bean id="attributeInterceptor" class="org.focusns.web.interceptor.AttributeInterceptor" />
+    
+    <bean id="themeInterceptor" class="org.focusns.web.interceptor.ThemeInterceptor" />
+    <bean id="redirectInterceptor" class="org.focusns.web.interceptor.RedirectInterceptor">
+        <property name="redirectMappings">
+            <map>
+                <entry key="/login.action">
+                    <value>/${user.project.code}/profile</value>
+                </entry>
+                <entry key="/project/logo/upload.action">
+                    <value>/${project.code}/admin/logo-edit</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" />
+    <mvc:resources mapping="/components/**" location="/WEB-INF/components/" cache-period="86400" />
+    
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    
+    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="number_format">0.######</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="template_update_delay">0</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+			<map>
+				<entry key="extends" value-ref="extendsDirective" />
+				<entry key="override" value-ref="overrideDirective" />
+				<entry key="block" value-ref="blockDirective" />
+				<entry key="super" value-ref="superDirective" />
+				<entry key="position" value-ref="positionDirective" />
+			</map>
+        </property>
+    </bean>
+    
+	<bean id="blockDirective" class="org.focusns.common.freemarker.directive.BlockDirective"/>
+	<bean id="extendsDirective" class="org.focusns.common.freemarker.directive.ExtendsDirective"/>
+	<bean id="overrideDirective" class="org.focusns.common.freemarker.directive.OverrideDirective"/>
+	<bean id="superDirective" class="org.focusns.common.freemarker.directive.SuperDirective"/>
+	<bean id="positionDirective" class="org.focusns.web.page.directive.PositionDirective" />
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+    	<property name="contentType" value="text/html;encoding=UTF-8" />
+    	<property name="prefix" value="/WEB-INF/" />
+    	<property name="suffix" value=".ftl" />
+    </bean>
+    
+    <!-- Page Render -->
+    <bean id="pageRender" class="org.focusns.web.page.render.impl.StandardPageRender">
+    	<property name="widgetEngine" ref="widgetEngine" />
+    	<property name="pageConfigFactory" ref="pageConfigFactory" />
+        <property name="widgetFilters">
+            <bean class="org.focusns.web.widget.security.SecurityWidgetFilter" />
+        </property>
+    </bean>
+    <bean id="pageConfigFactory" class="org.focusns.web.page.config.xml.XmlPageConfigFactory" />
+    <bean id="widgetEngine" class="org.focusns.web.widget.engine.impl.DefaultWidgetEngine">
+    	<property name="widgetFactory">
+    		<bean class="org.focusns.web.widget.engine.impl.DefaultWidgetFactory" />
+    	</property>
+    	<property name="widgetViewResolver">
+    		<bean class="org.focusns.web.widget.engine.impl.DefaultWidgetViewResolver">
+    			<property name="freeMarkerConfig" ref="freeMarkerConfigurer" />
+    		</bean>
+    	</property>
+    </bean>
+    
+</beans>

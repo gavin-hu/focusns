@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration debug="true">
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy/MM/dd HH:mm:ss,SSS} [%t] %-5p %c %x - %m%n" />
+		</layout>
+	</appender>
+	<appender name="performance" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="${webapp.root}/WEB-INF/logs/performance.log" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy/MM/dd HH:mm:ss,SSS} [%t] %-5p %c %x - %m%n" />
+		</layout>
+	</appender>
+    <appender name="application" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="${webapp.root}/WEB-INF/logs/application.log" />
+		<param name="append" value="true" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{yyyy/MM/dd HH:mm:ss,SSS} [%t] %-5p %c %x - %m%n" />
+		</layout>
+	</appender>
+    <!--
+    <appender name="async" class="org.apache.log4j.AsyncAppender">
+		<param name="BufferSize" value="128" />
+		<appender-ref ref="console" />
+    </appender>
+    -->
+    
+    <logger name="org.focusns.common.performance.filter.PerformanceMonitorFilter">  
+        <level value="TRACE" />
+        <appender-ref ref="performance" />   
+    </logger>
+    <logger name="org.springframework">  
+        <level value="DEBUG" />
+    </logger>
+    <root>
+		<priority value="INFO" />
+        <appender-ref ref="console" />
+        <appender-ref ref="application" />
+	</root>
+</log4j:configuration>

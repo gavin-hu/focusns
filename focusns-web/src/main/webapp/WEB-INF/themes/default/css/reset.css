@@ -1,0 +1,150 @@
+/********************************************
+   HTML ELEMENTS
+********************************************/ 
+
+/* top elements */
+* { margin:0; 	padding: 0; }
+
+body {
+	margin: 0; padding: 0;
+	font: 12px  微软雅黑,Verdana,sans-serif,宋体;
+	color: #333; 
+	background: #FFF url(../img/bg.gif) repeat-x;	
+	text-align: center; 
+}
+/* links */
+a {
+	color: #F9864D; 
+	background-color: inherit;
+	text-decoration: none;
+}
+a:hover {
+	color: #575757;
+	background-color: inherit;
+}
+
+/* headers */
+h1, h2, h3 {
+	font-family:  微软雅黑,Verdana,sans-serif,宋体;
+	font-weight: Bold; 		
+}
+h1 {
+	font-size: 150%;	
+	padding: 10px 10px 5px 10px;
+	color: #75A54B;
+	background-color: inherit;
+	border-bottom: 1px solid #EFF0F1;		
+}
+h2 {
+	font-size: 130%;
+}
+h3 {
+	font-size: 110%;	
+	color: #404040;
+}
+
+h2, h3, p {
+	padding: 10px;		
+	margin: 0;
+}
+
+/* images */
+img {
+	border: 3px solid #D5D5D5;
+}
+img.float-right {
+  margin: 5px 0px 5px 10px;  
+}
+img.float-left {
+  margin: 5px 10px 5px 0px;
+}
+
+#sidebar h1, 
+#sidebar p {
+	padding-left: 0;
+}
+
+ul, ol {
+	margin: 10px 20px;
+	padding: 0 20px;
+}
+
+code {
+  margin: 5px 0;
+  padding: 10px;
+  text-align: left;
+  display: block;
+  overflow: auto;  
+  font: 500 1em/1.5em 微软雅黑,Verdana,sans-serif,宋体;
+  /* white-space: pre; */
+  background: #FAFAFA;
+  border: 1px solid #f2f2f2;  
+  border-left: 4px solid #FF9966;
+}
+acronym {
+  cursor: help;
+  border-bottom: 1px solid #777;
+}
+blockquote {
+	margin: 10px;
+ 	padding: 0 0 0 32px;  	
+  	background: #FAFAFA url(../img/quote.gif) no-repeat 5px 10px !important; 
+	background-position: 8px 10px;
+	border: 1px solid #f2f2f2; 
+	border-left: 4px solid #FF9966;   
+}
+
+/* form elements */
+form {
+	margin:10px; padding: 5px;
+	border: 1px solid #f2f2f2; 
+	background-color: #FAFAFA; 
+}
+label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+}
+input {
+	padding: 3px;
+	border:1px solid #eee;
+	font: normal 1em Verdana, sans-serif;
+	color:#777;
+}
+textarea {
+	width:350px;
+	padding:3px;
+	font: normal 1em Verdana, sans-serif;
+	border:1px solid #eee;
+	height:100px;
+	display:block;
+	color:#777;
+}
+input.button { 
+	margin: 0; 
+	font: bolder 12px Verdana, Sans-serif; 
+	border: 1px solid #CCC; 
+	padding: 2px 3px; 
+	background: #FFF;
+	color: #75A54B;
+}
+/* search form */
+form.search {
+	position: absolute;
+	top: 15px; right: 5px;
+	padding: 0; margin: 0;
+	border: none;
+	background-color: transparent; 
+}
+form.search input.textbox { 
+	margin: 0; 
+	width: 120px;
+	border: 1px solid #CCC; 
+	background: #FFF;
+	color: #333; 	
+	vertical-align: top;
+}
+form.search input.button {
+	width: 60px;
+	vertical-align: top;
+}

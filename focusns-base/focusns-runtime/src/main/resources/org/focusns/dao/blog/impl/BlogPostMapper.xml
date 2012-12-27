@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.blog.BlogPostDao">
+
+	<resultMap id="BaseResultMap" type="org.focusns.model.blog.BlogPost">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+        <result column="tag_id" property="tagId" jdbcType="BIGINT" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="org.focusns.model.blog.BlogPost">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			select last_insert_id()
+		</selectKey>
+		insert into tb_blog_post (title, content, create_at, modify_at, tag_id, create_by_id) 
+		values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{tagId}, #{createById})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tb_blog_post where id = #{id}
+	</select>
+
+	<select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select a.*
+        from tb_blog_post a, tb_bost_category b,
+        where a.tag_id = b.id and b.project_id = #{projectId}
+	</select>
+	
+	<update id="update" parameterType="org.focusns.model.blog.BlogPost">
+		update tb_blog_post 
+		<set>
+			<if test="title != null" >
+		        title = #{title},
+			</if>
+			<if test="content != null" >
+		        content = #{content},
+			</if>
+            <if test="craeteAt != null" >
+		        create_at = #{createAt},
+			</if>
+            <if test="modifyAt != null" >
+		        modify_at = #{modifyAt},
+			</if>
+            <if test="tagId != null" >
+		        tag_id = #{tagId},
+			</if>
+            <if test="createById != null" >
+		        create_by_id = #{createById},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_blog_post where id = #{id}
+	</delete>
+    
+    <sql id="fetchByTagIdSql">
+        from tb_blog_post
+        where tag_id = #{tagId}
+    </sql>
+    <select id="fetchByTagId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="fetchByTagIdSql"/>
+    </select>
+     <select id="fetchByTagIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchByTagIdSql"/>
+    </select>
+    
+    <sql id="fetchByProjectIdSql">
+        from tb_blog_post a, tb_blog_tag b
+        where a.tag_id = b.id and b.project_id = #{projectId}
+    </sql>
+    <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select a.* <include refid="fetchByProjectIdSql"/>
+    </select>
+     <select id="fetchByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchByProjectIdSql"/>
+    </select>
+    
+</mapper>

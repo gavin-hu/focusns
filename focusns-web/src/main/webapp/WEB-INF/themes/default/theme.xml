@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+	<code>default</code>
+	<name>默认</name>
+	<version>1.0</version>
+	<author>Gavin Hu</author>
+	<email>haozhonghu@hotmail.com</email>
+	
+	<placeholders>
+		<placeholder>sidebar</placeholder>
+		<placeholder>main</placeholder>
+		<placeholder>rightbar</placeholder>
+	</placeholders>
+</theme>
