@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 FocuSNS.
+ * Copyright (C) 2012 FocusSNS.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,14 +22,33 @@ import org.focusns.model.common.Id;
 
 public class ProjectLogo extends Id {
 
-    private String imagePath;
+    private String title;
+    private String image;
+    //
+    private long projectId;
 
-    public String getImagePath() {
-        return imagePath;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
     
 }

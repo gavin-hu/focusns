@@ -48,7 +48,7 @@
 </div>
 <div id="footer">
 	<div id="footer-content">
-		&copy; Copyright 2011-2012 <strong>FocuSNS</strong> &nbsp;Developed by: <a href="#">Gavin Hu</a>
+		&copy; Copyright 2011-2012 <strong>FocusSNS</strong> &nbsp;Developed by: <a href="#">Gavin Hu</a>
 	</div>
 </div>
 </body>

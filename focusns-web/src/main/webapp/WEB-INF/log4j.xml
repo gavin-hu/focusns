@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 	<appender name="performance" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${webapp.root}/WEB-INF/logs/performance.log" />
+		<param name="file" value="${user.home}/.focusns/logs/performance.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"
@@ -16,7 +16,7 @@
 		</layout>
 	</appender>
     <appender name="application" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="${webapp.root}/WEB-INF/logs/application.log" />
+		<param name="file" value="${user.home}/.focusns/logs/application.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern"

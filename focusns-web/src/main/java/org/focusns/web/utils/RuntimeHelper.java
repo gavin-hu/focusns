@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 FocuSNS.
+ * Copyright (C) 2012 FocusSNS.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -30,17 +30,14 @@ import org.springframework.util.NumberUtils;
 
 public class RuntimeHelper {
 
-    private String TMP_DIR;
+    private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
     
-    private String RUNTIME_DIR;
+    private static final String RUNTIME_DIR = System.getProperty("user.home") + File.separator + ".focusns";
     
     private static ServletContext servletContext;
 
     public RuntimeHelper(ServletContext servletContext) {
         RuntimeHelper.servletContext = servletContext;
-        //
-        this.TMP_DIR = System.getProperty("java.io.tmpdir");
-        this.RUNTIME_DIR = servletContext.getRealPath("/WEB-INF/runtime");
     }
     
     public static RuntimeHelper getInstance() {

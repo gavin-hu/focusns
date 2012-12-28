@@ -1,3 +1,7 @@
+/**
+ * Source from the other open source project
+ * http://code.google.com/p/rapid-framework/
+ */
 package org.focusns.common.freemarker.directive;
 
 import java.io.IOException;
