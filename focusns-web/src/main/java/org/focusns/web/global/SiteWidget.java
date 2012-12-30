@@ -16,30 +16,50 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.modules.admin;
+package org.focusns.web.global;
 
 import java.util.List;
 import java.util.Map;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
+import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class AdminMenuWidget {
-    
+public class SiteWidget {
+
+    @Autowired
+    private ProjectCategoryService categoryService;
     @Autowired
     private ProjectFeatureService featureService;
     
-    public String doView(@Bind(value="project", scope = Bind.Scope.REQUEST) 
+    public String mainMenu(Map<String, Object> model) {
+        List<ProjectCategory> categories = categoryService.listCategories(true);
+        model.put("categories", categories);
+        return "site/menu-main";
+    }
+    
+    public String userMenu() {
+        return "site/menu-user";
+    }
+    
+    public String projectMenu(@Bind(value="project", scope = Bind.Scope.REQUEST) 
             Project project, Map<String, Object> model) {
-         //
         List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());
         model.put("features", features);
-        //
-        return "admin/menu";
+		return "site/menu-project";
+	}
+    
+    public String copyright() {
+        return "site/copyright";
+    }
+    
+    public String loginForm() {
+        return "site/login-form";
     }
     
 }

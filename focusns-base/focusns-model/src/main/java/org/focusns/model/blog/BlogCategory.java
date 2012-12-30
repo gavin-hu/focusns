@@ -16,19 +16,38 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.blog;
+package org.focusns.model.blog;
 
-import java.util.List;
-import org.focusns.model.blog.BlogTag;
+import org.focusns.model.common.Id;
 
-public interface BlogTagService {
+public class BlogCategory extends Id {
     
-    void createBlogTag(BlogTag tag);
-    
-    void modifyBlogTag(BlogTag tag);
-    
-    void removeBlogTag(BlogTag tag);
-    
-    List<BlogTag> getBlogTags(long projectId);
+    private String label;
+    //
+    private long projectId;
+
+    public BlogCategory() {
+    }
+
+    public BlogCategory(long projectId, String name) {
+        this.label = name;
+        this.projectId = projectId;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
     
 }

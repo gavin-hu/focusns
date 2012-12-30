@@ -16,30 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.modules.profile;
+package org.focusns.dao.blog;
 
 import java.util.List;
-import java.util.Map;
-import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectAttribute;
-import org.focusns.service.core.ProjectAttributeService;
-import org.focusns.web.widget.annotation.Bind;
-import org.focusns.web.widget.annotation.Widget;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.focusns.dao.common.BaseDao;
+import org.focusns.model.blog.BlogCategory;
 
-@Widget
-public class ProjectWidget {
+public interface BlogCategoryDao extends BaseDao<BlogCategory> {
     
-    @Autowired
-    private ProjectAttributeService attributeService;
+    List<BlogCategory> selectByProjectId(long projectId);
     
-	public String doView(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
-        //
-        List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
-        model.put("attributes", attributes);
-        //
-        return "profile/project-view";
-    }
-	
 }

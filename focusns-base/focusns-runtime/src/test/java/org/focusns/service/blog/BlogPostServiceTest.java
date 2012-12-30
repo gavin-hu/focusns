@@ -3,7 +3,7 @@ package org.focusns.service.blog;
 import java.util.Date;
 import junit.framework.Assert;
 import org.focusns.model.blog.BlogPost;
-import org.focusns.model.blog.BlogTag;
+import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.User;
@@ -22,7 +22,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private BlogTagService tagService;
+    private BlogCategoryService tagService;
     @Autowired
     private BlogPostService postService;
     
@@ -31,8 +31,8 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         Project project = projectService.getProject("focusns");
         Assert.assertNotNull(project);
         //
-        BlogTag blogTag = new BlogTag();
-        blogTag.setName("未分类");
+        BlogCategory blogTag = new BlogCategory();
+        blogTag.setLabel("未分类");
         blogTag.setProjectId(project.getId());
         //
         tagService.createBlogTag(blogTag);

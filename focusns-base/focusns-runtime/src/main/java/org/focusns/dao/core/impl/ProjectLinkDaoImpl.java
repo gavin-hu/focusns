@@ -21,7 +21,9 @@ package org.focusns.dao.core.impl;
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.core.ProjectLink;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink>
     implements ProjectLinkDao {
     

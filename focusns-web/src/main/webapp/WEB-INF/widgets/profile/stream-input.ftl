@@ -1,16 +1,21 @@
-<#import "../common.ftl" as c>
+<#import "/WEB-INF/libftl/utils.ftl" as utils>
 
-<div id="stream">
-    <form action="<@c.urlPrefix />/project/histroy-edit.action" method="post">
-        <textarea name="content"></textarea>
+<div class="widget">
+    <div class="widget-bd">
+        <form action="<@utils.urlPrefix />/project/histroy-edit.action" method="post">
+            <div class="share">
+                <textarea name="content" rows="3" cols="50"></textarea>
+                <input type="hidden" name="createById" value="${Session.user.id}" />
+                <input type="hidden" name="targetId" value="${Request.project.id}" />
+                <input type="hidden" name="targetType" value="${Request.project.class}" />
+                <input type="hidden" name="projectId" value="${Request.project.id}" />
 
-        <div class="submit">
-            <input type="hidden" name="createById" value="${Session.user.id}" />
-            <input type="hidden" name="targetId" value="${Request.project.id}" />
-            <input type="hidden" name="targetType" value="${Request.project.class}" />
-            <input type="hidden" name="projectId" value="${Request.project.id}" />
-            <button type="submit" name="action" value="create">分享</button>
-        </div>
-    </form>
-    
+                <div class="weibo-actions">
+                    <span class="action-share">
+                        <button type="submit" name="action" value="create">分享</button>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

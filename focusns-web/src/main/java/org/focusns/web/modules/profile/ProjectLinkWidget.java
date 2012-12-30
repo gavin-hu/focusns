@@ -18,28 +18,18 @@
  */
 package org.focusns.web.modules.profile;
 
-import java.util.List;
-import java.util.Map;
-import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectAttribute;
-import org.focusns.service.core.ProjectAttributeService;
-import org.focusns.web.widget.annotation.Bind;
+import org.focusns.service.core.ProjectLinkService;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class ProjectWidget {
+public class ProjectLinkWidget {
     
     @Autowired
-    private ProjectAttributeService attributeService;
+    private ProjectLinkService linkService;
     
-	public String doView(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
-        //
-        List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
-        model.put("attributes", attributes);
-        //
-        return "profile/project-view";
+    public String doList() {
+        return "profile/link-list";
     }
-	
+    
 }

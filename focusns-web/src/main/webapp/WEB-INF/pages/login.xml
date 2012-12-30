@@ -1,5 +1,5 @@
 <page extends="/global">
-	<position name="main">
-		<widget target="org.focusns.web.modules.system.common.LoginWidget@doView" />
+	<position name="mainColumn">
+		<widget target="org.focusns.web.global.SiteWidget@loginForm" />
 	</position>
 </page>

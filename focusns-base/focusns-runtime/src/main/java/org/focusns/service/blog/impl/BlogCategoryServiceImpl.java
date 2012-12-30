@@ -19,33 +19,33 @@
 package org.focusns.service.blog.impl;
 
 import java.util.List;
-import org.focusns.dao.blog.BlogTagDao;
-import org.focusns.model.blog.BlogTag;
-import org.focusns.service.blog.BlogTagService;
+import org.focusns.dao.blog.BlogCategoryDao;
+import org.focusns.model.blog.BlogCategory;
+import org.focusns.service.blog.BlogCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class BlogTagServiceImpl implements BlogTagService {
+public class BlogCategoryServiceImpl implements BlogCategoryService {
 
     @Autowired
-    private BlogTagDao tagDao;
+    private BlogCategoryDao tagDao;
     
-    public void createBlogTag(BlogTag tag) {
+    public void createBlogTag(BlogCategory tag) {
         tagDao.insert(tag);
     }
 
-    public void modifyBlogTag(BlogTag tag) {
+    public void modifyBlogTag(BlogCategory tag) {
         tagDao.update(tag);
     }
 
-    public void removeBlogTag(BlogTag tag) {
+    public void removeBlogTag(BlogCategory tag) {
         tagDao.delete(tag.getId());
     }
 
-    public List<BlogTag> getBlogTags(long projectId) {
+    public List<BlogCategory> getBlogTags(long projectId) {
         return tagDao.selectByProjectId(projectId);
     }
     

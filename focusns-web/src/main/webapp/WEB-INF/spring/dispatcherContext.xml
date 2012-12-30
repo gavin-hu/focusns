@@ -82,6 +82,7 @@
     	<property name="contentType" value="text/html;encoding=UTF-8" />
     	<property name="prefix" value="/WEB-INF/" />
     	<property name="suffix" value=".ftl" />
+        <property name="cache" value="false" />
     </bean>
     
     <!-- Page Render -->

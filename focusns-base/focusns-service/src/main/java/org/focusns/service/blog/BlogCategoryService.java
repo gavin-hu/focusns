@@ -16,14 +16,19 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.dao.blog;
+package org.focusns.service.blog;
 
 import java.util.List;
-import org.focusns.dao.common.BaseDao;
-import org.focusns.model.blog.BlogTag;
+import org.focusns.model.blog.BlogCategory;
 
-public interface BlogTagDao extends BaseDao<BlogTag> {
+public interface BlogCategoryService {
     
-    List<BlogTag> selectByProjectId(long projectId);
+    void createBlogTag(BlogCategory tag);
+    
+    void modifyBlogTag(BlogCategory tag);
+    
+    void removeBlogTag(BlogCategory tag);
+    
+    List<BlogCategory> getBlogTags(long projectId);
     
 }

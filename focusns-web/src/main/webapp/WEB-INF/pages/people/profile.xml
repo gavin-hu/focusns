@@ -1,5 +1,8 @@
 <page extends="/global-project">
-	<position name="main">
+    <position name="leftColumn">
+        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@doList" />
+    </position>
+    <position name="mainColumn">
 		<widget target="org.focusns.web.modules.profile.ProjectWidget@doView" />
         <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@input" />
         <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@output" />

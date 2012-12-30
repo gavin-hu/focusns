@@ -1,55 +1,67 @@
+<#import "/WEB-INF/libftl/utils.ftl" as utils>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<title>Focus SNS</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="${Request.contextPath}/themes/default/css/reset.css" type="text/css" />
-	<link rel="stylesheet" href="${Request.contextPath}/themes/default/css/layout.css" type="text/css" />
-	<link rel="stylesheet" href="${Request.contextPath}/themes/default/css/console.css" type="text/css" />
-	<link href="${Request.contextPath}/themes/default/img/favicon.ico" type="image/x-icon" rel="shortcut icon" />
-    
-    <link rel="stylesheet" href="${Request.contextPath}/components/Jcrop-master/css/jquery.Jcrop.min.css" type="text/css" />
-    
-    <script type="text/javascript" src="${Request.contextPath}/components/jQuery/jquery.min.js" ></script>
-    <script type="text/javascript" src="${Request.contextPath}/components/Jcrop-master/js/jquery.Jcrop.min.js"></script>
-    
-    <link rel="stylesheet" href="${Request.contextPath}/components/markitup/sets/default/style.css" type="text/css" />
-    <link rel="stylesheet" href="${Request.contextPath}/components/markitup/skins/simple/style.css" type="text/css" />
-    <script type="text/javascript" src="${Request.contextPath}/components/markitup/jquery.markitup.js" ></script>
-    <script type="text/javascript" src="${Request.contextPath}/components/markitup/sets/default/set.js" ></script>
-</head>
-<body>
-<div id="wrap">
-	<div id="header">
-	    <form method="post" class="search" action="#">
-	      <p>
-	        <input name="search_query" class="textbox" type="text" />
-	        <input name="search" class="button" value="Search" type="submit" />
-	      </p>
-	    </form>
-	    <h1 id="logo">FocuS<span>NS</span></h1>
-	    <h2 id="slogan">FocuSNS是一个开源的主题社会化网络软件</h2>
-	</div>
-    <@position name="menu" >
-	<div id="menu">${menu}</div>
-    </@position>
-    <@position name="menubar">
-    <div id="menubar">${menubar}</div>
-    </@position>
-    <@position name="submenu" >
-	<div id="submenu">${submenu}</div>
-    </@position>
-    <@position name="sidebar">
-    <div id="sidebar">${sidebar}</div>
-    </@position>
-    <@position name="main" >
-	<div id="main"> ${main}<br /></div>
-    </@position>
-</div>
-<div id="footer">
-	<div id="footer-content">
-		&copy; Copyright 2011-2012 <strong>FocusSNS</strong> &nbsp;Developed by: <a href="#">Gavin Hu</a>
-	</div>
-</div>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+    <head>
+        <title>FocusSNS</title>
+        <meta content="zh-CN" http-equiv="Content-Language" />
+        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        <meta content="" name="Keywords" />
+        <meta content="" name="Description" />
+        <!-- Base Stylesheet -->
+        <#include "stylesheet.ftl" />
+        <!-- Theme Stylesheet-->
+        <#include "styletheme.ftl" />
+        
+        <script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
+    </head>
+    <body <#if category?? || feature??>class="${category.code} ${feature.code}"</#if>>
+        <div id="hd" class="yui3-g">
+        	<div class="yui3-u-1">
+                <div class="area">
+                    <div id="logo">
+                        <a href="#">FocusSNS</a>
+                    </div>
+                    <@utils.position name="userMenu" >
+                        <div id="user-menu">${userMenu}</div>
+                    </@utils.position>
+                </div>
+                <@utils.position name="mainMenu" >
+                <div id="main-menu">
+                    <div class="bar">
+                        <div class="bar-in">${mainMenu}</div>
+                    </div>
+                </div>
+                </@utils.position>
+                <@utils.position name="projectMenu">
+                <div id="project-menu">
+                    <div class="subbar">
+                        <div class="subbar-in">${projectMenu}</div>
+                    </div>
+                </div>
+                </@utils.position>
+            </div>
+        </div>
+        <div id="bd" class="yui3-g">
+            <#-- render left column if exists -->
+            <@utils.position name="leftColumn">
+            <div id="left-column" class="yui3-u">${leftColumn}</div>
+            </@utils.position>
+            <#-- render main column if exists -->
+            <@utils.position name="mainColumn">
+            <div id="main-column" class="yui3-u">${mainColumn}</div>
+            </@utils.position>
+            <#-- render right column if exists -->
+            <@utils.position name="rightColumn">
+            <div id="right-column" class="yui3-u">${rightColumn}</div>
+            </@utils.position>
+        </div>
+        <div id="ft" class="yui3-g">
+            <div class="yui3-u-1">
+                <@utils.position name="footer">
+                <div id="footer">${footer}</div>
+                </@utils.position>
+            </div>
+        </div>
+    </body>
 </html>

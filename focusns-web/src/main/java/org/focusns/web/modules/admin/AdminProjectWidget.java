@@ -30,7 +30,7 @@ import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class AdminProfileWidget {
+public class AdminProjectWidget {
     
     @Autowired
     private ProjectAttributeService attributeService;

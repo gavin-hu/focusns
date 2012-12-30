@@ -16,38 +16,21 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.model.blog;
+package org.focusns.dao.blog.impl;
 
-import org.focusns.model.common.Id;
+import java.util.List;
+import org.focusns.dao.blog.BlogCategoryDao;
+import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.model.blog.BlogCategory;
+import org.springframework.stereotype.Repository;
 
-public class BlogTag extends Id {
-    
-    private String name;
-    //
-    private long projectId;
+@Repository
+public class BlogCategoryDaoImpl extends MyBatisBaseDao<BlogCategory> 
+    implements BlogCategoryDao {
 
-    public BlogTag() {
+    public List<BlogCategory> selectByProjectId(long projectId) {
+        return getSqlSession()
+                .selectList(NAMESPACE.concat(".selectByProjectId"), projectId);
     }
 
-    public BlogTag(long projectId, String name) {
-        this.name = name;
-        this.projectId = projectId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
-    
 }

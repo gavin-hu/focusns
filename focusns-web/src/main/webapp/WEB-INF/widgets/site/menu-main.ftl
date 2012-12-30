@@ -1,5 +1,4 @@
-<div class="bar">
-    <div class="bar-in">
+
         <ul class="menu">
             <li><a href="${Request.contextPath}/index">首页</a></li>
             <#list Request.categories as category>
@@ -10,8 +9,10 @@
         <div class="search">                        	
             <form class="ajax" action="#">
                 <select name="category">
-                    <option>成员</option>
-                    <option>圈子</option>
+                    <option value="">全部</option>
+                    <#list Request.categories as category>
+                    <option value="${category.code}">${category.label}</option>
+                    </#list>
                 </select>
                 <input type="text" name="keywords" />
                 <input type="submit" value="搜索" />

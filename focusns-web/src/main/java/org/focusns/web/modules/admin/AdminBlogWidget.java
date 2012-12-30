@@ -20,9 +20,9 @@ package org.focusns.web.modules.admin;
 
 import java.util.List;
 import java.util.Map;
-import org.focusns.model.blog.BlogTag;
+import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
-import org.focusns.service.blog.BlogTagService;
+import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +31,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AdminBlogWidget {
     
     @Autowired
-    private BlogTagService tagService;
+    private BlogCategoryService categoryService;
     
-    public String editTag(Map<String, Object> model,
+    public String editCategory(Map<String, Object> model,
             @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
         //
-        List<BlogTag> blogTags = tagService.getBlogTags(project.getId());
-        model.put("blogTags", blogTags);
+        List<BlogCategory> blogCategories = categoryService.getBlogTags(project.getId());
+        model.put("blogCategories", blogCategories);
         //
-        return "admin/blog/tag-edit";
+        return "admin/blog/category-edit";
+    }
+    
+    public String editPost(Map<String, Object> model,
+            @Bind(value="id", scope= Bind.Scope.PARAMETER) long id,
+            @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
+        //
+        return "admin/blog/post-edit";
     }
     
 }

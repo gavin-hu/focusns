@@ -16,30 +16,35 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.modules.profile;
+package org.focusns.web.modules.admin;
 
 import java.util.List;
 import java.util.Map;
 import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectAttribute;
-import org.focusns.service.core.ProjectAttributeService;
+import org.focusns.model.core.ProjectFeature;
+import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class ProjectWidget {
+public class AdminWidget {
     
     @Autowired
-    private ProjectAttributeService attributeService;
+    private ProjectFeatureService featureService;
     
-	public String doView(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
+    public String doMenu(@Bind(value="project", scope = Bind.Scope.REQUEST) 
+            Project project, Map<String, Object> model) {
+         //
+        List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());
+        model.put("features", features);
         //
-        List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
-        model.put("attributes", attributes);
-        //
-        return "profile/project-view";
+        return "admin/menu";
     }
-	
+    
+    public String doSummary() {
+        //
+        return "admin/summary";
+    }
+     
 }

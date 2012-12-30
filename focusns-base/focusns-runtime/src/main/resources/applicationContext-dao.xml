@@ -56,7 +56,7 @@
                 <value>classpath:/org/focusns/dao/core/impl/ProjectCategoryMapper.xml</value>
                 
                 <!-- blog -->
-                <value>classpath:/org/focusns/dao/blog/impl/BlogTagMapper.xml</value>
+                <value>classpath:/org/focusns/dao/blog/impl/BlogCategoryMapper.xml</value>
                 <value>classpath:/org/focusns/dao/blog/impl/BlogPostMapper.xml</value>
                 <value>classpath:/org/focusns/dao/blog/impl/BlogCommentMapper.xml</value>
 			</set>

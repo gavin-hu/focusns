@@ -1,8 +1,8 @@
 <page extends="/global-project">
-    <position name="sidebar">
-        <widget target="org.focusns.web.modules.admin.AdminMenuWidget@doView" />
+    <position name="leftColumn">
+        <widget target="org.focusns.web.modules.admin.AdminWidget@doMenu" />
     </position>
-	<position name="main">
-		<widget target="org.focusns.web.modules.profile.ProjectWidget@doView" />
+	<position name="mainColumn">
+		<widget target="org.focusns.web.modules.admin.AdminWidget@doSummary" />
 	</position>
 </page>

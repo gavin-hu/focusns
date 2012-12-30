@@ -1,5 +1,8 @@
 <page>
-    <position name="menu">
-        <widget target="org.focusns.web.modules.system.common.SiteMenuWidget@doView" />
+    <position name="userMenu">
+        <widget target="org.focusns.web.global.SiteWidget@userMenu" />
+    </position>
+    <position name="mainMenu">
+        <widget target="org.focusns.web.global.SiteWidget@mainMenu" />
     </position>
 </page>

@@ -3,6 +3,6 @@
         <widget target="org.focusns.web.modules.admin.AdminWidget@doMenu" />
     </position>
 	<position name="mainColumn">
-		<widget target="org.focusns.web.modules.admin.AdminProjectWidget@editProject" />
+		<widget target="org.focusns.web.modules.admin.AdminBlogWidget@editCategory" />
 	</position>
 </page>

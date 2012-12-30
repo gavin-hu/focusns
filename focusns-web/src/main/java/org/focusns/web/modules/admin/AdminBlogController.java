@@ -18,8 +18,8 @@
  */
 package org.focusns.web.modules.admin;
 
-import org.focusns.model.blog.BlogTag;
-import org.focusns.service.blog.BlogTagService;
+import org.focusns.model.blog.BlogCategory;
+import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.web.utils.ActionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,12 +32,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminBlogController {
     
     @Autowired
-    private BlogTagService blogTagService;
+    private BlogCategoryService blogTagService;
     
-    @RequestMapping("/blog/tag-edit.action")
+    @RequestMapping("/blog/category-edit.action")
     public String editTag(@RequestParam String action,
             @PathVariable("projectCode") String projectCode,
-            @PathVariable("featureCode") String featureCode, BlogTag blogTag) {
+            @PathVariable("featureCode") String featureCode, BlogCategory blogTag) {
         //
         if(ActionHelper.isCreate(action)) {
             blogTagService.createBlogTag(blogTag);
@@ -49,7 +49,7 @@ public class AdminBlogController {
             blogTagService.removeBlogTag(blogTag);
         }
         //
-        return "redirect:/"+projectCode+"/"+featureCode+"/blog/tag-edit";
+        return "redirect:/"+projectCode+"/"+featureCode+"/blog/category-edit";
     }
     
 }

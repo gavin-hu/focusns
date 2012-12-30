@@ -1,7 +1,7 @@
 package org.focusns.service.blog;
 
 import java.util.List;
-import org.focusns.model.blog.BlogTag;
+import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.AbstractServiceTest;
 import org.focusns.service.core.ProjectService;
@@ -11,20 +11,20 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Ignore
-public class BlogTagServiceTest extends AbstractServiceTest {
+public class BlogCategoryServiceTest extends AbstractServiceTest {
     
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private BlogTagService blogTagService;
+    private BlogCategoryService blogCategoryService;
     
     @Test
     public void testCreateBlogTag() {
         Project project = projectService.getProject("focusns");
         Assert.assertNotNull(project);
         //
-        BlogTag blogTag = new BlogTag(project.getId(), "未分类");
-        blogTagService.createBlogTag(blogTag);
+        BlogCategory blogTag = new BlogCategory(project.getId(), "未分类");
+        blogCategoryService.createBlogTag(blogTag);
     }
     
     @Test
@@ -32,9 +32,9 @@ public class BlogTagServiceTest extends AbstractServiceTest {
         Project project = projectService.getProject("focusns");
         Assert.assertNotNull(project);
         //
-        List<BlogTag> blogTags = blogTagService.getBlogTags(project.getId());
-        for(BlogTag blogTag : blogTags) {
-            blogTagService.removeBlogTag(blogTag);
+        List<BlogCategory> blogTags = blogCategoryService.getBlogTags(project.getId());
+        for(BlogCategory blogTag : blogTags) {
+            blogCategoryService.removeBlogTag(blogTag);
         }
     }
     

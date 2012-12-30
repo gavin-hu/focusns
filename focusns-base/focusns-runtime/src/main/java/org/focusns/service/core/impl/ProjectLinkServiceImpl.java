@@ -18,25 +18,34 @@
  */
 package org.focusns.service.core.impl;
 
+import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.service.core.ProjectLinkService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class ProjectLinkServiceImpl implements ProjectLinkService {
 
+    @Autowired
+    private ProjectLinkDao linkDao;
+    
     public ProjectLink getProjectLink(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return linkDao.select(id);
     }
 
     public void createProjectLink(ProjectLink link) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        linkDao.insert(link);
     }
 
     public void modifyProjectLink(ProjectLink link) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        linkDao.update(link);
     }
 
     public void removeProjectLink(ProjectLink link) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        linkDao.delete(link.getId());
     }
     
 }
