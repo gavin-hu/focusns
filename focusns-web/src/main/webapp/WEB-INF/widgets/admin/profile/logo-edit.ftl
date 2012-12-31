@@ -32,26 +32,14 @@
 </div>
 
 <script type="text/javascript">
-YUI().use('node', 'yui2-imagecropper', function(Y) {
-    //
-    Y.one('body').addClass('yui-skin-sam');
-    //
-    var YAHOO = Y.YUI2;
-    var cropper = new YAHOO.widget.ImageCropper('cropper', {
-        initWidth:100,
-        initHeight:100,
+$(function(){
+    $('#cropper').Jcrop({
+        onSelect:function(c) {
+            $('#x').val(c.x);
+            $('#y').val(c.y);
+            $('#w').val(c.w);
+            $('#h').val(c.h);
+        }
     });
-    var cropHandler = function(){
-        var region = cropper.getCropCoords(); 
-        Y.one('#x').set('value', region.left);
-        Y.one('#y').set('value', region.top);
-        Y.one('#w').set('value', region.width);
-        Y.one('#h').set('value', region.height);
-    }
-
-    cropper.on('moveEvent', cropHandler);
-    
-    cropHandler.call();
-
 });
 </script>

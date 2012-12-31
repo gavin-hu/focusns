@@ -35,7 +35,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         blogTag.setLabel("未分类");
         blogTag.setProjectId(project.getId());
         //
-        tagService.createBlogTag(blogTag);
+        tagService.createBlogCategory(blogTag);
         //
         User user = userService.getUser("admin");
         Assert.assertNotNull(user);
@@ -46,7 +46,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         blogPost.setContent("Blog Content");
         blogPost.setCreateAt(now);
         blogPost.setModifyAt(now);
-        blogPost.setTagId(blogTag.getId());
+        blogPost.setCategoryId(blogTag.getId());
         blogPost.setCreateById(user.getId());
         //
         postService.createBlogPost(blogPost);

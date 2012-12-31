@@ -47,8 +47,8 @@
         </property>
     </bean>
     
+    <mvc:resources mapping="/libjs/**" location="/WEB-INF/libjs/" />
     <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" />
-    <mvc:resources mapping="/components/**" location="/WEB-INF/components/" cache-period="86400" />
     
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
     

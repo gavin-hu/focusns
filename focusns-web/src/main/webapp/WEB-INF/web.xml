@@ -38,18 +38,22 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--
+    <filter>
+        <filter-name>applicationSetupFilter</filter-name>
+        <filter-class>org.focusns.web.setup.ApplicationSetupFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>applicationSetupFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.focusns.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring/dispatcherContext.xml</param-value>
-        </init-param>
-        <init-param>
-            <param-name>contextInitializerClasses</param-name>
-            <param-value>
-                org.focusns.web.initializer.ApplicationRuntimeInitializer
-            </param-value>
         </init-param>
     </servlet>
     <servlet-mapping>

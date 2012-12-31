@@ -28,14 +28,10 @@ public class BlogPost extends Id {
     private Date createAt;
     private Date modifyAt;
     //
-    private long tagId;
+    private long categoryId;
     private long createById;
 
     public BlogPost() {
-    }
-
-    public BlogPost(long tagId) {
-        this.tagId = tagId;
     }
 
     public String getTitle() {
@@ -70,12 +66,12 @@ public class BlogPost extends Id {
         this.modifyAt = modifyAt;
     }
 
-    public long getTagId() {
-        return tagId;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setTagId(long tagId) {
-        this.tagId = tagId;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public long getCreateById() {

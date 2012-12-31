@@ -24,7 +24,7 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
         Assert.assertNotNull(project);
         //
         BlogCategory blogTag = new BlogCategory(project.getId(), "未分类");
-        blogCategoryService.createBlogTag(blogTag);
+        blogCategoryService.createBlogCategory(blogTag);
     }
     
     @Test
@@ -32,9 +32,9 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
         Project project = projectService.getProject("focusns");
         Assert.assertNotNull(project);
         //
-        List<BlogCategory> blogTags = blogCategoryService.getBlogTags(project.getId());
+        List<BlogCategory> blogTags = blogCategoryService.getBlogCategories(project.getId());
         for(BlogCategory blogTag : blogTags) {
-            blogCategoryService.removeBlogTag(blogTag);
+            blogCategoryService.removeBlogCategory(blogTag);
         }
     }
     

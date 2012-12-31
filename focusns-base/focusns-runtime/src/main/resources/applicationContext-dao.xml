@@ -11,7 +11,16 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
 
-	<context:property-placeholder location="classpath:/application.properties" />
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="localOverride" value="true" />
+        <property name="locations">
+            <array>
+                <value>classpath:/application.properties</value>
+                <value>file:${user.home}/.focusns/application.properties</value>
+            </array>
+        </property>
+    </bean>
 	
 	<tx:annotation-driven />
 	

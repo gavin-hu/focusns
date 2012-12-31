@@ -25,7 +25,7 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.utils.RuntimeHelper;
+import org.focusns.runtime.RuntimeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;

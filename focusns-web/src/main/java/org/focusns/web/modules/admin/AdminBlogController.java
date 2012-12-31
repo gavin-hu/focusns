@@ -40,13 +40,13 @@ public class AdminBlogController {
             @PathVariable("featureCode") String featureCode, BlogCategory blogTag) {
         //
         if(ActionHelper.isCreate(action)) {
-            blogTagService.createBlogTag(blogTag);
+            blogTagService.createBlogCategory(blogTag);
         }
         if(ActionHelper.isModify(action)) {
-            blogTagService.modifyBlogTag(blogTag);
+            blogTagService.modifyBlogCategory(blogTag);
         }
         if(ActionHelper.isRemove(action)) {
-            blogTagService.removeBlogTag(blogTag);
+            blogTagService.removeBlogCategory(blogTag);
         }
         //
         return "redirect:/"+projectCode+"/"+featureCode+"/blog/category-edit";

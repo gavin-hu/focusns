@@ -18,8 +18,6 @@
  */
 package org.focusns.web.initializer;
 
-import javax.servlet.ServletContext;
-import org.focusns.web.utils.RuntimeHelper;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.web.context.support.AbstractRefreshableWebApplicationContext;
 
@@ -27,9 +25,7 @@ public class ApplicationRuntimeInitializer
 implements ApplicationContextInitializer<AbstractRefreshableWebApplicationContext> {
 
     public void initialize(AbstractRefreshableWebApplicationContext applicationContext) {
-        ServletContext servletContext = applicationContext.getServletContext();
-        RuntimeHelper runtimeHelper = new RuntimeHelper(servletContext);
-        servletContext.setAttribute(RuntimeHelper.class.getName(), runtimeHelper);
+       
     }
 
 }

@@ -23,12 +23,12 @@ import org.focusns.model.blog.BlogCategory;
 
 public interface BlogCategoryService {
     
-    void createBlogTag(BlogCategory tag);
+    void createBlogCategory(BlogCategory tag);
     
-    void modifyBlogTag(BlogCategory tag);
+    void modifyBlogCategory(BlogCategory tag);
     
-    void removeBlogTag(BlogCategory tag);
+    void removeBlogCategory(BlogCategory tag);
     
-    List<BlogCategory> getBlogTags(long projectId);
+    List<BlogCategory> getBlogCategories(long projectId);
     
 }

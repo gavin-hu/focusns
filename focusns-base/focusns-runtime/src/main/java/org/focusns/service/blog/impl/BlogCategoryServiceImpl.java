@@ -33,19 +33,19 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
     @Autowired
     private BlogCategoryDao tagDao;
     
-    public void createBlogTag(BlogCategory tag) {
+    public void createBlogCategory(BlogCategory tag) {
         tagDao.insert(tag);
     }
 
-    public void modifyBlogTag(BlogCategory tag) {
+    public void modifyBlogCategory(BlogCategory tag) {
         tagDao.update(tag);
     }
 
-    public void removeBlogTag(BlogCategory tag) {
+    public void removeBlogCategory(BlogCategory tag) {
         tagDao.delete(tag.getId());
     }
 
-    public List<BlogCategory> getBlogTags(long projectId) {
+    public List<BlogCategory> getBlogCategories(long projectId) {
         return tagDao.selectByProjectId(projectId);
     }
     

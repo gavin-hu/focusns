@@ -13,15 +13,27 @@
                 </div>
                 <div>
                     <label>分类</label>
-                    <select name="category">
+                    <select name="categoryId">
                         <option >未分类</option>
+                        <#list Request.blogCategories as blogCategory>
+                        <option value="${blogCategory.id}">${blogCategory.label}</option>
+                        </#list>
                     </select>
                 </div>
                 <div>
                     <label>内容</label>
-                    <textarea name="content"></textarea>
+                    <textarea id="content" name="content"></textarea>
                 </div>
+                <div class="submit">
+                    <button type="submit">提交</button>
+                <div>
             </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(function(){
+    $('#content').xheditor({skin:'nostyle'});
+});
+</script>

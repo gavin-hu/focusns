@@ -36,7 +36,7 @@ public class AdminBlogWidget {
     public String editCategory(Map<String, Object> model,
             @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
         //
-        List<BlogCategory> blogCategories = categoryService.getBlogTags(project.getId());
+        List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
         return "admin/blog/category-edit";
@@ -45,6 +45,9 @@ public class AdminBlogWidget {
     public String editPost(Map<String, Object> model,
             @Bind(value="id", scope= Bind.Scope.PARAMETER) long id,
             @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
+        //
+        List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
+        model.put("blogCategories", blogCategories);
         //
         return "admin/blog/post-edit";
     }

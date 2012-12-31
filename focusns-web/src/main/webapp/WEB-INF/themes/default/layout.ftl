@@ -8,12 +8,10 @@
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
         <meta content="" name="Keywords" />
         <meta content="" name="Description" />
-        <!-- Base Stylesheet -->
+        <!-- Include Stylesheet -->
         <#include "stylesheet.ftl" />
-        <!-- Theme Stylesheet-->
-        <#include "styletheme.ftl" />
-        
-        <script src="http://yui.yahooapis.com/3.8.0/build/yui/yui-min.js"></script>
+        <!-- Include Javascript-->
+        <#include "javascript.ftl" />
     </head>
     <body <#if category?? || feature??>class="${category.code} ${feature.code}"</#if>>
         <div id="hd" class="yui3-g">

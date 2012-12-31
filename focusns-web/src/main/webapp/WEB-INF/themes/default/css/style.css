@@ -271,7 +271,6 @@ body {
 .share {
 	padding:10px;
 	background-color:#FAFAFA;
-	border:1px solid #DDDDDD;
 }
 
 .share textarea {
@@ -360,6 +359,11 @@ body {
     display: block;
     font-weight: bold;
 }
+.admin-post textarea {
+    width: 100%;
+    height: 400px;
+}
+
 .admin-category {
     padding: 10px;
 }
