@@ -23,8 +23,10 @@ import java.util.List;
 import java.util.Map;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
+import org.focusns.model.core.ProjectLogo;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.runtime.RuntimeHelper;
+import org.focusns.service.core.ProjectLogoService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,18 +35,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AdminProjectWidget {
     
     @Autowired
+    private ProjectLogoService logoService;
+    @Autowired
     private ProjectAttributeService attributeService;
     
     public String editLogo(Map<String, Object> model,
             @Bind(value="id", scope = Bind.Scope.SESSION) String sessionId,
-            @Bind(value="WEBROOT", scope = Bind.Scope.APPLICATION) String webRoot,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
+            @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
         //
-        File dest = RuntimeHelper.getInstance().getTmpProjectLogo(project);
+        File dest = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
         model.put("hasTmpLogo", dest.canRead());
         //
-        File target = RuntimeHelper.getInstance().getProjectLogo(project);
-        model.put("hasLogo", target.canRead());
+        List<ProjectLogo> projectLogos = logoService.listProjectLogos(project.getId());
+        model.put("logos", projectLogos);
         //
         return "admin/profile/logo-edit";
     }

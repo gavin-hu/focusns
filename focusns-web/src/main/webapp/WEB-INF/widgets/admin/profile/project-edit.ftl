@@ -4,7 +4,7 @@
     </div>
     <div class="widget-bd">
         <div class="admin-project">
-            <form action="${Request.contextPath}/${Request.project.code}/${Request.feature.code}/project-edit.action" method="post">
+            <form action="${Request.contextPath}/project/edit" method="post">
                 <div>
                     <label>编码</label>
                     <input name="code" value="${Request.project.code}" />

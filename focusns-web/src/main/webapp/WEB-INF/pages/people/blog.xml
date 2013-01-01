@@ -1,5 +1,8 @@
 <page extends="/global-project">
-	<position name="main">
-		<widget target="org.focusns.web.modules.profile.ProjectWidget@doView" />
+    <position name="leftColumn">
+        <widget target="org.focusns.web.modules.blog.BlogCategoryWidget@listCategory" />
+    </position>
+	<position name="mainColumn">
+		<widget target="org.focusns.web.modules.blog.BlogPostWidget@listPost" />
 	</position>
 </page>

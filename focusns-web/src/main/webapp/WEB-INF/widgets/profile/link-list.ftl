@@ -10,28 +10,28 @@
                 <li>
                     <div class="project-link">	
                         <a href="#">
-                            <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                            <img src="${Request.contextPath}/project/logo/link" />
                         </a>
                     </div>
                 </li>
                 <li>
                     <div class="project-link">	
                         <a href="#">
-                            <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                            <img src="${Request.contextPath}/project/logo/link" />
                         </a>
                     </div>
                 </li>
-<li>
+                <li>
                     <div class="project-link">	
                         <a href="#">
-                            <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                            <img src="${Request.contextPath}/project/logo/link" />
                         </a>
                     </div>
                 </li>
-<li>
+                <li>
                     <div class="project-link">	
                         <a href="#">
-                            <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                            <img src="${Request.contextPath}/project/logo/link" />
                         </a>
                     </div>
                 </li>

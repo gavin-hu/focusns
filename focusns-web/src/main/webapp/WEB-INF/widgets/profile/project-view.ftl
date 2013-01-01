@@ -1,10 +1,9 @@
-<#import "/WEB-INF/libftl/utils.ftl" as utils>
 
 <div class="widget">
     <div class="widget-bd">
         <div class="project">
             <div class="project-logo">
-                <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                <img src="${Request.contextPath}/project/logo/link" />
             </div>
             <div class="project-title">
                 <h3>${Request.project.title}</h3>
@@ -12,6 +11,7 @@
             <div class="project-description">
                 ${Request.project.description}
             </div>
+            <#if Request.attributes?? && Request.attributes?size gt 0>
             <div class="project-attributes">
                 <ul>
                     <#list Request.attributes as attribute>
@@ -21,6 +21,7 @@
                     </#list>
                 </ul>
             </div>
+            </#if>
         </div>
     </div>
 </div>

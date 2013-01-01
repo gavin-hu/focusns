@@ -18,21 +18,34 @@
  */
 package org.focusns.web.modules.blog;
 
+import java.util.Map;
+import org.focusns.model.blog.BlogPost;
+import org.focusns.model.common.Page;
+import org.focusns.service.blog.BlogPostService;
+import org.focusns.web.widget.annotation.Bind;
+import org.focusns.web.widget.annotation.Bind.Scope;
 import org.focusns.web.widget.annotation.Widget;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
 public class BlogPostWidget {
 
-	public String doView() {
+    @Autowired
+    private BlogPostService blogPostService;
+    
+	public String viewPost() {
+        
 		return null;
 	}
 	
-	public String doList() {
-		return null;
-	}
-	
-	public String doEdit() {
-		return null;
+	public String listPost(Map<String, Object> model,
+            @Bind(value = "categoryId", scope = Scope.REQUEST) long categoryId) {
+        //
+        Page<BlogPost> page = new Page<BlogPost>(20);
+        page = blogPostService.fetchPageByCategoryId(page, categoryId);
+        model.put("page", page);
+        //
+		return "blog/post-list";
 	}
 	
 }

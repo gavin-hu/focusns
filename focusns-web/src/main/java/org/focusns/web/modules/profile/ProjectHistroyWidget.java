@@ -40,7 +40,7 @@ public class ProjectHistroyWidget {
     }
     
     public String output(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
+            @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
         //
         Page<ProjectHistroy> page = new Page<ProjectHistroy>(20);
         page = projectHistroyService.fetchPage(page, project.getId());

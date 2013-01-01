@@ -22,6 +22,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
@@ -29,17 +31,22 @@ import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
+import org.focusns.web.page.config.PageConfigException;
 import org.focusns.web.page.render.PageRender;
 import org.focusns.web.utils.UrlTemplateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UrlPathHelper;
 
 @Controller
 public class Portal {
 	
+    private static final Log log = LogFactory.getLog(Portal.class);
+    
 	private static final String[] uriPatterns = new String[]{
 		"^/{categoryCode}$",
 		"^/{projectCode}/{featureCode}$",
@@ -69,6 +76,10 @@ public class Portal {
 	}
 	
 	protected String resolvePagePath(HttpServletRequest request) {
+        request.getSession().removeAttribute("category");
+        request.getSession().removeAttribute("project");
+        request.getSession().removeAttribute("feature");
+        //
 		String requestPath = urlPathHelper.getOriginatingRequestUri(request);
 		if("/".equals(requestPath) || "".equals(requestPath)) {
 			requestPath = "/index";
@@ -80,7 +91,8 @@ public class Portal {
 			//
 			ProjectCategory category = categoryService.getCategory(categoryCode);
 			if(category!=null) {
-				request.setAttribute("category", category);
+				request.getSession().setAttribute("category", category);
+                request.setAttribute("category", category);
 				return "/".concat(categoryCode);
 			}
 		}
@@ -95,7 +107,10 @@ public class Portal {
 				ProjectCategory category = categoryService.getCategory(project.getCategoryId());
 				ProjectFeature feature = featureService.getProjectFeature(project.getId(), featureCode);
 				if(category!=null && feature!=null) {
-					request.setAttribute("project", project);
+					request.getSession().setAttribute("project", project);
+					request.getSession().setAttribute("category", category);
+					request.getSession().setAttribute("feature", feature);
+                    request.setAttribute("project", project);
 					request.setAttribute("category", category);
 					request.setAttribute("feature", feature);
                     //
@@ -110,5 +125,12 @@ public class Portal {
 		//
 		return requestPath;
 	}
-	
+
+    @ExceptionHandler
+    public ModelAndView handlePageConfigException(PageConfigException e) {
+        log.warn(e.getMessage(), e);
+        //
+        return new ModelAndView("redirect:/login");
+    }
+    
 }

@@ -45,8 +45,8 @@ public class BlogPostServiceImpl implements BlogPostService {
         postDao.delete(post.getId());
     }
 
-    public Page<BlogPost> fetchPageByTagId(Page<BlogPost> page, long tagId) {
-        return postDao.fetchByTagId(page, tagId);
+    public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long categoryId) {
+        return postDao.fetchByCategoryId(page, categoryId);
     }
 
     public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {

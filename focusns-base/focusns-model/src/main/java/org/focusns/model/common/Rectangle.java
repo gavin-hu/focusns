@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 FocusSNS.
+ * Copyright (C) 2013 FocusSNS.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,21 +16,45 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.blog;
+package org.focusns.model.common;
 
-import org.focusns.model.blog.BlogPost;
-import org.focusns.model.common.Page;
+public class Rectangle {
 
-public interface BlogPostService {
-    
-    void createBlogPost(BlogPost post);
-    
-    void modifyBlogPost(BlogPost post);
-    
-    void removeBlogPost(BlogPost post);
-    
-    Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long categoryId);
+    private int x; // x 
+    private int y; // y
+    private int w; // width
+    private int h; // height
 
-    Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId);
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
+
+    public int getH() {
+        return h;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
     
 }

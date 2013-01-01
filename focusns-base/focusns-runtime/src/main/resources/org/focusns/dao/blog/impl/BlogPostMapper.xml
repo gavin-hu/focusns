@@ -16,8 +16,16 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_blog_post (title, content, create_at, modify_at, category_id, create_by_id) 
-		values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById})
+        <choose>
+            <when test="categoryId > 0">
+                insert into tb_blog_post (title, content, create_at, modify_at, category_id, create_by_id) 
+                values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById})
+            </when>
+            <otherwise>
+                insert into tb_blog_post (title, content, create_at, modify_at, create_by_id) 
+                values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{createById})
+            </otherwise>
+        </choose>
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -59,19 +67,23 @@
 		delete from tb_blog_post where id = #{id}
 	</delete>
     
-    <sql id="fetchByTagIdSql">
+    <sql id="fetchByCategoryIdSql">
         from tb_blog_post
-        where category_id = #{categoryId}
+        <where>
+            <if test="categoryId > 0">
+                category_id = #{categoryId}
+            </if>
+        </where>
     </sql>
-    <select id="fetchByTagId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchByTagIdSql"/>
+    <select id="fetchByCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="fetchByCategoryIdSql"/>
     </select>
-     <select id="fetchByTagIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByTagIdSql"/>
+    <select id="fetchByCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchByCategoryIdSql"/>
     </select>
     
     <sql id="fetchByProjectIdSql">
-        from tb_blog_post a, tb_blog_tag b
+        from tb_blog_post a, tb_blog_category b
         where a.category_id = b.id and b.project_id = #{projectId}
     </sql>
     <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">

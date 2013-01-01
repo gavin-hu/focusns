@@ -18,33 +18,11 @@
  */
 package org.focusns.web.modules.profile;
 
-import java.io.File;
-import java.io.IOException;
-import javax.servlet.http.HttpSession;
-import org.focusns.model.core.Project;
-import org.focusns.service.core.ProjectService;
-import org.focusns.runtime.RuntimeHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/{projectCode}/{featureCode}")
 public class ProjectController {
     
-    @Autowired
-    private ProjectService projectService;
     
-    @RequestMapping("/project/logo-link.jpg")
-    public @ResponseBody byte[] linkLogo(@PathVariable("projectCode") String projectCode,
-            @PathVariable("featureCode") String featureCode, HttpSession session) throws IOException {
-        //
-        Project project = projectService.getProject(projectCode);
-        File target = RuntimeHelper.getInstance().getProjectLogo(project);
-        return FileCopyUtils.copyToByteArray(target);
-    }
     
 }

@@ -22,27 +22,17 @@ import org.focusns.model.common.Id;
 
 public class ProjectLogo extends Id {
 
-    private String title;
-    private String image;
-    //
+    private boolean main;
     private long projectId;
 
-    public String getTitle() {
-        return title;
+    public boolean isMain() {
+        return main;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMain(boolean main) {
+        this.main = main;
     }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
+    
     public long getProjectId() {
         return projectId;
     }

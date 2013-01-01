@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 import org.focusns.common.image.ImageUtils;
-import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectLogo;
 import org.focusns.model.setup.DbConfig;
 import org.focusns.model.setup.SiteConfig;
 import org.springframework.util.DefaultPropertiesPersister;
@@ -74,14 +74,14 @@ public class RuntimeHelper {
         propsPersister.store(props, new FileOutputStream(application), "");
     }
     
-    public File getTmpProjectLogo(Project project) {
-        return new File(String.format("%s/project/%s/logo", 
-                TMP_DIR, project.getId()));
+    public File getTmpProjectLogo(String tmpId) {
+        return new File(String.format("%s/project/logo/%s", 
+                TMP_DIR, tmpId));
     }
     
-    public void storeTmpProjectLogo(InputStream inputStream, Project project) throws IOException {
-        File tmpFile = new File(String.format("%s/project/%s/logo", 
-                TMP_DIR, project.getId()));
+    public void storeTmpProjectLogo(InputStream inputStream, String tmpId) throws IOException {
+        File tmpFile = new File(String.format("%s/project/logo/%s", 
+                TMP_DIR, tmpId));
         if(tmpFile.exists()) {
             tmpFile.delete();
         }
@@ -90,14 +90,14 @@ public class RuntimeHelper {
         FileCopyUtils.copy(inputStream, new FileOutputStream(tmpFile));
     }
     
-    public File getProjectLogo(Project project) {
-        return new File(String.format("%s/project/%s/logo.jpg", 
-                RUNTIME_DIR, project.getId()));
+    public File getProjectLogo(ProjectLogo logo) {
+        return new File(String.format("%s/project/%s/logo/%s", 
+                RUNTIME_DIR, logo.getProjectId(), logo.getId()));
     }
     
-    public void storeProjectLogo(InputStream inputStream, Project project) throws IOException {
-        File logoFile = new File(String.format("%s/project/%s/logo.jpg", 
-                RUNTIME_DIR, project.getId()));
+    public void storeProjectLogo(InputStream inputStream, ProjectLogo logo) throws IOException {
+        File logoFile = new File(String.format("%s/project/%s/logo/%s", 
+                RUNTIME_DIR, logo.getProjectId(), logo.getId()));
         if(logoFile.exists()) {
             logoFile.delete();
         }
@@ -106,9 +106,8 @@ public class RuntimeHelper {
         FileCopyUtils.copy(inputStream, new FileOutputStream(logoFile));
     }
     
-    public void cropProjectLogo(Project project, String xStr, String yStr, String wStr, String hStr) throws IOException {
-        File original = getTmpProjectLogo(project);
-        File target = getProjectLogo(project);
+    public void cropProjectLogo(File original, File target, 
+            String xStr, String yStr, String wStr, String hStr) throws IOException {
         //
         if(xStr.contains(".")) {
             xStr = xStr.substring(0, xStr.indexOf("."));

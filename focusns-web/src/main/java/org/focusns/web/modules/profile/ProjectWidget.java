@@ -34,7 +34,7 @@ public class ProjectWidget {
     private ProjectAttributeService attributeService;
     
 	public String doView(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
+            @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
         //
         List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);

@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.modules.admin;
+package org.focusns.web.modules.blog;
 
 import java.util.List;
 import java.util.Map;
@@ -28,28 +28,18 @@ import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class AdminBlogWidget {
+public class BlogCategoryWidget {
     
     @Autowired
-    private BlogCategoryService categoryService;
+    private BlogCategoryService blogCategoryService;
     
-    public String editCategory(Map<String, Object> model,
-            @Bind(value="project", scope= Bind.Scope.SESSION) Project project) {
+    public String listCategory(Map<String, Object> model,
+            @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
         //
-        List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
-        return "admin/blog/category-edit";
-    }
-    
-    public String editPost(Map<String, Object> model,
-            @Bind(value="id", scope= Bind.Scope.PARAMETER) long id,
-            @Bind(value="project", scope= Bind.Scope.SESSION) Project project) {
-        //
-        List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
-        model.put("blogCategories", blogCategories);
-        //
-        return "admin/blog/post-edit";
+        return "blog/category-list";
     }
     
 }

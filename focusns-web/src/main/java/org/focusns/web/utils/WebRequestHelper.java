@@ -16,21 +16,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.blog;
+package org.focusns.web.utils;
 
-import org.focusns.model.blog.BlogPost;
-import org.focusns.model.common.Page;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectFeature;
+import org.springframework.web.context.request.WebRequest;
 
-public interface BlogPostService {
+public abstract class WebRequestHelper {
     
-    void createBlogPost(BlogPost post);
+    public static Project getProject(WebRequest webRequest) {
+        return  (Project) webRequest.getAttribute("project", WebRequest.SCOPE_SESSION);
+    }
     
-    void modifyBlogPost(BlogPost post);
-    
-    void removeBlogPost(BlogPost post);
-    
-    Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long categoryId);
-
-    Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId);
+    public static ProjectFeature getProjectFeature(WebRequest webRequest) {
+        return (ProjectFeature) webRequest.getAttribute("feature", WebRequest.SCOPE_SESSION);
+    }
     
 }

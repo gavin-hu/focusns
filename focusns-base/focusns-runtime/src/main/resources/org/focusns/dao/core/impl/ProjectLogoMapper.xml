@@ -4,8 +4,7 @@
 
 	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectLogo">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="title" property="title" jdbcType="VARCHAR" />
-        <result column="image" property="image" jdbcType="VARCHAR" />
+        <result column="main" property="main" jdbcType="BOOLEAN" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
 	</resultMap>
 	
@@ -13,8 +12,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_project_logo (title, image, project_id) 
-		values (#{title}, #{image}, #{projectId})
+		insert into tb_project_logo (main, project_id) 
+		values (#{main}, #{projectId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -24,11 +23,8 @@
 	<update id="update" parameterType="org.focusns.model.core.ProjectLogo">
 		update tb_project_logo 
 		<set>
-            <if test="title != null" >
-		        title = #{title},
-			</if>
-			<if test="image != null" >
-		        image = #{image},
+            <if test="main != null" >
+		        main = #{main},
 			</if>
             <if test="projectId != null">
                 project_id = #{projectId}

@@ -24,7 +24,7 @@ import org.focusns.model.common.Page;
 
 public interface BlogPostDao extends BaseDao<BlogPost> {
 
-    Page<BlogPost> fetchByTagId(Page<BlogPost> page, long tagId);
+    Page<BlogPost> fetchByCategoryId(Page<BlogPost> page, long categoryId);
 
     Page<BlogPost> fetchByProjectId(Page<BlogPost> page, long projectId);
     

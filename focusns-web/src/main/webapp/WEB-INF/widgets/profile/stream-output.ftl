@@ -1,5 +1,3 @@
-<#import "/WEB-INF/libftl/utils.ftl" as utils>
-
 <div class="widget">
     <div class="widget-bd">
         <div class="stream">
@@ -8,7 +6,7 @@
                 <li>
                     <div class="thumbnail">
                         <a href="${Request.contextPath}/">
-                            <img src="<@utils.urlPrefix />/project/logo-link.jpg" />
+                            <img src="${Request.contextPath}/project/logo/link" />
                         </a>
                     </div>
                     <div class="activity">

@@ -3,7 +3,7 @@
 <div class="widget">
     <div class="widget-bd">
         <div class="share">
-            <form action="<@utils.urlPrefix />/project/histroy-edit.action" method="post">
+            <form action="${Request.contextPath}/project/histroy/edit" method="post">
                 <textarea name="content" rows="3" cols="50"></textarea>
                 <input type="hidden" name="createById" value="${Session.user.id}" />
                 <input type="hidden" name="targetId" value="${Request.project.id}" />

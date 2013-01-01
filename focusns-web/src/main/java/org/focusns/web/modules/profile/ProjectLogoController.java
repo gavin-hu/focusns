@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 FocusSNS.
+ * Copyright (C) 2013 FocusSNS.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -18,35 +18,31 @@
  */
 package org.focusns.web.modules.profile;
 
-import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectFeature;
-import org.focusns.model.core.ProjectHistroy;
-import org.focusns.service.core.ProjectHistroyService;
-import org.focusns.web.utils.ActionHelper;
-import org.focusns.web.utils.WebRequestHelper;
+import java.io.File;
+import java.io.IOException;
+import org.focusns.model.core.ProjectLogo;
+import org.focusns.runtime.RuntimeHelper;
+import org.focusns.service.core.ProjectLogoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class ProjectHistroyController {
+public class ProjectLogoController {
     
     @Autowired
-    private ProjectHistroyService projectHistroyService;
+    private ProjectLogoService projectLogoService;
     
-    @RequestMapping("/project/histroy/edit")
-    public String editHistroy(@RequestParam String action, ProjectHistroy histroy, WebRequest webRequest) {
+    @RequestMapping("/project/logo/{logoId}")
+    public @ResponseBody byte[] linkLogo(@PathVariable long logoId) throws IOException {
         //
-        Project project = WebRequestHelper.getProject(webRequest);
-        ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
+        ProjectLogo logo = projectLogoService.getProjectLogo(logoId);
         //
-        if(ActionHelper.isCreate(action)) {
-            projectHistroyService.createProjectHistroy(histroy);
-        } 
-        //
-        return "redirect:/" + project.getCode() + "/" + feature.getCode();
+        File target = RuntimeHelper.getInstance().getProjectLogo(logo);
+        return FileCopyUtils.copyToByteArray(target);
     }
     
 }

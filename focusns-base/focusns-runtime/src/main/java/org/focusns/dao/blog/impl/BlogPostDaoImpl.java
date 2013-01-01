@@ -29,12 +29,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BlogPostDaoImpl extends MyBatisBaseDao<BlogPost> implements BlogPostDao {
 
-    public Page<BlogPost> fetchByTagId(Page<BlogPost> page, long tagId) {
+    public Page<BlogPost> fetchByCategoryId(Page<BlogPost> page, long categoryId) {
         //
         Map parameter = new HashMap();
-        parameter.put("tagId", tagId);
+        parameter.put("categoryId", categoryId);
         //
-        return fetchPage(".fetchByTagId", page, parameter);
+        return fetchPage(".fetchByCategoryId", page, parameter);
     }
 
     public Page<BlogPost> fetchByProjectId(Page<BlogPost> page, long projectId) {
