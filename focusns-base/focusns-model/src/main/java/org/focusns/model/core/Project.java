@@ -18,11 +18,11 @@
  */
 package org.focusns.model.core;
 
+import org.focusns.model.common.Id;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.focusns.model.common.Id;
 
 public class Project extends Id {
     

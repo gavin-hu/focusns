@@ -18,9 +18,6 @@
  */
 package org.focusns.service.core.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import org.focusns.common.image.ImageUtils;
 import org.focusns.dao.core.ProjectLogoDao;
 import org.focusns.model.common.Rectangle;
@@ -31,6 +28,10 @@ import org.focusns.service.core.ProjectLogoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -70,8 +71,8 @@ public class ProjectLogoServiceImpl implements ProjectLogoService {
         logoDao.insert(logo);
         //
         File target = RuntimeHelper.getInstance().getProjectLogo(logo);
-        ImageUtils.crop(original, target, rectangle.getX(), rectangle.getY(), 
-                rectangle.getW(), rectangle.getH(), "JPG");
+        ImageUtils.crop(original, target, rectangle.getXInt(), rectangle.getYInt(), 
+                rectangle.getWInt(), rectangle.getHInt(), "JPG");
     }
     
 }

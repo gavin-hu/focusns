@@ -18,11 +18,11 @@
  */
 package org.focusns.web.widget.http;
 
+import org.focusns.web.widget.WidgetRequest;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.focusns.web.widget.WidgetRequest;
 
 public class HttpWidgetRequest implements WidgetRequest {
 	

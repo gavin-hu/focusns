@@ -18,12 +18,13 @@
  */
 package org.focusns.service.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 public interface ProjectLogoService { 
     

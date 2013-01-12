@@ -18,13 +18,13 @@
  */
 package org.focusns.web.modules.system.summary;
 
-import java.util.Map;
-
 import org.focusns.model.env.Environment;
 import org.focusns.model.env.Environment.Type;
 import org.focusns.service.env.EnvironmentService;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 @Widget
 public class JavaWidget {

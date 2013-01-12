@@ -18,14 +18,14 @@
  */
 package org.focusns.service.core.impl;
 
-import java.util.List;
-
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional

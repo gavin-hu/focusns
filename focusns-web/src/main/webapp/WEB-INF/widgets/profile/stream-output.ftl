@@ -6,7 +6,7 @@
                 <li>
                     <div class="thumbnail">
                         <a href="${Request.contextPath}/">
-                            <img src="${Request.contextPath}/project/logo/link" />
+                            <img src="${Request.contextPath}/project/logo" />
                         </a>
                     </div>
                     <div class="activity">

@@ -18,25 +18,33 @@
  */
 package org.focusns.web.modules.profile;
 
-import java.io.File;
-import java.io.IOException;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
 import org.focusns.runtime.RuntimeHelper;
 import org.focusns.service.core.ProjectLogoService;
+import org.focusns.service.core.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 @Controller
+@RequestMapping("/project")
 public class ProjectLogoController {
-    
+
+    @Autowired
+    private ProjectService projectService;
     @Autowired
     private ProjectLogoService projectLogoService;
     
-    @RequestMapping("/project/logo/{logoId}")
+    @RequestMapping("/logo/{logoId}")
     public @ResponseBody byte[] linkLogo(@PathVariable long logoId) throws IOException {
         //
         ProjectLogo logo = projectLogoService.getProjectLogo(logoId);
@@ -44,5 +52,5 @@ public class ProjectLogoController {
         File target = RuntimeHelper.getInstance().getProjectLogo(logo);
         return FileCopyUtils.copyToByteArray(target);
     }
-    
+
 }

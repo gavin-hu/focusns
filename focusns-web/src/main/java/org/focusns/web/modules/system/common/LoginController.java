@@ -18,7 +18,6 @@
  */
 package org.focusns.web.modules.system.common;
 
-import javax.servlet.http.HttpSession;
 import org.focusns.model.core.User;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;
@@ -28,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {

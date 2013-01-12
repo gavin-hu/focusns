@@ -355,11 +355,18 @@ body {
 .admin-post {
     padding:10px;
 }
+.admin-post form div {
+    padding-bottom: 5px;
+}
 .admin-post label {
     display: block;
     font-weight: bold;
 }
-.admin-post textarea {
+.admin-post div.summary textarea {
+    width: 100%;
+    height: 100px;
+}
+.admin-post div.content textarea {
     width: 100%;
     height: 400px;
 }

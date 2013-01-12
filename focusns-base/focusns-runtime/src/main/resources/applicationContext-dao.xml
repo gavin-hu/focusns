@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:component-scan base-package="org.focusns.dao">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
@@ -15,10 +15,10 @@
         <property name="ignoreResourceNotFound" value="true" />
         <property name="localOverride" value="true" />
         <property name="locations">
-            <array>
+            <list>
                 <value>classpath:/application.properties</value>
                 <value>file:${user.home}/.focusns/application.properties</value>
-            </array>
+            </list>
         </property>
     </bean>
 	
@@ -58,7 +58,8 @@
 				-->
 				<!-- core -->
 				<value>classpath:/org/focusns/dao/core/impl/UserMapper.xml</value>
-				<value>classpath:/org/focusns/dao/core/impl/ProjectMapper.xml</value>
+                <value>classpath:/org/focusns/dao/core/impl/ProjectMapper.xml</value>
+                <value>classpath:/org/focusns/dao/core/impl/ProjectLogoMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectFeatureMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectAttributeMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectHistroyMapper.xml</value>
@@ -68,6 +69,10 @@
                 <value>classpath:/org/focusns/dao/blog/impl/BlogCategoryMapper.xml</value>
                 <value>classpath:/org/focusns/dao/blog/impl/BlogPostMapper.xml</value>
                 <value>classpath:/org/focusns/dao/blog/impl/BlogCommentMapper.xml</value>
+
+                <!-- message -->
+                <value>classpath:/org/focusns/dao/msg/impl/MessageMapper.xml</value>
+                <value>classpath:/org/focusns/dao/msg/impl/MessageBoxMapper.xml</value>
 			</set>
 		</property>
 	</bean>

@@ -2,9 +2,9 @@ package org.focusns.service.env;
 
 import org.focusns.model.env.Environment;
 import org.focusns.model.env.Environment.Type;
-import org.junit.Test;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Ignore

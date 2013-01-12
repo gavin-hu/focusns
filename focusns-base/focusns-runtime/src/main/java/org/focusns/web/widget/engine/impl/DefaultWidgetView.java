@@ -18,13 +18,12 @@
  */
 package org.focusns.web.widget.engine.impl;
 
-import org.focusns.web.widget.WidgetRequest;
-import org.focusns.web.widget.WidgetResponse;
-import org.focusns.web.widget.engine.WidgetView;
-
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
+import org.focusns.web.widget.WidgetRequest;
+import org.focusns.web.widget.WidgetResponse;
+import org.focusns.web.widget.engine.WidgetView;
 
 public class DefaultWidgetView implements WidgetView {
 	

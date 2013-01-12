@@ -18,13 +18,12 @@
  */
 package org.focusns.web.widget.engine.impl;
 
-import java.util.Locale;
-
+import freemarker.template.Template;
 import org.focusns.web.widget.engine.WidgetView;
 import org.focusns.web.widget.engine.WidgetViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
-import freemarker.template.Template;
+import java.util.Locale;
 
 public class DefaultWidgetViewResolver implements WidgetViewResolver {
 

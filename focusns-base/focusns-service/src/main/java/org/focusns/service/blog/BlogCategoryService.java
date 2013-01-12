@@ -18,8 +18,9 @@
  */
 package org.focusns.service.blog;
 
-import java.util.List;
 import org.focusns.model.blog.BlogCategory;
+
+import java.util.List;
 
 public interface BlogCategoryService {
     

@@ -18,13 +18,14 @@
  */
 package org.focusns.web.widget.engine;
 
+import org.focusns.web.widget.annotation.Resource;
+import org.focusns.web.widget.annotation.Resources;
+import org.springframework.core.annotation.AnnotationUtils;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.focusns.web.widget.annotation.Resource;
-import org.focusns.web.widget.annotation.Resources;
-import org.springframework.core.annotation.AnnotationUtils;
 
 public class WidgetMethod {
     

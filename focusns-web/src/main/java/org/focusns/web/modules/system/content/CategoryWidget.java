@@ -18,13 +18,14 @@
  */
 package org.focusns.web.modules.system.content;
 
-import java.util.List;
-import java.util.Map;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+import java.util.Map;
 
 @Widget
 public class CategoryWidget {

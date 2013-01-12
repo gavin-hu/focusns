@@ -23,10 +23,6 @@ import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.focusns.model.setup.DbConfig;
 import org.focusns.model.setup.SiteConfig;
 import org.focusns.runtime.RuntimeHelper;
@@ -35,6 +31,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import org.springframework.web.util.UrlPathHelper;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class SetupInterceptor extends HandlerInterceptorAdapter 
     implements InitializingBean {

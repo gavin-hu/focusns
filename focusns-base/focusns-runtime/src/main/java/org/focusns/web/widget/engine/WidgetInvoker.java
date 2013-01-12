@@ -18,10 +18,10 @@
  */
 package org.focusns.web.widget.engine;
 
-import java.lang.reflect.Method;
-
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetResponse;
+
+import java.lang.reflect.Method;
 
 public abstract class WidgetInvoker {
 	

@@ -18,9 +18,9 @@
  */
 package org.focusns.dao.core.impl;
 
+import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.model.core.Project;
-import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.springframework.stereotype.Repository;
 
 @Repository

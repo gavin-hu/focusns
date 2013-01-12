@@ -18,8 +18,9 @@
  */
 package org.focusns.model.core;
 
-import java.util.Date;
 import org.focusns.model.common.Id;
+
+import java.util.Date;
 
 public class ProjectHistroy extends Id {
     
@@ -30,6 +31,10 @@ public class ProjectHistroy extends Id {
     private long projectId;
     private long targetId;
     private String targetType;
+    //
+    private Project project;
+    private User createBy;
+    private Object target;
 
     public String getContent() {
         return content;
@@ -78,5 +83,28 @@ public class ProjectHistroy extends Id {
     public void setTargetType(String targetType) {
         this.targetType = targetType;
     }
-    
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public User getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(User createBy) {
+        this.createBy = createBy;
+    }
+
+    public Object getTarget() {
+        return target;
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
+    }
 }

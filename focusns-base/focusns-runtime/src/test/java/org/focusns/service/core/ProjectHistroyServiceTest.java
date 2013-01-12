@@ -18,7 +18,6 @@
  */
 package org.focusns.service.core;
 
-import java.util.Date;
 import junit.framework.Assert;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
@@ -27,6 +26,8 @@ import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 @Ignore
 public class ProjectHistroyServiceTest extends AbstractServiceTest {

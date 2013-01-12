@@ -18,18 +18,19 @@
  */
 package org.focusns.web.widget.security;
 
-import org.focusns.web.widget.annotation.Resource;
-import java.util.Iterator;
-import java.util.List;
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.focusns.web.page.config.WidgetConfig;
+import org.focusns.web.widget.annotation.Resource;
 import org.focusns.web.widget.engine.WidgetFilter;
 import org.focusns.web.widget.engine.WidgetMethod;
 import org.focusns.web.widget.engine.WidgetMethodResolver;
 import org.focusns.web.widget.engine.impl.DefaultWidgetMethodResolver;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Iterator;
+import java.util.List;
 
 public class SecurityWidgetFilter implements WidgetFilter {
 

@@ -18,8 +18,6 @@
  */
 package org.focusns.web.initializer;
 
-import java.util.Date;
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
@@ -28,13 +26,11 @@ import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.service.core.UserService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.util.Assert;
+
+import java.util.Date;
 
 public class ApplicationInitializer 
 	implements ApplicationContextInitializer<ConfigurableApplicationContext> {

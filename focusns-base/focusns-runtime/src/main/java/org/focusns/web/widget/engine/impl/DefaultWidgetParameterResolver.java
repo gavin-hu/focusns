@@ -18,12 +18,6 @@
  */
 package org.focusns.web.widget.engine.impl;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetResponse;
 import org.focusns.web.widget.annotation.Bind;
@@ -32,6 +26,12 @@ import org.focusns.web.widget.engine.WidgetParameterResolver;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.util.ClassUtils;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class DefaultWidgetParameterResolver implements WidgetParameterResolver{
 	

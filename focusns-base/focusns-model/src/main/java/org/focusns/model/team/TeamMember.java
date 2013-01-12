@@ -18,8 +18,9 @@
  */
 package org.focusns.model.team;
 
-import java.util.Date;
 import org.focusns.model.common.Id;
+
+import java.util.Date;
 
 public class TeamMember extends Id {
     

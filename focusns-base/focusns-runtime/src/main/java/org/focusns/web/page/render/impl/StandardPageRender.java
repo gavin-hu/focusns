@@ -18,15 +18,6 @@
  */
 package org.focusns.web.page.render.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.focusns.web.page.config.PageConfig;
 import org.focusns.web.page.config.PageConfigFactory;
 import org.focusns.web.page.config.WidgetConfig;
@@ -38,6 +29,10 @@ import org.focusns.web.widget.WidgetResponseFactory;
 import org.focusns.web.widget.engine.WidgetEngine;
 import org.focusns.web.widget.engine.WidgetFilter;
 import org.focusns.web.widget.engine.WidgetInvocation;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
 
 public class StandardPageRender implements PageRender {
 

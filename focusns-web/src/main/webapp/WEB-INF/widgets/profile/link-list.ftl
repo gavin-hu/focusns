@@ -17,7 +17,7 @@
                 <li>
                     <div class="project-link">	
                         <a href="#">
-                            <img src="${Request.contextPath}/project/logo/link" />
+                            <img src="${Request.contextPath}/admin/project/logo/tmp" />
                         </a>
                     </div>
                 </li>

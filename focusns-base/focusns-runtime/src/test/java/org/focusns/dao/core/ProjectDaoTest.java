@@ -1,15 +1,14 @@
 package org.focusns.dao.core;
 
-import java.util.Date;
-
 import junit.framework.Assert;
-
-import org.focusns.model.core.ProjectCategory;
-import org.focusns.model.core.Project;
-import org.junit.Test;
 import org.focusns.dao.AbstractDaoTest;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectCategory;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 @Ignore
 public class ProjectDaoTest extends AbstractDaoTest {

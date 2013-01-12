@@ -18,9 +18,10 @@
  */
 package org.focusns.dao.blog;
 
-import java.util.List;
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.blog.BlogCategory;
+
+import java.util.List;
 
 public interface BlogCategoryDao extends BaseDao<BlogCategory> {
     

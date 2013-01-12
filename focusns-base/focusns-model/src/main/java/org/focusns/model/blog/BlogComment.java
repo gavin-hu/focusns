@@ -18,8 +18,9 @@
  */
 package org.focusns.model.blog;
 
-import java.util.Date;
 import org.focusns.model.common.Id;
+
+import java.util.Date;
 
 public class BlogComment extends Id {
     

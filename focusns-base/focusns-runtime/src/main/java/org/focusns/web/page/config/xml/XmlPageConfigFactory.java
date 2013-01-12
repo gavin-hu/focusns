@@ -18,9 +18,6 @@
  */
 package org.focusns.web.page.config.xml;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.focusns.common.xml.XmlParser;
 import org.focusns.web.page.config.AbstractPageConfigFactory;
 import org.focusns.web.page.config.PageConfig;
@@ -31,6 +28,9 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class XmlPageConfigFactory extends AbstractPageConfigFactory 
 	implements PageConfigFactory, ResourceLoaderAware {

@@ -18,10 +18,11 @@
  */
 package org.focusns.web.widget.engine;
 
-import java.util.List;
+import org.focusns.web.page.config.WidgetConfig;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.focusns.web.page.config.WidgetConfig;
+import java.util.List;
 
 public interface WidgetFilter {
 

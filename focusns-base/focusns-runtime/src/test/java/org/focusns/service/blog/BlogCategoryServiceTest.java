@@ -1,6 +1,5 @@
 package org.focusns.service.blog;
 
-import java.util.List;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.AbstractServiceTest;
@@ -9,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 @Ignore
 public class BlogCategoryServiceTest extends AbstractServiceTest {

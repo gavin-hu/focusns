@@ -18,9 +18,13 @@
  */
 package org.focusns.service.core.impl;
 
+import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectHistroyDao;
+import org.focusns.dao.core.UserDao;
 import org.focusns.model.common.Page;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
+import org.focusns.model.core.User;
 import org.focusns.service.core.ProjectHistroyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +34,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProjectHistroyServiceImpl implements ProjectHistroyService {
 
+    @Autowired
+    private UserDao userDao;
+    @Autowired
+    private ProjectDao projectDao;
     @Autowired
     private ProjectHistroyDao projectHistroyDao;
     

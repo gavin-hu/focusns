@@ -1,9 +1,8 @@
 package org.focusns.service.blog;
 
-import java.util.Date;
 import junit.framework.Assert;
-import org.focusns.model.blog.BlogPost;
 import org.focusns.model.blog.BlogCategory;
+import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.User;
@@ -13,6 +12,8 @@ import org.focusns.service.core.UserService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 @Ignore
 public class BlogPostServiceTest extends AbstractServiceTest {

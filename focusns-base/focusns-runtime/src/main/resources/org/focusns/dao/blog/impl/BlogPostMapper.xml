@@ -5,6 +5,7 @@
 	<resultMap id="BaseResultMap" type="org.focusns.model.blog.BlogPost">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="summary" property="summary" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
 		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
@@ -18,12 +19,12 @@
 		</selectKey>
         <choose>
             <when test="categoryId > 0">
-                insert into tb_blog_post (title, content, create_at, modify_at, category_id, create_by_id) 
-                values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById})
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById})
             </when>
             <otherwise>
                 insert into tb_blog_post (title, content, create_at, modify_at, create_by_id) 
-                values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{createById})
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById})
             </otherwise>
         </choose>
 	</insert>
@@ -44,6 +45,9 @@
 			<if test="title != null" >
 		        title = #{title},
 			</if>
+            <if test="summary != null" >
+                title = #{summary},
+            </if>
 			<if test="content != null" >
 		        content = #{content},
 			</if>

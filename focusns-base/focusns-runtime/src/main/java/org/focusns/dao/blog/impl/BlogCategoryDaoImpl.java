@@ -18,11 +18,12 @@
  */
 package org.focusns.dao.blog.impl;
 
-import java.util.List;
 import org.focusns.dao.blog.BlogCategoryDao;
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.blog.BlogCategory;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class BlogCategoryDaoImpl extends MyBatisBaseDao<BlogCategory> 

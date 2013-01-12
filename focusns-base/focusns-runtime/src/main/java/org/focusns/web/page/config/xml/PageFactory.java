@@ -18,17 +18,16 @@
  */
 package org.focusns.web.page.config.xml;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.focusns.web.page.config.PageConfig;
 import org.focusns.web.page.config.WidgetConfig;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PageFactory {
 	

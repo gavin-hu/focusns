@@ -4,7 +4,7 @@
     </div>
     <div class="widget-bd">
         <div class="admin-project">
-            <form action="${Request.contextPath}/project/edit" method="post">
+            <form action="${Request.contextPath}/admin/project/edit" method="post">
                 <div>
                     <label>编码</label>
                     <input name="code" value="${Request.project.code}" />
@@ -21,7 +21,7 @@
                 </div>
                 <div class="submit">
                     <input type="hidden" name="id" value="${Request.project.id}" />
-                    <button type="submi">提交</button>
+                    <button type="submit">提交</button>
                 </div>
             </form>
         </div>

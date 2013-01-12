@@ -18,10 +18,10 @@
  */
 package org.focusns.dao.core;
 
-import java.util.List;
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.core.ProjectFeature;
+
+import java.util.List;
 
 public interface ProjectFeatureDao extends BaseDao<ProjectFeature> {
 	

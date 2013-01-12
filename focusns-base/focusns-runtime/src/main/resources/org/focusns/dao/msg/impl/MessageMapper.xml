@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.msg.MessageDao">
+
+	<resultMap id="BaseResultMap" type="org.focusns.model.msg.Message">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="title" jdbcType="VARCHAR" />
+        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
+        <result column="box_id" property="boxId" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="org.focusns.model.msg.Message">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			select last_insert_id()
+		</selectKey>
+		insert into tb_message (title, content, create_at, create_by_id, project_id, box_id)
+		values (#{title}, #{content}, #{createAt}, #{createById}, #{projectId}, #{boxId})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tb_message where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="org.focusns.model.msg.Message">
+		update tb_blog_comment 
+		<set>
+			<if test="title != null" >
+		        title = #{title},
+			</if>
+			<if test="content != null" >
+		        content = #{content},
+			</if>
+            <if test="craeteAt != null" >
+		        create_at = #{createAt},
+			</if>
+            <if test="createById != null" >
+                create_by_id = #{createById},
+            </if>
+            <if test="projectId != null" >
+                project_id = #{projectId},
+			</if>
+            <if test="boxId != null" >
+                box_id = #{boxId},
+            </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_message where id = #{id}
+	</delete>
+
+    <sql id="fetchByPostIdSql">
+        form tb_blog_comment where post_id = #{postId}
+    </sql>
+    <select id="fetchByPostId" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select * <include refid="fetchByPostIdSql" />
+    </select>
+    <select id="fetchByPostIdCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select count(1) <include refid="fetchByPostIdSql" />
+    </select>
+</mapper>

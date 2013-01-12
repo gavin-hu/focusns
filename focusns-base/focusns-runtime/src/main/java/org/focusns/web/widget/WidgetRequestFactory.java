@@ -18,15 +18,14 @@
  */
 package org.focusns.web.widget;
 
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import org.focusns.web.widget.http.HttpWidgetRequest;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.focusns.web.widget.http.HttpWidgetRequest;
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class WidgetRequestFactory {
 	

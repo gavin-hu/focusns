@@ -4,19 +4,16 @@
     </div>
     <div class="widget-bd">
          <div class="admin-logo">
-            <form action="${Request.contextPath}/project/logo/upload" 
+            <form action="${Request.contextPath}/admin/project/logo/upload"
                   method="post" enctype="multipart/form-data">
                 <input type="file"name="file" accept="image/*" />
                 <button type="submit">上传</button>
             </form>
-            <#if Request.hasLogo>
-            <img src="${Request.contextPath}/project/logo/link" alt="Logo" />
-            </#if>
+
             <#if Request.hasTmpLogo>
-            
             <div id="cropper-wrap">
-                <img id="cropper" src="${Request.contextPath}/project/logo/link.tmp" alt="Logo" />
-                <form class="hidden" action="${Request.contextPath}/project/logo/crop" method="post">
+                <img id="cropper" src="${Request.contextPath}/admin/project/logo/tmp" alt="Logo" />
+                <form class="hidden" action="${Request.contextPath}/admin/project/logo/crop" method="post">
                     <input type="hidden" id="x" name="x" />
                     <input type="hidden" id="y" name="y" />
                     <input type="hidden" id="w" name="w" />
@@ -25,6 +22,17 @@
                 </form>
             </div>
             </#if>
+            <div class="logos">
+                <#if Request.logos??>
+                <ul>
+                    <#list Request.logos as logo>
+                    <li>
+                        <img src="${Request.contextPath}/admin/project/logo/${logo.id}" alt="Logo" />
+                    </li>
+                    </#list>
+                <ul>
+                </#if>
+            </div>
         </div>
     </div>
 </div>

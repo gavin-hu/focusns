@@ -18,9 +18,6 @@
  */
 package org.focusns.web.widget.engine.impl;
 
-import java.lang.reflect.Method;
-import java.util.Locale;
-
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetResponse;
 import org.focusns.web.widget.engine.WidgetInvoker;
@@ -28,6 +25,9 @@ import org.focusns.web.widget.engine.WidgetParameterResolver;
 import org.focusns.web.widget.engine.WidgetView;
 import org.focusns.web.widget.engine.WidgetViewResolver;
 import org.springframework.util.ReflectionUtils;
+
+import java.lang.reflect.Method;
+import java.util.Locale;
 
 public class DefaultWidgetInvoker extends WidgetInvoker {
 	

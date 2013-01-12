@@ -18,7 +18,6 @@
  */
 package org.focusns.web.modules.profile;
 
-import java.util.Map;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
@@ -27,6 +26,8 @@ import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Resource;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 @Widget
 public class ProjectHistroyWidget {

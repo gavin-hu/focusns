@@ -18,26 +18,30 @@
  */
 package org.focusns.web.modules.admin;
 
-import java.io.File;
-import java.io.IOException;
 import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectFeature;
-import org.focusns.service.core.ProjectAttributeService;
-import org.focusns.service.core.ProjectService;
+import org.focusns.model.core.ProjectLogo;
 import org.focusns.runtime.RuntimeHelper;
+import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectLogoService;
+import org.focusns.service.core.ProjectService;
 import org.focusns.web.utils.WebRequestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+
 @Controller
+@RequestMapping("/admin")
 public class AdminProfileController {
     
     @Autowired
@@ -74,6 +78,14 @@ public class AdminProfileController {
         //
         File temp = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
         return FileCopyUtils.copyToByteArray(temp);
+    }
+
+    @RequestMapping("/project/logo/{logoId}")
+    public @ResponseBody byte[] linkLogo(@PathVariable long logoId, WebRequest webRequest) throws IOException {
+        //
+        ProjectLogo projectLogo = projectLogoService.getProjectLogo(logoId);
+        File imageFile =  projectLogoService.loadProjectLogoImage(projectLogo);
+        return FileCopyUtils.copyToByteArray(imageFile);
     }
     
     @RequestMapping("/project/edit")

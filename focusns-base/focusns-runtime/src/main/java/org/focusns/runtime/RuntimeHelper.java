@@ -18,11 +18,6 @@
  */
 package org.focusns.runtime;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import org.focusns.common.image.ImageUtils;
 import org.focusns.model.core.ProjectLogo;
 import org.focusns.model.setup.DbConfig;
@@ -31,6 +26,12 @@ import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
 import org.springframework.util.PropertiesPersister;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class RuntimeHelper {
 

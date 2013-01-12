@@ -20,41 +20,64 @@ package org.focusns.model.common;
 
 public class Rectangle {
 
-    private int x; // x 
-    private int y; // y
-    private int w; // width
-    private int h; // height
+    private String x; // x 
+    private String y; // y
+    private String w; // width
+    private String h; // height
 
-    public int getX() {
+    public String getX() {
         return x;
     }
-
-    public void setX(int x) {
+    
+    public int getXInt() {
+        return parseInt(x);
+    }
+    
+    public void setX(String x) {
         this.x = x;
     }
 
-    public int getY() {
+    public String getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public int getYInt() {
+        return parseInt(y);
+    }
+    public void setY(String y) {
         this.y = y;
     }
 
-    public int getW() {
+    public String getW() {
         return w;
     }
 
-    public void setW(int w) {
+    public int getWInt() {
+        return parseInt(w);
+    }
+    
+    public void setW(String w) {
         this.w = w;
     }
 
-    public int getH() {
+    public String getH() {
         return h;
     }
-
-    public void setH(int h) {
+    
+    public int getHInt() {
+        return parseInt(h);
+    }
+    
+    public void setH(String h) {
         this.h = h;
+    }
+    
+    private int parseInt(String num) {
+        if(num.contains(".")) {
+            num = num.substring(0, num.indexOf("."));
+        }
+        //
+        return Integer.parseInt(num);
     }
     
 }

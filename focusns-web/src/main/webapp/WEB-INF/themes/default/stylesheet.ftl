@@ -1,9 +1,7 @@
-<#assign yuiHost="http://yui.yahooapis.com/3.8.0" />
-
 <!-- YUI Stylesheet -->
-<link rel="stylesheet" type="text/css" href="${yuiHost}/build/cssreset/cssreset-min.css" />
-<link rel="stylesheet" type="text/css" href="${yuiHost}/build/cssfonts/cssfonts-min.css" />
-<link rel="stylesheet" type="text/css" href="${yuiHost}/build/cssgrids/cssgrids-min.css" />
+<link rel="stylesheet" type="text/css" href="${Request.contextPath}/themes/default/css/cssreset.css" />
+<link rel="stylesheet" type="text/css" href="${Request.contextPath}/themes/default/css/cssfonts.css" />
+<link rel="stylesheet" type="text/css" href="${Request.contextPath}/themes/default/css/cssgrids.css" />
 
 <link rel="stylesheet" type="text/css" href="${Request.contextPath}/libjs/jcrop/css/jquery.Jcrop.min.css" />
 

@@ -18,12 +18,12 @@
  */
 package org.focusns.web.widget.http;
 
+import org.focusns.web.widget.WidgetResponse;
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
-
-import org.focusns.web.widget.WidgetResponse;
 
 public class HttpWidgetResponse implements WidgetResponse {
 	

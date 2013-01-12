@@ -18,10 +18,10 @@
  */
 package org.focusns.web.servlet;
 
+import org.focusns.web.page.config.PageConfigException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.focusns.web.page.config.PageConfigException;
 
 @SuppressWarnings("serial")
 public class DispatcherServlet extends

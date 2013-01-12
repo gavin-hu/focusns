@@ -18,9 +18,9 @@
  */
 package org.focusns.web.widget;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.focusns.web.widget.http.HttpWidgetResponse;
+
+import javax.servlet.http.HttpServletResponse;
 
 public class WidgetResponseFactory {
 	

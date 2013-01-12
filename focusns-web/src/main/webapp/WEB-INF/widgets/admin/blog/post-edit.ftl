@@ -6,10 +6,6 @@
         <div class="admin-post">
             <form action="${Request.contextPath}/blog/post/edit" method="post">
                 <div>
-                    <label>标题</label>
-                    <input name="title" value="" />
-                </div>
-                <div>
                     <label>分类</label>
                     <select name="categoryId">
                         <option value="-1">未分类</option>
@@ -18,7 +14,15 @@
                         </#list>
                     </select>
                 </div>
-                <div>
+                <div class="title">
+                    <label>标题</label>
+                    <input name="title" value="" />
+                </div>
+                <div class="summary">
+                    <label>简介</label>
+                    <textarea id="summary" name="summary"></textarea>
+                </div>
+                <div class="content">
                     <label>内容</label>
                     <textarea id="content" name="content"></textarea>
                 </div>
@@ -33,6 +37,7 @@
 
 <script type="text/javascript">
 $(function(){
+    $('#summary').xheditor({skin:'nostyle', tools:'simple'});
     $('#content').xheditor({skin:'nostyle'});
 });
 </script>

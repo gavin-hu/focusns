@@ -18,13 +18,13 @@
  */
 package org.focusns.service.core.impl;
 
-import java.util.List;
-
 import org.focusns.dao.core.ProjectFeatureDao;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProjectFeatureServiceImpl implements ProjectFeatureService {

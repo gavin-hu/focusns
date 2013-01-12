@@ -18,7 +18,6 @@
  */
 package org.focusns.event.core.impl;
 
-import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.common.event.Event;
@@ -29,6 +28,8 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
 import org.focusns.service.core.ProjectHistroyService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 @Subscriber
 public class ProjectEventSubscriber {

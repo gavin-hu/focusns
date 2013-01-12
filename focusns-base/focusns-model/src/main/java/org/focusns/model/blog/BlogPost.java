@@ -18,12 +18,14 @@
  */
 package org.focusns.model.blog;
 
-import java.util.Date;
 import org.focusns.model.common.Id;
+
+import java.util.Date;
 
 public class BlogPost extends Id {
     
     private String title;
+    private String summary;
     private String content;
     private Date createAt;
     private Date modifyAt;
@@ -40,6 +42,14 @@ public class BlogPost extends Id {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public String getContent() {

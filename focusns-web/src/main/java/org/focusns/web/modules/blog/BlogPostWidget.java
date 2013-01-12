@@ -18,7 +18,6 @@
  */
 package org.focusns.web.modules.blog;
 
-import java.util.Map;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.focusns.service.blog.BlogPostService;
@@ -26,6 +25,8 @@ import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Bind.Scope;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Map;
 
 @Widget
 public class BlogPostWidget {

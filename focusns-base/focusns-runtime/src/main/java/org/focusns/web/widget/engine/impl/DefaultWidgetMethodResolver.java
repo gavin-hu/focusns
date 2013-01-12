@@ -18,11 +18,12 @@
  */
 package org.focusns.web.widget.engine.impl;
 
+import org.focusns.web.widget.engine.WidgetMethod;
+import org.focusns.web.widget.engine.WidgetMethodResolver;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import org.focusns.web.widget.engine.WidgetMethod;
-import org.focusns.web.widget.engine.WidgetMethodResolver;
 
 public class DefaultWidgetMethodResolver implements WidgetMethodResolver {
 

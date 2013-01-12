@@ -18,14 +18,15 @@
  */
 package org.focusns.dao.common.impl;
 
-import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.session.RowBounds;
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.common.Page;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements BaseDao<M> {
 
