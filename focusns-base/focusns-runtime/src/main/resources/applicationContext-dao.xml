@@ -70,6 +70,11 @@
                 <value>classpath:/org/focusns/dao/blog/impl/BlogPostMapper.xml</value>
                 <value>classpath:/org/focusns/dao/blog/impl/BlogCommentMapper.xml</value>
 
+                <!-- forum -->
+                <value>classpath:/org/focusns/dao/forum/impl/ForumCategoryMapper.xml</value>
+                <value>classpath:/org/focusns/dao/forum/impl/ForumTopicMapper.xml</value>
+                <value>classpath:/org/focusns/dao/forum/impl/ForumPostMapper.xml</value>
+
                 <!-- message -->
                 <value>classpath:/org/focusns/dao/msg/impl/MessageMapper.xml</value>
                 <value>classpath:/org/focusns/dao/msg/impl/MessageBoxMapper.xml</value>

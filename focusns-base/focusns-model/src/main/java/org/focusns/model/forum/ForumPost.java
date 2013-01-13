@@ -29,6 +29,7 @@ public class ForumPost extends Id {
     private Date createAt;
     private Date modifyAt;
     //
+    private long projectId;
     private long topicId;
     private long createById;
     private long modifyById;
@@ -65,6 +66,14 @@ public class ForumPost extends Id {
         this.modifyAt = modifyAt;
     }
 
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
     public long getTopicId() {
         return topicId;
     }
@@ -88,5 +97,4 @@ public class ForumPost extends Id {
     public void setModifyById(long modifyById) {
         this.modifyById = modifyById;
     }
-    
 }
