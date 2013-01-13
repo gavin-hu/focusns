@@ -5,6 +5,8 @@ import org.focusns.service.AbstractServiceTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
+
 public class MessageBoxServiceTest extends AbstractServiceTest {
 
     @Autowired
@@ -15,6 +17,8 @@ public class MessageBoxServiceTest extends AbstractServiceTest {
          MessageBox messageBox = new MessageBox();
          messageBox.setBox("IN");
          messageBox.setProjectId(1);
+         messageBox.setCreateAt(new Date());
+         messageBox.setCreateById(1);
          messageBoxService.createMessageBox(messageBox);
     }
 }
