@@ -75,6 +75,10 @@
                 <value>classpath:/org/focusns/dao/forum/impl/ForumTopicMapper.xml</value>
                 <value>classpath:/org/focusns/dao/forum/impl/ForumPostMapper.xml</value>
 
+                <!-- event -->
+                <value>classpath:/org/focusns/dao/event/impl/EventCategoryMapper.xml</value>
+                <value>classpath:/org/focusns/dao/event/impl/EventMapper.xml</value>
+
                 <!-- message -->
                 <value>classpath:/org/focusns/dao/msg/impl/MessageMapper.xml</value>
                 <value>classpath:/org/focusns/dao/msg/impl/MessageBoxMapper.xml</value>
