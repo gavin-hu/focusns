@@ -4,7 +4,8 @@
 
 	<resultMap id="BaseResultMap" type="org.focusns.model.msg.MessageBox">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="box" property="box" jdbcType="VARCHAR" />
+		<result column="label" property="label" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
         <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
         <result column="create_by_id" property="createById" jdbcType="BIGINT" />
@@ -14,8 +15,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_message_box (box, create_at, project_id, create_by_id)
-		values (#{box}, #{createAt}, #{projectId}, #{createById})
+		insert into tb_message_box (label, type, create_at, project_id, create_by_id)
+		values (#{label}, #{type}, #{createAt}, #{projectId}, #{createById})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -25,9 +26,12 @@
 	<update id="update" parameterType="org.focusns.model.msg.MessageBox">
 		update tb_blog_comment 
 		<set>
-			<if test="box != null" >
-		        box = #{box},
+			<if test="label != null" >
+		        label = #{label},
 			</if>
+            <if test="type != null" >
+                type = #{type},
+            </if>
             <if test="createAt != null" >
                 create_at = #{createAt},
             </if>

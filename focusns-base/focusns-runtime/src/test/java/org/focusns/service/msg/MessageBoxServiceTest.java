@@ -15,7 +15,8 @@ public class MessageBoxServiceTest extends AbstractServiceTest {
     @Test
     public void testCreateMessageBox() {
          MessageBox messageBox = new MessageBox();
-         messageBox.setBox("IN");
+         messageBox.setLabel("收件箱");
+         messageBox.setType(MessageBox.TYPE_IN);
          messageBox.setProjectId(1);
          messageBox.setCreateAt(new Date());
          messageBox.setCreateById(1);
