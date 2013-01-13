@@ -20,10 +20,14 @@ package org.focusns.model.blog;
 
 import org.focusns.model.common.Id;
 
+import java.util.Date;
+
 public class BlogCategory extends Id {
     
     private String label;
+    private Date createAt;
     //
+    private long createById;
     private long projectId;
 
     public BlogCategory() {
@@ -49,5 +53,20 @@ public class BlogCategory extends Id {
     public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
-    
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public long getCreateById() {
+        return createById;
+    }
+
+    public void setCreateById(long createById) {
+        this.createById = createById;
+    }
 }

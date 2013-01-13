@@ -9,6 +9,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 @Ignore
@@ -20,22 +21,25 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
     private BlogCategoryService blogCategoryService;
     
     @Test
-    public void testCreateBlogTag() {
-        Project project = projectService.getProject("focusns");
+    public void testCreateBlogCategory() {
+        Project project = projectService.getProject("admin");
         Assert.assertNotNull(project);
         //
-        BlogCategory blogTag = new BlogCategory(project.getId(), "未分类");
-        blogCategoryService.createBlogCategory(blogTag);
+        BlogCategory blogCategory = new BlogCategory(project.getId(), "Test");
+        blogCategory.setCreateAt(new Date());
+        blogCategory.setCreateById(1);
+
+        blogCategoryService.createBlogCategory(blogCategory);
     }
     
     @Test
-    public void testRemoteBlogTag() {
-        Project project = projectService.getProject("focusns");
+    public void testRemoveBlogCategory() {
+        Project project = projectService.getProject("admin");
         Assert.assertNotNull(project);
         //
-        List<BlogCategory> blogTags = blogCategoryService.getBlogCategories(project.getId());
-        for(BlogCategory blogTag : blogTags) {
-            blogCategoryService.removeBlogCategory(blogTag);
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
+        for(BlogCategory blogCategory : blogCategories) {
+            blogCategoryService.removeBlogCategory(blogCategory);
         }
     }
     
