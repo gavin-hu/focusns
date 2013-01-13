@@ -20,8 +20,6 @@ package org.focusns.runtime;
 
 import org.focusns.common.image.ImageUtils;
 import org.focusns.model.core.ProjectLogo;
-import org.focusns.model.setup.DbConfig;
-import org.focusns.model.setup.SiteConfig;
 import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
@@ -31,7 +29,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Properties;
 
 public class RuntimeHelper {
 
@@ -54,25 +51,6 @@ public class RuntimeHelper {
     
     public boolean isInstalled() {
         return application.exists();
-    }
-    
-    public void install(SiteConfig siteConfig, DbConfig dbConfig) throws IOException {
-        Properties props = new Properties();
-        props.setProperty("site.title", siteConfig.getTitle());
-        props.setProperty("site.keywords", siteConfig.getKeywords());
-        props.setProperty("site.description", siteConfig.getDescription());
-        //
-        if("mysql".equals(dbConfig.getType())) {
-            props.setProperty("jdbc.driver", "com.mysql.jdbc.Driver");
-            props.setProperty("jdbc.url", String.format("jdbc:mysql://%s:%s/%s", 
-                    dbConfig.getHost(), dbConfig.getPort(), dbConfig.getSchema()));
-        }
-        props.setProperty("jdbc.username", dbConfig.getUsername());
-        props.setProperty("jdbc.password", dbConfig.getPassword());
-        props.setProperty("jdbc.initSize", "1");
-        props.setProperty("jdbc.maxSize", "15");
-        //
-        propsPersister.store(props, new FileOutputStream(application), "");
     }
     
     public File getTmpProjectLogo(String tmpId) {
