@@ -79,6 +79,10 @@
                 <value>classpath:/org/focusns/dao/event/impl/EventCategoryMapper.xml</value>
                 <value>classpath:/org/focusns/dao/event/impl/EventMapper.xml</value>
 
+                <!-- event -->
+                <value>classpath:/org/focusns/dao/photo/impl/AlbumMapper.xml</value>
+                <value>classpath:/org/focusns/dao/photo/impl/PhotoMapper.xml</value>
+
                 <!-- message -->
                 <value>classpath:/org/focusns/dao/msg/impl/MessageMapper.xml</value>
                 <value>classpath:/org/focusns/dao/msg/impl/MessageBoxMapper.xml</value>
