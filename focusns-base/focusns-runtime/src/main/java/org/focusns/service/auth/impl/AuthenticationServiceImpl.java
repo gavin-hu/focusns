@@ -18,8 +18,8 @@
  */
 package org.focusns.service.auth.impl;
 
-import org.focusns.dao.core.UserDao;
-import org.focusns.model.core.User;
+import org.focusns.dao.core.ProjectUserDao;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
-    private UserDao userDao;
+    private ProjectUserDao projectUserDao;
     
-    public void authenticate(User user) {
-        User dbUser = userDao.selectByUsername(user.getUsername());
+    public void authenticate(ProjectUser user) {
+        ProjectUser dbUser = projectUserDao.selectByUsername(user.getUsername());
         if(!user.getPassword().equals(dbUser.getPassword())) {
             throw new AuthenticationException("Username or password miss matched!");
         }

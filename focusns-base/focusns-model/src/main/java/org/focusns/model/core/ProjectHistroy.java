@@ -33,7 +33,7 @@ public class ProjectHistroy extends Id {
     private String targetType;
     //
     private Project project;
-    private User createBy;
+    private ProjectUser createBy;
     private Object target;
 
     public String getContent() {
@@ -92,11 +92,11 @@ public class ProjectHistroy extends Id {
         this.project = project;
     }
 
-    public User getCreateBy() {
+    public ProjectUser getCreateBy() {
         return createBy;
     }
 
-    public void setCreateBy(User createBy) {
+    public void setCreateBy(ProjectUser createBy) {
         this.createBy = createBy;
     }
 

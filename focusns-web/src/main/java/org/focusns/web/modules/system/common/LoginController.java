@@ -18,11 +18,11 @@
  */
 package org.focusns.web.modules.system.common;
 
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.service.core.UserService;
+import org.focusns.service.core.ProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,18 +34,18 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     
     @Autowired
-    private UserService userService;
+    private ProjectUserService projectUserService;
     @Autowired
     private ProjectService projectService;
     @Autowired
     private AuthenticationService authenticationService;
     
     @RequestMapping("/login.action")
-    public String login(User user, HttpSession session) {
+    public String login(ProjectUser user, HttpSession session) {
         //
         authenticationService.authenticate(user);
         //
-        User dbUser = userService.getUser(user.getUsername());
+        ProjectUser dbUser = projectUserService.getUser(user.getUsername());
         session.setAttribute("user", dbUser);
         //
         return "redirect:/" + dbUser.getProject().getCode() + "/profile" ;

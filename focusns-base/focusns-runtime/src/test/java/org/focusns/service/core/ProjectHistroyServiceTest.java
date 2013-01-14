@@ -18,11 +18,11 @@
  */
 package org.focusns.service.core;
 
-import junit.framework.Assert;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.AbstractServiceTest;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import java.util.Date;
 public class ProjectHistroyServiceTest extends AbstractServiceTest {
     
     @Autowired
-    private UserService userService;
+    private ProjectUserService projectUserService;
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -44,7 +44,7 @@ public class ProjectHistroyServiceTest extends AbstractServiceTest {
         Project project = projectService.getProject("focusns");
         Assert.assertNotNull(project);
         //
-        User user = userService.getUser("admin");
+        ProjectUser user = projectUserService.getUser("admin");
         Assert.assertNotNull(user);
         //
         ProjectHistroy histroy = new ProjectHistroy();

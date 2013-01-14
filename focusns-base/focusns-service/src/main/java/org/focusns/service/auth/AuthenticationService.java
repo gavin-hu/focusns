@@ -18,10 +18,10 @@
  */
 package org.focusns.service.auth;
 
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 
 public interface AuthenticationService {
     
-    void authenticate(User user);
+    void authenticate(ProjectUser user);
     
 }

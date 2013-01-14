@@ -1,14 +1,15 @@
 package org.focusns.service.blog;
 
-import junit.framework.Assert;
+
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.AbstractServiceTest;
 import org.focusns.service.core.ProjectService;
-import org.focusns.service.core.UserService;
+import org.focusns.service.core.ProjectUserService;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Date;
 public class BlogPostServiceTest extends AbstractServiceTest {
 
     @Autowired
-    private UserService userService;
+    private ProjectUserService projectUserService;
     @Autowired
     private ProjectService projectService;
     @Autowired
@@ -38,7 +39,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         //
         tagService.createBlogCategory(blogTag);
         //
-        User user = userService.getUser("admin");
+        ProjectUser user = projectUserService.getUser("admin");
         Assert.assertNotNull(user);
         //
         Date now = new Date();

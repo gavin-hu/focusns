@@ -21,11 +21,11 @@ package org.focusns.web.initializer;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.service.core.UserService;
+import org.focusns.service.core.ProjectUserService;
 import org.springframework.context.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.util.Assert;
@@ -72,15 +72,15 @@ public class ApplicationInitializer
 	}
 	
 	private void setupAdmin(ApplicationContext applicationContext) {
-		UserService userService = applicationContext.getBean(UserService.class);
-		User admin = userService.getUser("admin");
+		ProjectUserService projectUserService = applicationContext.getBean(ProjectUserService.class);
+        ProjectUser admin = projectUserService.getUser("admin");
 		if(admin==null) {
-			admin = new User();
+			admin = new ProjectUser();
 			admin.setUsername("admin");
 			admin.setPassword("admin");
 			admin.setEmail("admin@focusns.org");
 			//
-			userService.createUser(admin);
+			projectUserService.createUser(admin);
 		}
 	}
 	
@@ -91,8 +91,8 @@ public class ApplicationInitializer
 		//
 		ProjectService projectService = applicationContext.getBean(ProjectService.class);
 		Project project = projectService.getProject("focusns");
-		UserService userService = applicationContext.getBean(UserService.class);
-		User admin = userService.getUser("admin");
+		ProjectUserService projectUserService = applicationContext.getBean(ProjectUserService.class);
+        ProjectUser admin = projectUserService.getUser("admin");
 		if(project==null) {
 			Date now = new Date();
 			//
@@ -109,7 +109,7 @@ public class ApplicationInitializer
 			projectService.createProject(project);
             //
             admin.setProjectId(project.getId());
-            userService.modifyUser(admin);
+            projectUserService.modifyUser(admin);
 		}
 	}
 	

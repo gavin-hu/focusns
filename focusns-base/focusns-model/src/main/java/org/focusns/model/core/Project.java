@@ -37,8 +37,8 @@ public class Project extends Id {
 	private long categoryId;
 	private long logoId;
 	//
-	private User createBy;
-	private User modifyBy;
+	private ProjectUser createBy;
+	private ProjectUser modifyBy;
 	private ProjectLogo logo;
 	private ProjectCategory category;
 	private List<ProjectAttribute> attributes = new ArrayList<ProjectAttribute>();
@@ -124,19 +124,19 @@ public class Project extends Id {
 		this._private = _private;
 	}
 	
-	public User getCreateBy() {
+	public ProjectUser getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(User createBy) {
+	public void setCreateBy(ProjectUser createBy) {
 		this.createBy = createBy;
 	}
 
-	public User getModifyBy() {
+	public ProjectUser getModifyBy() {
 		return modifyBy;
 	}
 
-	public void setModifyBy(User modifyBy) {
+	public void setModifyBy(ProjectUser modifyBy) {
 		this.modifyBy = modifyBy;
 	}
 	

@@ -1,9 +1,9 @@
 package org.focusns.service.core;
 
-import org.focusns.dao.core.UserDao;
+import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
-import org.focusns.model.core.User;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,7 +15,7 @@ import java.util.Date;
 public class ProjectServiceTest extends AbstractServiceTest {
 
 	@Autowired
-	private UserDao userDao;
+	private ProjectUserDao projectUserDao;
 	@Autowired
 	private ProjectService projectService;
 	@Autowired
@@ -28,11 +28,11 @@ public class ProjectServiceTest extends AbstractServiceTest {
 		category.setLabel("人员");
 		projectCategoryService.createCategory(category);
 		//
-		User user = new User();
+        ProjectUser user = new ProjectUser();
 		user.setUsername("haozhonghu");
 		user.setPassword("123456");
 		user.setEmail("haozhonghu@hotmail.com");
-		userDao.insert(user);
+		projectUserDao.insert(user);
 		//
 		Date now = new Date();
 		Project project = new Project();
@@ -55,7 +55,7 @@ public class ProjectServiceTest extends AbstractServiceTest {
 		//
 		projectService.removeProject(project);
 		//
-		userDao.delete(project.getCreateById());
+		projectUserDao.delete(project.getCreateById());
 		//
 		ProjectCategory category = projectCategoryService.getCategory(project.getCategoryId());
 		projectCategoryService.removeCategory(category);

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.core.ProjectUserDao">
+
+	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectUser">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="org.focusns.model.core.ProjectUser">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			select last_insert_id()
+		</selectKey>
+		insert into tb_project_user (username, password, email)
+		values (#{username}, #{password}, #{email})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tb_project_user where id = #{id}
+	</select>
+
+	<select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from tb_project_user where username = #{username}
+	</select>
+	
+	<update id="update" parameterType="org.focusns.model.core.ProjectUser">
+		update tb_project_user
+		<set>
+			<if test="username != null" >
+		        username = #{username},
+			</if>
+			<if test="password != null" >
+		        password = #{password},
+			</if>
+			<if test="email != null" >
+		        email = #{email},
+			</if>
+            <if test="projectId != null" >
+		        project_id = #{projectId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_project_user where id = #{id}
+	</delete>
+
+</mapper>
