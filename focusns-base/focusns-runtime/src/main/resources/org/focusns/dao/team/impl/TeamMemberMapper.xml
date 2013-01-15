@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) 2011-2013 FocusSNS.
+  ~
+  ~ This library is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~ This library is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+  ~ MA 02110-1301  USA
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.team.TeamMemberDao">
+
+	<resultMap id="BaseResultMap" type="org.focusns.model.team.TeamMember">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+        <result column="user_id" property="projectId" jdbcType="BIGINT" />
+        <result column="role_id" property="projectId" jdbcType="BIGINT" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="org.focusns.model.team.TeamMember">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			select last_insert_id()
+		</selectKey>
+		insert into tb_team_member (create_at, modify_at, user_id, role_id, project_id)
+		values (#{createAt}, #{modifyAt}, #{userId}, #{roleId}, #{projectId})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tb_team_member where id = #{id}
+	</select>
+	
+	<update id="update" parameterType="org.focusns.model.team.TeamMember">
+		update tb_team_member
+		<set>
+			<if test="createAt != null" >
+                create_at = #{createAt},
+			</if>
+			<if test="modifyAt != null" >
+		        modify_at = #{modifyAt},
+			</if>
+            <if test="userId > 0" >
+                user_id = #{userId},
+            </if>
+            <if test="roleId > 0" >
+                role_id = #{roleId},
+            </if>
+            <if test="projectId > 0" >
+		        project_id = #{projectId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_team_member where id = #{id}
+	</delete>
+
+</mapper>

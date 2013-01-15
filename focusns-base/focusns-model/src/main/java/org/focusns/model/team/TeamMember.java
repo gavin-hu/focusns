@@ -25,9 +25,11 @@ import java.util.Date;
 public class TeamMember extends Id {
     
     private Date createAt;
+    private Date modifyAt;
     //
     private long userId;
     private long roleId;
+    private long projectId;
 
     public Date getCreateAt() {
         return createAt;
@@ -35,6 +37,14 @@ public class TeamMember extends Id {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Date getModifyAt() {
+        return modifyAt;
+    }
+
+    public void setModifyAt(Date modifyAt) {
+        this.modifyAt = modifyAt;
     }
 
     public long getUserId() {
@@ -52,5 +62,12 @@ public class TeamMember extends Id {
     public void setRoleId(long roleId) {
         this.roleId = roleId;
     }
-    
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
 }
