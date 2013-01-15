@@ -54,8 +54,18 @@ public class ProjectUserServiceImpl implements ProjectUserService {
        projectUserDao.update(user);
     }
 
-	public void removeUser(ProjectUser user) {
+    public void removeUser(ProjectUser user) {
 		projectUserDao.delete(user.getId());
 	}
+
+    @Override
+    public void assignRole(long projectId, long userId, long roleId) {
+        projectUserDao.insertRole(projectId, userId, roleId);
+    }
+
+    @Override
+    public void unassignRole(long projectId, long userId, long roleId) {
+        projectUserDao.deleteRole(projectId, userId, roleId);
+    }
 
 }

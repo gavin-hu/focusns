@@ -38,7 +38,7 @@
 			<if test="email != null" >
 		        email = #{email},
 			</if>
-            <if test="projectId != null" >
+            <if test="projectId > 0" >
 		        project_id = #{projectId},
 			</if>
 		</set>
@@ -48,5 +48,15 @@
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project_user where id = #{id}
 	</delete>
+
+    <insert id="insertRole" parameterType="java.util.Map">
+        insert into tb_project_user_role (project_id, user_id, role_id)
+        values (#{projectId}, #{userId}, #{roleId})
+    </insert>
+
+    <delete id="deleteRole" parameterType="java.util.Map">
+        delete from tb_project_user_role
+        where project_id = #{projectId} and user_id = #{userId} and role_id = #{roleId}
+    </delete>
 
 </mapper>

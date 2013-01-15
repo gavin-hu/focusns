@@ -16,22 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 package org.focusns.service.core;
 
-import org.focusns.model.core.ProjectUser;
+import org.focusns.model.core.ProjectRole;
 
-public interface ProjectUserService {
+public interface ProjectRoleService {
 
-    ProjectUser getUser(String username);
-	
-	void createUser(ProjectUser user);
-	
-	void removeUser(ProjectUser user);
+    ProjectRole getProjectRole(long roleId);
 
-    void modifyUser(ProjectUser user);
+    void createProjectRole(ProjectRole role);
 
-    void assignRole(long projectId, long userId, long roleId);
+    void modifyProjectRole(ProjectRole role);
 
-    void unassignRole(long projectId, long userId, long roleId);
-	
+    void removeProjectRole(ProjectRole role);
+
+    void authorizeAuthority(long projectId, long roleId, long authorityId);
+
+    void deauthorizeAuthority(long projectId, long roleId, long authorityId);
+
 }

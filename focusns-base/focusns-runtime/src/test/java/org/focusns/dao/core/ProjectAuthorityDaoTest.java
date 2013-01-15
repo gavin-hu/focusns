@@ -16,22 +16,27 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.core;
 
-import org.focusns.model.core.ProjectUser;
+package org.focusns.dao.core;
 
-public interface ProjectUserService {
+import org.focusns.dao.AbstractDaoTest;
+import org.focusns.model.core.ProjectAuthority;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-    ProjectUser getUser(String username);
-	
-	void createUser(ProjectUser user);
-	
-	void removeUser(ProjectUser user);
+@Ignore
+public class ProjectAuthorityDaoTest extends AbstractDaoTest {
 
-    void modifyUser(ProjectUser user);
+    @Autowired
+    private ProjectAuthorityDao projectAuthorityDao;
 
-    void assignRole(long projectId, long userId, long roleId);
-
-    void unassignRole(long projectId, long userId, long roleId);
-	
+    @Test
+    public void testInsert() {
+         ProjectAuthority authority = new ProjectAuthority();
+        authority.setCode("project-profile-view");
+        authority.setDescription("查看主页模块");
+        //
+        this.projectAuthorityDao.insert(authority);
+    }
 }

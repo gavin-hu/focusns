@@ -16,22 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.core;
 
-import org.focusns.model.core.ProjectUser;
+package org.focusns.dao.core;
 
-public interface ProjectUserService {
+import org.focusns.dao.common.BaseDao;
+import org.focusns.model.core.ProjectAuthority;
 
-    ProjectUser getUser(String username);
-	
-	void createUser(ProjectUser user);
-	
-	void removeUser(ProjectUser user);
-
-    void modifyUser(ProjectUser user);
-
-    void assignRole(long projectId, long userId, long roleId);
-
-    void unassignRole(long projectId, long userId, long roleId);
-	
+public interface ProjectAuthorityDao extends BaseDao<ProjectAuthority> {
 }

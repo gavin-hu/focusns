@@ -16,22 +16,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.core;
 
-import org.focusns.model.core.ProjectUser;
+package org.focusns.model.core;
 
-public interface ProjectUserService {
+import org.focusns.model.common.Id;
 
-    ProjectUser getUser(String username);
-	
-	void createUser(ProjectUser user);
-	
-	void removeUser(ProjectUser user);
+public class ProjectAuthority extends Id {
 
-    void modifyUser(ProjectUser user);
+    private String code;
+    private String description;
+    //
 
-    void assignRole(long projectId, long userId, long roleId);
+    public String getCode() {
+        return code;
+    }
 
-    void unassignRole(long projectId, long userId, long roleId);
-	
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

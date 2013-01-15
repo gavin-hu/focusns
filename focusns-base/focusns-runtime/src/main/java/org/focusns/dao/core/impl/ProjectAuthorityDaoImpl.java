@@ -16,22 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.service.core;
 
-import org.focusns.model.core.ProjectUser;
+package org.focusns.dao.core.impl;
 
-public interface ProjectUserService {
+import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.dao.core.ProjectAuthorityDao;
+import org.focusns.model.core.ProjectAuthority;
+import org.springframework.stereotype.Repository;
 
-    ProjectUser getUser(String username);
-	
-	void createUser(ProjectUser user);
-	
-	void removeUser(ProjectUser user);
-
-    void modifyUser(ProjectUser user);
-
-    void assignRole(long projectId, long userId, long roleId);
-
-    void unassignRole(long projectId, long userId, long roleId);
-	
+@Repository
+public class ProjectAuthorityDaoImpl extends MyBatisBaseDao<ProjectAuthority> implements ProjectAuthorityDao {
 }

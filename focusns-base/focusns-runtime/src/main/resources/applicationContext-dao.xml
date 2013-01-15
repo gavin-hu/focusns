@@ -53,6 +53,8 @@
 
 				<!-- core -->
 				<value>classpath:/org/focusns/dao/core/impl/ProjectUserMapper.xml</value>
+                <value>classpath:/org/focusns/dao/core/impl/ProjectRoleMapper.xml</value>
+                <value>classpath:/org/focusns/dao/core/impl/ProjectAuthorityMapper.xml</value>
                 <value>classpath:/org/focusns/dao/core/impl/ProjectMapper.xml</value>
                 <value>classpath:/org/focusns/dao/core/impl/ProjectLogoMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectFeatureMapper.xml</value>

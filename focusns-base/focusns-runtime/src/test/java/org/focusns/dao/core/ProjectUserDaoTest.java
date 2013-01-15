@@ -31,5 +31,15 @@ public class ProjectUserDaoTest extends AbstractDaoTest {
 		int count = projectUserDao.delete(user.getId());
 		Assert.assertTrue(count==1);
 	}
+
+    @Test
+    public void testInsertRole() {
+        projectUserDao.insertRole(1, 1, 1);
+    }
+
+    @Test
+    public void testDeleteRole() {
+        projectUserDao.deleteRole(1, 1, 1);
+    }
 	
 }
