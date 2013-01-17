@@ -18,12 +18,10 @@
  */
 package org.focusns.service.core.impl;
 
-import org.focusns.common.image.ImageUtils;
 import org.focusns.dao.core.ProjectLogoDao;
 import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
-import org.focusns.runtime.RuntimeHelper;
 import org.focusns.service.core.ProjectLogoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,18 +59,19 @@ public class ProjectLogoServiceImpl implements ProjectLogoService {
     }
 
     public File loadProjectLogoImage(ProjectLogo logo) {
-        return RuntimeHelper.getInstance().getProjectLogo(logo);
+//        return RuntimeHelper.getInstance().getProjectLogo(logo);
+        return null;
     }
 
     public void cropProjectLogoImage(Project project, File original, Rectangle rectangle) throws IOException {
         //
-        ProjectLogo logo = new ProjectLogo();
+      /*  ProjectLogo logo = new ProjectLogo();
         logo.setProjectId(project.getId());
         logoDao.insert(logo);
         //
         File target = RuntimeHelper.getInstance().getProjectLogo(logo);
-        ImageUtils.crop(original, target, rectangle.getXInt(), rectangle.getYInt(), 
-                rectangle.getWInt(), rectangle.getHInt(), "JPG");
+        ImageUtils.crop(original, target, rectangle.getXInt(), rectangle.getYInt(),
+                rectangle.getWInt(), rectangle.getHInt(), "JPG");*/
     }
     
 }

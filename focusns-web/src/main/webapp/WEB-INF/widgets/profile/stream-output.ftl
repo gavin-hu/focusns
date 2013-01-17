@@ -1,12 +1,13 @@
+<#if Request.page.results?size gt 0>
 <div class="widget">
     <div class="widget-bd">
         <div class="stream">
             <ul>
                 <#list Request.page.results as histroy>
                 <li>
-                    <div class="thumbnail">
+                    <div>
                         <a href="${Request.contextPath}/">
-                            <img src="${Request.contextPath}/project/logo" />
+                            <img class="thumbnail" src="${Request.contextPath}/project/${histroy.projectId}/logo" />
                         </a>
                     </div>
                     <div class="activity">
@@ -26,3 +27,4 @@
         </div>
     </div>
 </div>
+</#if>

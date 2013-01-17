@@ -21,7 +21,7 @@ package org.focusns.web.modules.admin;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectLogo;
-import org.focusns.runtime.RuntimeHelper;
+import org.focusns.web.helpers.RuntimeHelper;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectLogoService;
 import org.focusns.web.widget.annotation.Bind;
@@ -34,9 +34,7 @@ import java.util.Map;
 
 @Widget
 public class AdminProjectWidget {
-    
-    @Autowired
-    private ProjectLogoService logoService;
+
     @Autowired
     private ProjectAttributeService attributeService;
     
@@ -44,11 +42,11 @@ public class AdminProjectWidget {
             @Bind(value="id", scope = Bind.Scope.SESSION) String sessionId,
             @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
         //
-        File dest = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
-        model.put("hasTmpLogo", dest.canRead());
+        File tmpLogo = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
+        model.put("hasTmpLogo", tmpLogo.canRead());
         //
-        List<ProjectLogo> projectLogos = logoService.listProjectLogos(project.getId());
-        model.put("logos", projectLogos);
+        File targetLogo = RuntimeHelper.getInstance().getProjectLogo(project.getId());
+        model.put("hasLogo", targetLogo.canRead());
         //
         return "admin/profile/logo-edit";
     }

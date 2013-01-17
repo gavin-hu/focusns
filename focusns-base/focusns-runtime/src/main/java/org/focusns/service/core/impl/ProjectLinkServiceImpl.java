@@ -19,11 +19,14 @@
 package org.focusns.service.core.impl;
 
 import org.focusns.dao.core.ProjectLinkDao;
+import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.service.core.ProjectLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -47,5 +50,21 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     public void removeProjectLink(ProjectLink link) {
         linkDao.delete(link.getId());
     }
-    
+
+    @Override
+    public ProjectLink getProjectLink(long fromProjectId, long toProjectId) {
+        return linkDao.selectByFromAndToProjectId(fromProjectId, toProjectId);
+    }
+
+    @Override
+    public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId) {
+        return linkDao.fetchByToProjectId(page, toProjectId, null);
+    }
+
+    @Override
+    public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId) {
+        return linkDao.fetchByFromProjectId(page, fromProjectId, null);
+    }
+
+
 }

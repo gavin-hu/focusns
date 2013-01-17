@@ -17,31 +17,26 @@
  * MA 02110-1301  USA
  */
 
-package org.focusns.dao.team;
+package org.focusns.dao.core;
 
 import org.focusns.dao.AbstractDaoTest;
-import org.focusns.model.team.TeamMember;
+import org.focusns.model.core.ProjectLink;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
-
 @Ignore
-public class TeamMemberDaoTest extends AbstractDaoTest {
+public class ProjectLinkDaoTest extends AbstractDaoTest {
 
     @Autowired
-    private TeamMemberDao teamMemberDao;
+    private ProjectLinkDao projectLinkDao;
 
     @Test
     public void testInsert() {
-        TeamMember member = new TeamMember();
-        member.setCreateAt(new Date());
-        member.setModifyAt(new Date());
-        member.setUserId(1);
-        member.setRoleId(1);
-        member.setProjectId(1);
+        ProjectLink link = new ProjectLink();
+        link.setFromProjectId(1);
+        link.setToProjectId(1);
         //
-        this.teamMemberDao.insert(member);
+        projectLinkDao.insert(link);
     }
 }

@@ -28,7 +28,7 @@ import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.web.page.config.PageConfigException;
 import org.focusns.web.page.render.PageRender;
-import org.focusns.web.utils.UrlTemplateHelper;
+import org.focusns.web.helpers.UrlTemplateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;

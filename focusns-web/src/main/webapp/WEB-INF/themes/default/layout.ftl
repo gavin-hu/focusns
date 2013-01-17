@@ -56,9 +56,9 @@
         </div>
         <div id="ft" class="yui3-g">
             <div class="yui3-u-1">
-                <@utils.position name="footer">
-                <div id="footer">${footer}</div>
-                </@utils.position>
+                <div class="copyright">
+				&copy; Copyright 2011-2013 Powered by <strong>Focus<span>SNS</span></strong>
+                </div>
             </div>
         </div>
     </body>

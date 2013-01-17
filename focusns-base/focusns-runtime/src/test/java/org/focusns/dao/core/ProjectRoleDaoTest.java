@@ -21,9 +21,11 @@ package org.focusns.dao.core;
 
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.core.ProjectRole;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Ignore
 public class ProjectRoleDaoTest extends AbstractDaoTest {
 
     @Autowired

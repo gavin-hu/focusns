@@ -6,36 +6,11 @@
     </div>
     <div class="widget-bd">
         <div class="project-links">
-            <ul>
-                <li>
-                    <div class="project-link">	
-                        <a href="#">
-                            <img src="${Request.contextPath}/project/logo/link" />
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="project-link">	
-                        <a href="#">
-                            <img src="${Request.contextPath}/admin/project/logo/tmp" />
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="project-link">	
-                        <a href="#">
-                            <img src="${Request.contextPath}/project/logo/link" />
-                        </a>
-                    </div>
-                </li>
-                <li>
-                    <div class="project-link">	
-                        <a href="#">
-                            <img src="${Request.contextPath}/project/logo/link" />
-                        </a>
-                    </div>
-                </li>
-            </ul>
+            <@utils.ul items=Request.page.results ; item >
+            <a href="#">
+                <img class="thumbnail" src="${Request.contextPath}/project/${item.toProjectId}/logo" />
+            </a>
+            </@utils.ul>
         </div>
     </div>
     <div class="widget-ft">

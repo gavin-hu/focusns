@@ -9,7 +9,7 @@
                 <input type="hidden" name="targetId" value="${Request.project.id}" />
                 <input type="hidden" name="targetType" value="${Request.project.class}" />
                 <input type="hidden" name="projectId" value="${Request.project.id}" />
-
+                <input type="hidden" name="redirect" value="${Request.contextPath}/${Request.project.code}/${Request.feature.code}" />
                 <div class="weibo-actions">
                     <span class="action-share">
                         <button type="submit" name="action" value="create">分享</button>

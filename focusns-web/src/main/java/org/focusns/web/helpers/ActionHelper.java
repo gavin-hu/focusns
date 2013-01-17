@@ -16,32 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+package org.focusns.web.helpers;
 
-package org.focusns.dao.team;
-
-import org.focusns.dao.AbstractDaoTest;
-import org.focusns.model.team.TeamMember;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
-
-@Ignore
-public class TeamMemberDaoTest extends AbstractDaoTest {
-
-    @Autowired
-    private TeamMemberDao teamMemberDao;
-
-    @Test
-    public void testInsert() {
-        TeamMember member = new TeamMember();
-        member.setCreateAt(new Date());
-        member.setModifyAt(new Date());
-        member.setUserId(1);
-        member.setRoleId(1);
-        member.setProjectId(1);
-        //
-        this.teamMemberDao.insert(member);
+public class ActionHelper {
+    
+    public static boolean isFetch(String action) {
+        return "fetch".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isCreate(String action) {
+        return "create".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isModify(String action) {
+        return "modify".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isRemove(String action) {
+        return "remove".equalsIgnoreCase(action);
     }
 }

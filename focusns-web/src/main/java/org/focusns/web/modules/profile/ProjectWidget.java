@@ -34,7 +34,7 @@ public class ProjectWidget {
     @Autowired
     private ProjectAttributeService attributeService;
     
-	public String doView(Map<String, Object> model,
+	public String view(Map<String, Object> model,
             @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
         //
         List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());

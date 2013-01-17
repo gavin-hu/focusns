@@ -11,7 +11,7 @@
             </form>
 
             <#if Request.hasTmpLogo>
-            <div id="cropper-wrap">
+            <div class="cropper-wrapper">
                 <img id="cropper" src="${Request.contextPath}/admin/project/logo/tmp" alt="Logo" />
                 <form class="hidden" action="${Request.contextPath}/admin/project/logo/crop" method="post">
                     <input type="hidden" id="x" name="x" />
@@ -22,15 +22,9 @@
                 </form>
             </div>
             </#if>
-            <div class="logos">
-                <#if Request.logos??>
-                <ul>
-                    <#list Request.logos as logo>
-                    <li>
-                        <img src="${Request.contextPath}/admin/project/logo/${logo.id}" alt="Logo" />
-                    </li>
-                    </#list>
-                <ul>
+            <div class="logo">
+                <#if Request.hasLogo>
+                <img src="${Request.contextPath}/admin/project/${Request.project.id}/logo" alt="Logo" />
                 </#if>
             </div>
         </div>
@@ -40,6 +34,8 @@
 <script type="text/javascript">
 $(function(){
     $('#cropper').Jcrop({
+        aspectRatio:1,
+        minSize:[80, 80],
         onSelect:function(c) {
             $('#x').val(c.x);
             $('#y').val(c.y);

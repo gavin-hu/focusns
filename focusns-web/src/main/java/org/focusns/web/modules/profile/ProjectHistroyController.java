@@ -22,8 +22,8 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.model.core.ProjectHistroy;
 import org.focusns.service.core.ProjectHistroyService;
-import org.focusns.web.utils.ActionHelper;
-import org.focusns.web.utils.WebRequestHelper;
+import org.focusns.web.helpers.ActionHelper;
+import static org.focusns.web.helpers.WebRequestHelper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,16 +37,11 @@ public class ProjectHistroyController {
     private ProjectHistroyService projectHistroyService;
     
     @RequestMapping("/project/histroy/edit")
-    public String editHistroy(@RequestParam String action, ProjectHistroy histroy, WebRequest webRequest) {
-        //
-        Project project = WebRequestHelper.getProject(webRequest);
-        ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
+    public void editHistroy(@RequestParam String action, ProjectHistroy histroy) {
         //
         if(ActionHelper.isCreate(action)) {
             projectHistroyService.createProjectHistroy(histroy);
-        } 
-        //
-        return "redirect:/" + project.getCode() + "/" + feature.getCode();
+        }
     }
     
 }

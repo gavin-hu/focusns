@@ -4,9 +4,9 @@
 
 	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectLink">
 		<id column="id" property="id" jdbcType="BIGINT" />
-		<result column="form_project_id" property="fromProjectId" jdbcType="VARCHAR" />
+		<result column="from_project_id" property="fromProjectId" jdbcType="VARCHAR" />
         <result column="to_project_id" property="toProjectId" jdbcType="VARCHAR" />
-        <result column="mutual" property="mutual" jdbcType="VARCHAR" />
+        <result column="mutual" property="mutual" jdbcType="BOOLEAN" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectLink">
@@ -37,5 +37,30 @@
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project_link where id = #{id}
 	</delete>
+
+    <select id="selectByFromAndToProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from tb_project_link where from_project_id = #{fromProjectId} and to_project_id = #{toProjectId}
+    </select>
+
+    <sql id="fetchPageSql">
+        from tb_project_link
+        <where>
+            <if test="toProjectId!=null">
+                to_project_id = #{toProjectId}
+            </if>
+            <if test="fromProjectId!=null">
+                from_project_id = #{fromProjectId}
+            </if>
+            <if test="mutual!=null">
+                mutual = #{mutual}
+            </if>
+        </where>
+    </sql>
+    <select id="fetchPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="fetchPageSql"/>
+    </select>
+    <select id="fetchPageCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchPageSql"/>
+    </select>
 	
 </mapper>

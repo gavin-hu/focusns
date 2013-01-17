@@ -1,10 +1,13 @@
 <page extends="/global-project">
     <position name="leftColumn">
-        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@doList" />
+        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@list" />
     </position>
     <position name="mainColumn">
-		<widget target="org.focusns.web.modules.profile.ProjectWidget@doView" />
+		<widget target="org.focusns.web.modules.profile.ProjectWidget@view" />
         <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@input" />
         <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@output" />
 	</position>
+    <position name="rightColumn">
+        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@action" />
+    </position>
 </page>

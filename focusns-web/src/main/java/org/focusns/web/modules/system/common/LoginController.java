@@ -33,10 +33,11 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class LoginController {
     
-    @Autowired
-    private ProjectUserService projectUserService;
+
     @Autowired
     private ProjectService projectService;
+    @Autowired
+    private ProjectUserService projectUserService;
     @Autowired
     private AuthenticationService authenticationService;
     

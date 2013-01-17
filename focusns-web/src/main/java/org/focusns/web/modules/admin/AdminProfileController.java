@@ -23,11 +23,11 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.model.core.ProjectLogo;
-import org.focusns.runtime.RuntimeHelper;
+import org.focusns.web.helpers.RuntimeHelper;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectLogoService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.utils.WebRequestHelper;
+import org.focusns.web.helpers.WebRequestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -47,8 +47,6 @@ public class AdminProfileController {
     @Autowired
     private ProjectService projectService;
     @Autowired
-    private ProjectLogoService projectLogoService;
-    @Autowired
     private ProjectAttributeService projectAttributeService;
     
     @RequestMapping("/project/logo/upload")
@@ -67,8 +65,9 @@ public class AdminProfileController {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        File tmp = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
-        projectLogoService.cropProjectLogoImage(project, tmp, rectangle);
+        File target = RuntimeHelper.getInstance().getProjectLogo(project.getId());
+        File original = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        RuntimeHelper.getInstance().cropProjectLogo(original, target, rectangle);
         //
         return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
     }
@@ -80,12 +79,11 @@ public class AdminProfileController {
         return FileCopyUtils.copyToByteArray(temp);
     }
 
-    @RequestMapping("/project/logo/{logoId}")
-    public @ResponseBody byte[] linkLogo(@PathVariable long logoId, WebRequest webRequest) throws IOException {
+    @RequestMapping("/project/{projectId}/logo")
+    public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
         //
-        ProjectLogo projectLogo = projectLogoService.getProjectLogo(logoId);
-        File imageFile =  projectLogoService.loadProjectLogoImage(projectLogo);
-        return FileCopyUtils.copyToByteArray(imageFile);
+        File target = RuntimeHelper.getInstance().getProjectLogo(projectId);
+        return FileCopyUtils.copyToByteArray(target);
     }
     
     @RequestMapping("/project/edit")
