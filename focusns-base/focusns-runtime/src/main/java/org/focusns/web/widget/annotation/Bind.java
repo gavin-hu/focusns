@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 public @interface Bind {
 
 	public enum Scope {
-		PARAMETER, REQUEST, SESSION, APPLICATION
+		PARAMETER, REQUEST, SESSION, APPLICATION, PREFERENCE
 	}
 	
 	String value();

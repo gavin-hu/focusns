@@ -5,7 +5,7 @@
 </#macro>
 
 <#macro redirect>
-    ${Request.contextPath}/${Request.project.code}/${Request.feature.code}
+${Request.contextPath}/${Request.project.code}/${Request.feature.code}
 </#macro>
 
 <#-- html ul tag wrapper -->

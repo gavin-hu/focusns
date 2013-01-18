@@ -18,7 +18,7 @@
  */
 package org.focusns.web.widget.security;
 
-import org.focusns.web.page.config.WidgetConfig;
+import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.widget.annotation.Resource;
 import org.focusns.web.widget.engine.WidgetFilter;
 import org.focusns.web.widget.engine.WidgetMethod;

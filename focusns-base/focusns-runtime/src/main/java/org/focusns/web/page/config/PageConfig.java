@@ -18,6 +18,8 @@
  */
 package org.focusns.web.page.config;
 
+import org.focusns.web.widget.config.WidgetConfig;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

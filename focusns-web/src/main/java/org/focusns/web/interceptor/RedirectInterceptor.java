@@ -39,7 +39,7 @@ public class RedirectInterceptor extends HandlerInterceptorAdapter {
 
     private FreeMarkerConfig freeMarkerConfig;
     
-    private Map<String, String> redirectMappings;
+    private Map<String, String> redirectMappings = new HashMap<String, String>();
     
     private Map<String, Template> templateMappings = new HashMap<String, Template>();
 

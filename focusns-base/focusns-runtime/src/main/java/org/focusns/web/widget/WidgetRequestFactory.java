@@ -18,6 +18,7 @@
  */
 package org.focusns.web.widget;
 
+import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.widget.http.HttpWidgetRequest;
 
 import javax.servlet.ServletContext;
@@ -28,7 +29,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WidgetRequestFactory {
-	
+
 	private Map<String, Object> requestParameters = new ConcurrentHashMap<String, Object>();
 	private Map<String, Object> requestAttributes = new ConcurrentHashMap<String, Object>();
 	private Map<String, Object> sessionAttributes = new ConcurrentHashMap<String, Object>();
@@ -41,9 +42,9 @@ public class WidgetRequestFactory {
 		copyApplicationAttributes(request, applicationAttributes);
 	}
 
-	public WidgetRequest createWidgetRequest() {
+	public WidgetRequest createWidgetRequest(WidgetConfig widgetConfig) {
 		//
-		return new HttpWidgetRequest(requestParameters, requestAttributes, sessionAttributes, applicationAttributes);
+		return new HttpWidgetRequest(widgetConfig, requestParameters, requestAttributes, sessionAttributes, applicationAttributes);
 	}
 	
 	@SuppressWarnings("unchecked")

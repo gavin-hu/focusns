@@ -13,7 +13,7 @@
                 <div class="weibo-actions">
                     <span class="action-share">
                         <button type="submit" name="action" value="create">分享</button>
-                    </span>
+                                               </span>
                 </div>
             </form>
         </div>

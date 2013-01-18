@@ -35,11 +35,17 @@ public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink>
     @Override
     public ProjectLink selectByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //
-        Map parameter = new HashMap();
-        parameter.put("fromProjectId", fromProjectId);
-        parameter.put("toProjectId", toProjectId);
+        Map parameter = createParameter(fromProjectId, toProjectId, null);
         //
         return getSqlSession().selectOne(NAMESPACE.concat(".selectByFromAndToProjectId"), parameter);
+    }
+
+    @Override
+    public void deleteByFromAndToProjectId(long fromProjectId, long toProjectId) {
+        //
+        Map parameter = createParameter(fromProjectId, toProjectId, null);
+        //
+        getSqlSession().delete(NAMESPACE.concat(".deleteByFromAndToProjectId"), parameter);
     }
 
     @Override

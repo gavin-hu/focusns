@@ -19,13 +19,15 @@
 package org.focusns.web.widget.http;
 
 import org.focusns.web.widget.WidgetRequest;
+import org.focusns.web.widget.config.WidgetConfig;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpWidgetRequest implements WidgetRequest {
-	
+
+    private WidgetConfig widgetConfig;
 	private Map<String, Object> requestParameters = Collections.emptyMap();
 	private Map<String, Object> requestAttributes = Collections.emptyMap();
 	private Map<String, Object> sessionAttributes = Collections.emptyMap();
@@ -34,15 +36,22 @@ public class HttpWidgetRequest implements WidgetRequest {
 	public HttpWidgetRequest() {
 	}
 	
-	public HttpWidgetRequest(Map<String, ?> requestParameters, Map<String, ?> requestAttributes, 
-			Map<String, ?> sessionAttributes, Map<String, ?> applicationAttributes) {
+	public HttpWidgetRequest(WidgetConfig widgetConfig,
+                             Map<String, ?> requestParameters, Map<String, ?> requestAttributes,
+                             Map<String, ?> sessionAttributes, Map<String, ?> applicationAttributes) {
+        this.widgetConfig = widgetConfig;
 		this.requestParameters = new HashMap<String, Object>(requestParameters);
 		this.requestAttributes = new HashMap<String, Object>(requestAttributes);
 		this.sessionAttributes = new HashMap<String, Object>(sessionAttributes);
 		this.applicationAttributes = new HashMap<String, Object>(applicationAttributes);
 	}
 
-	public String getRequestParameter(String name) {
+    @Override
+    public String getWidgetPreference(String name) {
+        return (String) widgetConfig.getPreferences().get(name);
+    }
+
+    public String getRequestParameter(String name) {
 		return (String) this.requestParameters.get(name);
 	}
 
@@ -65,7 +74,12 @@ public class HttpWidgetRequest implements WidgetRequest {
 		return (T) this.applicationAttributes.get(name);
 	}
 
-	public Map<String, Object> getRequestParameters() {
+    @Override
+    public Map<String, Object> getWidgetPreferences() {
+        return widgetConfig.getPreferences();
+    }
+
+    public Map<String, Object> getRequestParameters() {
 		return requestParameters;
 	}
 

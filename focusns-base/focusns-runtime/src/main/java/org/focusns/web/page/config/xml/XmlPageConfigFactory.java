@@ -22,7 +22,7 @@ import org.focusns.common.xml.XmlParser;
 import org.focusns.web.page.config.AbstractPageConfigFactory;
 import org.focusns.web.page.config.PageConfig;
 import org.focusns.web.page.config.PageConfigFactory;
-import org.focusns.web.page.config.WidgetConfig;
+import org.focusns.web.widget.config.WidgetConfig;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -70,8 +70,15 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
 			//
 			List<Element> widgetEles = DomUtils.getChildElementsByTagName(positionEle, "widget");
 			for(Element widgetEle : widgetEles) {
-				WidgetConfig widgetDefinition = new WidgetConfig();
-				widgetDefinition.setTarget(widgetEle.getAttribute("target"));
+				WidgetConfig widgetDefinition = new WidgetConfig(widgetEle.getAttribute("target"));
+                Element prefsEle = DomUtils.getChildElementByTagName(widgetEle, "preference");
+                if(prefsEle!=null) {
+                    for(Element prefEle : DomUtils.getChildElements(prefsEle)) {
+                        String name = prefEle.getTagName();
+                        String value = DomUtils.getTextValue(prefEle);
+                        widgetDefinition.getPreferences().put(name, value);
+                    }
+                }
 				//
 				widgetDefinitions.add(widgetDefinition);
 			}

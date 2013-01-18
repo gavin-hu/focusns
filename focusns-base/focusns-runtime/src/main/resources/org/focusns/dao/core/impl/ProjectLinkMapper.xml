@@ -42,6 +42,10 @@
         select * from tb_project_link where from_project_id = #{fromProjectId} and to_project_id = #{toProjectId}
     </select>
 
+    <delete id="deleteByFromAndToProjectId" parameterType="java.util.Map">
+        delete from tb_project_link where from_project_id = #{fromProjectId} and to_project_id = #{toProjectId}
+    </delete>
+
     <sql id="fetchPageSql">
         from tb_project_link
         <where>

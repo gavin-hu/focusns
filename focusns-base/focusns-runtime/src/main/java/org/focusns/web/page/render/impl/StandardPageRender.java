@@ -20,7 +20,7 @@ package org.focusns.web.page.render.impl;
 
 import org.focusns.web.page.config.PageConfig;
 import org.focusns.web.page.config.PageConfigFactory;
-import org.focusns.web.page.config.WidgetConfig;
+import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.page.render.PageRender;
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetRequestFactory;
@@ -87,7 +87,7 @@ public class StandardPageRender implements PageRender {
             //
 			for(WidgetConfig widgetConfig : widgetConfigList) {
 				//
-				WidgetRequest widgetRequest = widgetRequestFactory.createWidgetRequest();
+				WidgetRequest widgetRequest = widgetRequestFactory.createWidgetRequest(widgetConfig);
 				WidgetResponse widgetResponse = widgetResponseFactory.createWidgetResponse();
 				//
 				WidgetInvocation widgetInvocation = new WidgetInvocation(widgetConfig, widgetRequest, widgetResponse);

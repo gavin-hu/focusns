@@ -18,7 +18,7 @@
  */
 package org.focusns.web.widget.engine;
 
-import org.focusns.web.page.config.WidgetConfig;
+import org.focusns.web.widget.config.WidgetConfig;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

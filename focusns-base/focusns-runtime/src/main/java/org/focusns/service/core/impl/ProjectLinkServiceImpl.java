@@ -40,7 +40,12 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     }
 
     public void createProjectLink(ProjectLink link) {
-        linkDao.insert(link);
+        ProjectLink dbLink = linkDao.selectByFromAndToProjectId(link.getFromProjectId(), link.getToProjectId());
+        if(dbLink==null) {
+            linkDao.insert(link);
+        } else {
+            throw new RuntimeException("The link already exist!");
+        }
     }
 
     public void modifyProjectLink(ProjectLink link) {
@@ -49,6 +54,10 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     public void removeProjectLink(ProjectLink link) {
         linkDao.delete(link.getId());
+    }
+
+    public void removeProjectLink(long fromProjectId, long toProjectId) {
+        linkDao.deleteByFromAndToProjectId(fromProjectId, toProjectId);
     }
 
     @Override

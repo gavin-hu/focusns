@@ -1,5 +1,5 @@
 <div class="login">
-    <form action="${Request.contextPath}/login.action" method="post">
+    <form action="${Request.contextPath}/system/login" method="post">
         <div>
             <label>用户名</label>
             <input name="username" />

@@ -31,14 +31,17 @@ import org.focusns.web.page.render.PageRender;
 import org.focusns.web.helpers.UrlTemplateHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UrlPathHelper;
+import sun.plugin.dom.html.HTMLMetaElement;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -126,10 +129,16 @@ public class Portal {
 	}
 
     @ExceptionHandler
-    public ModelAndView handlePageConfigException(PageConfigException e) {
+    public String handlePageConfigException(PageConfigException e, Model model) {
+        //
         log.warn(e.getMessage(), e);
         //
-        return new ModelAndView("redirect:/login");
+        Map htmlMeta = new HashMap();
+        htmlMeta.put("http-equiv", "refresh");
+        htmlMeta.put("content", "3, /login");
+        model.addAttribute("htmlMeta", htmlMeta);
+        //
+        return "redirect:/http404";
     }
     
 }

@@ -38,7 +38,7 @@ public class ProjectLinkController {
 
     @RequestMapping("/project/link/remove")
     public void unlink(ProjectLink link) {
-        projectLinkService.removeProjectLink(link);
+        projectLinkService.removeProjectLink(link.getFromProjectId(), link.getToProjectId());
     }
 
 }

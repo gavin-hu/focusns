@@ -41,7 +41,7 @@ public class LoginController {
     @Autowired
     private AuthenticationService authenticationService;
     
-    @RequestMapping("/login.action")
+    @RequestMapping("/system/login")
     public String login(ProjectUser user, HttpSession session) {
         //
         authenticationService.authenticate(user);
@@ -57,4 +57,13 @@ public class LoginController {
         //
         return "redirect:/login";
     }
+
+    @RequestMapping("/system/logout")
+    public String logout(HttpSession session) {
+        //
+        session.invalidate();
+        //
+        return "redirect:/login";
+    }
+
 }

@@ -33,6 +33,8 @@ public interface ProjectLinkService {
     
     void removeProjectLink(ProjectLink link);
 
+    void removeProjectLink(long fromProjectId, long toProjectId);
+
     ProjectLink getProjectLink(long fromProjectId, long toProjectId);
 
     Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId);

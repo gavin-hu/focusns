@@ -18,6 +18,7 @@
  */
 package org.focusns.web.widget.engine.impl;
 
+import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetResponse;
 import org.focusns.web.widget.engine.*;
@@ -100,6 +101,7 @@ public class DefaultWidgetEngine implements WidgetEngine {
 			String methodName = widgetInvocation.getWidgetConfig().getMethodName();
             WidgetMethod widgetMethod = widgetMethodResolver.resolve(className, methodName);
             //
+            WidgetConfig widgetConfig = widgetInvocation.getWidgetConfig();
 			WidgetRequest widgetRequest = widgetInvocation.getWidgetRequest();
 			WidgetResponse widgetResponse = widgetInvocation.getWidgetResponse();
 			//

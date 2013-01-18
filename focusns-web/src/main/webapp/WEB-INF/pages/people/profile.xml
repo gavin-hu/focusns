@@ -1,6 +1,10 @@
 <page extends="/global-project">
     <position name="leftColumn">
-        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@list" />
+        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@list">
+            <preference>
+                <limit>4</limit>
+            </preference>
+        </widget>
     </position>
     <position name="mainColumn">
 		<widget target="org.focusns.web.modules.profile.ProjectWidget@view" />

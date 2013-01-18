@@ -48,9 +48,10 @@ public class ProjectLinkWidget {
     }
 
     public String list(Map<String, Object> model,
+                       @Bind(value="limit", scope = Bind.Scope.PREFERENCE) int limit,
                        @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
         //
-        Page<ProjectLink> page = new Page<ProjectLink>(4);
+        Page<ProjectLink> page = new Page<ProjectLink>(limit);
         page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
         model.put("page", page);
         //

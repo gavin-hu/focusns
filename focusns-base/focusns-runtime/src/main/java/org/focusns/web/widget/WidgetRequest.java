@@ -23,6 +23,8 @@ import java.util.Map;
 
 public interface WidgetRequest {
 
+    String getWidgetPreference(String name);
+
 	String getRequestParameter(String name);
 	
 	<T> T getRequestAttribute(String name);
@@ -32,7 +34,9 @@ public interface WidgetRequest {
 	<T> T getSessionAttribute(String name);
 
 	<T> T getApplicationAttribute(String name); 
-	
+
+    Map<String, Object> getWidgetPreferences();
+
 	Map<String, Object> getRequestParameters();
 	
 	Map<String, Object> getRequestAttributes();

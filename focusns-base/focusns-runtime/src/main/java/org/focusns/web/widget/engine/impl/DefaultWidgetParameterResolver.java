@@ -104,6 +104,9 @@ public class DefaultWidgetParameterResolver implements WidgetParameterResolver{
 		if(Scope.APPLICATION==scope) {
 			value = request.getApplicationAttribute(name);
 		}
+        if(Scope.PREFERENCE==scope) {
+            value = request.getWidgetPreference(name);
+        }
 		//
         if(value!=null) {
             return this.conversionService.convert(value, parameterType);
