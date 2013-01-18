@@ -1,5 +1,3 @@
 <page extends="/global">
-	<position name="main">
-		<widget target="org.focusns.web.portal.TestWidget@doTest" />
-	</position>
+
 </page>

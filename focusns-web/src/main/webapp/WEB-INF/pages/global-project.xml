@@ -8,4 +8,7 @@
     <position name="projectMenu">
         <widget target="org.focusns.web.site.SiteWidget@projectMenu" />
     </position>
+    <position name="copyright">
+        <widget target="org.focusns.web.site.SiteWidget@copyright" />
+    </position>
 </page>

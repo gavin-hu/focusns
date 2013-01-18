@@ -5,4 +5,7 @@
     <position name="mainMenu">
         <widget target="org.focusns.web.site.SiteWidget@mainMenu" />
     </position>
+    <position name="copyright">
+        <widget target="org.focusns.web.site.SiteWidget@copyright" />
+    </position>
 </page>

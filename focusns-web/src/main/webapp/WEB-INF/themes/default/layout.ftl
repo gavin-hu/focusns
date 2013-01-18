@@ -58,11 +58,9 @@
             </@utils.position>
         </div>
         <div id="ft" class="yui3-g">
-            <div class="yui3-u-1">
-                <@utils.position name="copyright">
-                <div id="footer" class="yui3-u">${copyright}</div>
-                </@utils.position>
-            </div>
+            <@utils.position name="copyright">
+            <div id="copyright" class="yui3-u-1">${copyright}</div>
+            </@utils.position>
         </div>
     </body>
 </html>

@@ -23,6 +23,8 @@ import org.focusns.model.core.ProjectUser;
 public interface ProjectUserService {
 
     ProjectUser getUser(String username);
+
+    ProjectUser getUser(long userId);
 	
 	void createUser(ProjectUser user);
 	

@@ -46,7 +46,12 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         return user;
     }
 
-	public void createUser(ProjectUser user) {
+    @Override
+    public ProjectUser getUser(long userId) {
+        return projectUserDao.select(userId);
+    }
+
+    public void createUser(ProjectUser user) {
 		projectUserDao.insert(user);
 	}
 
