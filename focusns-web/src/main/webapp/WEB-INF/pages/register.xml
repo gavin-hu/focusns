@@ -1,5 +1,5 @@
-<page>
-	<position name="main">
-		<widget target="org.focusns.web.portal.TestWidget@doTest" />
-	</position>
+<page extends="/global">
+    <position name="mainColumn">
+        <widget target="org.focusns.web.site.SiteWidget@register" />
+    </position>
 </page>

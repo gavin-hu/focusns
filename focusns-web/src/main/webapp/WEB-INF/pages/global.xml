@@ -1,8 +1,8 @@
 <page>
     <position name="userMenu">
-        <widget target="org.focusns.web.global.SiteWidget@userMenu" />
+        <widget target="org.focusns.web.site.SiteWidget@userMenu" />
     </position>
     <position name="mainMenu">
-        <widget target="org.focusns.web.global.SiteWidget@mainMenu" />
+        <widget target="org.focusns.web.site.SiteWidget@mainMenu" />
     </position>
 </page>

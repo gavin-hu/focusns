@@ -10,7 +10,10 @@
 <#else>
 <ul>
     <li>
-        <a href="${Request.contextPath}/system/login">登录</a>
+        <a href="${Request.contextPath}/login">登录</a>
+    </li>
+    <li>
+        <a href="${Request.contextPath}/register">注册</a>
     </li>
 </ul>
 </#if>
