@@ -1,0 +1,55 @@
+.admin-menu h3 {
+    padding-left: 10px;
+    font-weight: bold;
+}
+.admin-menu ul {
+    margin-bottom: 5px;
+}
+.admin-menu ul li {
+    padding:1px 0 1px 20px;
+}
+
+.admin-logo {
+    padding:10px;
+}
+.admin-project {
+    padding:10px;
+}
+.admin-project label {
+    display: block;
+    font-weight: bold;
+}
+.admin-project textarea {
+    width: 60%;
+}
+.admin-project div {
+    margin-bottom: 5px;
+}
+.admin-attribute {
+    padding:10px;
+}
+.admin-attribute ul {
+    margin-top: 20px;
+}
+.admin-post {
+    padding:10px;
+}
+.admin-post form div {
+    padding-bottom: 5px;
+}
+.admin-post label {
+    display: block;
+    font-weight: bold;
+}
+.admin-post div.summary textarea {
+    width: 100%;
+    height: 100px;
+}
+.admin-post div.content textarea {
+    width: 100%;
+    height: 400px;
+}
+
+.admin-category {
+    padding: 10px;
+}

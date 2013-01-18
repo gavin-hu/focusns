@@ -1,0 +1,10 @@
+.blog .post-title h3 {
+	font-size:16px;
+	font-weight:bold;
+}
+.blog .post-title a {
+	text-decoration:none;
+}
+.blog .post-description {
+	margin-right:60px;
+}

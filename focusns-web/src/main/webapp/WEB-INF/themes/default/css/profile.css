@@ -1,0 +1,177 @@
+.weibo-box {
+	margin-left: 76px;
+	padding-bottom:10px;
+	background:url(bg_textarea.png) no-repeat bottom left;
+}
+.weibo-box-in {
+	min-height:50px;
+	padding: 10px 10px 0 24px;
+	background:url(bg_textarea.png) no-repeat;
+}
+.weibo-box-in textarea {
+	height:50px;
+	width:100%;
+}
+.weibo-actions {
+	padding-top:5px;
+}
+.weibo-actions:after {
+	content:".";
+	clear:both;
+	display:block;
+	height:0;
+	visibility:hidden;
+}
+.weibo-actions .action-share {
+}
+.weibo-actions .action-share button {
+	float:right;
+	color:#FFF;
+	height:22px;
+	padding:0 2px 0 2px;
+	border: 1px solid #045A8B;
+	background-color:#0571A6;
+	vertical-align:middle;
+}
+.weibo-actions .action-share button:hover {
+	background-color:#045A8B;
+}
+.thumbnail{
+    display: inline-block;
+	border: 1px solid #DDD;
+	padding:2px;
+	background-color:#FFFFFF;
+	width:50px;
+	height:50px;
+}
+.thumbnail img {
+    width:50px;
+    height:50px;
+}
+.avatar:hover {
+	border-color:#BFBFBF;
+}
+
+.project {
+	padding:10px;
+	min-height:100px;
+    position: relative;
+	background-color:#DDF0F8;
+}
+.project .project-logo {
+    float:right;
+    padding:2px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+}
+.project .project-logo img {
+    width:80px;
+	height:80px;
+}
+.project .project-title {
+	margin-bottom:10px;
+}
+.project .project-title h3 {
+
+	font-size:16px;
+	font-weight:bold;
+}
+.project .project-description {
+	min-height:65px;
+}
+.project .project-attributes {
+	padding:5px;
+	background-color:#FFFFFF;
+	border:1px solid #DDDDDD;
+}
+.project .project-attributes ul li {
+	margin-bottom:5px;
+	padding-bottom:2px;
+	border-bottom:1px dashed #DDDDDD;
+}
+.project .project-attributes ul li span.strong {
+	font-weight:bold;
+}
+
+.project-links {
+    padding:10px;
+}
+.project-links li {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.project-links .project-link {
+    padding:2px;
+    border: 1px solid #DDDDDD;
+}
+.project-links .project-link img {
+    width:50px;
+    height:50px;
+}
+.share {
+	padding:10px;
+	background-color:#FAFAFA;
+}
+
+.share textarea {
+	width:99.8%;
+	height:50px;
+}
+
+.stream {
+}
+.stream  ul li {
+	padding:10px 10px 5px 10px;
+	border-bottom:1px dashed #DDDDDD;
+}
+.stream ul li.last {
+    border-bottom:none;
+}
+.stream .thumbnail {
+    float:left;
+    width: 50px;
+    height: 50px;
+}
+.stream img.thumbnail {
+    width:50px;
+	height:50px;
+}
+.stream .activity  {
+	padding-left: 65px;
+	min-height:60px;
+}
+.stream .activity .content {
+    min-height:40px;
+}
+.stream .activity .reply textarea {
+    height:18px;
+    width:98.2%;
+    padding:2px;
+}
+
+.stream .activity ul.replies li {
+    padding:10px 0;
+}
+.stream .activity ul.replies li.only {
+    border-bottom:none;
+}
+.stream .activity ul.replies li img.thumbnail {
+    width:40px;
+    height:40px;
+}
+.stream .activity ul.replies li .reply-content {
+    min-height:30px;
+    padding-left:50px;
+}
+.stream .activity ul.replies li .reply-info {
+    padding-left:50px;
+}
+.stream .activity .reply {
+    position:relative;
+    padding-bottom:20px;
+}
+.stream .activity .reply button {
+    position:absolute;
+    right:0;
+    top:auto;
+}
