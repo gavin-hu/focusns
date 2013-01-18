@@ -31,17 +31,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
+@RequestMapping("/project/histroy")
 public class ProjectHistroyController {
     
     @Autowired
     private ProjectHistroyService projectHistroyService;
     
-    @RequestMapping("/project/histroy/edit")
-    public void editHistroy(@RequestParam String action, ProjectHistroy histroy) {
+    @RequestMapping("/create")
+    public void createHistroy(ProjectHistroy histroy) {
         //
-        if(ActionHelper.isCreate(action)) {
-            projectHistroyService.createProjectHistroy(histroy);
-        }
+        projectHistroyService.createProjectHistroy(histroy);
+    }
+
+    @RequestMapping("/remove")
+    public void removeHistroy(ProjectHistroy histroy) {
+        //
+        projectHistroyService.removeProjectHistroy(histroy);
     }
     
 }

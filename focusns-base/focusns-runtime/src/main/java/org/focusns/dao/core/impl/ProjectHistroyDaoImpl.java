@@ -25,11 +25,16 @@ import org.focusns.model.core.ProjectHistroy;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
 public class ProjectHistroyDaoImpl extends MyBatisBaseDao<ProjectHistroy>
     implements ProjectHistroyDao {
+
+    public List<ProjectHistroy> selectByParentId(long parentId) {
+        return getSqlSession().selectList(NAMESPACE.concat(".selectByParentId"), parentId);
+    }
 
     public Page<ProjectHistroy> fetchByProjectId(Page<ProjectHistroy> page, long projectId) {
         //

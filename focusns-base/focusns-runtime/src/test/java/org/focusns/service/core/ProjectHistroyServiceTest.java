@@ -18,6 +18,7 @@
  */
 package org.focusns.service.core;
 
+import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistroy;
 import org.focusns.model.core.ProjectUser;
@@ -41,7 +42,7 @@ public class ProjectHistroyServiceTest extends AbstractServiceTest {
     
     @Test
     public void testCreateProjectHistroy() {
-        Project project = projectService.getProject("focusns");
+        Project project = projectService.getProject("admin");
         Assert.assertNotNull(project);
         //
         ProjectUser user = projectUserService.getUser("admin");
@@ -53,9 +54,17 @@ public class ProjectHistroyServiceTest extends AbstractServiceTest {
         histroy.setCreateById(user.getId());
         histroy.setTargetType("project");
         histroy.setTargetId(1);
+        histroy.setParentId(1);
         histroy.setProjectId(project.getId());
         //
         projectHistroyService.createProjectHistroy(histroy);
     }
-    
+
+    @Test
+    public void testFetchPage() {
+        Page<ProjectHistroy> page = new Page<ProjectHistroy>(10);
+        page = projectHistroyService.fetchPage(page, 1);
+        System.out.println(page.getTotalCount());
+    }
+
 }

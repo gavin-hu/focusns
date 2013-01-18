@@ -28,6 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 @Transactional
 public class ProjectHistroyServiceImpl implements ProjectHistroyService {
@@ -40,6 +43,10 @@ public class ProjectHistroyServiceImpl implements ProjectHistroyService {
     private ProjectHistroyDao projectHistroyDao;
     
     public void createProjectHistroy(ProjectHistroy histroy) {
+        //
+        Date now = new Date();
+        histroy.setCreateAt(now);
+        //
         projectHistroyDao.insert(histroy);
     }
 
@@ -52,7 +59,15 @@ public class ProjectHistroyServiceImpl implements ProjectHistroyService {
     }
 
     public Page<ProjectHistroy> fetchPage(Page<ProjectHistroy> page, long projectId) {
-        return projectHistroyDao.fetchByProjectId(page, projectId);
+        page = projectHistroyDao.fetchByProjectId(page, projectId);
+        //
+        for(ProjectHistroy histroy : page.getResults()) {
+            List<ProjectHistroy> children = projectHistroyDao
+                    .selectByParentId(histroy.getId());
+            histroy.setChildren(children);
+        }
+        //
+        return page;
     }
     
 }

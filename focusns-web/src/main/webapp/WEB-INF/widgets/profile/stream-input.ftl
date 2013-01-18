@@ -3,17 +3,16 @@
 <div class="widget">
     <div class="widget-bd">
         <div class="share">
-            <form action="${Request.contextPath}/project/histroy/edit" method="post">
+            <form action="${Request.contextPath}/project/histroy/create" method="post">
                 <textarea name="content" rows="3" cols="50"></textarea>
                 <input type="hidden" name="createById" value="${Session.user.id}" />
                 <input type="hidden" name="targetId" value="${Request.project.id}" />
                 <input type="hidden" name="targetType" value="${Request.project.class}" />
                 <input type="hidden" name="projectId" value="${Request.project.id}" />
-                <input type="hidden" name="redirect" value="${Request.contextPath}/${Request.project.code}/${Request.feature.code}" />
                 <div class="weibo-actions">
                     <span class="action-share">
-                        <button type="submit" name="action" value="create">分享</button>
-                                               </span>
+                        <button type="submit" name="redirect" value="<@utils.redirect />">分享</button>
+                    </span>
                 </div>
             </form>
         </div>

@@ -20,21 +20,27 @@ package org.focusns.model.core;
 
 import org.focusns.model.common.Id;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectHistroy extends Id {
     
     private String content;
     private Date createAt;
-    //
-    private long createById;
-    private long projectId;
     private long targetId;
     private String targetType;
+    //
+    private long parentId;
+    private long projectId;
+    private long createById;
+
     //
     private Project project;
     private ProjectUser createBy;
     private Object target;
+    //
+    private List<ProjectHistroy> children = new ArrayList<ProjectHistroy>();
 
     public String getContent() {
         return content;
@@ -52,22 +58,6 @@ public class ProjectHistroy extends Id {
         this.createAt = createAt;
     }
 
-    public long getCreateById() {
-        return createById;
-    }
-
-    public void setCreateById(long createById) {
-        this.createById = createById;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
-
     public long getTargetId() {
         return targetId;
     }
@@ -82,6 +72,30 @@ public class ProjectHistroy extends Id {
 
     public void setTargetType(String targetType) {
         this.targetType = targetType;
+    }
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public long getCreateById() {
+        return createById;
+    }
+
+    public void setCreateById(long createById) {
+        this.createById = createById;
     }
 
     public Project getProject() {
@@ -106,5 +120,13 @@ public class ProjectHistroy extends Id {
 
     public void setTarget(Object target) {
         this.target = target;
+    }
+
+    public List<ProjectHistroy> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<ProjectHistroy> children) {
+        this.children = children;
     }
 }

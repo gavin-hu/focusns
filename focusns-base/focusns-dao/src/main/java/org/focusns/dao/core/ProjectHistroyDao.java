@@ -22,7 +22,11 @@ import org.focusns.dao.common.BaseDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectHistroy;
 
+import java.util.List;
+
 public interface ProjectHistroyDao extends BaseDao<ProjectHistroy> {
+
+    List<ProjectHistroy> selectByParentId(long parentId);
 
     Page<ProjectHistroy> fetchByProjectId(Page<ProjectHistroy> page, long projectId);
     
