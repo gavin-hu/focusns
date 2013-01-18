@@ -16,35 +16,36 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+package org.focusns.web.modules.setting;
 
-package org.focusns.service.forum;
-
-import org.focusns.model.forum.ForumPost;
-import org.focusns.service.AbstractServiceTest;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectFeature;
+import org.focusns.service.core.ProjectFeatureService;
+import org.focusns.web.widget.annotation.Bind;
+import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
-@Ignore
-public class ForumPostServiceTest extends AbstractServiceTest {
+import java.util.List;
+import java.util.Map;
 
+@Widget
+public class SettingsWidget {
+    
     @Autowired
-    private ForumPostService forumPostService;
-
-    @Test
-    public void createForumPost() {
-        ForumPost post = new ForumPost();
-        post.setTitle("post title");
-        post.setContent("post content");
-        post.setCreateAt(new Date());
-        post.setModifyAt(new Date());
-        post.setCreateById(1);
-        post.setModifyById(1);
-        post.setProjectId(1);
-        post.setTopicId(1);
+    private ProjectFeatureService featureService;
+    
+    public String menu(@Bind(value="project", scope = Bind.Scope.REQUEST)
+            Project project, Map<String, Object> model) {
+         //
+        List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());
+        model.put("features", features);
         //
-        forumPostService.createForumPost(post);
+        return "setting/menu";
     }
-
+    
+    public String summary() {
+        //
+        return "setting/summary";
+    }
+     
 }

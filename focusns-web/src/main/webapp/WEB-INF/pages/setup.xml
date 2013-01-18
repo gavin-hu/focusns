@@ -1,5 +1,0 @@
-<page>
-	<position name="mainColumn">
-		<widget target="org.focusns.web.portal.TestWidget@doTest" />
-	</position>
-</page>

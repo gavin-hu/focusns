@@ -693,7 +693,7 @@ create procedure init_db()
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
             values('message', '私信', 20, true, projectId);
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
-            values('admin', '管理', 25, true, projectId);
+            values('setting', '设置', 25, true, projectId);
     end //
 delimiter ;
 
