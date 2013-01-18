@@ -5,4 +5,8 @@
 <script src="${contextPath}/libjs/jquery/jquery.min.js"></script>
 <script src="${contextPath}/libjs/xheditor/xheditor.min.js"></script>
 
-<script src="${contextPath}/libjs/jcrop/js/jquery.Jcrop.min.js"></script>
+<#-- jcrop -->
+<script src="${contextPath}/libjs/jcrop/jquery.Jcrop.min.js"></script>
+<#-- timeago -->
+<script src="${contextPath}/libjs/timeago/jquery.timeago.js"></script>
+<script src="${contextPath}/libjs/timeago/locales/jquery.timeago.zh-CN.js"></script>

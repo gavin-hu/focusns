@@ -8,6 +8,9 @@
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
         <meta content="" name="Keywords" />
         <meta content="" name="Description" />
+        <#--
+        <meta content="3; url=/index" http-equiv="refresh" />
+        -->
         <!-- Include Stylesheet -->
         <#include "stylesheet.ftl" />
         <!-- Include Javascript-->
