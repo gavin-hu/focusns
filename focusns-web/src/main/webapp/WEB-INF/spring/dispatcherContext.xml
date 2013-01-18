@@ -31,19 +31,8 @@
     <bean id="attributeInterceptor" class="org.focusns.web.interceptor.AttributeInterceptor" />
     
     <bean id="themeInterceptor" class="org.focusns.web.interceptor.ThemeInterceptor" />
-    <bean id="redirectInterceptor" class="org.focusns.web.interceptor.RedirectInterceptor">
-        <property name="redirectMappings">
-            <map>
-                <entry key="/login.action">
-                    <value>/${user.project.code}/profile</value>
-                </entry>
-                <entry key="/project/logo/upload.action">
-                    <value>/${project.code}/admin/logo-edit</value>
-                </entry>
-            </map>
-        </property>
-    </bean>
-    
+    <bean id="redirectInterceptor" class="org.focusns.web.interceptor.RedirectInterceptor" />
+
     <mvc:resources mapping="/libjs/**" location="/WEB-INF/libjs/" />
     <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" />
     
