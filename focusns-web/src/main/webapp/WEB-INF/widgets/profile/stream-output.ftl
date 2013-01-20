@@ -5,44 +5,58 @@
 
 <div class="widget">
     <div class="widget-bd">
-        <div class="stream">
-            <@html.ul items=Request.page.results ; histroy>
-            <form action="${Request.contextPath}/project/histroy/create" method="post">
-                <div>
-                    <a href="${Request.contextPath}/">
-                        <img class="thumbnail" src="${Request.contextPath}/project/${histroy.projectId}/logo" />
+        <div class="histories">
+            <@html.ul items=Request.page.results ; history>
+                <div class="history">
+                    <a href="${Request.contextPath}">
+                        <img class="thumbnail" src="${Request.contextPath}/project/${history.projectId}/logo" />
                     </a>
-                </div>
-                <div class="activity">
-                    <div class="content">${histroy.content}</div>
-                    <div class="info">
-                        <abbr class="date" title="${histroy.createAt?datetime}">${histroy.createAt?string("yyyy-MM-dd HH:mm")}</abbr>
+                    <div class="content">${history.content}</div>
+                    <div class="status">
+                        <abbr class="date" title="${history.createAt?datetime}">${history.createAt?string("yyyy-MM-dd HH:mm")}</abbr>
                     </div>
-                    <#if histroy.children?? && histroy.children?size gt 0 >
-                    <@html.ul ulClass="replies" items=histroy.children ; childHistroy>
-                        <a href="${Request.contextPath}/">
-                            <img class="thumbnail" src="${Request.contextPath}/project/user/${childHistroy.createById}/logo" />
-                        </a>
-                        <div class="reply-content">
-                        ${childHistroy.content}
-                        </div>
-                        <div class="reply-info">
-                            <abbr class="date" title="${histroy.createAt?datetime}">${histroy.createAt?string("yyyy-MM-dd HH:mm")}</abbr>
-                        </div>
-                    </@html.ul>
+                    <#if history.children?? && history.children?size gt 0 >
+                    <div class="history-children">
+                        <@html.ul items=history.children ; childhistory>
+                            <div class="history">
+                                <img class="thumbnail" src="${Request.contextPath}/project/user/${childhistory.createById}/logo" />
+                                <div class="content">${childhistory.content}</div>
+                                <div class="status">
+                                    <abbr class="date" title="${history.createAt?datetime}">${history.createAt?string("yyyy-MM-dd HH:mm")}</abbr>
+                                </div>
+                            </div>
+                        </@html.ul>
+                    </div>
                     </#if>
-                    <div class="reply">
-                        <textarea name="content"></textarea>
+                    <div class="history-reply">
+                        <#--
+                        <@form.form name="reply" action="${Request.contextPath}/project/history/create">
+                            <textarea name="content"></textarea>
 
-                        <input type="hidden" name="targetType" value="project" />
-                        <input type="hidden" name="targetId" value="${Request.project.id}" />
-                        <input type="hidden" name="projectId" value="${Request.project.id}" />
-                        <input type="hidden" name="createById" value="${Session.user.id}" />
-                        <input type="hidden" name="parentId" value="${histroy.id}" />
-                        <button class="button" type="submit" name="redirect" value="<@utils.redirect />">回复</button>
+                            <@form.textArea name="content" path="reply.content" />
+                            <@form.hiddenInput name="targetType" path="reply.targetType" />
+                            <@form.hiddenInput name="targetId" path="reply.targetId" />
+                            <@form.hiddenInput name="projectId" path="reply.projectId" />
+                            <@form.hiddenInput name="createById" path="reply.createById" />
+
+                            <input type="hidden" name="parentId" value="${history.id}" />
+                        </@form.form>
+                        -->
+                        <form action="${Request.contextPath}/project/history/create" method="post">
+                            <textarea name="content"></textarea>
+
+                            <input type="hidden" name="targetType" value="${Request.template.targetType}" />
+                            <input type="hidden" name="targetId" value="${Request.template.targetId}" />
+                            <input type="hidden" name="projectId" value="${Request.template.projectId}" />
+                            <input type="hidden" name="createById" value="${Request.template.createById}" />
+                            <input type="hidden" name="parentId" value="${history.id}" />
+
+                            <div class="submit">
+                                <button type="submit" name="redirect" value="<@utils.redirect />">回复</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </form>
             </@html.ul>
         </div>
     </div>
@@ -53,7 +67,7 @@ $(function(){
     // time ago
     $('abbr.date').timeago();
     //
-    $('div.reply textarea').focus(function(){
+    $('div.history-reply textarea').focus(function(){
         $(this).height(50);
     });
 });

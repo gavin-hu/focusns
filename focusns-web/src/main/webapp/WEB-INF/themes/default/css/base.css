@@ -118,21 +118,17 @@ body {
 	background-color:#FFFFFF;
 }
 #left-column {
-    margin-top: 10px;
 	width:15%;
 }
 #main-column {
-    margin-top: 10px;
 	width:55%;
 }
 #right-column {
-    margin-top: 10px;
 	width:26%;
 }
 #bd {
-    padding:0 10px;
+    padding-top:10px;
 }
-
 /* Widget Css */
 .widget {
     margin-bottom: 10px;
@@ -192,7 +188,11 @@ body {
     padding-left: 105px;
 }
 
-.button {
+textarea {
+    padding:5px;
+}
+
+button {
     color:#FFF;
     padding: 0 2px 0 2px;
     height:22px;
@@ -201,4 +201,12 @@ body {
     vertical-align:middle;
     right:0;
     top:0;
+}
+
+img.thumbnail{
+    position:absolute;
+    display: inline-block;
+	border: 1px solid #DDD;
+	padding:2px;
+	background-color:#FFFFFF;
 }

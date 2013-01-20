@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="${Request.contextPath}/themes/default/css/style.css" type="text/css" />
 <#if leftColumn?? && mainColumn?? && rightColumn??>
 <style>
-    #left-column {width:15%; margin-right:10px;}
+    #left-column {width:15%; padding-right:10px;}
     #main-column {width:56.92%;}
-    #right-column {width:26%; margin-left:10px;}
+    #right-column {width:26%; padding-left:10px;}
 </style>
 <#elseif leftColumn?? && mainColumn??>
 <style>

@@ -25,8 +25,8 @@ import org.focusns.common.event.annotation.Subscriber;
 import org.focusns.common.event.annotation.Subscriber.OnEvent;
 import org.focusns.common.event.support.EventContext;
 import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectHistroy;
-import org.focusns.service.core.ProjectHistroyService;
+import org.focusns.model.core.ProjectHistory;
+import org.focusns.service.core.ProjectHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
@@ -37,7 +37,7 @@ public class ProjectEventSubscriber {
     private Log log = LogFactory.getLog(ProjectEventSubscriber.class);
     
     @Autowired
-    private ProjectHistroyService projectHistroyService;
+    private ProjectHistoryService projectHistoryService;
     
     @OnEvent(Event.MODIFIED)
     public void onProjectModified(EventContext taskContext) {
@@ -45,15 +45,15 @@ public class ProjectEventSubscriber {
         //
         Project project = taskContext.getParameter("project", Project.class);
         //
-        ProjectHistroy projectHistroy = new ProjectHistroy();
-        projectHistroy.setCreateAt(new Date());
-        projectHistroy.setContent("Project modified!");
-        projectHistroy.setTargetId(project.getId());
-        projectHistroy.setTargetType(Project.class.getName());
-        projectHistroy.setProjectId(project.getId());
-        projectHistroy.setCreateById(project.getModifyById());
+        ProjectHistory projectHistory = new ProjectHistory();
+        projectHistory.setCreateAt(new Date());
+        projectHistory.setContent("Project modified!");
+        projectHistory.setTargetId(project.getId());
+        projectHistory.setTargetType(Project.class.getName());
+        projectHistory.setProjectId(project.getId());
+        projectHistory.setCreateById(project.getModifyById());
         //
-        projectHistroyService.createProjectHistroy(projectHistroy);
+        projectHistoryService.createProjectHistory(projectHistory);
     }
     
 }

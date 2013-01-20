@@ -27,8 +27,8 @@
     </position>
     <position name="mainColumn">
 		<widget target="org.focusns.web.modules.profile.ProjectWidget@view" />
-        <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@input" />
-        <widget target="org.focusns.web.modules.profile.ProjectHistroyWidget@output" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistoryWidget@input" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistoryWidget@output" />
 	</position>
     <position name="rightColumn">
         <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@action" />

@@ -36,18 +36,7 @@
 .weibo-actions .action-share button:hover {
 	background-color:#045A8B;
 }
-.thumbnail{
-    display: inline-block;
-	border: 1px solid #DDD;
-	padding:2px;
-	background-color:#FFFFFF;
-	width:50px;
-	height:50px;
-}
-.thumbnail img {
-    width:50px;
-    height:50px;
-}
+
 .avatar:hover {
 	border-color:#BFBFBF;
 }
@@ -108,70 +97,90 @@
     width:50px;
     height:50px;
 }
+
 .share {
 	padding:10px;
+	padding-bottom: 41px;
 	background-color:#FAFAFA;
 }
-
 .share textarea {
-	width:99.8%;
+	width:97.8%;
 	height:50px;
 }
+.share .submit {
+    position:relative;
+}
+.share .submit button {
+    position:absolute;
+    top:10px;
+    right:0;
+}
 
-.stream {
+.histories {
 }
-.stream  ul li {
-	padding:10px 10px 5px 10px;
-	border-bottom:1px dashed #DDDDDD;
+.histories ul li {
+    padding:0 10px;
+    border-bottom:1px solid #DDD;
 }
-.stream ul li.last {
+.histories ul li.last {
     border-bottom:none;
 }
-.stream .thumbnail {
-    float:left;
-    width: 50px;
-    height: 50px;
+.histories .history {
+    position:relative;
+    padding-left:65px;
+    padding-top:10px;
+    padding-bottom:10px;
+    vertical-align:bottom;
 }
-.stream img.thumbnail {
+.histories .history .thumbnail {
+    top:10px;
+    left:0;
     width:50px;
-	height:50px;
+    height:50px;
 }
-.stream .activity  {
-	padding-left: 65px;
-	min-height:60px;
-}
-.stream .activity .content {
-    min-height:40px;
-}
-.stream .activity .reply textarea {
-    height:18px;
-    width:98.2%;
-    padding:2px;
+.histories .history .content {
+    min-height:30px;
 }
 
-.stream .activity ul.replies li {
+.histories .history .status {
     padding:10px 0;
 }
-.stream .activity ul.replies li.only {
+
+.histories .history .history-reply {
+
+}
+.histories .history .history-reply .submit {
+    position:relative;
+    padding:16px;
+}
+.histories .history .history-reply .submit button {
+    position:absolute;
+    top:10px;
+    right:0
+
+}
+.histories .history .history-reply textarea {
+    width:97.4%;
+    height:18px;
+}
+
+.histories .history .history-children ul li {
+    position:relative;
+    padding:0;
+    border-bottom:1px dashed #DDD;
+}
+.histories .history .history-children ul li.last,
+.histories .history .history-children ul li.only{
     border-bottom:none;
 }
-.stream .activity ul.replies li img.thumbnail {
+.histories .history .history-children ul li .history {
+    padding-left:55px;
+    padding-bottom:0;
+}
+.histories .history .history-children ul li .history .content {
+    min-height:20px;
+}
+.histories .history .history-children ul li .thumbnail {
     width:40px;
     height:40px;
-}
-.stream .activity ul.replies li .reply-content {
-    min-height:30px;
-    padding-left:50px;
-}
-.stream .activity ul.replies li .reply-info {
-    padding-left:50px;
-}
-.stream .activity .reply {
-    position:relative;
-    padding-bottom:20px;
-}
-.stream .activity .reply button {
-    position:absolute;
-    right:0;
-    top:auto;
 }

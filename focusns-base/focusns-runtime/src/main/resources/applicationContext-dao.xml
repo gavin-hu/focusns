@@ -59,7 +59,7 @@
                 <value>classpath:/org/focusns/dao/core/impl/ProjectLinkMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectFeatureMapper.xml</value>
 				<value>classpath:/org/focusns/dao/core/impl/ProjectAttributeMapper.xml</value>
-				<value>classpath:/org/focusns/dao/core/impl/ProjectHistroyMapper.xml</value>
+				<value>classpath:/org/focusns/dao/core/impl/ProjectHistoryMapper.xml</value>
                 <value>classpath:/org/focusns/dao/core/impl/ProjectCategoryMapper.xml</value>
                 
                 <!-- blog -->
