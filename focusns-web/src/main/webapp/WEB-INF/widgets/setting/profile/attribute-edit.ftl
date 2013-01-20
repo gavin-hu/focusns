@@ -3,7 +3,7 @@
         <h2>属性编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="admin-attribute">
+        <div class="setting-attribute">
             <form action="${Request.contextPath}/setting/project/attribute/edit" method="post">
                 <span>属性名</span>
                 <input name="name" />

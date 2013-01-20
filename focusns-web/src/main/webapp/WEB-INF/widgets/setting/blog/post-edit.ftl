@@ -3,7 +3,7 @@
         <h2>博文编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="admin-post">
+        <div class="setting-post">
             <form action="${Request.contextPath}/blog/post/edit" method="post">
                 <div>
                     <label>分类</label>
@@ -28,6 +28,7 @@
                 </div>
                 <div class="submit">
                     <input type="hidden" name="createById" value="${Session.user.id}" />
+                    <input type="hidden" name="projectId" value="${Session.project.id}" />
                     <button type="submit" name="action" value="create">提交</button>
                 <div>
             </form>

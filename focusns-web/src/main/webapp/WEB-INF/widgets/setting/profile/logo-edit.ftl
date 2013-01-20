@@ -3,7 +3,7 @@
         <h2>标志编辑</h2>
     </div>
     <div class="widget-bd">
-         <div class="admin-logo">
+         <div class="setting-logo">
             <form action="${Request.contextPath}/setting/project/logo/upload"
                   method="post" enctype="multipart/form-data">
                 <input type="file"name="file" accept="image/*" />

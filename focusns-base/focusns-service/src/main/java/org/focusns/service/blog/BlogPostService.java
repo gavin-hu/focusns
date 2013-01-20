@@ -22,6 +22,8 @@ import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 
 public interface BlogPostService {
+
+    BlogPost getBlogPost(long postId);
     
     void createBlogPost(BlogPost post);
     

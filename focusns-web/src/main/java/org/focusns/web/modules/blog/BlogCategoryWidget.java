@@ -34,10 +34,14 @@ public class BlogCategoryWidget {
     @Autowired
     private BlogCategoryService blogCategoryService;
     
-    public String listCategory(Map<String, Object> model,
+    public String list(Map<String, Object> model,
             @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
         //
+        BlogCategory blogCategory = new BlogCategory();
+        blogCategory.setLabel("未分类");
+        blogCategory.setProjectId(project.getId());
         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
+        blogCategories.add(0, blogCategory);
         model.put("blogCategories", blogCategories);
         //
         return "blog/category-list";

@@ -1,55 +1,70 @@
-.admin-menu h3 {
+.blog-category-setting {
+    padding:10px;
+}
+.blog-category-setting .blog-category-list {
+    padding-top:10px;
+}
+.blog-category-setting .blog-category-list ul li {
+    padding-bottom:5px;
+}
+.blog-category-setting .blog-category-list ul li.last {
+    padding-bottom:0;
+}
+.setting-menu {
+    padding:10px 0;
+}
+.setting-menu h3 {
     padding-left: 10px;
     font-weight: bold;
 }
-.admin-menu ul {
+.setting-menu ul {
     margin-bottom: 5px;
 }
-.admin-menu ul li {
+.setting-menu ul li {
     padding:1px 0 1px 20px;
 }
 
-.admin-logo {
+.setting-logo {
     padding:10px;
 }
-.admin-project {
+.setting-project {
     padding:10px;
 }
-.admin-project label {
+.setting-project label {
     display: block;
     font-weight: bold;
 }
-.admin-project textarea {
+.setting-project textarea {
     width: 60%;
 }
-.admin-project div {
+.setting-project div {
     margin-bottom: 5px;
 }
-.admin-attribute {
+.setting-attribute {
     padding:10px;
 }
-.admin-attribute ul {
+.setting-attribute ul {
     margin-top: 20px;
 }
-.admin-post {
+.setting-post {
     padding:10px;
 }
-.admin-post form div {
+.setting-post form div {
     padding-bottom: 5px;
 }
-.admin-post label {
+.setting-post label {
     display: block;
     font-weight: bold;
 }
-.admin-post div.summary textarea {
-    width: 100%;
+.setting-post div.summary textarea {
+    width: 98.5%;
     height: 100px;
 }
-.admin-post div.content textarea {
-    width: 100%;
+.setting-post div.content textarea {
+    width: 98.5%;
     height: 400px;
 }
 
-.admin-category {
+.setting-category {
     padding: 10px;
 }

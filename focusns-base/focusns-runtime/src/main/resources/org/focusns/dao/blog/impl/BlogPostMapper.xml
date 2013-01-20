@@ -11,6 +11,7 @@
 		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
         <result column="category_id" property="categoryId" jdbcType="BIGINT" />
         <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.blog.BlogPost">
@@ -19,24 +20,18 @@
 		</selectKey>
         <choose>
             <when test="categoryId > 0">
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById})
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{projectId})
             </when>
             <otherwise>
-                insert into tb_blog_post (title, content, create_at, modify_at, create_by_id) 
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById})
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{projectId})
             </otherwise>
         </choose>
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_blog_post where id = #{id}
-	</select>
-
-	<select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-		select a.*
-        from tb_blog_post a, tb_bost_category b,
-        where a.category_id = b.id and b.project_id = #{projectId}
 	</select>
 	
 	<update id="update" parameterType="org.focusns.model.blog.BlogPost">
@@ -57,12 +52,15 @@
             <if test="modifyAt != null" >
 		        modify_at = #{modifyAt},
 			</if>
-            <if test="categoryId != null" >
+            <if test="categoryId > 0" >
 		        category_id = #{categoryId},
 			</if>
-            <if test="createById != null" >
+            <if test="createById > 0" >
 		        create_by_id = #{createById},
 			</if>
+            <if test="projectId > 0" >
+                project_id = #{projectId},
+            </if>
 		</set>
 		where id = #{id}
 	</update>
@@ -70,31 +68,25 @@
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_blog_post where id = #{id}
 	</delete>
-    
-    <sql id="fetchByCategoryIdSql">
-        from tb_blog_post
-        <where>
-            <if test="categoryId > 0">
-                category_id = #{categoryId}
-            </if>
-        </where>
+
+    <sql id="fetchByProjectAndCategoryIdSql">
+        <choose>
+            <when test="categoryId > 0">
+                from tb_blog_post a, tb_blog_category b
+                where a.category_id = b.id and b.id = #{categoryId}
+                order by a.create_at desc
+            </when>
+            <otherwise>
+                from tb_blog_post a
+                where a.project_id = #{projectId}
+                order by a.create_at desc
+            </otherwise>
+        </choose>
     </sql>
-    <select id="fetchByCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchByCategoryIdSql"/>
+    <select id="fetchByProjectAndCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="fetchByProjectAndCategoryIdSql"/>
     </select>
-    <select id="fetchByCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByCategoryIdSql"/>
+    <select id="fetchByProjectAndCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchByProjectAndCategoryIdSql"/>
     </select>
-    
-    <sql id="fetchByProjectIdSql">
-        from tb_blog_post a, tb_blog_category b
-        where a.category_id = b.id and b.project_id = #{projectId}
-    </sql>
-    <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select a.* <include refid="fetchByProjectIdSql"/>
-    </select>
-     <select id="fetchByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByProjectIdSql"/>
-    </select>
-    
 </mapper>

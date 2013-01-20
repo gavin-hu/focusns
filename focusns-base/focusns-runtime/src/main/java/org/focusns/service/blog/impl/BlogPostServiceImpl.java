@@ -32,7 +32,12 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Autowired
     private BlogPostDao postDao;
-    
+
+    @Override
+    public BlogPost getBlogPost(long postId) {
+        return postDao.select(postId);
+    }
+
     public void createBlogPost(BlogPost post) {
         postDao.insert(post);
     }
@@ -46,11 +51,11 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long categoryId) {
-        return postDao.fetchByCategoryId(page, categoryId);
+        return postDao.fetchByProjectAndCategoryId(page, null, categoryId);
     }
 
     public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {
-        return postDao.fetchByProjectId(page, projectId);
+        return postDao.fetchByProjectAndCategoryId(page, projectId, null);
     }
     
 }

@@ -8,3 +8,42 @@
 .blog .post-description {
 	margin-right:60px;
 }
+
+.blog-categories {
+    padding:10px;
+}
+.blog-categories ul li {
+
+}
+
+.blog-posts {
+    padding:10px;
+}
+.blog-posts .post {
+    min-height:100px;
+    padding-left:65px;
+    position:relative;
+}
+
+.blog-posts .post .thumbnail {
+    width:50px;
+    height:50px;
+    top:0;
+    left:0;
+}
+.blog-posts .post .summary {
+    padding:10px 0;
+}
+.blog-posts .post .title h3 {
+    font-size:200%;
+    font-weight:bold;
+}
+
+.blog-post {
+    padding:10px;
+}
+
+.blog-post .title h3 {
+    font-size:200%;
+    font-weight:bold;
+}

@@ -135,10 +135,8 @@ body {
 	border:1px solid #DDD;
 }
 .widget .widget-hd {
-	background:url(../img/global.png) no-repeat 0 -302px;
+	background-color:#FAFAFA;
 	border-bottom:1px solid #DDD;
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
 	height:28px;
 }
 .widget .widget-hd h2 {
@@ -187,7 +185,9 @@ body {
 .login .submit {
     padding-left: 105px;
 }
-
+input {
+    padding:1px;
+}
 textarea {
     padding:5px;
 }

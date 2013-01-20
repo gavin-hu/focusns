@@ -30,20 +30,12 @@ import java.util.Map;
 @Repository
 public class BlogPostDaoImpl extends MyBatisBaseDao<BlogPost> implements BlogPostDao {
 
-    public Page<BlogPost> fetchByCategoryId(Page<BlogPost> page, long categoryId) {
-        //
-        Map parameter = new HashMap();
-        parameter.put("categoryId", categoryId);
-        //
-        return fetchPage(".fetchByCategoryId", page, parameter);
-    }
-
-    public Page<BlogPost> fetchByProjectId(Page<BlogPost> page, long projectId) {
+    public Page<BlogPost> fetchByProjectAndCategoryId(Page<BlogPost> page, Long projectId, Long categoryId) {
         //
         Map parameter = new HashMap();
         parameter.put("projectId", projectId);
+        parameter.put("categoryId", categoryId);
         //
-        return fetchPage(".fetchByProjectId", page, parameter);
+        return fetchPage(".fetchByProjectAndCategoryId", page, parameter);
     }
-    
 }

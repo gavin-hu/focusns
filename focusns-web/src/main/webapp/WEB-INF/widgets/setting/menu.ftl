@@ -3,7 +3,7 @@
         <h2>管理菜单</h2>
     </div>
     <div class="widget-bd">
-        <div class="admin-menu">
+        <div class="setting-menu">
             <#list Request.features as feature>
             <#if feature.code=='profile'>
                 <h3>${feature.label}管理</h3>
