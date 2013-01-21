@@ -6,18 +6,19 @@
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
         <result column="content" property="title" jdbcType="VARCHAR" />
+        <result column="read_at" property="readAt" jdbcType="TIMESTAMP" />
         <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
         <result column="create_by_id" property="createById" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
-        <result column="box_id" property="boxId" jdbcType="BIGINT" />
+        <result column="to_project_id" property="toProjectId" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.msg.Message">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_message (title, content, create_at, create_by_id, project_id, box_id)
-		values (#{title}, #{content}, #{createAt}, #{createById}, #{projectId}, #{boxId})
+		insert into tb_message (title, content, read_at, create_at, create_by_id, project_id, to_project_id)
+		values (#{title}, #{content}, #{readAt}, #{createAt}, #{createById}, #{projectId}, #{toProjectId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -33,17 +34,20 @@
 			<if test="content != null" >
 		        content = #{content},
 			</if>
-            <if test="craeteAt != null" >
+            <if test="readAt != null" >
+                read_at = #{readAt},
+            </if>
+            <if test="createAt != null" >
 		        create_at = #{createAt},
 			</if>
-            <if test="createById != null" >
+            <if test="createById > 0" >
                 create_by_id = #{createById},
             </if>
-            <if test="projectId != null" >
+            <if test="projectId > 0" >
                 project_id = #{projectId},
 			</if>
-            <if test="boxId != null" >
-                box_id = #{boxId},
+            <if test="toProjectId > 0" >
+                to_project_id = #{toProjectId},
             </if>
 		</set>
 		where id = #{id}
@@ -53,13 +57,23 @@
 		delete from tb_message where id = #{id}
 	</delete>
 
-    <sql id="fetchByPostIdSql">
-        form tb_blog_comment where post_id = #{postId}
+    <sql id="fetchByProjectIdSql">
+        from tb_message where project_id = #{projectId}
     </sql>
-    <select id="fetchByPostId" parameterType="java.util.Map" resultMap="BaseResultMap">
-       select * <include refid="fetchByPostIdSql" />
+    <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select * <include refid="fetchByProjectIdSql" />
     </select>
-    <select id="fetchByPostIdCount" parameterType="java.util.Map" resultMap="BaseResultMap">
-       select count(1) <include refid="fetchByPostIdSql" />
+    <select id="fetchByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+       select count(1) <include refid="fetchByProjectIdSql" />
+    </select>
+
+    <sql id="fetchByToProjectIdSql">
+        from tb_message where to_project_id = #{toProjectId}
+    </sql>
+    <select id="fetchByToProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="fetchByToProjectIdSql" />
+    </select>
+    <select id="fetchByToProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchByToProjectIdSql" />
     </select>
 </mapper>

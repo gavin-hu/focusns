@@ -681,7 +681,7 @@ create procedure init_db()
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
             values('team', '关系', 15, true, projectId);
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
-            values('message', '私信', 20, true, projectId);
+            values('msg', '私信', 20, true, projectId);
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
             values('setting', '设置', 25, true, projectId);
     end //

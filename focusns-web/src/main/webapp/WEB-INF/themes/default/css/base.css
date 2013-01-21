@@ -1,10 +1,11 @@
-
 body {
 	margin:auto;
 	width:980px;
 }
-#bd {
-    min-height:590px;
+#left-column,
+#main-column,
+#right-column{
+    min-height:500px;
 }
 .copyright {
 	padding-bottom:20px;
@@ -209,4 +210,8 @@ img.thumbnail{
 	border: 1px solid #DDD;
 	padding:2px;
 	background-color:#FFFFFF;
+}
+
+a {
+    text-decoration:none;
 }

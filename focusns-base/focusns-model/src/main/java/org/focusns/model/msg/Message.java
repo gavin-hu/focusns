@@ -24,30 +24,14 @@ import java.util.Date;
 
 public class Message extends Id {
 
-    private long boxId;
-    private long projectId;
-    //
     private String title;
     private String content;
-    //
+    private Date readAt;
     private Date createAt;
+    //
+    private long projectId;
     private long createById;
-
-    public long getBoxId() {
-        return boxId;
-    }
-
-    public void setBoxId(long boxId) {
-        this.boxId = boxId;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
+    private long toProjectId;
 
     public String getTitle() {
         return title;
@@ -65,12 +49,28 @@ public class Message extends Id {
         this.content = content;
     }
 
+    public Date getReadAt() {
+        return readAt;
+    }
+
+    public void setReadAt(Date readAt) {
+        this.readAt = readAt;
+    }
+
     public Date getCreateAt() {
         return createAt;
     }
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
     }
 
     public long getCreateById() {
@@ -80,5 +80,12 @@ public class Message extends Id {
     public void setCreateById(long createById) {
         this.createById = createById;
     }
-    
+
+    public long getToProjectId() {
+        return toProjectId;
+    }
+
+    public void setToProjectId(long toProjectId) {
+        this.toProjectId = toProjectId;
+    }
 }

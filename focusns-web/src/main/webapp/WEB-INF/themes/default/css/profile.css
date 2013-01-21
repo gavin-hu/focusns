@@ -122,7 +122,8 @@
     padding:0 10px;
     border-bottom:1px solid #DDD;
 }
-.histories ul li.last {
+.histories ul li.last,
+.histories ul li.only{
     border-bottom:none;
 }
 .histories .history {
