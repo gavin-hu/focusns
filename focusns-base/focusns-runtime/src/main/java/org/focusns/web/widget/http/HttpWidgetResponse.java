@@ -26,7 +26,8 @@ import java.io.PrintWriter;
 import java.io.Writer;
 
 public class HttpWidgetResponse implements WidgetResponse {
-	
+
+    private boolean commited;
 	private PrintWriter writer;
 	private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 	
@@ -44,7 +45,17 @@ public class HttpWidgetResponse implements WidgetResponse {
 	public OutputStream getOutputStream() {
 		return outputStream;
 	}
-	
+
+    @Override
+    public void commit() {
+        this.commited = true;
+    }
+
+    @Override
+    public boolean isCommitted() {
+        return commited;
+    }
+
     @Override
 	public String toString() {
 		return outputStream.toString();

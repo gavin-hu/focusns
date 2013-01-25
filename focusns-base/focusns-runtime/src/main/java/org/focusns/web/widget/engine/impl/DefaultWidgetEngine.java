@@ -18,6 +18,8 @@
  */
 package org.focusns.web.widget.engine.impl;
 
+import org.focusns.web.widget.annotation.AfterFilter;
+import org.focusns.web.widget.annotation.BeforeFilter;
 import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.widget.WidgetRequest;
 import org.focusns.web.widget.WidgetResponse;
@@ -39,6 +41,8 @@ public class DefaultWidgetEngine implements WidgetEngine {
     private WidgetMethodResolver widgetMethodResolver = new DefaultWidgetMethodResolver();
 	
 	private WidgetParameterResolver widgetParameterResolver = new DefaultWidgetParameterResolver();
+
+    private WidgetFilterResolver widgetFilterResolver = new DefaultWidgetFilterResolver();
 	
 	private ExecutorService executorService = Executors.newCachedThreadPool();
 	//
@@ -61,12 +65,15 @@ public class DefaultWidgetEngine implements WidgetEngine {
 		this.widgetViewResolver = widgetViewResolver;
 	}
 	
-	public void setWidgetParameterResolver(
-			WidgetParameterResolver widgetParameterResolver) {
+	public void setWidgetParameterResolver(WidgetParameterResolver widgetParameterResolver) {
 		this.widgetParameterResolver = widgetParameterResolver;
 	}
-	
-	public void submit(final WidgetInvocation invocation) {
+
+    public void setWidgetFilterResolver(WidgetFilterResolver widgetFilterResolver) {
+        this.widgetFilterResolver = widgetFilterResolver;
+    }
+
+    public void submit(final WidgetInvocation invocation) {
 		Future<WidgetInvocation> future = executorService.submit(new WidgetInvoker(invocation));
 		//
 		futuresLocal.get().add(future);
@@ -104,15 +111,33 @@ public class DefaultWidgetEngine implements WidgetEngine {
             WidgetConfig widgetConfig = widgetInvocation.getWidgetConfig();
 			WidgetRequest widgetRequest = widgetInvocation.getWidgetRequest();
 			WidgetResponse widgetResponse = widgetInvocation.getWidgetResponse();
-			//
+            //
 			Object widget = widgetFactory.getWidget(className); 
 			Method method = widgetMethod.getMethod();
+            //
+            List<WidgetFilter> widgetBeforeFilters = widgetFilterResolver.resolve(method, widgetConfig, BeforeFilter.class);
+            for(WidgetFilter widgetFitler : widgetBeforeFilters) {
+                if(!widgetFitler.doFilter(widgetRequest, widgetResponse, widgetConfig)) {
+                    return widgetInvocation;
+                }
+            }
+            //
 			Object[] args = widgetParameterResolver.resolve(method, widgetRequest, widgetResponse);
 			//
 			Object viewName = ReflectionUtils.invokeMethod(method, widget, args);
-			WidgetView widgetView = widgetViewResolver.resolve(viewName, Locale.getDefault());
+			//
+            List<WidgetFilter> widgetAfterFilters = widgetFilterResolver.resolve(method, widgetConfig, AfterFilter.class);
+            for(WidgetFilter widgetFitler : widgetAfterFilters) {
+                if(!widgetFitler.doFilter(widgetRequest, widgetResponse, widgetConfig)) {
+                    return widgetInvocation;
+                }
+            }
+            //
+            WidgetView widgetView = widgetViewResolver.resolve(viewName, Locale.getDefault());
 			//
 			widgetView.render(widgetRequest, widgetResponse);
+            // commit widget response
+            widgetResponse.commit();
 			//
 			return widgetInvocation;
 		}

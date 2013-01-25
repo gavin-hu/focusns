@@ -21,6 +21,7 @@ package org.focusns.web.site;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;

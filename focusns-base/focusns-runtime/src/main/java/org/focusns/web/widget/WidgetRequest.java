@@ -29,8 +29,6 @@ public interface WidgetRequest {
 	
 	<T> T getRequestAttribute(String name);
 	
-	void setRequestAttribute(String name, Object value);
-	
 	<T> T getSessionAttribute(String name);
 
 	<T> T getApplicationAttribute(String name); 

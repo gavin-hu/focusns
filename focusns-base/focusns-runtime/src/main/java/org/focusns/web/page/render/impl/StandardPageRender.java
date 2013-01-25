@@ -37,8 +37,6 @@ import java.util.*;
 public class StandardPageRender implements PageRender {
 
 	private WidgetEngine widgetEngine;
-    
-    private List<WidgetFilter> widgetFilters = Collections.emptyList();
 	
 	private PageConfigFactory pageConfigFactory;
 	
@@ -50,10 +48,6 @@ public class StandardPageRender implements PageRender {
 	public void setWidgetEngine(WidgetEngine widgetEngine) {
 		this.widgetEngine = widgetEngine;
 	}
-
-    public void setWidgetFilters(List<WidgetFilter> widgetFilters) {
-        this.widgetFilters = widgetFilters;
-    }
 	
 	public void setPageConfigFactory(PageConfigFactory pageConfigFactory) {
 		this.pageConfigFactory = pageConfigFactory;
@@ -81,10 +75,6 @@ public class StandardPageRender implements PageRender {
 			List<WidgetInvocation> widgetInvocationList = new ArrayList<WidgetInvocation>();
 			List<WidgetConfig> widgetConfigList = widgetConfigMap.get(position);
             //
-            for(WidgetFilter widgetFilter : widgetFilters) {
-                widgetFilter.doFilter(request, response, widgetConfigList);
-            }
-            //
 			for(WidgetConfig widgetConfig : widgetConfigList) {
 				//
 				WidgetRequest widgetRequest = widgetRequestFactory.createWidgetRequest(widgetConfig);
@@ -102,13 +92,21 @@ public class StandardPageRender implements PageRender {
 		widgetEngine.waitForUntilException();
 		//
 		for(String position : widgetInvocationMap.keySet()) {
-			StringBuilder sb = new StringBuilder();
             List<WidgetInvocation> widgetInvocations = widgetInvocationMap.get(position);
-            for(WidgetInvocation widgetInvocation : widgetInvocations) {
-                sb.append(widgetInvocation.getWidgetResponse().toString()).append("\n");
-            }
             //
-            request.setAttribute(position, sb.toString());
+            boolean skipPosition = true;
+            StringBuilder sb = new StringBuilder();
+            for(WidgetInvocation widgetInvocation : widgetInvocations) {
+                WidgetResponse widgetResonse = widgetInvocation.getWidgetResponse();
+                if(widgetResonse.isCommitted()) {
+                    skipPosition = false;
+                    sb.append(widgetInvocation.getWidgetResponse().toString()).append("\n");
+                }
+            }
+            // skip position ?
+            if(!skipPosition) {
+                request.setAttribute(position, sb);
+            }
 		}
 	}
 

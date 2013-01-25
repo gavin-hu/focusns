@@ -26,5 +26,9 @@ public interface WidgetResponse {
 	PrintWriter getWriter();
 	
 	OutputStream getOutputStream();
+
+    void commit();
+
+    boolean isCommitted();
 	
 }

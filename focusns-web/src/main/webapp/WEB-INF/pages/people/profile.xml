@@ -31,6 +31,7 @@
         <widget target="org.focusns.web.modules.profile.ProjectHistoryWidget@output" />
 	</position>
     <position name="rightColumn">
-        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@action" />
+        <widget target="org.focusns.web.modules.profile.ProjectWidget@action" />
+        <widget target="org.focusns.web.modules.profile.ProjectWidget@status" />
     </position>
 </page>

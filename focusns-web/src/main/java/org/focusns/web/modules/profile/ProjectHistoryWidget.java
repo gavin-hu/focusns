@@ -23,9 +23,11 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectHistoryService;
+import org.focusns.web.widget.annotation.AfterFilter;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Resource;
 import org.focusns.web.widget.annotation.Widget;
+import org.focusns.web.widget.filter.PageNotEmptyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -46,7 +48,8 @@ public class ProjectHistoryWidget {
         //
         return "profile/stream-input";
     }
-    
+
+    @AfterFilter(PageNotEmptyFilter.class)
     public String output(Map<String, Object> model,
                          @Bind(value="user", scope = Bind.Scope.SESSION) ProjectUser user,
                          @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {

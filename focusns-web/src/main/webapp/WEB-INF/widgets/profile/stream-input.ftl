@@ -11,7 +11,7 @@
                 <input type="hidden" name="projectId" value="${Request.template.projectId}" />
 
                 <div class="submit">
-                    <button type="submit" name="redirect" value="<@utils.redirect />">回复</button>
+                    <button type="submit" name="redirect" value="<@utils.redirect />">分享</button>
                 </div>
             </form>
         </div>

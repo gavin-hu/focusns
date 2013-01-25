@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<!--
+  ~ Copyright (C) 2011-2013 FocusSNS.
+  ~
+  ~ This library is free software; you can redistribute it and/or
+  ~ modify it under the terms of the GNU Lesser General Public
+  ~ License as published by the Free Software Foundation; either
+  ~ version 2.1 of the License, or (at your option) any later version.
+  ~
+  ~ This library is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ Lesser General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Lesser General Public
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+  ~ MA 02110-1301  USA
+  -->
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <!-- Web Application Name -->
     <display-name>Focus SNS</display-name>
+
+    <!-- Web Application Context Parameters -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath*:applicationContext-dao.xml
-            classpath*:applicationContext-service.xml
-            classpath*:applicationContext-event.xml
-            classpath*:applicationContext-cache.xml
-        </param-value>
+        <param-value>classpath*:applicationContext.xml</param-value>
     </context-param>
     <context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>/WEB-INF/log4j.xml</param-value>
     </context-param>
+
+    <!-- Web Application Performance Monitor -->
     <filter>
         <filter-name>performanceMonitorFilter</filter-name>
         <filter-class>org.focusns.common.monitor.filter.PerformanceMonitorFilter</filter-class>
@@ -22,6 +43,8 @@
         <filter-name>performanceMonitorFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!-- Web Application Character Encoding UTF-8 -->
     <filter>
         <filter-name>characterEncodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -38,16 +61,8 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--
-    <filter>
-        <filter-name>applicationSetupFilter</filter-name>
-        <filter-class>org.focusns.web.setup.ApplicationSetupFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>applicationSetupFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    -->
+
+    <!-- SpringMVC Center Dispatcher -->
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.focusns.web.servlet.DispatcherServlet</servlet-class>
@@ -60,13 +75,16 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+
+    <!-- Web Application Listener -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <listener>
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
+
     <welcome-file-list>
-        <welcome-file>welcome.html</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

@@ -26,6 +26,9 @@ public class ProjectLink extends Id {
     private long toProjectId;
     private boolean mutual;
 
+    private Project fromProject;
+    private Project toProject;
+
     public ProjectLink() {
     }
 
@@ -53,4 +56,19 @@ public class ProjectLink extends Id {
         this.mutual = mutual;
     }
 
+    public Project getFromProject() {
+        return fromProject;
+    }
+
+    public void setFromProject(Project fromProject) {
+        this.fromProject = fromProject;
+    }
+
+    public Project getToProject() {
+        return toProject;
+    }
+
+    public void setToProject(Project toProject) {
+        this.toProject = toProject;
+    }
 }

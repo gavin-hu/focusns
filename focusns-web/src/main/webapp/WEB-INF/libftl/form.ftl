@@ -21,7 +21,7 @@ ${DynamicInvoker.create(name)}
 <@input id="${id}" class="${class}" type="password" name=name path=path />
 </#macro>
 
-<#macro hiddenInput name path id="" class="">
+<#macro hiddenInput name path Sid="" class="">
 <@input id="${id}" class="${class}" type="hidden" name=name path=path />
 </#macro>
 
@@ -30,5 +30,5 @@ ${DynamicInvoker.create(name)}
 </#macro>
 
 <#macro input type name path id="" class="">
-<input id="${id}" class="${class}" type="text" name="${name}" value="${DynamicInvoker.invoke(path)!""}" />
+<input id="${id}" class="${class}" type="${type}" name="${name}" value="${DynamicInvoker.invoke(path)!""}" />
 </#macro>

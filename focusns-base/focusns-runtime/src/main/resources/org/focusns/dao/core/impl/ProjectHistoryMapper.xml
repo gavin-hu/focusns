@@ -70,12 +70,15 @@
     </select>
 
     <sql id="fetchByProjectIdSql">
-        from tb_project_history a
-        where a.project_id = #{projectId} and a.parent_id is null
-        order by a.create_at desc
+        from tb_project_history
+        where parent_id is null
+            and (   project_id = #{projectId}
+                    or project_id in (select to_project_id from tb_project_link
+                    where from_project_id = #{projectId} ))
+        order by create_at desc
     </sql>
     <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select a.* <include refid="fetchByProjectIdSql"/>
+        select * <include refid="fetchByProjectIdSql"/>
     </select>
      <select id="fetchByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
         select count(1) <include refid="fetchByProjectIdSql"/>

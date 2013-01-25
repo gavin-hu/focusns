@@ -18,8 +18,10 @@
  */
 package org.focusns.service.core.impl;
 
+import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.service.core.ProjectLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,10 @@ import java.util.List;
 public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     @Autowired
+    private ProjectDao projectDao;
+    @Autowired
     private ProjectLinkDao linkDao;
+
     
     public ProjectLink getProjectLink(long id) {
         return linkDao.select(id);
@@ -67,13 +72,26 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     @Override
     public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId) {
-        return linkDao.fetchByToProjectId(page, toProjectId, null);
+        page = linkDao.fetchByToProjectId(page, toProjectId, null);
+        for(ProjectLink projectLink : page.getResults()) {
+            Project fromProject = projectDao.select(projectLink.getFromProjectId());
+            Project toProject = projectDao.select(projectLink.getToProjectId());
+            projectLink.setFromProject(fromProject);
+            projectLink.setToProject(toProject);
+        }
+        return page;
     }
 
     @Override
     public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId) {
-        return linkDao.fetchByFromProjectId(page, fromProjectId, null);
+        page = linkDao.fetchByFromProjectId(page, fromProjectId, null);
+        for(ProjectLink projectLink : page.getResults()) {
+            Project fromProject = projectDao.select(projectLink.getFromProjectId());
+            Project toProject = projectDao.select(projectLink.getToProjectId());
+            projectLink.setFromProject(fromProject);
+            projectLink.setToProject(toProject);
+        }
+        return page;
     }
-
 
 }

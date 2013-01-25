@@ -5,7 +5,7 @@
         <h2>分类编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="blog-category-setting">
+        <div class="setting-blog-category">
             <div class="blog-category-create">
                 <form action="${Request.contextPath}/blog/category/edit" method="post">
                     <input name="label" value="" />

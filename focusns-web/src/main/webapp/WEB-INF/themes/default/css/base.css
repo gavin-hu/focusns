@@ -165,27 +165,6 @@ body {
 	margin-right:5px;
 }
 
-
-
-
-
-
-
-.login  {
-    padding:10px;
-    border: 1px solid #DDDDDD;
-}
-.login div {
-    padding: 5px 0;
-}
-.login label {
-    display: inline-block;
-    width: 100px;
-    text-align: right;
-}
-.login .submit {
-    padding-left: 105px;
-}
 input {
     padding:1px;
 }
@@ -214,4 +193,55 @@ img.thumbnail{
 
 a {
     text-decoration:none;
+}
+
+.clear {
+    clear:both;
+}
+
+.login  {
+    padding:50px;
+    border: 1px solid #DDDDDD;
+}
+.login div {
+    padding: 5px 0;
+}
+.login label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+.login .submit {
+    padding-left: 105px;
+}
+
+.register {
+    padding:50px;
+    border: 1px solid #DDDDDD;
+    clear:both;
+}
+.register .register-left {
+    float:left;
+    display:inline-block;
+    width:70%;
+}
+.register .register-left div {
+    padding:5px 0;
+}
+.register .register-right {
+    display:inline-block;
+    width:30%;
+}
+.register .register-right ul li {
+    padding:7px 0 7px 24px;
+    background:url('../img/social_icon.png') no-repeat transparent;
+}
+.register .register-right ul li.sina {
+    background-position: 0 -97px;
+}
+.register .register-right ul li.renren {
+    background-position: 0 7px;
+}
+.register .register-right ul li.tencent {
+    background-position: 0 -164px;
 }

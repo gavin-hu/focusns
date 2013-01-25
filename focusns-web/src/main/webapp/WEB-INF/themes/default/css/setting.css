@@ -1,13 +1,13 @@
-.blog-category-setting {
+.setting-blog-category {
     padding:10px;
 }
-.blog-category-setting .blog-category-list {
+.setting-blog-category .blog-category-list {
     padding-top:10px;
 }
-.blog-category-setting .blog-category-list ul li {
+.setting-blog-category .blog-category-list ul li {
     padding-bottom:5px;
 }
-.blog-category-setting .blog-category-list ul li.last {
+.setting-blog-category .blog-category-list ul li.last {
     padding-bottom:0;
 }
 .setting-menu {
@@ -26,6 +26,9 @@
 
 .setting-logo {
     padding:10px;
+}
+.setting-logo .cropper-wrapper img {
+    max-width:100%;
 }
 .setting-project {
     padding:10px;

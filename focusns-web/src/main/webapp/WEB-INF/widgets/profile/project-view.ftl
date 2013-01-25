@@ -2,9 +2,7 @@
 <div class="widget">
     <div class="widget-bd">
         <div class="project">
-            <div class="project-logo">
-                <img src="${Request.contextPath}/project/${Request.project.id}/logo" />
-            </div>
+            <img class="thumbnail" alt="logo" src="${Request.contextPath}/project/${Request.project.id}/logo" />
             <div class="project-title">
                 <h3>${Request.project.title}</h3>
             </div>

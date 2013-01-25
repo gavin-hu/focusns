@@ -17,21 +17,14 @@
     <!-- Configures Handler Interceptors -->
     <mvc:interceptors>
         <!-- pre -->
-        <ref local="portalInterceptor" />
-        <ref local="attributeInterceptor" />
+        <bean class="org.focusns.web.interceptor.PortalInterceptor" />
+        <bean class="org.focusns.web.interceptor.AttributeInterceptor" />
         <!-- post -->
-        <ref local="themeInterceptor" />
-        <ref local="redirectInterceptor" />
-        
+        <bean class="org.focusns.web.interceptor.ThemeInterceptor" />
+        <bean class="org.focusns.web.interceptor.RedirectInterceptor" />
+
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
     </mvc:interceptors>
-    
-    <!-- Handler Interceptors-->
-    <bean id="portalInterceptor" class="org.focusns.web.interceptor.PortalInterceptor" />
-    <bean id="attributeInterceptor" class="org.focusns.web.interceptor.AttributeInterceptor" />
-    
-    <bean id="themeInterceptor" class="org.focusns.web.interceptor.ThemeInterceptor" />
-    <bean id="redirectInterceptor" class="org.focusns.web.interceptor.RedirectInterceptor" />
 
     <mvc:resources mapping="/libjs/**" location="/WEB-INF/libjs/" />
     <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" />
@@ -75,9 +68,6 @@
     <bean id="pageRender" class="org.focusns.web.page.render.impl.StandardPageRender">
     	<property name="widgetEngine" ref="widgetEngine" />
     	<property name="pageConfigFactory" ref="pageConfigFactory" />
-        <property name="widgetFilters">
-            <bean class="org.focusns.web.widget.security.SecurityWidgetFilter" />
-        </property>
     </bean>
     <bean id="pageConfigFactory" class="org.focusns.web.page.config.xml.XmlPageConfigFactory" />
     <bean id="widgetEngine" class="org.focusns.web.widget.engine.impl.DefaultWidgetEngine">

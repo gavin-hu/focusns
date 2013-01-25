@@ -18,6 +18,8 @@
  */
 package org.focusns.web.widget.engine;
 
+import org.focusns.web.widget.WidgetRequest;
+import org.focusns.web.widget.WidgetResponse;
 import org.focusns.web.widget.config.WidgetConfig;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +28,6 @@ import java.util.List;
 
 public interface WidgetFilter {
 
-    void doFilter(HttpServletRequest request, HttpServletResponse response, 
-            List<WidgetConfig> widgetConfigList) throws Exception;
+    boolean doFilter(WidgetRequest request, WidgetResponse response, WidgetConfig widgetConfig) throws Exception;
     
 }

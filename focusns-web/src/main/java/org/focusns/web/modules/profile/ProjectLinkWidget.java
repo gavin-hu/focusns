@@ -23,8 +23,12 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectLinkService;
+import org.focusns.web.widget.annotation.AfterFilter;
+import org.focusns.web.widget.annotation.BeforeFilter;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
+import org.focusns.web.widget.filter.NotMyProjectFilter;
+import org.focusns.web.widget.filter.PageNotEmptyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -35,6 +39,7 @@ public class ProjectLinkWidget {
     @Autowired
     private ProjectLinkService projectLinkService;
     
+    @BeforeFilter(NotMyProjectFilter.class)
     public String action(Map<String, Object> model,
                          @Bind(value="user", scope = Bind.Scope.SESSION) ProjectUser user,
                          @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
@@ -47,6 +52,7 @@ public class ProjectLinkWidget {
         return "profile/link-action";
     }
 
+    @AfterFilter(PageNotEmptyFilter.class)
     public String list(Map<String, Object> model,
                        @Bind(value="limit", scope = Bind.Scope.PREFERENCE) int limit,
                        @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {

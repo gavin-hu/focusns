@@ -1,7 +1,9 @@
 <#if Session.user??>
 <ul>
     <li>
-        <a href="${Request.contextPath}/${Session.user.project.code}/profile">Gavin Hu</a>
+        <a href="${Request.contextPath}/${Session.user.project.code}/profile">
+            ${Session.user.username}
+        </a>
     </li>
     <li>
         <a href="${Request.contextPath}/site/logout">退出</a>
