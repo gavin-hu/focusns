@@ -21,7 +21,7 @@ public class EnvironmentServiceTest extends AbstractServiceTest{
 	
 	@Test
 	public void testJavaEnv() {
-		Environment jvmOS = environmentService.lookupEnvironment(Type.JAVA);
+		Environment jvmOS = environmentService.lookupEnvironment(Type.JRE);
 		System.out.println(jvmOS);
 	}
 	

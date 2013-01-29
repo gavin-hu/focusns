@@ -45,7 +45,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 	public Environment lookupEnvironment(Type type) {
 		if(Type.OS==type) {
 			return lookupOS();
-		} else if(Type.JAVA==type) {
+		} else if(Type.JRE ==type) {
 			return lookupJava();
 		} else if(Type.DB==type) {
 			return lookupDB();

@@ -23,7 +23,7 @@ import org.focusns.model.common.Id;
 public class Environment extends Id {
 	
 	public enum Type {
-		OS, JAVA, DB
+		OS, JRE, DB
 	}
 	
 }

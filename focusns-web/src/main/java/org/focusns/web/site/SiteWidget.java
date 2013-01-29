@@ -23,9 +23,13 @@ import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
+import org.focusns.web.widget.annotation.BeforeFilter;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
+import org.focusns.web.widget.filter.ExceptionRequiredFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ClassUtils;
+import org.springframework.validation.BindException;
 
 import java.util.List;
 import java.util.Map;
@@ -61,13 +65,22 @@ public class SiteWidget {
     
     public String login(Map<String, Object> model) {
         //
-
-        //
         return "site/login";
     }
 
     public String register() {
         return "site/register";
+    }
+
+    @BeforeFilter(ExceptionRequiredFilter.class)
+    public String exception(Map<String, Object> model,
+            @Bind(value="exception", scope= Bind.Scope.REQUEST) Exception e) {
+        //
+        if(ClassUtils.isAssignableValue(BindException.class, e)) {
+            model.put("", ((BindException)e).getObjectName());
+        }
+        //
+        return "site/exception";
     }
     
 }

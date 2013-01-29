@@ -27,17 +27,12 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- global definition -->
-    <util:properties id="applicationProperties" location="classpath:application.properties" />
+    <util:properties id="application" location="file:${user.home}/.focusns/application.properties" />
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreResourceNotFound" value="true" />
         <property name="localOverride" value="true" />
-        <property name="locations">
-            <list>
-                <value>classpath:/application.properties</value>
-                <value>file:${user.home}/.focusns/application.properties</value>
-            </list>
-        </property>
+        <property name="properties" ref="application" />
     </bean>
 
     <!-- import other layer definition -->
@@ -45,5 +40,6 @@
     <import resource="classpath:applicationContext-event.xml" />
     <import resource="classpath:applicationContext-service.xml" />
     <import resource="classpath:applicationContext-cache.xml" />
+    <import resource="classpath:applicationContext-validation.xml" />
 
 </beans>

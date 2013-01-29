@@ -42,7 +42,7 @@ public class BlogPostWidget {
         model.put("blogPost", blogPost);
         model.put("blogPost", blogPost);
         //
-		return "blog/post-view";
+		return "modules/blog/post-view";
 	}
 	
 	public String list(Map<String, Object> model,
@@ -57,7 +57,7 @@ public class BlogPostWidget {
         }
         model.put("page", page);
         //
-		return "blog/post-list";
+		return "modules/blog/post-list";
 	}
 	
 }

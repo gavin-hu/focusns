@@ -44,7 +44,7 @@ public class BlogCategoryWidget {
         blogCategories.add(0, blogCategory);
         model.put("blogCategories", blogCategories);
         //
-        return "blog/category-list";
+        return "modules/blog/category-list";
     }
     
 }

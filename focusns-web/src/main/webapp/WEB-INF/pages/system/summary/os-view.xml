@@ -1,5 +1,5 @@
 <page extends="/system/common">
 	<position name="main">
-		<widget target="org.focusns.web.modules.system.summary.OsWidget@doView" />
+		<widget target="org.focusns.web.system.summary.OsWidget@doView" />
 	</position>
 </page>

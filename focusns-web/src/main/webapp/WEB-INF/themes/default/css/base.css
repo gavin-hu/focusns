@@ -23,7 +23,7 @@ body {
 	margin:6px 10px 10px 10px;
 	width:120px;
 }
-#logo a {
+#logo {
 	background:url(../img/global.png) no-repeat;
 	height:22px;
 	display:block;
@@ -197,6 +197,12 @@ a {
 
 .clear {
     clear:both;
+}
+.exception {
+    padding:10px;
+    margin-bottom: 10px;
+    background-color: #FFCCCC;
+    border:1px solid #FF4E4E;
 }
 
 .login  {

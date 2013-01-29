@@ -40,7 +40,7 @@ public class BlogSettingWidget {
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
-        return "setting/blog/category-edit";
+        return "modules/setting/blog/category-edit";
     }
     
     public String editPost(Map<String, Object> model,
@@ -50,7 +50,7 @@ public class BlogSettingWidget {
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
-        return "setting/blog/post-edit";
+        return "modules/setting/blog/post-edit";
     }
     
 }
