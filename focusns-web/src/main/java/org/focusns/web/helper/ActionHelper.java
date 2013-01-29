@@ -16,22 +16,23 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+package org.focusns.web.helper;
 
-package org.focusns.web.widget.filter;
-
-import org.focusns.model.common.Page;
-import org.focusns.web.widget.WidgetRequest;
-import org.focusns.web.widget.WidgetResponse;
-import org.focusns.web.widget.config.WidgetConfig;
-import org.focusns.web.widget.engine.WidgetFilter;
-
-public class PageNotEmptyFilter implements WidgetFilter {
-
-    @Override
-    public boolean doFilter(WidgetRequest request, WidgetResponse response, WidgetConfig widgetConfig) throws Exception {
-        //
-        Page page = request.getRequestAttribute("page");
-        //
-        return page!=null && !page.getResults().isEmpty();
+public class ActionHelper {
+    
+    public static boolean isFetch(String action) {
+        return "fetch".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isCreate(String action) {
+        return "create".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isModify(String action) {
+        return "modify".equalsIgnoreCase(action);
+    }
+    
+    public static boolean isRemove(String action) {
+        return "remove".equalsIgnoreCase(action);
     }
 }

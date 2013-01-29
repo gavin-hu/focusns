@@ -16,15 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.helpers;
+package org.focusns.web.helper;
 
 import org.focusns.common.image.ImageUtils;
 import org.focusns.model.common.Rectangle;
-import org.focusns.model.core.ProjectLogo;
-import org.springframework.util.DefaultPropertiesPersister;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
-import org.springframework.util.PropertiesPersister;
 
 import java.io.File;
 import java.io.FileOutputStream;

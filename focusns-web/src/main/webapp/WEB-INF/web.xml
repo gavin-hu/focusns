@@ -22,7 +22,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <!-- Web Application Name -->
-    <display-name>Focus SNS</display-name>
+    <display-name>FocusSNS</display-name>
 
     <!-- Web Application Context Parameters -->
     <context-param>
@@ -70,6 +70,10 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring/dispatcherContext.xml</param-value>
         </init-param>
+        <init-param>
+            <param-name>contextInitializerClasses</param-name>
+            <param-value>org.focusns.web.initializer.ApplicationInitializer</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
@@ -84,7 +88,4 @@
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>

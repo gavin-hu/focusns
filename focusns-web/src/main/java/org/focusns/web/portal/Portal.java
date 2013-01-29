@@ -26,20 +26,19 @@ import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.helpers.UrlTemplateHelper;
+import org.focusns.web.helper.UrlTemplateHelper;
 import org.focusns.web.page.config.PageConfigException;
 import org.focusns.web.page.render.PageRender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -80,7 +79,9 @@ public class Portal {
         request.getSession().removeAttribute("project");
         request.getSession().removeAttribute("feature");
         //
-		String requestPath = urlPathHelper.getOriginatingRequestUri(request);
+        String contextPath = urlPathHelper.getOriginatingContextPath(request);
+		String requestUri = urlPathHelper.getOriginatingRequestUri(request);
+        String requestPath = requestUri.substring(contextPath.length());
 		if("/".equals(requestPath) || "".equals(requestPath)) {
 			requestPath = "/index";
 		}
@@ -126,17 +127,16 @@ public class Portal {
 		return requestPath;
 	}
 
-    @ExceptionHandler
-    public String handlePageConfigException(PageConfigException e, Model model) {
+    @ExceptionHandler(PageConfigException.class)
+    public ModelAndView handlePageConfigException(PageConfigException e) {
         //
         log.warn(e.getMessage(), e);
         //
-        Map htmlMeta = new HashMap();
+        /*Map htmlMeta = new HashMap();
         htmlMeta.put("http-equiv", "refresh");
-        htmlMeta.put("content", "3, /login");
-        model.addAttribute("htmlMeta", htmlMeta);
+        htmlMeta.put("content", "3, /login");*/
         //
-        return "redirect:/http404";
+        return new ModelAndView("redirect:/login");
     }
     
 }

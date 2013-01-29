@@ -4,13 +4,12 @@
 DROP TABLE IF EXISTS TB_PROJECT_USER;
 
 CREATE TABLE TB_PROJECT_USER (
-	`ID` BIGINT NOT NULL AUTO_INCREMENT ,
-	`USERNAME` VARCHAR(100) NOT NULL ,
-	`PASSWORD` VARCHAR(100) NOT NULL ,
-	`EMAIL` VARCHAR(100) NOT NULL ,
-	`PROJECT_ID` BIGINT ,
-	PRIMARY KEY (`ID`) ,
-    UNIQUE INDEX `USERNAME_UNIQUE` (`USERNAME`) ,
+    `ID` BIGINT NOT NULL AUTO_INCREMENT ,
+	  `USERNAME` VARCHAR(100) NOT NULL ,
+	  `PASSWORD` VARCHAR(100) NOT NULL ,
+	  `EMAIL` VARCHAR(100) NOT NULL ,
+  	`PROJECT_ID` BIGINT ,
+    PRIMARY KEY (`ID`) ,
     UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL`)
 );
 
@@ -722,7 +721,7 @@ create procedure init_db()
         call createProjectCategory('people', '成员', categoryId);
         #
         insert into tb_project_user(username, password, email)
-            values ('admin', 'admin', 'admin@focusns.org');
+            values ('admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@focusns.org');
 
         select id into userId from tb_project_user where username = 'admin';
 
@@ -738,7 +737,7 @@ create procedure init_db()
         call createProjectFeature(projectId);
 
         insert into tb_project_user(username, password, email)
-            values ('test', 'test', 'test@focusns.org');
+            values ('test', 'e10adc3949ba59abbe56e057f20f883e', 'test@focusns.org');
         # select userId
         select id into userId from tb_project_user where username = 'test';
 

@@ -20,6 +20,8 @@ package org.focusns.web.widget;
 
 import org.focusns.web.widget.config.WidgetConfig;
 import org.focusns.web.widget.http.HttpWidgetRequest;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -67,6 +69,11 @@ public class WidgetRequestFactory {
 			//
 			requestAttributes.put(name, value);
 		}
+        // copy flash attributes
+        Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+        if(flashMap!=null) {
+            requestAttributes.putAll(flashMap);
+        }
 	}
 	
 	@SuppressWarnings("unchecked")

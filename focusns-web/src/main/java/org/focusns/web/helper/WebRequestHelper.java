@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-package org.focusns.web.helpers;
+package org.focusns.web.helper;
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectFeature;

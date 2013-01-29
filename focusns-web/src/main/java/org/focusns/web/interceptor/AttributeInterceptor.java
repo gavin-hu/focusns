@@ -33,12 +33,21 @@ public class AttributeInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		//
 		exposeContextPath(request);
+        //
+        exposeRequestPath(request);
 		//
 		return super.preHandle(request, response, handler);
 	}
-	
-	private void exposeContextPath(HttpServletRequest request) {
-		String contextPath = urlPathHelper.getContextPath(request);
+
+    private void exposeRequestPath(HttpServletRequest request) {
+        String contextPath = urlPathHelper.getOriginatingContextPath(request);
+        String requestUri = urlPathHelper.getOriginatingRequestUri(request);
+        request.setAttribute("requestPath", requestUri.substring(contextPath.length()));
+
+    }
+
+    private void exposeContextPath(HttpServletRequest request) {
+        String contextPath = urlPathHelper.getOriginatingContextPath(request);
 		request.setAttribute("contextPath", contextPath);
 	}
 	

@@ -2,7 +2,6 @@ package org.focusns.web.oauth;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.Api;
-import org.scribe.builder.api.SinaWeiboApi20;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
@@ -23,8 +22,8 @@ public class OAuthController {
     private static final Token EMPTY_TOKEN = null;
 
     @Autowired
-    @Qualifier("applicationProperties")
-    private Properties applicationProperties;
+    @Qualifier("application")
+    private Properties application;
 
     @RequestMapping("/authorize")
     public String authorize(@RequestParam String provider, WebRequest webRequest) throws Exception {
@@ -47,12 +46,12 @@ public class OAuthController {
     }
 
     private OAuthService getOAuthService(String provider) throws Exception {
-        String apiClass = applicationProperties.getProperty(String.format("oauth.%s.apiClass", provider));
-        String apiKey = applicationProperties.getProperty(String.format("oauth.%s.apiKey", provider));
-        String apiSecret = applicationProperties.getProperty(String.format("oauth.%s.apiSecret", provider));
-        String callback = applicationProperties.getProperty(String.format("oauth.%s.callback", provider));
+        String apiClass = application.getProperty(String.format("oauth.%s.apiClass", provider));
+        String apiKey = application.getProperty(String.format("oauth.%s.apiKey", provider));
+        String apiSecret = application.getProperty(String.format("oauth.%s.apiSecret", provider));
+        String callback = application.getProperty(String.format("oauth.%s.callback", provider));
         //
-        Class<? extends Api> apiClazz = (Class<? extends Api>) ClassUtils.forName(apiClass);
+        Class<? extends Api> apiClazz = (Class<? extends Api>) ClassUtils.forName(apiClass, getClass().getClassLoader());
         //
         return new ServiceBuilder().provider(apiClazz).apiKey(apiKey).apiSecret(apiSecret).callback(callback).build();
     }

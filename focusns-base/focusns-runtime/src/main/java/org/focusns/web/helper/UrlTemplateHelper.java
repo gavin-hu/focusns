@@ -1,4 +1,4 @@
-package org.focusns.web.helpers;
+package org.focusns.web.helper;
 
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
