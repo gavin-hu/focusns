@@ -28,7 +28,7 @@ import org.focusns.web.widget.annotation.BeforeFilter;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.focusns.web.widget.filter.NotMyProjectFilter;
-import org.focusns.web.widget.filter.PageNotEmptyFilter;
+import org.focusns.web.widget.filter.PageRequiredFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -49,10 +49,10 @@ public class ProjectLinkWidget {
         model.put("fromProject", user.getProject());
         model.put("toProject", project);
         //
-        return "profile/link-action";
+        return "modules/profile/link-action";
     }
 
-    @AfterFilter(PageNotEmptyFilter.class)
+    @AfterFilter(PageRequiredFilter.class)
     public String list(Map<String, Object> model,
                        @Bind(value="limit", scope = Bind.Scope.PREFERENCE) int limit,
                        @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
@@ -61,7 +61,7 @@ public class ProjectLinkWidget {
         page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
         model.put("page", page);
         //
-        return "profile/link-list";
+        return "modules/profile/link-list";
     }
     
 }

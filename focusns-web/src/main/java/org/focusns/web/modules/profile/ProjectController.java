@@ -18,8 +18,7 @@
  */
 package org.focusns.web.modules.profile;
 
-import org.focusns.model.core.ProjectLogo;
-import org.focusns.web.helpers.RuntimeHelper;
+import org.focusns.web.helper.RuntimeHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;

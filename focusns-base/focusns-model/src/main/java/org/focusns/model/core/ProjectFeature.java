@@ -29,7 +29,15 @@ public class ProjectFeature extends Id {
 	//
 	private long projectId;
 
-	public String getCode() {
+
+    public ProjectFeature() {
+    }
+
+    public ProjectFeature(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getCode() {
 		return code;
 	}
 

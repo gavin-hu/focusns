@@ -27,7 +27,7 @@ import org.focusns.web.widget.annotation.AfterFilter;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Resource;
 import org.focusns.web.widget.annotation.Widget;
-import org.focusns.web.widget.filter.PageNotEmptyFilter;
+import org.focusns.web.widget.filter.PageRequiredFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -46,10 +46,10 @@ public class ProjectHistoryWidget {
         ProjectHistory template = createTemplate(user, project);
         model.put("template", template);
         //
-        return "profile/stream-input";
+        return "modules/profile/stream-input";
     }
 
-    @AfterFilter(PageNotEmptyFilter.class)
+    @AfterFilter(PageRequiredFilter.class)
     public String output(Map<String, Object> model,
                          @Bind(value="user", scope = Bind.Scope.SESSION) ProjectUser user,
                          @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
@@ -61,7 +61,7 @@ public class ProjectHistoryWidget {
         page = projectHistoryService.fetchPage(page, project.getId());
         model.put("page", page);
         //
-        return "profile/stream-output";
+        return "modules/profile/stream-output";
     }
 
     private ProjectHistory createTemplate(ProjectUser user, Project project) {

@@ -20,9 +20,9 @@
         <div id="hd" class="yui3-g">
         	<div class="yui3-u-1">
                 <div class="area">
-                    <div id="logo">
-                        <a href="#">FocusSNS</a>
-                    </div>
+                    <a href="/">
+                        <img id="logo" />
+                    </a>
                     <@utils.position name="userMenu" >
                         <div id="user-menu">${userMenu}</div>
                     </@utils.position>

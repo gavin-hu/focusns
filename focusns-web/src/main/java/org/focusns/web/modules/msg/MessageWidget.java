@@ -39,17 +39,17 @@ public class MessageWidget {
 
     public String alert() {
 
-        return "msg/message-alert";
+        return "modules/msg/message-alert";
     }
 
     public String action() {
 
-        return "msg/message-action";
+        return "modules/msg/message-action";
     }
 
     public String box() {
 
-        return "msg/message-box";
+        return "modules/msg/message-box";
     }
 
     public String list(Map<String, Object> model, @Bind(value="box") String box,
@@ -59,12 +59,12 @@ public class MessageWidget {
         page = messageService.fetchPageByBox(page, box, project.getId());
         model.put("page", page);
         //
-        return "msg/message-list";
+        return "modules/msg/message-list";
     }
 
     public String view() {
 
-        return "msg/message-view";
+        return "modules/msg/message-view";
     }
 
     public String edit(Map<String, Object> model,
@@ -77,6 +77,6 @@ public class MessageWidget {
         message.setToProjectId(project.getId());
         model.put("message", message);
         //
-        return "msg/message-edit";
+        return "modules/msg/message-edit";
     }
 }

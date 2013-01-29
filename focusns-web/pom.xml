@@ -11,13 +11,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.focusns</groupId>
             <artifactId>focusns-runtime</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
@@ -41,5 +43,7 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <finalName>${project.artifactId}</finalName>
     </build>
 </project>

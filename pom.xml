@@ -10,6 +10,7 @@
     <modules>
         <module>focusns-base</module>
         <module>focusns-web</module>
+        <module>focusns-install</module>
     </modules>
     <properties>
         <cglib.version>2.2.2</cglib.version>
@@ -112,12 +113,7 @@
                 <artifactId>cglib</artifactId>
                 <version>${cglib.version}</version>
             </dependency>
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${cglib.version}</version>
-            </dependency>
-            
+
             <!-- AspectJ -->
             <dependency>
                 <groupId>org.aspectj</groupId>
@@ -172,6 +168,18 @@
                 <artifactId>servlet-api</artifactId>
                 <version>2.5</version>
             </dependency>
+
+            <!-- Bean Validation -->
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.0.0.GA</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>4.3.0.Final</version>
+            </dependency>
 			
             <!-- Freemarker -->
             <dependency>
@@ -179,12 +187,7 @@
                 <artifactId>freemarker</artifactId>
                 <version>2.3.19</version>
             </dependency>
-            <dependency>
-                <groupId>org.tuckey</groupId>
-                <artifactId>urlrewritefilter</artifactId>
-                <version>4.0.3</version>
-            </dependency>
-            
+
             <!-- Logging Log4j -->
             <dependency>
                 <groupId>commons-logging</groupId>
@@ -230,6 +233,24 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <includeEmptyDirs>true</includeEmptyDirs>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>

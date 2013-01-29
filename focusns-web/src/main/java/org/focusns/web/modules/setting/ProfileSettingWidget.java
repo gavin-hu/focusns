@@ -20,10 +20,8 @@ package org.focusns.web.modules.setting;
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
-import org.focusns.model.core.ProjectLogo;
-import org.focusns.web.helpers.RuntimeHelper;
+import org.focusns.web.helper.RuntimeHelper;
 import org.focusns.service.core.ProjectAttributeService;
-import org.focusns.service.core.ProjectLogoService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +46,11 @@ public class ProfileSettingWidget {
         File targetLogo = RuntimeHelper.getInstance().getProjectLogo(project.getId());
         model.put("hasLogo", targetLogo.canRead());
         //
-        return "setting/profile/logo-edit";
+        return "modules/setting/profile/logo-edit";
     }
     
     public String editProject(@Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
-        return "setting/profile/project-edit";
+        return "modules/setting/profile/project-edit";
     }
     
     public String editAttribute(Map<String, Object> model,
@@ -61,7 +59,7 @@ public class ProfileSettingWidget {
         List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);
         //
-        return "setting/profile/attribute-edit";
+        return "modules/setting/profile/attribute-edit";
     }
     
 }

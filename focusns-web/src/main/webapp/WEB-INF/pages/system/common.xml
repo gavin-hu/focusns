@@ -1,8 +1,8 @@
 <page>
     <position name="menu">
-        <widget target="org.focusns.web.modules.system.common.SiteMenuWidget@doView" />
+        <widget target="org.focusns.web.system.common.SiteMenuWidget@doView" />
     </position>
 	<position name="sidebar">
-		<widget target="org.focusns.web.modules.system.common.SystemMenuWidget@doView" />
+		<widget target="org.focusns.web.system.common.SystemMenuWidget@doView" />
 	</position>
 </page>

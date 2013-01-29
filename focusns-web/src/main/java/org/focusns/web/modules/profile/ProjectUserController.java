@@ -21,7 +21,7 @@ package org.focusns.web.modules.profile;
 
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
-import org.focusns.web.helpers.RuntimeHelper;
+import org.focusns.web.helper.RuntimeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;

@@ -47,13 +47,13 @@ public class ProjectWidget {
         List<ProjectAttribute> attributes = projectAttributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);
         //
-        return "profile/project-view";
+        return "modules/profile/project-view";
     }
 
     public String status(Map<String, Object> model,
              @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
         //
-        return "profile/project-status";
+        return "modules/profile/project-status";
     }
 
     @BeforeFilter(NotMyProjectFilter.class)
@@ -66,7 +66,7 @@ public class ProjectWidget {
         model.put("fromProject", user.getProject());
         model.put("toProject", project);
         //
-        return "profile/project-action";
+        return "modules/profile/project-action";
     }
 	
 }

@@ -18,19 +18,8 @@
  */
 package org.focusns.web.modules.profile;
 
-import org.focusns.model.core.ProjectLogo;
-import org.focusns.web.helpers.RuntimeHelper;
-import org.focusns.service.core.ProjectLogoService;
-import org.focusns.service.core.ProjectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/project")
