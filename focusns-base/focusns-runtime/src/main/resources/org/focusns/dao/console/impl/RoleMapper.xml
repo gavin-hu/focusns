@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ Copyright (C) 2011-2013 FocusSNS.                                  
+  ~                                                                    
+  ~ This library is free software; you can redistribute it and/or      
+  ~ modify it under the terms of the GNU Lesser General Public         
+  ~ License as published by the Free Software Foundation; either       
+  ~ version 2.1 of the License, or (at your option) any later version. 
+  ~                                                                    
+  ~ This library is distributed in the hope that it will be useful,    
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of     
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  
+  ~ Lesser General Public License for more details.                    
+  ~                                                                    
+  ~ You should have received a copy of the GNU Lesser General Public   
+  ~ License along with this library; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,         
+  ~ MA 02110-1301  USA
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.console.RoleDao">
+
+	<resultMap id="BaseResultMap" type="org.focusns.dao.console.RoleDao">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="label" property="label" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="org.focusns.dao.console.RoleDao">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			SELECT last_insert_id()
+		</selectKey>
+        INSERT INTO tb_role (label, LEVEL) VALUES (#{label}, #{level})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		SELECT * FROM tb_role WHERE id = #{id}
+	</select>
+	
+	<update id="update" parameterType="org.focusns.dao.console.RoleDao">
+		UPDATE tb_role
+		<set>
+			<if test="label != null" >
+                label = #{label},
+			</if>
+            <if test="level != null" >
+                LEVEL = #{level},
+            </if>
+		</set>
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.Long">
+		DELETE FROM tb_role WHERE id = #{id}
+	</delete>
+
+    <insert id="authorize" parameterType="java.util.Map">
+       INSERT INTO tb_role_authority (role_id, authority_id)
+       VALUES (#{roleId}, #{authorityId})
+    </insert>
+
+    <delete id="unauthorize" parameterType="java.util.Map">
+        delete from tb_role_authority
+        where role_id = #{roleId} and authority_id = #{authorityId}
+    </delete>
+</mapper>
