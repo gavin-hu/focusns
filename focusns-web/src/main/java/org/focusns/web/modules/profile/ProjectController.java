@@ -18,7 +18,7 @@
  */
 package org.focusns.web.modules.profile;
 
-import org.focusns.web.helper.RuntimeHelper;
+import org.focusns.web.helper.ApplicationHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +35,7 @@ public class ProjectController {
     @RequestMapping("{projectId}/logo")
     public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
         //
-        File target = RuntimeHelper.getInstance().getProjectLogo(projectId);
+        File target = ApplicationHelper.getInstance().getProjectLogo(projectId);
         return FileCopyUtils.copyToByteArray(target);
     }
     

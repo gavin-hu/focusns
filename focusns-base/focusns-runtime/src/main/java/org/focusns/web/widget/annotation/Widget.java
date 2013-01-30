@@ -30,6 +30,6 @@ import java.lang.annotation.Target;
 @Component
 public @interface Widget {
 
-    String value();
+    String value() default "";
 
 }

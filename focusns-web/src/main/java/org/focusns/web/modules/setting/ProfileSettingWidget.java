@@ -20,7 +20,7 @@ package org.focusns.web.modules.setting;
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
-import org.focusns.web.helper.RuntimeHelper;
+import org.focusns.web.helper.ApplicationHelper;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.web.widget.annotation.Bind;
 import org.focusns.web.widget.annotation.Widget;
@@ -40,10 +40,10 @@ public class ProfileSettingWidget {
             @Bind(value="id", scope = Bind.Scope.SESSION) String sessionId,
             @Bind(value="project", scope= Bind.Scope.REQUEST) Project project) {
         //
-        File tmpLogo = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
+        File tmpLogo = ApplicationHelper.getInstance().getTmpProjectLogo(sessionId);
         model.put("hasTmpLogo", tmpLogo.canRead());
         //
-        File targetLogo = RuntimeHelper.getInstance().getProjectLogo(project.getId());
+        File targetLogo = ApplicationHelper.getInstance().getProjectLogo(project.getId());
         model.put("hasLogo", targetLogo.canRead());
         //
         return "modules/setting/profile/logo-edit";

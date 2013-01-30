@@ -21,7 +21,7 @@ package org.focusns.web.modules.profile;
 
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
-import org.focusns.web.helper.RuntimeHelper;
+import org.focusns.web.helper.ApplicationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
@@ -44,7 +44,7 @@ public class ProjectUserController {
     byte[] linkLogo(@PathVariable long userId) throws IOException {
         //
         ProjectUser user = projectUserService.getUser(userId);
-        File target = RuntimeHelper.getInstance().getProjectLogo(user.getProjectId());
+        File target = ApplicationHelper.getInstance().getProjectLogo(user.getProjectId());
         return FileCopyUtils.copyToByteArray(target);
     }
 

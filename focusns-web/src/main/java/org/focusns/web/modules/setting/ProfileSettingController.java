@@ -22,7 +22,7 @@ import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectFeature;
-import org.focusns.web.helper.RuntimeHelper;
+import org.focusns.web.helper.ApplicationHelper;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.web.helper.WebRequestHelper;
@@ -52,7 +52,7 @@ public class ProfileSettingController {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        RuntimeHelper.getInstance().storeTmpProjectLogo(file.getInputStream(), webRequest.getSessionId());
+        ApplicationHelper.getInstance().storeTmpProjectLogo(file.getInputStream(), webRequest.getSessionId());
         //
         return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
     }
@@ -63,9 +63,9 @@ public class ProfileSettingController {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        File target = RuntimeHelper.getInstance().getProjectLogo(project.getId());
-        File original = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
-        RuntimeHelper.getInstance().cropProjectLogo(original, target, rectangle);
+        File target = ApplicationHelper.getInstance().getProjectLogo(project.getId());
+        File original = ApplicationHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        ApplicationHelper.getInstance().cropProjectLogo(original, target, rectangle);
         //
         return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
     }
@@ -73,14 +73,14 @@ public class ProfileSettingController {
     @RequestMapping("/project/logo/tmp")
     public @ResponseBody byte[] linkLogoTemp(WebRequest webRequest) throws IOException {
         //
-        File temp = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        File temp = ApplicationHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
         return FileCopyUtils.copyToByteArray(temp);
     }
 
     @RequestMapping("/project/{projectId}/logo")
     public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
         //
-        File target = RuntimeHelper.getInstance().getProjectLogo(projectId);
+        File target = ApplicationHelper.getInstance().getProjectLogo(projectId);
         return FileCopyUtils.copyToByteArray(target);
     }
     

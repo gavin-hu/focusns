@@ -55,9 +55,10 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<set>
-				<!-- theme 
-				<value>classpath:/org/focusns/dao/theme/impl/PlaceholderDefinitionMapper.xml</value>
-				-->			
+				<!-- console -->
+                <value>classpath:/org/focusns/dao/console/impl/UserMapper.xml</value>
+                <value>classpath:/org/focusns/dao/console/impl/RoleMapper.xml</value>
+                <value>classpath:/org/focusns/dao/console/impl/AuthorityMapper.xml</value>
 
 				<!-- core -->
 				<value>classpath:/org/focusns/dao/core/impl/ProjectUserMapper.xml</value>

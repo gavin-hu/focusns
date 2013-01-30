@@ -28,7 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class RuntimeHelper {
+public class ApplicationHelper {
 
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
     
@@ -36,19 +36,19 @@ public class RuntimeHelper {
 
     private static final File application = new File(RUNTIME_DIR, "application.properties");
     
-    private static RuntimeHelper instance = new RuntimeHelper();
+    private static ApplicationHelper instance = new ApplicationHelper();
 
-    private RuntimeHelper() {
+    private ApplicationHelper() {
     }
     
-    public static RuntimeHelper getInstance() {
+    public static ApplicationHelper getInstance() {
         return instance;
     }
 
     public boolean isInstalled() {
         return application.exists();
     }
-    
+
     public File getTmpProjectLogo(String tmpId) {
         return new File(String.format("%s/project/logo/%s", TMP_DIR, tmpId));
     }
