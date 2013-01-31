@@ -1,4 +1,3 @@
-
 package org.focusns.dao.blog.impl;
 
 /*

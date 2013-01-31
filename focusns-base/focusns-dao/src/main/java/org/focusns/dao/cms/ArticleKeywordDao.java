@@ -1,5 +1,3 @@
-
-
 package org.focusns.dao.cms;
 
 /*

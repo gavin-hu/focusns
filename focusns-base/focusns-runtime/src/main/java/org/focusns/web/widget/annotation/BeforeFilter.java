@@ -1,5 +1,3 @@
-
-
 package org.focusns.web.widget.annotation;
 
 /*

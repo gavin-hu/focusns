@@ -1,4 +1,3 @@
-
 package org.focusns.dao.core;
 
 /*
@@ -22,7 +21,6 @@ package org.focusns.dao.core;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
 
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.core.ProjectAttribute;

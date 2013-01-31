@@ -1,4 +1,3 @@
-
 package org.focusns.common.event.support;
 
 /*

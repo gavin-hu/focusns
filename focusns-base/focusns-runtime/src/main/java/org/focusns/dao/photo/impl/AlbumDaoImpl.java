@@ -1,5 +1,3 @@
-
-
 package org.focusns.dao.photo.impl;
 
 /*

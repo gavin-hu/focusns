@@ -1,5 +1,3 @@
-
-
 package org.focusns.console.impl;
 
 /*

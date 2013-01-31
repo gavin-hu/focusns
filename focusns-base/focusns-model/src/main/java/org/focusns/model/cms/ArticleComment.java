@@ -1,10 +1,8 @@
-
-
 package org.focusns.model.cms;
 
 /*
  * #%L
- * focusns-model
+ * FocusSNS Model
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%

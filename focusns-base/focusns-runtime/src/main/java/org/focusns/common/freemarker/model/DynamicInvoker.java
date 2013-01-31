@@ -1,5 +1,3 @@
-
-
 package org.focusns.common.freemarker.model;
 
 /*

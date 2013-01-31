@@ -1,5 +1,3 @@
-
-
 package org.focusns.validation.group;
 
 /*

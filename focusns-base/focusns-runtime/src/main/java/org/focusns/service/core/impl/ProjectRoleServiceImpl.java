@@ -1,5 +1,3 @@
-
-
 package org.focusns.service.core.impl;
 
 /*
