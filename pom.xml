@@ -270,9 +270,15 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>1.4</version>
                     <configuration>
-                        <includes>
-                           <include>*.java</include>
-                        </includes>
+                        <roots>
+                            <root>src/main/java</root>
+                            <root>src/main/resources</root>
+                        </roots>
+                        <excludes>
+                            <exclude>
+                                src/main/resources/META-INF
+                            </exclude>
+                        </excludes>
                         <extraExtensions>
                             <sql>mysql</sql>
                         </extraExtensions>
