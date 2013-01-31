@@ -7,6 +7,8 @@
     <name>Focus SNS</name>
     <url>http://www.focusns.org</url>
 
+    <inceptionYear>2011</inceptionYear>
+
     <modules>
         <module>focusns-base</module>
         <module>focusns-web</module>
@@ -16,7 +18,9 @@
         <cglib.version>2.2.2</cglib.version>
         <aspectj.version>1.6.12</aspectj.version>
         <spring.version>3.1.3.RELEASE</spring.version>
-        <netbeans.hint.license>lgpl21</netbeans.hint.license>
+
+        <license.licenseName>lgpl_v2_1</license.licenseName>
+        <license.licenseResolver>${project.baseUri}/src/license</license.licenseResolver>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <organization>
@@ -262,9 +266,17 @@
                     <version>7.5.4.v20111024</version>
                 </plugin>
                 <plugin>
-                    <groupId>com.googlecode.flyway</groupId>
-                    <artifactId>flyway-maven-plugin</artifactId>
-                    <version>2.0.3</version>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>license-maven-plugin</artifactId>
+                    <version>1.4</version>
+                    <configuration>
+                        <includes>
+                           <include>*.java</include>
+                        </includes>
+                        <extraExtensions>
+                            <sql>mysql</sql>
+                        </extraExtensions>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -272,6 +284,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

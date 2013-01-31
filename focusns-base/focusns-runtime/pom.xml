@@ -114,26 +114,5 @@
             <groupId>org.scribe</groupId>
             <artifactId>scribe</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.flyway</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
     </dependencies>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.googlecode.flyway</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <configuration>
-                    <driver />
-                    <serverId>flyway-db</serverId>
-                    <schemas>
-                        <schema />
-                    </schemas>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
