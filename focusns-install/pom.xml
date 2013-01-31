@@ -29,6 +29,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>focusns-install</artifactId>
+    <name>FocusSNS Install</name>
 
     <build>
         <resources>

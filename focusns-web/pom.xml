@@ -8,6 +8,7 @@
     </parent>
     <artifactId>focusns-web</artifactId>
     <packaging>war</packaging>
+    <name>FocusSNS Web</name>
 
     <dependencies>
         <dependency>
