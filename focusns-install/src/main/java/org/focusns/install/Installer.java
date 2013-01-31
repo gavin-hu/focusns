@@ -32,11 +32,11 @@ public class Installer {
         //
         Properties globalSettings = new Properties();
         //
-        databaseWizard.setup(globalSettings);
+        databaseWizard.setup(scanner, globalSettings);
         //
-        openApiWizard.setup(globalSettings);
+        openApiWizard.setup(scanner, globalSettings);
         //
-        serverWizader.setup(globalSettings);
+        serverWizader.setup(scanner, globalSettings);
         //
         storeToRuntime(globalSettings);
         //

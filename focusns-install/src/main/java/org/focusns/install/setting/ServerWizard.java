@@ -22,10 +22,7 @@ public class ServerWizard implements Wizard {
     private String installPath;
 
     @Override
-    public void setup(Properties globalSettings) throws Exception {
-        //
-        Scanner scanner = new Scanner(System.in);
-
+    public void setup(Scanner scanner, Properties globalSettings) throws Exception {
         //
         ClassLoader classLoader = getClass().getClassLoader();
         for(String server : servers) {

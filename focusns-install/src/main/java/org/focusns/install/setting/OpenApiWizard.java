@@ -15,10 +15,8 @@ public class OpenApiWizard implements Wizard {
     private Map<String, Map<String, String>> openAPIProviders = new LinkedHashMap<String, Map<String, String>>();
 
     @Override
-    public void setup(Properties globalSettings) {
+    public void setup(Scanner scanner, Properties globalSettings) {
         printWelcome();
-        //
-        Scanner scanner = new Scanner(System.in);
         //
         for(String provider : providers) {
             //

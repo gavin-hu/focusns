@@ -24,10 +24,8 @@ public class DatabaseWizard implements Wizard {
     private String password;
 
     @Override
-    public void setup(Properties globalSettings) {
+    public void setup(Scanner scanner, Properties globalSettings) {
         printWelcome();
-        //
-        Scanner scanner = new Scanner(System.in);
         //
         scanType(scanner);
         //

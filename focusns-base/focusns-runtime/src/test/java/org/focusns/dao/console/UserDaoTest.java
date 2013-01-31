@@ -4,9 +4,11 @@ package org.focusns.dao.console;
 
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.console.User;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@Ignore
 public class UserDaoTest extends AbstractDaoTest {
 
     @Autowired
