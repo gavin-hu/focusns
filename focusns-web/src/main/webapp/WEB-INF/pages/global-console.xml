@@ -1,0 +1,8 @@
+<page>
+    <position name="userMenu">
+        <widget target="org.focusns.web.console.ConsoleWidget@userMenu" />
+    </position>
+    <position name="leftColumn">
+        <widget target="org.focusns.web.console.ConsoleWidget@menu" />
+    </position>
+</page>

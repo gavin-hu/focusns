@@ -2,7 +2,7 @@ package org.focusns.install.setting;
 
 /*
  * #%L
- * focusns-install
+ * FocusSNS-Install
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%

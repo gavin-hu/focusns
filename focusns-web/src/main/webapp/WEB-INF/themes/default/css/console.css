@@ -1,3 +1,14 @@
+.console-login {
+    padding: 10px;
+    border: 1px solid #DDD;
+}
+.console-login div {
+    padding: 5px 20px;
+}
+.console-login div.submit {
+    padding-left:50px;
+}
+
 
 .console-menu {
     padding:10px;
@@ -5,7 +16,14 @@
 .console-menu h3 {
     font-weight: bold;
 }
+.console-menu ul {
+    padding-bottom: 10px;
+}
+.console-menu ul.last {
+    padding-bottom: 0;
+}
 .console-menu ul li {
+    padding: 1px;
     padding-left: 16px;
 }
 

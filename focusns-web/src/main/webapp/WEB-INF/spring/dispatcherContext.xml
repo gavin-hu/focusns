@@ -17,6 +17,7 @@
     <!-- Configures Handler Interceptors -->
     <mvc:interceptors>
         <!-- pre -->
+        <bean class="org.focusns.web.interceptor.ConsoleInterceptor" />
         <bean class="org.focusns.web.interceptor.PortalInterceptor" />
         <bean class="org.focusns.web.interceptor.AttributeInterceptor" />
         <!-- post -->

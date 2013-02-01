@@ -5,7 +5,7 @@
     <div class="widget-bd">
         <div class="console-menu">
             <h3>站点管理</h3>
-            <ul class="sidemenu">
+            <ul>
                 <li>
                     <a href="${Request.contextPath}/system/content/category-list">首页管理</a>
                 </li>
@@ -17,25 +17,31 @@
                 </li>
             </ul>
             <h3>内容管理</h3>
-            <ul class="sidemenu">
+            <ul>
                 <li>
                     <a href="${Request.contextPath}/system/content/category-list">栏目管理</a>
                 </li>
                 <li>
                     <a href="${Request.contextPath}/system/content/category-list">文章管理</a>
                 </li>
-            </ul>
-            <h3>安全管理</h3>
-            <ul class="sidemenu">
                 <li>
-                    <a href="${Request.contextPath}/system/securiry/list">系统权限</a>
+                    <a href="${Request.contextPath}/system/content/category-list">评论管理</a>
                 </li>
                 <li>
-                    <a href="${Request.contextPath}/system/securiry/list">分类权限</a>
+                    <a href="${Request.contextPath}/system/content/category-list">关键词管理</a>
+                </li>
+            </ul>
+            <h3>安全管理</h3>
+            <ul>
+                <li>
+                    <a href="${Request.contextPath}/system/securiry/list">系统权限管理</a>
+                </li>
+                <li>
+                    <a href="${Request.contextPath}/system/securiry/list">分类权限管理</a>
                 </li>
             </ul>
             <h3>环境信息</h3>
-            <ul class="sidemenu">
+            <ul class="last">
                 <li>
                     <a href="${Request.contextPath}/console/summary-os">系统环境</a>
                 </li>
