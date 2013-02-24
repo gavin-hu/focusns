@@ -1,28 +1,5 @@
 package org.focusns.service.core.impl;
 
-/*
- * #%L
- * FocusSNS Runtime
- * %%
- * Copyright (C) 2011 - 2013 FocusSNS
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
-
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
@@ -32,8 +9,6 @@ import org.focusns.service.core.ProjectLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -70,12 +45,10 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         linkDao.deleteByFromAndToProjectId(fromProjectId, toProjectId);
     }
 
-    @Override
     public ProjectLink getProjectLink(long fromProjectId, long toProjectId) {
         return linkDao.selectByFromAndToProjectId(fromProjectId, toProjectId);
     }
 
-    @Override
     public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId) {
         page = linkDao.fetchByToProjectId(page, toProjectId, null);
         for(ProjectLink projectLink : page.getResults()) {
@@ -87,7 +60,6 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         return page;
     }
 
-    @Override
     public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId) {
         page = linkDao.fetchByFromProjectId(page, fromProjectId, null);
         for(ProjectLink projectLink : page.getResults()) {

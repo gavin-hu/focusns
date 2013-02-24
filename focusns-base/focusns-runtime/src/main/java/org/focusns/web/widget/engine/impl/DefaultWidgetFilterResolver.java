@@ -1,27 +1,10 @@
 package org.focusns.web.widget.engine.impl;
 
-/*
- * #%L
- * FocusSNS Runtime
- * %%
- * Copyright (C) 2011 - 2013 FocusSNS
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.focusns.web.widget.annotation.AfterFilter;
 import org.focusns.web.widget.annotation.BeforeFilter;
@@ -32,18 +15,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class DefaultWidgetFilterResolver implements WidgetFilterResolver {
 
     private Map<Method, List<WidgetFilter>> beforeFilterCache = new HashMap<Method, List<WidgetFilter>>();
     private Map<Method, List<WidgetFilter>> afterFilterCache = new HashMap<Method, List<WidgetFilter>>();
 
-    @Override
     public List<WidgetFilter> resolve(Method method, WidgetConfig widgetConfig, Class<?> annotationType) {
         List<WidgetFilter> widgetFilters = null;
         //

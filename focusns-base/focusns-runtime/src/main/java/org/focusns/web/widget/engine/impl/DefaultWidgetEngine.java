@@ -1,41 +1,31 @@
 package org.focusns.web.widget.engine.impl;
 
-/*
- * #%L
- * FocusSNS Runtime
- * %%
- * Copyright (C) 2011 - 2013 FocusSNS
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
-
-import org.focusns.web.widget.annotation.AfterFilter;
-import org.focusns.web.widget.annotation.BeforeFilter;
-import org.focusns.web.widget.config.WidgetConfig;
-import org.focusns.web.widget.WidgetRequest;
-import org.focusns.web.widget.WidgetResponse;
-import org.focusns.web.widget.engine.*;
-import org.springframework.util.ReflectionUtils;
-
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import org.focusns.web.widget.WidgetRequest;
+import org.focusns.web.widget.WidgetResponse;
+import org.focusns.web.widget.annotation.AfterFilter;
+import org.focusns.web.widget.annotation.BeforeFilter;
+import org.focusns.web.widget.config.WidgetConfig;
+import org.focusns.web.widget.engine.WidgetEngine;
+import org.focusns.web.widget.engine.WidgetFactory;
+import org.focusns.web.widget.engine.WidgetFilter;
+import org.focusns.web.widget.engine.WidgetFilterResolver;
+import org.focusns.web.widget.engine.WidgetInvocation;
+import org.focusns.web.widget.engine.WidgetMethod;
+import org.focusns.web.widget.engine.WidgetMethodResolver;
+import org.focusns.web.widget.engine.WidgetParameterResolver;
+import org.focusns.web.widget.engine.WidgetView;
+import org.focusns.web.widget.engine.WidgetViewResolver;
+import org.springframework.util.ReflectionUtils;
 
 public class DefaultWidgetEngine implements WidgetEngine {
 	
