@@ -5,7 +5,7 @@ import java.util.Scanner;
 import org.focusns.install.utils.Properties;
 
 /**
- * A wizard for database setting
+ * A wizard for database admin
  * @author Gavin Hu
  * @since 2.0
  */

@@ -3,7 +3,7 @@
         <h2>博文编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="setting-post">
+        <div class="admin-post">
             <form action="${Request.contextPath}/blog/post/edit" method="post">
                 <div>
                     <label>分类</label>

@@ -1,4 +1,4 @@
-package org.focusns.web.modules.setting;
+package org.focusns.web.modules.admin;
 
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
-public class BlogSettingController {
+public class BlogAdminController {
     
     @Autowired
     private BlogPostService blogPostService;

@@ -3,8 +3,8 @@
         <h2>标志编辑</h2>
     </div>
     <div class="widget-bd">
-         <div class="setting-logo">
-            <form action="${Request.contextPath}/setting/project/logo/upload"
+         <div class="admin-logo">
+            <form action="${Request.contextPath}/admin/project/logo/upload"
                   method="post" enctype="multipart/form-data">
                 <input type="file"name="file" accept="image/*" />
                 <button type="submit">上传</button>
@@ -12,8 +12,8 @@
 
             <#if Request.hasTmpLogo>
             <div class="cropper-wrapper">
-                <img id="cropper" src="${Request.contextPath}/setting/project/logo/tmp" alt="Logo" />
-                <form class="hidden" action="${Request.contextPath}/setting/project/logo/crop" method="post">
+                <img id="cropper" src="${Request.contextPath}/admin/project/logo/tmp" alt="Logo" />
+                <form class="hidden" action="${Request.contextPath}/admin/project/logo/crop" method="post">
                     <input type="hidden" id="x" name="x" />
                     <input type="hidden" id="y" name="y" />
                     <input type="hidden" id="w" name="w" />
@@ -24,7 +24,7 @@
             </#if>
             <div class="logo">
                 <#if Request.hasLogo>
-                <img src="${Request.contextPath}/setting/project/${Request.project.id}/logo" alt="Logo" />
+                <img src="${Request.contextPath}/admin/project/${Request.project.id}/logo" alt="Logo" />
                 </#if>
             </div>
         </div>

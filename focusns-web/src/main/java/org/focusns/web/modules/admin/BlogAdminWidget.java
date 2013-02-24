@@ -1,4 +1,4 @@
-package org.focusns.web.modules.setting;
+package org.focusns.web.modules.admin;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class BlogSettingWidget {
+public class BlogAdminWidget {
     
     @Autowired
     private BlogCategoryService categoryService;
@@ -22,7 +22,7 @@ public class BlogSettingWidget {
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
-        return "modules/setting/blog/category-edit";
+        return "modules/admin/blog/category-edit";
     }
     
     public String editPost(Map<String, Object> model,
@@ -32,7 +32,7 @@ public class BlogSettingWidget {
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
         model.put("blogCategories", blogCategories);
         //
-        return "modules/setting/blog/post-edit";
+        return "modules/admin/blog/post-edit";
     }
     
 }

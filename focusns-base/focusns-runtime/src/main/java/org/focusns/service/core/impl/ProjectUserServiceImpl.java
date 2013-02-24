@@ -99,7 +99,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         //
         ProjectFeature settingFeature = new ProjectFeature();
         settingFeature.setLabel("设置");
-        settingFeature.setCode("setting");
+        settingFeature.setCode("admin");
         settingFeature.setLevel(30);
         settingFeature.setProjectId(project.getId());
         //

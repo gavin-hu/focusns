@@ -758,7 +758,7 @@ create procedure createProjectFeature(in _projectId bigint)
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
             values('msg', '私信', 20, true, _projectId);
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
-            values('setting', '设置', 25, true, _projectId);
+            values('admin', '管理', 25, true, _projectId);
     end //
 delimiter ;
 
@@ -794,21 +794,21 @@ create procedure init_db()
         #
         call createProjectCategory('people', '成员', categoryId);
         #
-        insert into tb_project_user(username, password, email)
-            values ('admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@focusns.org');
+        #insert into tb_project_user(username, password, email)
+        #    values ('admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@focusns.org');
 
-        select id into userId from tb_project_user where username = 'admin';
+        #select id into userId from tb_project_user where username = 'admin';
 
-        insert into tb_project (code, title, description, create_at, modify_at, create_by_id, modify_by_id, category_id, private)
-            values ('admin', 'Admin', 'This is admin!', now(), now(), userId, userId, categoryId, true);
+        #insert into tb_project (code, title, description, create_at, modify_at, create_by_id, modify_by_id, category_id, private)
+        #    values ('admin', 'Admin', 'This is admin!', now(), now(), userId, userId, categoryId, true);
 
         # select projectId
-        select id into projectId from tb_project where code = 'admin';
+        #select id into projectId from tb_project where code = 'admin';
         # update user
-        update tb_project_user set project_id = projectId where id = userId;
+        #update tb_project_user set project_id = projectId where id = userId;
 
         # create project features
-        call createProjectFeature(projectId);
+        #call createProjectFeature(projectId);
 
         insert into tb_project_user(username, password, email)
             values ('test', 'e10adc3949ba59abbe56e057f20f883e', 'test@focusns.org');

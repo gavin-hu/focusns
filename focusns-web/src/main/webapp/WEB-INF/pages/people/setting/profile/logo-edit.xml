@@ -1,8 +1,0 @@
-<page extends="/global-project">
-    <position name="leftColumn">
-        <widget target="org.focusns.web.modules.setting.SettingsWidget@menu" />
-    </position>
-	<position name="mainColumn">
-		<widget target="org.focusns.web.modules.setting.ProfileSettingWidget@editLogo" />
-	</position>
-</page>

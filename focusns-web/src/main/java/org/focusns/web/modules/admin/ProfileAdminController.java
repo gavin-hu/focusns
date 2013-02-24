@@ -1,4 +1,4 @@
-package org.focusns.web.modules.setting;
+package org.focusns.web.modules.admin;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +21,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-@RequestMapping("/setting")
-public class ProfileSettingController {
+@RequestMapping("/admin")
+public class ProfileAdminController {
     
     @Autowired
     private ProjectService projectService;

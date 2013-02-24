@@ -3,8 +3,8 @@
         <h2>空间编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="setting-project">
-            <form action="${Request.contextPath}/setting/project/edit" method="post">
+        <div class="admin-project">
+            <form action="${Request.contextPath}/admin/project/edit" method="post">
                 <div>
                     <label>编码</label>
                     <input name="code" value="${Request.project.code}" />

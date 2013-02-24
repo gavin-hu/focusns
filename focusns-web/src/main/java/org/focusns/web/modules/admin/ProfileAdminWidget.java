@@ -1,4 +1,4 @@
-package org.focusns.web.modules.setting;
+package org.focusns.web.modules.admin;
 
 import java.io.File;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class ProfileSettingWidget {
+public class ProfileAdminWidget {
 
     @Autowired
     private ProjectAttributeService attributeService;
@@ -28,11 +28,11 @@ public class ProfileSettingWidget {
         File targetLogo = ApplicationHelper.getInstance().getProjectLogo(project.getId());
         model.put("hasLogo", targetLogo.canRead());
         //
-        return "modules/setting/profile/logo-edit";
+        return "modules/admin/profile/logo-edit";
     }
     
     public String editProject(@Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
-        return "modules/setting/profile/project-edit";
+        return "modules/admin/profile/project-edit";
     }
     
     public String editAttribute(Map<String, Object> model,
@@ -41,7 +41,7 @@ public class ProfileSettingWidget {
         List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);
         //
-        return "modules/setting/profile/attribute-edit";
+        return "modules/admin/profile/attribute-edit";
     }
     
 }

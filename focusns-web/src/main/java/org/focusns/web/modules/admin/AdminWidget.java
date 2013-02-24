@@ -1,4 +1,4 @@
-package org.focusns.web.modules.setting;
+package org.focusns.web.modules.admin;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Widget
-public class SettingsWidget {
+public class AdminWidget {
     
     @Autowired
     private ProjectFeatureService featureService;
@@ -22,12 +22,12 @@ public class SettingsWidget {
         List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());
         model.put("features", features);
         //
-        return "modules/setting/menu";
+        return "modules/admin/menu";
     }
     
     public String summary() {
         //
-        return "modules/setting/summary";
+        return "modules/admin/summary";
     }
      
 }

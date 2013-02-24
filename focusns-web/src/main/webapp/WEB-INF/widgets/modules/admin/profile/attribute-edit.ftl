@@ -3,8 +3,8 @@
         <h2>属性编辑</h2>
     </div>
     <div class="widget-bd">
-        <div class="setting-attribute">
-            <form action="${Request.contextPath}/setting/project/attribute/edit" method="post">
+        <div class="admin-attribute">
+            <form action="${Request.contextPath}/admin/project/attribute/edit" method="post">
                 <span>属性名</span>
                 <input name="name" />
                 <span>属性值</span>
@@ -30,7 +30,7 @@
             <ul>
                 <#list Request.attributes as attribute>
                 <li>
-                <form action="${Request.contextPath}/setting/project/attribute/edit" method="post">
+                <form action="${Request.contextPath}/admin/project/attribute/edit" method="post">
                     <span>属性名</span>
                     <input name="name" value="${attribute.name}" />
                     <span>属性值</span>

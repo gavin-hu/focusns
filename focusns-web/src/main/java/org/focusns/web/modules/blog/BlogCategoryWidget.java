@@ -19,10 +19,12 @@ public class BlogCategoryWidget {
     public String list(Map<String, Object> model,
             @Bind(value="project", scope = Bind.Scope.REQUEST) Project project) {
         //
+    	Long projectId = project.getId();
+    	//
         BlogCategory blogCategory = new BlogCategory();
         blogCategory.setLabel("未分类");
-        blogCategory.setProjectId(project.getId());
-        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
+        blogCategory.setProjectId(projectId);
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(projectId);
         blogCategories.add(0, blogCategory);
         model.put("blogCategories", blogCategories);
         //

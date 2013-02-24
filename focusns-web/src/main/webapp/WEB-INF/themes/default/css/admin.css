@@ -1,73 +1,73 @@
-.setting-blog-category {
+.admin-blog-category {
     padding:10px;
 }
-.setting-blog-category .blog-category-list {
+.admin-blog-category .blog-category-list {
     padding-top:10px;
 }
-.setting-blog-category .blog-category-list ul li {
+.admin-blog-category .blog-category-list ul li {
     padding-bottom:5px;
 }
-.setting-blog-category .blog-category-list ul li.last {
+.admin-blog-category .blog-category-list ul li.last {
     padding-bottom:0;
 }
-.setting-menu {
+.admin-menu {
     padding:10px 0;
 }
-.setting-menu h3 {
+.admin-menu h3 {
     padding-left: 10px;
     font-weight: bold;
 }
-.setting-menu ul {
+.admin-menu ul {
     margin-bottom: 5px;
 }
-.setting-menu ul li {
+.admin-menu ul li {
     padding:1px 0 1px 20px;
 }
 
-.setting-logo {
+.admin-logo {
     padding:10px;
 }
-.setting-logo .cropper-wrapper img {
+.admin-logo .cropper-wrapper img {
     max-width:100%;
 }
-.setting-project {
+.admin-project {
     padding:10px;
 }
-.setting-project label {
+.admin-project label {
     display: block;
     font-weight: bold;
 }
-.setting-project textarea {
+.admin-project textarea {
     width: 60%;
 }
-.setting-project div {
+.admin-project div {
     margin-bottom: 5px;
 }
-.setting-attribute {
+.admin-attribute {
     padding:10px;
 }
-.setting-attribute ul {
+.admin-attribute ul {
     margin-top: 20px;
 }
-.setting-post {
+.admin-post {
     padding:10px;
 }
-.setting-post form div {
+.admin-post form div {
     padding-bottom: 5px;
 }
-.setting-post label {
+.admin-post label {
     display: block;
     font-weight: bold;
 }
-.setting-post div.summary textarea {
+.admin-post div.summary textarea {
     width: 98.5%;
     height: 100px;
 }
-.setting-post div.content textarea {
+.admin-post div.content textarea {
     width: 98.5%;
     height: 400px;
 }
 
-.setting-category {
+.admin-category {
     padding: 10px;
 }
