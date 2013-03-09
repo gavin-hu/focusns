@@ -43,7 +43,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 @Controller
 public class Portal {
@@ -60,7 +62,8 @@ public class Portal {
     private PageConfigFactory pageConfigFactory;
 
     @RequestMapping("/portal")
-	public String doRender(@RequestParam(required = false) String projectCode,
+	public String doRender(@RequestParam(required = false) String mode,
+                           @RequestParam(required = false) String projectCode,
                            @RequestParam String path, WebRequest webRequest) throws Exception {
         //
         String categoryCode = null;
@@ -91,7 +94,7 @@ public class Portal {
             webRequest.setAttribute(ProjectUser.KEY, projectUser, WebRequest.SCOPE_REQUEST);
         }
         //
-        PageConfig pageConfig = resolvePage(categoryCode, path);
+        PageConfig pageConfig = resolvePage(path, mode, categoryCode);
         Assert.notNull(pageConfig, String.format("Page %s not found!", path));
         //
         processPageConfig(pageConfig, webRequest);
@@ -101,8 +104,16 @@ public class Portal {
         return "viewName";
 	}
 
-    protected PageConfig resolvePage(String categoryCode, String pagePath) throws Exception {
-        return pageConfigFactory.findPage(categoryCode, pagePath);
+    protected PageConfig resolvePage(String pagePath, String mode, String category) throws Exception {
+        Map<String, String> paramsMap = new HashMap<String, String>();
+        if(StringUtils.hasText(mode)) {
+            paramsMap.put("mode", mode);
+        }
+        if(StringUtils.hasText(category)) {
+            paramsMap.put("category", category);
+        }
+        //
+        return pageConfigFactory.findPage(pagePath, paramsMap);
     }
 
     protected void processPageConfig(PageConfig pageConfig, WebRequest webRequest) {

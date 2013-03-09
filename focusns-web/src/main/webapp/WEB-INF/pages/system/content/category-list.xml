@@ -1,5 +1,0 @@
-<page extends="/system/common">
-	<position name="main">
-		<widget target="org.focusns.web.system.content.CategoryWidget@doList" />
-	</position>
-</page>

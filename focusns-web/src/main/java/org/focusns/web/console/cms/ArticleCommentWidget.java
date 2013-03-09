@@ -1,8 +1,8 @@
-package org.focusns.web.portal.config;
+package org.focusns.web.console.cms;
 
 /*
  * #%L
- * FocusSNS Runtime
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -22,11 +22,17 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
+@Controller
+@RequestMapping("/console/cms")
+public class ArticleCommentWidget {
 
-public interface PageConfigFactory {
+    @RequestMapping("/comment-list")
+    public String doList() {
 
-    PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception;
-	
+        return "console/cms/comment-list";
+    }
+
 }

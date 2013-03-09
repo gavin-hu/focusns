@@ -60,6 +60,10 @@ public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements 
     public List<M> select(M model) {
         return getSqlSession().selectList(NAMESPACE.concat(".selectList"), model);
     }
+
+    public List<M> selectList(String selectId, Object parameter) {
+        return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
+    }
     
     public Page<M> fetchPage(String selectId, Page<M> page, Map<String, Object> model) {
         //

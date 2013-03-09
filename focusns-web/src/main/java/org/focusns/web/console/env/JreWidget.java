@@ -1,8 +1,8 @@
-package org.focusns.web.portal.config;
+package org.focusns.web.console.env;
 
 /*
  * #%L
- * FocusSNS Runtime
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -23,10 +23,25 @@ package org.focusns.web.portal.config;
  */
 
 
-import java.util.Map;
+import org.focusns.model.env.Environment;
+import org.focusns.service.env.EnvironmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-public interface PageConfigFactory {
+@Controller
+@RequestMapping("/console/env")
+public class JreWidget {
 
-    PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception;
-	
+    @Autowired
+    private EnvironmentService environmentService;
+
+    @RequestMapping("/jre-view")
+    public String jre(Model model) {
+        Environment envJava = environmentService.lookupEnvironment(Environment.Type.JRE);
+        model.addAttribute("envJava", envJava);
+        return "console/env/jre-view";
+    }
+
 }

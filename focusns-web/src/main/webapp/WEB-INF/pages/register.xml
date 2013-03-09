@@ -1,6 +1,0 @@
-<page extends="/global">
-    <position name="mainColumn">
-        <widget target="org.focusns.web.site.SiteWidget@exception" />
-        <widget target="org.focusns.web.site.SiteWidget@register" />
-    </position>
-</page>

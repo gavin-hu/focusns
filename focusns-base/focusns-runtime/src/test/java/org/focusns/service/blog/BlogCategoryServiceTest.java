@@ -65,5 +65,21 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
             blogCategoryService.removeBlogCategory(blogCategory);
         }
     }
-    
+
+    @Test
+    public void testCreateBlogCategoryNoProject() {
+        BlogCategory blogCategory = new BlogCategory();
+        blogCategory.setCreateById(1);
+        blogCategory.setCreateAt(new Date());
+        blogCategory.setLabel("News");
+        blogCategoryService.createBlogCategory(blogCategory);
+
+    }
+
+    @Test
+    public void testGetBlogCategoriesNoProject() {
+         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories();
+        System.out.println(blogCategories.size());
+    }
+
 }

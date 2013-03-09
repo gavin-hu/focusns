@@ -28,7 +28,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"/applicationContext-service.xml", "/applicationContext-dao.xml"})
+@ContextConfiguration(locations={"/applicationContext-service.xml", "/applicationContext-dao-test.xml"})
 public abstract class AbstractServiceTest {
     
 }

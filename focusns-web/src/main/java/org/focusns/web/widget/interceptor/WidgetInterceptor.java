@@ -82,6 +82,11 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         //
         String redirect = request.getParameter("redirect");
         if(StringUtils.hasText(redirect)) {
+            String contextPath = request.getContextPath();
+            if(contextPath.length()>1) {
+                redirect = redirect.substring(contextPath.length());
+            }
+            //
             modelAndView.setViewName("redirect:".concat(redirect));
         }
         //

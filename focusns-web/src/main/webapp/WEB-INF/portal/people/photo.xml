@@ -1,5 +1,0 @@
-<page extends="/global-project">
-	<position name="main">
-		<widget target="org.focusns.web.modules.profile.ProjectWidget@view" />
-	</position>
-</page>

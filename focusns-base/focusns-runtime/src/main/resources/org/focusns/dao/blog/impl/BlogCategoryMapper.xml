@@ -14,16 +14,32 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_blog_category (label, create_at, project_id, create_by_id)
-		values (#{label}, #{createAt}, #{projectId}, #{createById})
+        <choose>
+            <when test="projectId > 0">
+                insert into tb_blog_category (label, create_at, project_id, create_by_id)
+                values (#{label}, #{createAt}, #{projectId}, #{createById})
+            </when>
+            <otherwise>
+                insert into tb_blog_category (label, create_at, create_by_id)
+                values (#{label}, #{createAt}, #{createById})
+            </otherwise>
+        </choose>
+
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_blog_category where id = #{id}
 	</select>
 
-	<select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-		select * from tb_blog_category where project_id = #{projectId}
+	<select id="selectByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        <choose>
+            <when test="projectId > 0">
+                select * from tb_blog_category where project_id = #{projectId}
+            </when>
+            <otherwise>
+                select * from tb_blog_category where project_id is null
+            </otherwise>
+        </choose>
 	</select>
 	
 	<update id="update" parameterType="org.focusns.model.blog.BlogCategory">

@@ -1,8 +1,8 @@
-package org.focusns.web.portal.config;
+package org.focusns.web.console.cms;
 
 /*
  * #%L
- * FocusSNS Runtime
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -22,11 +22,21 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Map;
+@Controller
+@RequestMapping("/console/cms")
+public class ArticleWidget {
 
-public interface PageConfigFactory {
+    @RequestMapping("/article-list")
+    public String doList() {
+        return "console/cms/article-list";
+    }
 
-    PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception;
-	
+    @RequestMapping("/article-edit")
+    public String doEdit() {
+        return "console/cms/article-edit";
+    }
+
 }

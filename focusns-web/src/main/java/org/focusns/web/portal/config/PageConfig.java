@@ -32,6 +32,7 @@ import java.util.Map;
 public class PageConfig {
 
     private String path;
+    private String mode;
     private String category = "default";
 
 	private Map<String, List<WidgetConfig>> positionMap = new HashMap<String, List<WidgetConfig>>();
@@ -45,6 +46,14 @@ public class PageConfig {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
     }
 
     public String getCategory() {

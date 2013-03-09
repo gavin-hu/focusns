@@ -29,12 +29,18 @@ import java.util.List;
 
 public interface BlogCategoryService {
     
-    void createBlogCategory(BlogCategory tag);
+    void createBlogCategory(BlogCategory category);
     
-    void modifyBlogCategory(BlogCategory tag);
+    void modifyBlogCategory(BlogCategory category);
     
-    void removeBlogCategory(BlogCategory tag);
+    void removeBlogCategory(BlogCategory category);
     
     List<BlogCategory> getBlogCategories(long projectId);
-    
+
+    /**
+     * Get cms categories
+     * @return
+     */
+    List<BlogCategory> getBlogCategories();
+
 }

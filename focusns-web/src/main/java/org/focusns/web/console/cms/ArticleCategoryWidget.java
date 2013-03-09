@@ -1,8 +1,8 @@
-package org.focusns.service.blog.impl;
+package org.focusns.web.console.cms;
 
 /*
  * #%L
- * FocusSNS Runtime
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -22,42 +22,39 @@ package org.focusns.service.blog.impl;
  * #L%
  */
 
-
-import org.focusns.dao.blog.BlogCategoryDao;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.service.blog.BlogCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Service
-@Transactional
-public class BlogCategoryServiceImpl implements BlogCategoryService {
+@Controller
+@RequestMapping("/console/cms")
+public class ArticleCategoryWidget {
 
     @Autowired
-    private BlogCategoryDao categoryDao;
-    
-    public void createBlogCategory(BlogCategory tag) {
-        categoryDao.insert(tag);
+    private BlogCategoryService blogCategoryService;
+
+    @RequestMapping("/category-list")
+    public String doList(Model model) {
+        //
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories();
+        model.addAttribute("blogCategories", blogCategories);
+        //
+        return "console/cms/category-list";
     }
 
-    public void modifyBlogCategory(BlogCategory tag) {
-        categoryDao.update(tag);
+    @RequestMapping("/category-edit")
+    public String doEdit() {
+        return "console/cms/category-edit";
     }
 
-    public void removeBlogCategory(BlogCategory tag) {
-        categoryDao.delete(tag.getId());
-    }
+    @RequestMapping("/category-modify")
+    public void modify() {
 
-    public List<BlogCategory> getBlogCategories(long projectId) {
-        return categoryDao.selectByProjectId(projectId);
-    }
-
-    @Override
-    public List<BlogCategory> getBlogCategories() {
-        return categoryDao.selectByProjectId(0);
     }
 
 }

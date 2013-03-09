@@ -69,7 +69,10 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
         for(Resource resource : resources) {
             List<PageConfig> pageConfigList = parse(getRootElement(resource));
             for(PageConfig pageConfig : pageConfigList) {
-                String key = generateKey(pageConfig.getCategory(), pageConfig.getPath());
+                Map<String, String> paramsMap = new HashMap<String, String>();
+                paramsMap.put("mode", pageConfig.getMode());
+                paramsMap.put("category", pageConfig.getCategory());
+                String key = generateKey(pageConfig.getPath(), paramsMap);
                 pageConfigMap.put(key, pageConfig);
             }
         }
@@ -90,6 +93,7 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
             //
             PageConfig pageConfig = new PageConfig();
             pageConfig.setPath(pageEle.getAttribute("path"));
+            pageConfig.setMode(pageEle.getAttribute("mode"));
             pageConfig.setCategory(pageEle.getAttribute("category"));
             //
             List<Element> positionEles = DomUtils.getChildElementsByTagName(pageEle, "position");

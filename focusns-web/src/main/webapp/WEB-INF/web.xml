@@ -88,4 +88,13 @@
         <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>503</error-code>
+        <location>/error503.jsp</location>
+    </error-page>
+
 </web-app>

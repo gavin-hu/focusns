@@ -1,8 +1,8 @@
-package org.focusns.web.portal.config;
+package org.focusns.web.console;
 
 /*
  * #%L
- * FocusSNS Runtime
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -23,10 +23,17 @@ package org.focusns.web.portal.config;
  */
 
 
-import java.util.Map;
 
-public interface PageConfigFactory {
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-    PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception;
-	
+@Controller
+@RequestMapping("/console")
+public class ConsoleMenuWidget {
+
+    @RequestMapping("/menu-list")
+    public String doList() {
+        return "console/menu-list";
+    }
+
 }

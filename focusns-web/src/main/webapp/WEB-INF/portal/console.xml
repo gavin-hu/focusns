@@ -1,5 +1,156 @@
-<page>
-    <position name="mainColumn">
-        <widget target="org.focusns.web.console.ConsoleWidget@login" />
-    </position>
-</page>
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page path="/console">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <!-- Console Site -->
+    <page path="/console/site" mode="menu-list">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/site/menu-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/site" mode="menu-edit">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/site/menu-edit" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <!-- CMS Console -->
+    <page path="/console/cms" mode="category">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/cms/category-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/cms" mode="article">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/cms/article-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/cms" mode="comment">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/cms/comment-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <!-- Console Environment -->
+    <page path="/console/environment" mode="db">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/env/db-view" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/environment" mode="jre">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/env/jre-view" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/environment" mode="os">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/env/os-view" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+</pages>

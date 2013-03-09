@@ -1,5 +1,0 @@
-<page>
-    <position name="mainColumn">
-        <widget target="org.focusns.web.console.ConsoleWidget@login" />
-    </position>
-</page>

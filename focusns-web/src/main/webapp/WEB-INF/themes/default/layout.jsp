@@ -30,7 +30,7 @@
         <div id="hd" class="yui3-g">
             <div class="yui3-u-1">
                 <div class="area">
-                    <a href="/">
+                    <a href='<c:url value="/" />'>
                         <img id="logo" />
                     </a>
                     <c:if test="${userMenuExist}">

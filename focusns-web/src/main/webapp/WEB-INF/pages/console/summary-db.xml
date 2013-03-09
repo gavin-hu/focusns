@@ -1,5 +1,0 @@
-<page extends="/global-console">
-	<position name="mainColumn">
-		<widget target="org.focusns.web.console.SummaryWidget@db" />
-	</position>
-</page>

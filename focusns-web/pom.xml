@@ -56,7 +56,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <webApp>
-                        <contextPath>/</contextPath>
+                        <contextPath>/focusns</contextPath>
                     </webApp>
                     <stopKey>focusns</stopKey>
                     <stopPort>9966</stopPort>
