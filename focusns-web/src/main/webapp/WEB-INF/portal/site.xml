@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page path="/login">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/site/login-form" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/register">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/site/register-form" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+</pages>

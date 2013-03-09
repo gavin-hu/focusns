@@ -3,7 +3,7 @@
  *
  * mmSWFUpload 1.0: Flash upload dialog - http://profandesign.se/swfupload/,  http://www.vinterwebb.se/
  *
- * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilzén and Mammon Media and is released under the MIT License:
+ * SWFUpload is (c) 2006-2007 Lars Huring, Olov Nilzï¿½n and Mammon Media and is released under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  *
  * SWFUpload 2 is (c) 2007-2008 Jake Roberts and is released under the MIT License:
@@ -305,7 +305,7 @@ SWFUpload.prototype.buildParamString = function () {
 	return paramStringPairs.join("&amp;");
 };
 
-// Public: Used to remove a SWFUpload instance from the page. This method strives to remove
+// Public: Used to remove a SWFUpload instance from the portal. This method strives to remove
 // all references to the SWF, and other objects so memory is properly freed.
 // Returns true if everything was destroyed. Returns a false if a failure occurs leaving SWFUpload in an inconsistant state.
 // Credits: Major improvements provided by steffen
@@ -329,7 +329,7 @@ SWFUpload.prototype.destroy = function () {
 				} catch (ex1) {}
 			}
 
-			// Remove the Movie Element from the page
+			// Remove the Movie Element from the portal
 			try {
 				movieElement.parentNode.removeChild(movieElement);
 			} catch (ex) {}
@@ -817,7 +817,7 @@ SWFUpload.prototype.cleanUp = function (movieElement) {
 	
 	}
 
-	// Fix Flashes own cleanup code so if the SWFMovie was removed from the page
+	// Fix Flashes own cleanup code so if the SWFMovie was removed from the portal
 	// it doesn't display errors.
 	window["__flash__removeCallback"] = function (instance, name) {
 		try {
@@ -913,7 +913,7 @@ SWFUpload.prototype.debug = function (message) {
 
 /* **********************************
 	Debug Console
-	The debug console is a self contained, in page location
+	The debug console is a self contained, in portal location
 	for debug message to be sent.  The Debug Console adds
 	itself to the body if necessary.
 

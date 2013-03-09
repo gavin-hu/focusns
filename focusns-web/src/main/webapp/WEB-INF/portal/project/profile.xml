@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page path="/profile" category="people">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/project/history-form">
+                <rules>
+                    <rule>projectUserRequired</rule>
+                </rules>
+            </widget>
+            <widget target="/project/history-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+</pages>

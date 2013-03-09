@@ -1,5 +1,28 @@
 package org.focusns.service.auth.impl;
 
+/*
+ * #%L
+ * FocusSNS Runtime
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
+
+
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
@@ -20,7 +43,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         ProjectUser dbUser = projectUserDao.selectByUsername(user.getUsername());
         //
-        if(!md5Password.equals(dbUser.getPassword())) {
+        if(dbUser==null || !md5Password.equals(dbUser.getPassword())) {
             throw new AuthenticationException("Username or password miss matched!");
         }
     }

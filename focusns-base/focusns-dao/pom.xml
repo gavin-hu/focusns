@@ -10,6 +10,15 @@
     <artifactId>focusns-dao</artifactId>
     <name>FocusSNS Dao</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.focusns</groupId>

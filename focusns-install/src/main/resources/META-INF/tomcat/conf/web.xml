@@ -138,7 +138,7 @@
 -->
 
 
-  <!-- The JSP page compiler and execution servlet, which is the mechanism  -->
+  <!-- The JSP portal compiler and execution servlet, which is the mechanism  -->
   <!-- used by Tomcat to support JSP pages.  Traditionally, this servlet    -->
   <!-- is mapped to the URL pattern "*.jsp".  This servlet supports the     -->
   <!-- following initialization parameters (default values are in square    -->
@@ -147,7 +147,7 @@
   <!--   checkInterval       If development is false and checkInterval is   -->
   <!--                       greater than zero, background compilations are -->
   <!--                       enabled. checkInterval is the time in seconds  -->
-  <!--                       between checks to see if a JSP page (and its   -->
+  <!--                       between checks to see if a JSP portal (and its   -->
   <!--                       dependent files) needs to  be recompiled. [0]  -->
   <!--                                                                      -->
   <!--   classdebuginfo      Should the class file be compiled with         -->
@@ -193,7 +193,7 @@
   <!--                       not a valid bean class?  [true]                -->
   <!--                                                                      -->
   <!--   fork                Tell Ant to fork compiles of JSP pages so that -->
-  <!--                       a separate JVM is used for JSP page compiles   -->
+  <!--                       a separate JVM is used for JSP portal compiles   -->
   <!--                       from the one Tomcat is running in. [true]      -->
   <!--                                                                      -->
   <!--   genStrAsCharArray   Should text strings be generated as char       -->
@@ -208,7 +208,7 @@
   <!--                       source files. [UTF8]                           -->
   <!--                                                                      -->
   <!--   keepgenerated       Should we keep the generated Java source code  -->
-  <!--                       for each page instead of deleting it? [true]   -->
+  <!--                       for each portal instead of deleting it? [true]   -->
   <!--                                                                      -->
   <!--   mappedfile          Should we generate static content with one     -->
   <!--                       print statement per input line, to ease        -->
@@ -246,7 +246,7 @@
   <!--                                                                      -->
   <!-- If you wish to use Jikes to compile JSP pages:                       -->
   <!--   Please see the "Using Jikes" section of the Jasper-HowTo           -->
-  <!--   page in the Tomcat documentation.                                  -->
+  <!--   portal in the Tomcat documentation.                                  -->
 
     <servlet>
         <servlet-name>jsp</servlet-name>
@@ -278,7 +278,7 @@
   <!--   debug               Debugging detail level for messages logged     -->
   <!--                       by this servlet.  [0]                          -->
   <!--                                                                      -->
-  <!--   expires             The number of seconds before a page with SSI   -->
+  <!--   expires             The number of seconds before a portal with SSI   -->
   <!--                       directives will expire.  [No default]          -->
   <!--                                                                      -->
   <!--   isVirtualWebappRelative                                            -->
@@ -290,7 +290,7 @@
   <!--                       one is not available from the resource.        -->
   <!--                       [Platform default]                             -->
   <!--                                                                      -->
-  <!--   outputEncoding      The encoding to use for the page that results  -->
+  <!--   outputEncoding      The encoding to use for the portal that results  -->
   <!--                       from the SSI processing. [UTF-8]               -->
   <!--                                                                      -->
   <!--   allowExec           Is use of the exec command enabled? [false]    -->
@@ -471,7 +471,7 @@
   <!--   debug               Debugging detail level for messages logged     -->
   <!--                       by this servlet.  [0]                          -->
   <!--                                                                      -->
-  <!--   expires             The number of seconds before a page with SSI   -->
+  <!--   expires             The number of seconds before a portal with SSI   -->
   <!--                       directives will expire.  [No default]          -->
   <!--                                                                      -->
   <!--   isVirtualWebappRelative                                            -->

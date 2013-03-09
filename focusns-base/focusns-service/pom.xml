@@ -9,6 +9,15 @@
     <artifactId>focusns-service</artifactId>
     <name>FocusSNS Service</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.focusns</groupId>

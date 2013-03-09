@@ -1,7 +1,27 @@
 package org.focusns.web.modules.profile;
 
-import java.util.List;
-import java.util.Map;
+/*
+ * #%L
+ * FocusSNS Web
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
+
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
@@ -9,13 +29,13 @@ import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectLinkService;
-import org.focusns.web.widget.annotation.BeforeFilter;
-import org.focusns.web.widget.annotation.Bind;
-import org.focusns.web.widget.annotation.Widget;
-import org.focusns.web.widget.filter.NotMyProjectFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-@Widget
+import java.util.List;
+import java.util.Map;
+
+@Controller
 public class ProjectWidget {
     
     @Autowired
@@ -24,7 +44,7 @@ public class ProjectWidget {
     private ProjectAttributeService projectAttributeService;
     
 	public String view(Map<String, Object> model,
-            @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
+            Project project) {
         //
         List<ProjectAttribute> attributes = projectAttributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);
@@ -33,15 +53,14 @@ public class ProjectWidget {
     }
 
     public String status(Map<String, Object> model,
-             @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
+             Project project) {
         //
         return "modules/profile/project-status";
     }
 
-    @BeforeFilter(NotMyProjectFilter.class)
     public String action(Map<String, Object> model,
-                         @Bind(value="user", scope = Bind.Scope.SESSION) ProjectUser user,
-                         @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
+                         ProjectUser user,
+                         Project project) {
         //
         ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
         model.put("projectLink", projectLink);

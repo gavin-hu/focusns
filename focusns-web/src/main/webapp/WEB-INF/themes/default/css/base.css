@@ -7,12 +7,12 @@ body {
 #right-column{
     min-height:500px;
 }
-.copyright {
+#copyright {
 	padding-bottom:20px;
 	text-align:center;
 	display:block;
 }
-.copyright strong span {
+#copyright strong span {
 	color:#045A8B;
 	font-weight:bold;
 }
@@ -96,26 +96,26 @@ body {
 	right:0;
 	top:0;
 }
-#project-menu {
+#sub-menu {
 }
-#project-menu ul.menu {
+#sub-menu ul.menu {
 	list-style-type:none;
 }
-#project-menu .subbar-in {
+#sub-menu .subbar-in {
 	padding: 10px 20px 20px 20px;
 	border-bottom:1px solid #DDDDDD;
 }
-#project-menu .subbar ul.menu li{
+#sub-menu .subbar ul.menu li{
 	float: left;
 	padding: 3px 10px 0 10px;
 	margin-right:5px;
 	border:1px solid #DDDDDD;
 	background-color:#FAFAFA;
 }
-#project-menu .subbar ul.menu li a {
+#sub-menu .subbar ul.menu li a {
 	text-decoration:none;
 }
-#project-menu .subbar ul.menu li.active {
+#sub-menu .subbar ul.menu li.active {
 	background-color:#FFFFFF;
 }
 #left-column {

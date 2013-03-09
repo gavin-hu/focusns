@@ -24,8 +24,11 @@
                         <img id="logo" />
                     </a>
                     <@utils.position name="userMenu" >
-                        <div id="user-menu">${userMenu}</div>
+                        <div id="user-menu">
+                            <@include_page path="/widget/site/menu-main"/>
+                        </div>
                     </@utils.position>
+                    <@include_page path="/site/menu-main"/>
                 </div>
                 <@utils.position name="mainMenu" >
                 <div id="main-menu">
@@ -35,7 +38,7 @@
                 </div>
                 </@utils.position>
                 <@utils.position name="projectMenu">
-                <div id="project-menu">
+                <div id="sub-menu">
                     <div class="subbar">
                         <div class="subbar-in">${projectMenu}</div>
                     </div>

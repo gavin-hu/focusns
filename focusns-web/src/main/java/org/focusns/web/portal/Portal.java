@@ -1,125 +1,143 @@
 package org.focusns.web.portal;
 
-import java.util.Map;
+/*
+ * #%L
+ * FocusSNS Web
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.helper.UrlTemplateHelper;
-import org.focusns.web.page.config.PageConfigException;
-import org.focusns.web.page.render.PageRender;
+import org.focusns.web.portal.config.PageConfig;
+import org.focusns.web.portal.config.PageConfigFactory;
+import org.focusns.web.widget.config.WidgetConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UrlPathHelper;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.Iterator;
 
 @Controller
 public class Portal {
 	
     private static final Log log = LogFactory.getLog(Portal.class);
     
-	private static final String[] uriPatterns = new String[]{
-		"^/{categoryCode}$",
-		"^/{projectCode}/{featureCode}$",
-        "^/{projectCode}/{featureCode}/{more}$"
-	};
-	
-	private UrlPathHelper urlPathHelper = new UrlPathHelper();
-	
-	private UrlTemplateHelper urlTemplateHelper = new UrlTemplateHelper(uriPatterns);
-	@Autowired
-	private PageRender pageRender;
 	@Autowired
 	private ProjectService projectService;
-	@Autowired
-	private ProjectFeatureService featureService;
+    @Autowired
+    private ProjectFeatureService featureService;
 	@Autowired
 	private ProjectCategoryService categoryService;
-	
-	@RequestMapping("/portal")
-	public String doRender(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String pagePath = resolvePagePath(request);
-		if( pageRender.matches(pagePath)) {
-			pageRender.doRender(request, response);
-		}
-		//
-		return "viewName";
-	}
-	
-	protected String resolvePagePath(HttpServletRequest request) {
-        request.getSession().removeAttribute("category");
-        request.getSession().removeAttribute("project");
-        request.getSession().removeAttribute("feature");
+    @Autowired
+    private PageConfigFactory pageConfigFactory;
+
+    @RequestMapping("/portal")
+	public String doRender(@RequestParam(required = false) String projectCode,
+                           @RequestParam String path, WebRequest webRequest) throws Exception {
         //
-        String contextPath = urlPathHelper.getOriginatingContextPath(request);
-		String requestUri = urlPathHelper.getOriginatingRequestUri(request);
-        String requestPath = requestUri.substring(contextPath.length());
-		if("/".equals(requestPath) || "".equals(requestPath)) {
-			requestPath = "/index";
-		}
-		//
-		Map<String, String> pathVariables = urlTemplateHelper.match(requestPath);
-		if(pathVariables.containsKey("categoryCode")) {
-			String categoryCode = pathVariables.get("categoryCode");
-			//
-			ProjectCategory category = categoryService.getCategory(categoryCode);
-			if(category!=null) {
-				request.getSession().setAttribute("category", category);
-                request.setAttribute("category", category);
-				return "/".concat(categoryCode);
-			}
-		}
-		//
-		if(pathVariables.containsKey("projectCode") && pathVariables.containsKey("featureCode")) {
-			String projectCode = pathVariables.get("projectCode");
-			String featureCode = pathVariables.get("featureCode");
-            String more = pathVariables.get("more");
-            //
-			Project project = projectService.getProject(projectCode);
-			if(project!=null) {
-				ProjectCategory category = categoryService.getCategory(project.getCategoryId());
-				ProjectFeature feature = featureService.getProjectFeature(project.getId(), featureCode);
-				if(category!=null && feature!=null) {
-					request.getSession().setAttribute("project", project);
-					request.getSession().setAttribute("category", category);
-					request.getSession().setAttribute("feature", feature);
-                    request.setAttribute("project", project);
-					request.setAttribute("category", category);
-					request.setAttribute("feature", feature);
-                    //
-                    if(StringUtils.hasText(more)) {
-                        return "/" + category.getCode() + "/" + feature.getCode() + "/" + more;
-                    }
-					//
-					return "/" + category.getCode() + "/" + feature.getCode();
-				}
-			}
-		}
-		//
-		return requestPath;
+        String categoryCode = null;
+        // export project
+        if(StringUtils.hasText(projectCode)) {
+            Project project = projectService.getProject(projectCode);
+            if(project!=null) {
+                ProjectCategory projectCategory = categoryService.getCategory(project.getCategoryId());
+                categoryCode = projectCategory.getCode();
+                //
+                webRequest.setAttribute("project", project, WebRequest.SCOPE_REQUEST);
+                webRequest.setAttribute(Project.KEY, project, WebRequest.SCOPE_REQUEST);
+                webRequest.setAttribute("projectCategory", projectCategory, WebRequest.SCOPE_REQUEST);
+                webRequest.setAttribute(ProjectCategory.KEY, projectCategory, WebRequest.SCOPE_REQUEST);
+                // export feature
+                String featureCode = webRequest.getParameter("featureCode");
+                if(StringUtils.hasText(featureCode)) {
+                    ProjectFeature projectFeature = featureService.getProjectFeature(project.getId(), featureCode);
+                    webRequest.setAttribute("projectFeature", projectFeature, WebRequest.SCOPE_REQUEST);
+                    webRequest.setAttribute(ProjectFeature.KEY, projectFeature, WebRequest.SCOPE_REQUEST);
+                }
+            }
+        }
+        // export ProjectUser
+        ProjectUser projectUser = (ProjectUser) webRequest.getAttribute(ProjectUser.KEY, WebRequest.SCOPE_SESSION);
+        if(projectUser!=null) {
+            webRequest.setAttribute("user", projectUser, WebRequest.SCOPE_REQUEST);
+            webRequest.setAttribute(ProjectUser.KEY, projectUser, WebRequest.SCOPE_REQUEST);
+        }
+        //
+        PageConfig pageConfig = resolvePage(categoryCode, path);
+        Assert.notNull(pageConfig, String.format("Page %s not found!", path));
+        //
+        processPageConfig(pageConfig, webRequest);
+        //
+        webRequest.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
+        //
+        return "viewName";
 	}
 
-    @ExceptionHandler(PageConfigException.class)
-    public ModelAndView handlePageConfigException(PageConfigException e) {
-        //
-        log.warn(e.getMessage(), e);
-        //
-        /*Map htmlMeta = new HashMap();
-        htmlMeta.put("http-equiv", "refresh");
-        htmlMeta.put("content", "3, /login");*/
-        //
-        return new ModelAndView("redirect:/login");
+    protected PageConfig resolvePage(String categoryCode, String pagePath) throws Exception {
+        return pageConfigFactory.findPage(categoryCode, pagePath);
     }
-    
+
+    protected void processPageConfig(PageConfig pageConfig, WebRequest webRequest) {
+        for(String position : pageConfig.getWidgetConfigMap().keySet()) {
+            Iterator<WidgetConfig> iter = pageConfig.getWidgetConfigList(position).iterator();
+            //
+
+            while (iter.hasNext()) {
+                WidgetConfig widgetConfig = iter.next();
+                //
+                boolean needRemove = false;
+                //
+                if(!processRules(widgetConfig, webRequest)) {
+                    needRemove = true;
+                }
+                //
+                if(needRemove) {
+                    iter.remove();
+                }
+            }
+        }
+    }
+
+    protected boolean processRules(WidgetConfig widgetConfig, WebRequest webRequest) {
+        //
+        ProjectUser projectUser = (ProjectUser) webRequest
+                .getAttribute(ProjectUser.KEY, WebRequest.SCOPE_SESSION);
+        //
+        for(String rule : widgetConfig.getRules()) {
+            if("projectUserRequired".equals(rule)) {
+                return projectUser!=null;
+            }
+        }
+        //
+        return true;
+    }
+
 }

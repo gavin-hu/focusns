@@ -1,17 +1,39 @@
 package org.focusns.web.modules.msg;
 
-import java.util.Map;
+/*
+ * #%L
+ * FocusSNS Web
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
+
 
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.model.msg.Message;
 import org.focusns.service.msg.MessageService;
-import org.focusns.web.widget.annotation.Bind;
-import org.focusns.web.widget.annotation.Widget;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-@Widget
+import java.util.Map;
+
+@Controller
 public class MessageWidget {
 
     @Autowired
@@ -32,12 +54,12 @@ public class MessageWidget {
         return "modules/msg/message-box";
     }
 
-    public String list(Map<String, Object> model, @Bind(value="box") String box,
-                       @Bind(value="project", scope= Bind.Scope.SESSION) Project project) {
+    public String list(Map<String, Object> model, String box,
+                       Project project) {
         //
         Page<Message> page = new Page<Message>(10);
         page = messageService.fetchPageByBox(page, box, project.getId());
-        model.put("page", page);
+        model.put("portal", page);
         //
         return "modules/msg/message-list";
     }
@@ -48,8 +70,8 @@ public class MessageWidget {
     }
 
     public String edit(Map<String, Object> model,
-                       @Bind(value="user", scope= Bind.Scope.SESSION) ProjectUser user,
-                       @Bind(value="project", scope= Bind.Scope.SESSION) Project project) {
+                       ProjectUser user,
+                       Project project) {
         //
         Message message = new Message();
         message.setCreateById(user.getId());

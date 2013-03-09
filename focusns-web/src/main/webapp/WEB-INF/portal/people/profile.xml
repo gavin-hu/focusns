@@ -1,0 +1,18 @@
+<page extends="/global-project">
+    <position name="leftColumn">
+        <widget target="org.focusns.web.modules.profile.ProjectLinkWidget@list">
+            <preference>
+                <limit>4</limit>
+            </preference>
+        </widget>
+    </position>
+    <position name="mainColumn">
+		<widget target="org.focusns.web.modules.profile.ProjectWidget@view" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistoryWidget@input" />
+        <widget target="org.focusns.web.modules.profile.ProjectHistoryWidget@output" />
+	</position>
+    <position name="rightColumn">
+        <widget target="org.focusns.web.modules.profile.ProjectWidget@action" />
+        <widget target="org.focusns.web.modules.profile.ProjectWidget@status" />
+    </position>
+</page>

@@ -1,30 +1,47 @@
 package org.focusns.web.modules.profile;
 
-import java.util.Map;
+/*
+ * #%L
+ * FocusSNS Web
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
+
 
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectLinkService;
-import org.focusns.web.widget.annotation.AfterFilter;
-import org.focusns.web.widget.annotation.BeforeFilter;
-import org.focusns.web.widget.annotation.Bind;
-import org.focusns.web.widget.annotation.Widget;
-import org.focusns.web.widget.filter.NotMyProjectFilter;
-import org.focusns.web.widget.filter.PageRequiredFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
-@Widget
+import java.util.Map;
+
+@Controller
 public class ProjectLinkWidget {
     
     @Autowired
     private ProjectLinkService projectLinkService;
     
-    @BeforeFilter(NotMyProjectFilter.class)
     public String action(Map<String, Object> model,
-                         @Bind(value="user", scope = Bind.Scope.SESSION) ProjectUser user,
-                         @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
+                         ProjectUser user,
+                         Project project) {
         //
         ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
         model.put("projectLink", projectLink);
@@ -34,14 +51,13 @@ public class ProjectLinkWidget {
         return "modules/profile/link-action";
     }
 
-    @AfterFilter(PageRequiredFilter.class)
     public String list(Map<String, Object> model,
-                       @Bind(value="limit", scope = Bind.Scope.PREFERENCE) int limit,
-                       @Bind(value="project", scope = Bind.Scope.SESSION) Project project) {
+                       int limit,
+                       Project project) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
-        model.put("page", page);
+        model.put("portal", page);
         //
         return "modules/profile/link-list";
     }

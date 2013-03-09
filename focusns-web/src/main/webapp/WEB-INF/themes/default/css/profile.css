@@ -121,6 +121,7 @@
 }
 
 .histories {
+    padding: 0 10px;
 }
 .histories ul li {
     padding:0 10px;

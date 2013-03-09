@@ -30,12 +30,12 @@
     </appender>
     -->
     
-    <logger name="org.focusns.common.performance.filter.PerformanceMonitorFilter">  
-        <level value="TRACE" />
+    <logger name="org.focusns.common.monitor.filter.PerformanceMonitorFilter">
+        <level value="INFO" />
         <appender-ref ref="performance" />   
     </logger>
     <logger name="org.springframework">  
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
     <root>
 		<priority value="INFO" />
