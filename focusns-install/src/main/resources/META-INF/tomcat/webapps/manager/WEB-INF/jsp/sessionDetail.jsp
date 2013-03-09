@@ -16,10 +16,10 @@
   limitations under the License.
 --%>
 <%@page session="false" contentType="text/html; charset=ISO-8859-1" %>
-<%@page import="java.util.Enumeration" %>
-<%@page import="javax.servlet.http.HttpSession" %>
 <%@page import="org.apache.catalina.Session" %>
 <%@page import="org.apache.catalina.manager.JspHelper" %>
+<%@page import="javax.servlet.http.HttpSession" %>
+<%@page import="java.util.Enumeration" %>
 <!DOCTYPE html 
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
