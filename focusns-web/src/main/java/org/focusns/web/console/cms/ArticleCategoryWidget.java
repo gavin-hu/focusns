@@ -23,11 +23,14 @@ package org.focusns.web.console.cms;
  */
 
 import org.focusns.model.blog.BlogCategory;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
+import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -41,20 +44,38 @@ public class ArticleCategoryWidget {
     @RequestMapping("/category-list")
     public String doList(Model model) {
         //
-        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories();
-        model.addAttribute("blogCategories", blogCategories);
+        List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
+        model.addAttribute("articleCategories", articleCategories);
         //
         return "console/cms/category-list";
     }
 
     @RequestMapping("/category-edit")
-    public String doEdit() {
+    public String doEdit(@RequestParam(required = false) Long categoryId,
+                         @WidgetAttribute ProjectUser user, Model model) {
+        //
+        BlogCategory articleCategory = new BlogCategory();
+        articleCategory.setCreateById(user.getId());
+        if(categoryId!=null) {
+            articleCategory = blogCategoryService.getBlogCategory(categoryId);
+        }
+        model.addAttribute("articleCategory", articleCategory);
+        //
         return "console/cms/category-edit";
     }
 
     @RequestMapping("/category-modify")
-    public void modify() {
+    public void modifyAction(BlogCategory articleCategory) {
+        if(articleCategory.getId()>0) {
+            blogCategoryService.modifyBlogCategory(articleCategory);
+        } else {
+            blogCategoryService.createBlogCategory(articleCategory);
+        }
+    }
 
+    @RequestMapping("/category-remove")
+    public void removeAction(BlogCategory articleCategory) {
+        blogCategoryService.removeBlogCategory(articleCategory);
     }
 
 }

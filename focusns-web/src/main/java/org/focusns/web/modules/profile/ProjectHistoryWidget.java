@@ -47,7 +47,8 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-form")
-    public String doEdit(Project project, ProjectUser user, Model model) {
+    public String doEdit(@WidgetAttribute Project project,
+                         @WidgetAttribute ProjectUser user, Model model) {
         //
         ProjectHistory template = createTemplate(user, project);
         model.addAttribute("template", template);

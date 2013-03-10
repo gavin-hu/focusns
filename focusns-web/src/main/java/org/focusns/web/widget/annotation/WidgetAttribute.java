@@ -34,4 +34,6 @@ public @interface WidgetAttribute {
 
     String value() default "";
 
+    boolean required() default true;
+
 }

@@ -78,3 +78,33 @@
     font-weight: bold;
     text-align: right;
 }
+
+.article-categories {
+    padding: 10px;
+}
+.article-categories table {
+    width:100%;
+}
+.article-categories table th {
+    width:120px;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.article-categories table td {
+    text-align: center;
+}
+.article-category {
+    padding: 10px;
+}
+.article-category table {
+    width: 100%;
+}
+.article-category table th {
+    padding: 5px 10px 5px 0;
+    width: 60px;
+}
+.article-category div.submit {
+    padding-left: 70px;
+    padding-top: 10px;
+}

@@ -27,6 +27,7 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.core.MethodParameter;
+import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebArgumentResolver;
@@ -41,7 +42,11 @@ public class CustomWebArgumentResolver implements WebArgumentResolver {
         WidgetAttribute widgetAttribute = methodParameter.getParameterAnnotation(WidgetAttribute.class);
         if(widgetAttribute!=null) {
             String widgetAttributeName = getWidgetAttributeName(methodParameter, widgetAttribute);
-            return webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
+            Object value = webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
+            if(widgetAttribute.required()) {
+                Assert.notNull(value, String.format("Widget attribute %s can not be null", value));
+            }
+            return value;
         }
         //
         return UNRESOLVED;

@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -38,17 +39,25 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
 
     @Autowired
     private BlogCategoryDao categoryDao;
-    
-    public void createBlogCategory(BlogCategory tag) {
-        categoryDao.insert(tag);
+
+    @Override
+    public BlogCategory getBlogCategory(long categoryId) {
+        return categoryDao.select(categoryId);
     }
 
-    public void modifyBlogCategory(BlogCategory tag) {
-        categoryDao.update(tag);
+    public void createBlogCategory(BlogCategory category) {
+        if(category.getCreateAt()==null) {
+            category.setCreateAt(new Date());
+        }
+        categoryDao.insert(category);
     }
 
-    public void removeBlogCategory(BlogCategory tag) {
-        categoryDao.delete(tag.getId());
+    public void modifyBlogCategory(BlogCategory category) {
+        categoryDao.update(category);
+    }
+
+    public void removeBlogCategory(BlogCategory category) {
+        categoryDao.delete(category.getId());
     }
 
     public List<BlogCategory> getBlogCategories(long projectId) {

@@ -45,8 +45,8 @@
 
     <outbound-rule match-type="wildcard">
         <condition type="context-path" operator="equal">/focusns</condition>
-        <from>/*/**/*.action</from>
-        <to>/$1/widget/$2/$3</to>
+        <from>/*/**/*.action*</from>
+        <to>/$1/widget/$2/$3$4</to>
     </outbound-rule>
 
 </urlrewrite>

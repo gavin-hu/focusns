@@ -50,7 +50,7 @@
         </position>
     </page>
     <!-- CMS Console -->
-    <page path="/console/cms" mode="category">
+    <page path="/console/cms" mode="category-list">
         <position name="userMenu">
             <widget target="/site/menu-user" />
         </position>
@@ -67,7 +67,24 @@
             <widget target="/site/copyright" />
         </position>
     </page>
-    <page path="/console/cms" mode="article">
+    <page path="/console/cms" mode="category-edit">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/cms/category-edit" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/console/cms" mode="article-list">
         <position name="userMenu">
             <widget target="/site/menu-user" />
         </position>
@@ -84,7 +101,7 @@
             <widget target="/site/copyright" />
         </position>
     </page>
-    <page path="/console/cms" mode="comment">
+    <page path="/console/cms" mode="comment-list">
         <position name="userMenu">
             <widget target="/site/menu-user" />
         </position>

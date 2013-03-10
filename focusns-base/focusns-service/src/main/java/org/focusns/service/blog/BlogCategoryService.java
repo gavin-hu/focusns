@@ -28,6 +28,8 @@ import org.focusns.model.blog.BlogCategory;
 import java.util.List;
 
 public interface BlogCategoryService {
+
+    BlogCategory getBlogCategory(long categoryId);
     
     void createBlogCategory(BlogCategory category);
     

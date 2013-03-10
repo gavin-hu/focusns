@@ -22,13 +22,13 @@
             <h3>内容管理</h3>
             <ul>
                 <li>
-                    <a href='<c:url value="/console/cms?mode=category" />'>栏目管理</a>
+                    <a href='<c:url value="/console/cms?mode=category-list" />'>栏目管理</a>
                 </li>
                 <li>
-                    <a href='<c:url value="/console/cms?mode=article" />'>文章管理</a>
+                    <a href='<c:url value="/console/cms?mode=article-list" />'>文章管理</a>
                 </li>
                 <li>
-                    <a href='<c:url value="/console/cms?mode=comment" />'>评论管理</a>
+                    <a href='<c:url value="/console/cms?mode=comment-list" />'>评论管理</a>
                 </li>
             </ul>
             <h3>安全管理</h3>
