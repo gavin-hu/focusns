@@ -101,6 +101,23 @@
             <widget target="/site/copyright" />
         </position>
     </page>
+    <page path="/console/cms" mode="article-edit">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/console/menu-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/console/cms/article-edit" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
     <page path="/console/cms" mode="comment-list">
         <position name="userMenu">
             <widget target="/site/menu-user" />

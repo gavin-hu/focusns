@@ -42,11 +42,11 @@
         <to>/portal?path=/console/$1</to>
     </rule>
 
-
-    <outbound-rule match-type="wildcard">
-        <condition type="context-path" operator="equal">/focusns</condition>
-        <from>/*/**/*.action*</from>
-        <to>/$1/widget/$2/$3$4</to>
+    <outbound-rule>
+        <condition type="context-path" operator="equal" next="or">/</condition>
+        <condition type="context-path" operator="greater">/</condition>
+        <from>^/([a-z]+)/(.*)\.action(.*)$</from>
+        <to>/$1/widget/$2$3</to>
     </outbound-rule>
 
 </urlrewrite>

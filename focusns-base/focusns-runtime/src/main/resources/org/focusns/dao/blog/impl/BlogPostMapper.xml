@@ -11,6 +11,7 @@
 		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
         <result column="category_id" property="categoryId" jdbcType="BIGINT" />
         <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="modify_by_id" property="modifyById" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
 	</resultMap>
 	
@@ -19,13 +20,21 @@
 			select last_insert_id()
 		</selectKey>
         <choose>
-            <when test="categoryId > 0">
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, project_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{projectId})
+            <when test="categoryId > 0 and projectId > 0">
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, modify_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{modifyById}, #{projectId})
+            </when>
+            <when test="categoryId &gt; 0 and projectId &lt; 1">
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, modify_by_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{modifyById})
+            </when>
+            <when test="categoryId &lt; 0 and projectId &gt; 0">
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, modify_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{modifyById}, #{projectId})
             </when>
             <otherwise>
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, project_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{projectId})
+                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, modify_by_id)
+                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{modifyById})
             </otherwise>
         </choose>
 	</insert>
@@ -46,7 +55,7 @@
 			<if test="content != null" >
 		        content = #{content},
 			</if>
-            <if test="craeteAt != null" >
+            <if test="createAt != null" >
 		        create_at = #{createAt},
 			</if>
             <if test="modifyAt != null" >

@@ -31,6 +31,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 @Transactional
 public class BlogPostServiceImpl implements BlogPostService {
@@ -43,6 +45,18 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     public void createBlogPost(BlogPost post) {
+        Date now = new Date();
+        if(post.getCreateAt()==null) {
+            post.setCreateAt(now);
+        }
+        if(post.getModifyAt()==null) {
+            post.setModifyAt(now);
+        }
+        //
+        if(post.getSummary()==null) {
+            post.setSummary("Summary!");
+        }
+        //
         postDao.insert(post);
     }
 

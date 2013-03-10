@@ -37,6 +37,7 @@ public class BlogPost extends Id {
     //
     private long categoryId;
     private long createById;
+    private long modifyById;
     private long projectId;
 
     public BlogPost() {
@@ -96,6 +97,14 @@ public class BlogPost extends Id {
 
     public void setCreateById(long createById) {
         this.createById = createById;
+    }
+
+    public long getModifyById() {
+        return modifyById;
+    }
+
+    public void setModifyById(long modifyById) {
+        this.modifyById = modifyById;
     }
 
     public long getProjectId() {

@@ -22,21 +22,83 @@ package org.focusns.web.console.cms;
  * #L%
  */
 
+import org.focusns.model.blog.BlogCategory;
+import org.focusns.model.blog.BlogPost;
+import org.focusns.model.common.Page;
+import org.focusns.model.core.ProjectUser;
+import org.focusns.service.blog.BlogCategoryService;
+import org.focusns.service.blog.BlogPostService;
+import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/console/cms")
 public class ArticleWidget {
 
+    @Autowired
+    private BlogPostService blogPostService;
+    @Autowired
+    private BlogCategoryService blogCategoryService;
+
     @RequestMapping("/article-list")
-    public String doList() {
+    public String doList(@RequestParam(required = false) Long categoryId, Model model) {
+        //
+        List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
+        if(!articleCategories.isEmpty()) {
+            BlogCategory articleCategory = articleCategories.get(0);
+            if(categoryId!=null) {
+                for(BlogCategory tmp : articleCategories) {
+                    if(categoryId.longValue()==tmp.getId()) {
+                        articleCategory = tmp;
+                    }
+                }
+            }
+            //
+            Page<BlogPost> page = new Page<BlogPost>(10);
+            page = blogPostService.fetchPageByCategoryId(page, articleCategory.getId());
+            //
+            model.addAttribute("articleCategories", articleCategories);
+            model.addAttribute("articleCategory", articleCategory);
+            model.addAttribute("page", page);
+        }
+        //
         return "console/cms/article-list";
     }
 
     @RequestMapping("/article-edit")
-    public String doEdit() {
+    public String doEdit(@RequestParam(required = false) Long articleId,
+                         @RequestParam(required = false) Long categoryId,
+                         @WidgetAttribute ProjectUser user, Model model) {
+        //
+        List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
+        //
+        BlogPost article = new BlogPost();
+        article.setCategoryId(categoryId!=null?categoryId:0);
+        article.setCreateById(user.getId());
+        article.setModifyById(user.getId());
+        if(articleId!=null) {
+            article = blogPostService.getBlogPost(articleId);
+        }
+        //
+        model.addAttribute("articleCategories", articleCategories);
+        model.addAttribute("article", article);
+        //
         return "console/cms/article-edit";
+    }
+
+    @RequestMapping("/article-modify")
+    public void modifyAction(BlogPost article) {
+        if(article.getId()>0) {
+            blogPostService.modifyBlogPost(article);
+        } else {
+            blogPostService.createBlogPost(article);
+        }
     }
 
 }

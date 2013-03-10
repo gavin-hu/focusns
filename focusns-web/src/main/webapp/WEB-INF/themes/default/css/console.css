@@ -108,3 +108,21 @@
     padding-left: 70px;
     padding-top: 10px;
 }
+
+.articles {
+    padding: 10px;
+}
+.article {
+    padding: 10px;
+}
+.article div {
+    padding: 5px 0;
+}
+.article div label {
+    display: block;
+    font-weight: bold;
+}
+.article div.content textarea {
+    width: 98.5%;
+    height: 400px;
+}

@@ -29,8 +29,10 @@ import org.focusns.service.core.ProjectService;
 import org.focusns.service.core.ProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -49,8 +51,9 @@ public class LogInAndOutWidget {
         return "site/login-form";
     }
 
-    @RequestMapping("/login-action")
-    public String doLogin(@ModelAttribute ProjectUser user, WebRequest webRequest) {
+    @RequestMapping("/login")
+    public String doLogin(@RequestParam(required = false) String redirect,
+                          @ModelAttribute ProjectUser user, WebRequest webRequest) {
         //
         authenticationService.authenticate(user);
         //
@@ -58,10 +61,14 @@ public class LogInAndOutWidget {
         webRequest.setAttribute("user", dbUser, WebRequest.SCOPE_SESSION);
         webRequest.setAttribute(ProjectUser.KEY, dbUser, WebRequest.SCOPE_SESSION);
         //
+        if(StringUtils.hasText(redirect)) {
+            return "redirect:"+redirect;
+        }
+        //
         return "redirect:/" + dbUser.getProject().getCode() + "/profile" ;
     }
 
-    @RequestMapping("/logout-action")
+    @RequestMapping("/logout")
     public String doLogout(WebRequest webRequest) {
         //
         webRequest.removeAttribute("user", WebRequest.SCOPE_SESSION);

@@ -33,7 +33,8 @@
                                     |
                                     <a href='<c:url value="/console/cms?mode=category-edit&categoryId=${articleCategory.id}" />'>修改</a>
                                     |
-                                    <a href='<c:url value="/console/cms/category-remove.action?id=${articleCategory.id}" />'>删除</a>
+                                    <c:url value="/console/cms?mode=category-list" var="redirectUrl" />
+                                    <a href='<c:url value="/console/cms/category-remove.action?id=${articleCategory.id}&redirect=${redirectUrl}" />'>删除</a>
                                 </td>
                             </tr>
                         </c:forEach>
