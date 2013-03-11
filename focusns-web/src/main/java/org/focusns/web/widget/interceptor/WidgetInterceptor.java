@@ -23,6 +23,7 @@ package org.focusns.web.widget.interceptor;
  */
 
 
+import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.web.portal.config.PageConfig;
@@ -48,7 +49,7 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                 //
                 HandlerMethod handlerMethod = (HandlerMethod) handler;
                 //
-                if(processConstraints(request, handlerMethod)) {
+                if(processConstraintsBeforeHandle(request, handlerMethod)) {
                     return false;
                 }
             }
@@ -57,7 +58,7 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
-    private boolean processConstraints(HttpServletRequest request, HandlerMethod handlerMethod) {
+    private boolean processConstraintsBeforeHandle(HttpServletRequest request, HandlerMethod handlerMethod) {
         Constraints constraints = handlerMethod.getMethodAnnotation(Constraints.class);
         if(constraints!=null) {
             for(Constraint constraint : constraints.value()) {
@@ -73,12 +74,22 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                 }
             }
         }
-
+        //
         return false;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        //
+        if(WebUtils.isIncludeRequest(request)) {
+            PageConfig pageConfig = (PageConfig) request.getAttribute("pageConfig");
+            if (pageConfig!=null && handler instanceof HandlerMethod) {
+                //
+                HandlerMethod handlerMethod = (HandlerMethod) handler;
+                //
+                processConstraintsAfterHandle(handlerMethod, modelAndView);
+            }
+        }
         //
         String redirect = request.getParameter("redirect");
         if(StringUtils.hasText(redirect)) {
@@ -96,6 +107,21 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         //X
         if(modelAndView.getViewName()!=null) {
             return ;
+        }
+    }
+
+    private void processConstraintsAfterHandle(HandlerMethod handlerMethod, ModelAndView modelAndView) {
+        Constraints constraints = handlerMethod.getMethodAnnotation(Constraints.class);
+        if(constraints!=null) {
+            for(Constraint constraint : constraints.value()) {
+                //
+                if(Constraint.PAGE_NOT_EMPTY == constraint) {
+                    Page<?> page = (Page<?>) modelAndView.getModel().get(Page.KEY);
+                    if(page==null || page.getResults().isEmpty()) {
+                        modelAndView.setViewName("blank");
+                    }
+                }
+            }
         }
     }
 }

@@ -28,6 +28,8 @@ import java.util.List;
 
 public class Page<T> {
 
+    public static final String KEY = "page";
+
 	private static final long TOTAL_COUNT_UNKNOW = -1L;
 	
 	protected int pageNo = 1;

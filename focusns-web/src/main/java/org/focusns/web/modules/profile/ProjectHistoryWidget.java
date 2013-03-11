@@ -28,6 +28,8 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectHistoryService;
+import org.focusns.web.widget.Constraint;
+import org.focusns.web.widget.annotation.Constraints;
 import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,6 +59,7 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-list")
+    @Constraints({Constraint.PAGE_NOT_EMPTY})
     public String doList(@WidgetAttribute Project project,
                          @WidgetAttribute ProjectUser user, Model model) {
         //
