@@ -28,8 +28,8 @@
     </developers>
     <licenses>
         <license>
-            <name>The GNU Lesser General Public License, version 3.0</name>
-            <url>http://opensource.org/licenses/LGPL-3.0</url>
+            <name>The GNU Lesser General Public License, version 2.1</name>
+            <url>http://opensource.org/licenses/LGPL-2.1</url>
         </license>
     </licenses>
     <scm>
@@ -59,7 +59,7 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>1.4</version>
                     <configuration>
-                        <licenseName>lgpl_v3</licenseName>
+                        <licenseName>lgpl_v2_1</licenseName>
                         <roots>
                             <root>src/main/java</root>
                             <root>src/test/java</root>
