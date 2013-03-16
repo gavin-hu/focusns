@@ -10,6 +10,35 @@
     <packaging>war</packaging>
     <name>FocusSNS Web</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <configuration>
+                    <nosuffix>true</nosuffix>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <webApp>
+                        <contextPath>/focusns</contextPath>
+                    </webApp>
+                    <stopKey>focusns</stopKey>
+                    <stopPort>9966</stopPort>
+                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <war>${project.build.directory}/${project.build.finalName}</war>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.focusns</groupId>
@@ -45,25 +74,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <configuration>
-                    <webApp>
-                        <contextPath>/focusns</contextPath>
-                    </webApp>
-                    <stopKey>focusns</stopKey>
-                    <stopPort>9966</stopPort>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
-                    <war>${project.build.directory}/${project.build.finalName}</war>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
