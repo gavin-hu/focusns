@@ -1,8 +1,8 @@
-package org.focusns.web.site.cms;
+package org.focusns.common.lucene;
 
 /*
  * #%L
- * FocusSNS Web
+ * FocusSNS Runtime
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -23,26 +23,13 @@ package org.focusns.web.site.cms;
  */
 
 
-import org.focusns.service.blog.BlogPostService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.lucene.index.IndexWriter;
 
-@Controller
-@RequestMapping("/site/cms")
-public class ArticleWidget {
+public final class ObjectIndexWriter {
 
-    @Autowired
-    private BlogPostService blogPostService;
+    private IndexWriter indexWriter;
 
-    @RequestMapping("/article-list")
-    public String doList() {
-        return "site/cms/article-list";
+    public ObjectIndexWriter(IndexWriter indexWriter) {
+        this.indexWriter = indexWriter;
     }
-
-    @RequestMapping("/article-view")
-    public String doView() {
-        return "site/cms/article-view";
-    }
-
 }

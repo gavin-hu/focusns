@@ -24,10 +24,7 @@ package org.focusns.web.portal.config.xml;
 
 
 import org.focusns.common.xml.XmlParser;
-import org.focusns.web.portal.config.AbstractPageConfigFactory;
-import org.focusns.web.portal.config.PageConfig;
-import org.focusns.web.portal.config.PageConfigFactory;
-import org.focusns.web.widget.config.WidgetConfig;
+import org.focusns.web.portal.config.*;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -36,6 +33,7 @@ import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class XmlPageConfigFactory extends AbstractPageConfigFactory 
 	implements PageConfigFactory, ResourceLoaderAware {
@@ -46,6 +44,8 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
 	private ResourceLoader resourceLoader;
 	
 	private XmlParser xmlParser = new XmlParser();
+
+    private AtomicLong atomicLong = new AtomicLong(0);
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
@@ -98,20 +98,14 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
             //
             List<Element> positionEles = DomUtils.getChildElementsByTagName(pageEle, "position");
             for(Element positionEle : positionEles) {
-                String position = positionEle.getAttribute("name");
-                List<WidgetConfig> widgetDefinitions = new ArrayList<WidgetConfig>();
+                PositionConfig positionConfig = new PositionConfig();
+                positionConfig.setName(positionEle.getAttribute("name"));
+                positionConfig.setGrid(positionEle.getAttribute("grid"));
                 //
                 List<Element> widgetEles = DomUtils.getChildElementsByTagName(positionEle, "widget");
                 for(Element widgetEle : widgetEles) {
                     WidgetConfig widgetConfig = new WidgetConfig(widgetEle.getAttribute("target"));
-                    // rules elements
-                    Element rulesEle = DomUtils.getChildElementByTagName(widgetEle, "rules");
-                    if(rulesEle!=null) {
-                        for(Element ruleEle : DomUtils.getChildElementsByTagName(rulesEle, "rule")) {
-                            String rule = DomUtils.getTextValue(ruleEle);
-                            widgetConfig.getRules().add(rule);
-                        }
-                    }
+                    widgetConfig.setId(String.valueOf(atomicLong.incrementAndGet()));
                     // preferences element
                     Element prefsEle = DomUtils.getChildElementByTagName(widgetEle, "preference");
                     if(prefsEle!=null) {
@@ -122,10 +116,10 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
                         }
                     }
                     //
-                    widgetDefinitions.add(widgetConfig);
+                    positionConfig.addWidgetConfig(widgetConfig);
                 }
                 //
-                pageConfig.addWidgetConfigList(position, widgetDefinitions);
+                pageConfig.addPositionConfig(positionConfig);
                 //
                 pageConfigList.add(pageConfig);
             }

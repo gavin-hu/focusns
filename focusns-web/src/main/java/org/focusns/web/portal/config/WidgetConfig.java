@@ -1,4 +1,4 @@
-package org.focusns.web.widget.config;
+package org.focusns.web.portal.config;
 
 /*
  * #%L
@@ -23,31 +23,29 @@ package org.focusns.web.widget.config;
  */
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WidgetConfig {
 
+    private String id;
     private String target;
-    private List<String> rules = new ArrayList<String>();
     private Map<String, Object> preferences = new HashMap<String, Object>();
 	
 	public WidgetConfig(String target) {
         this.target = target;
 	}
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getTarget() {
         return target;
-    }
-
-    public List<String> getRules() {
-        return rules;
-    }
-
-    public void setRules(List<String> rules) {
-        this.rules = rules;
     }
 
     public Map<String, Object> getPreferences() {

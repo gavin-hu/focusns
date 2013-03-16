@@ -1,0 +1,17 @@
+<mapper namespace="">
+    <indexMap id="indexMap" type="org.focusns.model.core.Project">
+        <index field="" property="" />
+        <index field="" property="" />
+        <index field="" property="" />
+        <index field="" property="" />
+    </indexMap>
+
+    <index id="index" indexMap="indexMap" >
+
+    </index>
+
+    <search id="search" indexMap="indexMap">
+
+    </search>
+
+</mapper>

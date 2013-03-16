@@ -10,9 +10,9 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" href="<c:url value="/static/themes/default/css/style.css" />" type="text/css" />
 
-<c:set var="leftColumnExist" value="${pageConfig.widgetConfigMap['leftColumn']!=null}" />
-<c:set var="mainColumnExist" value="${pageConfig.widgetConfigMap['mainColumn']!=null}" />
-<c:set var="rightColumnExist" value="${pageConfig.widgetConfigMap['rightColumn']!=null}" />
+<c:set var="leftColumnExist" value="${pageConfig.positionConfigMap['leftColumn']!=null}" />
+<c:set var="mainColumnExist" value="${pageConfig.positionConfigMap['mainColumn']!=null}" />
+<c:set var="rightColumnExist" value="${pageConfig.positionConfigMap['rightColumn']!=null}" />
 
 <style type="text/css">
 <c:choose>

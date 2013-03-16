@@ -2,13 +2,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="l" tagdir="/WEB-INF/tags/layout" %>
 
-<c:set var="userMenuExist" value="${pageConfig.widgetConfigMap['userMenu']!=null}" />
-<c:set var="mainMenuExist" value="${pageConfig.widgetConfigMap['mainMenu']!=null}" />
-<c:set var="subMenuExist" value="${pageConfig.widgetConfigMap['subMenu']!=null}" />
-<c:set var="leftColumnExist" value="${pageConfig.widgetConfigMap['leftColumn']!=null}" />
-<c:set var="mainColumnExist" value="${pageConfig.widgetConfigMap['mainColumn']!=null}" />
-<c:set var="rightColumnExist" value="${pageConfig.widgetConfigMap['rightColumn']!=null}" />
-<c:set var="copyrightExist" value="${pageConfig.widgetConfigMap['copyright']!=null}" />
+<c:set var="userMenuExist" value="${pageConfig.positionConfigMap['userMenu']!=null}" />
+<c:set var="mainMenuExist" value="${pageConfig.positionConfigMap['mainMenu']!=null}" />
+<c:set var="subMenuExist" value="${pageConfig.positionConfigMap['subMenu']!=null}" />
+<c:set var="leftColumnExist" value="${pageConfig.positionConfigMap['leftColumn']!=null}" />
+<c:set var="mainColumnExist" value="${pageConfig.positionConfigMap['mainColumn']!=null}" />
+<c:set var="rightColumnExist" value="${pageConfig.positionConfigMap['rightColumn']!=null}" />
+<c:set var="copyrightExist" value="${pageConfig.positionConfigMap['copyright']!=null}" />
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">

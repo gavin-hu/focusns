@@ -23,10 +23,7 @@ package org.focusns.web.portal.config;
  */
 
 
-import org.focusns.web.widget.config.WidgetConfig;
-
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PageConfig {
@@ -35,8 +32,8 @@ public class PageConfig {
     private String mode;
     private String category = "default";
 
-	private Map<String, List<WidgetConfig>> positionMap = new HashMap<String, List<WidgetConfig>>();
-	
+    private Map<String, PositionConfig> positionConfigMap = new LinkedHashMap<String, PositionConfig>();
+
 	public PageConfig() {
 	}
 
@@ -66,16 +63,12 @@ public class PageConfig {
         }
     }
 
-    public Map<String, List<WidgetConfig>> getWidgetConfigMap() {
-		return positionMap;
-	}
-	
-	public List<WidgetConfig> getWidgetConfigList(String position) {
-		return positionMap.get(position);
-	}
-	
-	public void addWidgetConfigList(String position, List<WidgetConfig> widgetConfigList) {
-		this.positionMap.put(position, widgetConfigList);
-	}
-	
+    public Map<String, PositionConfig> getPositionConfigMap() {
+        return positionConfigMap;
+    }
+
+    public void addPositionConfig(PositionConfig positionConfig) {
+        this.positionConfigMap.put(positionConfig.getName(), positionConfig);
+    }
+
 }

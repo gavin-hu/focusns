@@ -1,4 +1,4 @@
-package org.focusns.web.springmvc.resolver;
+package org.focusns.web.springmvc.bind;
 
 /*
  * #%L

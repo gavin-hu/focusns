@@ -34,7 +34,8 @@ import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.web.portal.config.PageConfig;
 import org.focusns.web.portal.config.PageConfigFactory;
-import org.focusns.web.widget.config.WidgetConfig;
+import org.focusns.web.portal.config.PositionConfig;
+import org.focusns.web.portal.config.WidgetConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -117,38 +118,19 @@ public class Portal {
     }
 
     protected void processPageConfig(PageConfig pageConfig, WebRequest webRequest) {
-        for(String position : pageConfig.getWidgetConfigMap().keySet()) {
-            Iterator<WidgetConfig> iter = pageConfig.getWidgetConfigList(position).iterator();
+        for(PositionConfig positionConfig : pageConfig.getPositionConfigMap().values()) {
+            Iterator<WidgetConfig> iter = positionConfig.getWidgetConfigList().iterator();
             //
-
             while (iter.hasNext()) {
                 WidgetConfig widgetConfig = iter.next();
                 //
                 boolean needRemove = false;
-                //
-                if(!processRules(widgetConfig, webRequest)) {
-                    needRemove = true;
-                }
                 //
                 if(needRemove) {
                     iter.remove();
                 }
             }
         }
-    }
-
-    protected boolean processRules(WidgetConfig widgetConfig, WebRequest webRequest) {
-        //
-        ProjectUser projectUser = (ProjectUser) webRequest
-                .getAttribute(ProjectUser.KEY, WebRequest.SCOPE_SESSION);
-        //
-        for(String rule : widgetConfig.getRules()) {
-            if("projectUserRequired".equals(rule)) {
-                return projectUser!=null;
-            }
-        }
-        //
-        return true;
     }
 
 }

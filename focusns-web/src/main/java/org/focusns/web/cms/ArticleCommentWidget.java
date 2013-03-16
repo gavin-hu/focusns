@@ -1,4 +1,4 @@
-package org.focusns.web.site.cms;
+package org.focusns.web.cms;
 
 /*
  * #%L
@@ -23,21 +23,26 @@ package org.focusns.web.site.cms;
  */
 
 
-import org.focusns.service.blog.BlogCategoryService;
+import org.focusns.service.blog.BlogCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/site/cms")
-public class ArticleCategoryWidget {
+public class ArticleCommentWidget {
 
     @Autowired
-    private BlogCategoryService blogCategoryService;
+    private BlogCommentService blogCommentService;
 
-    @RequestMapping("/category-list")
+    @RequestMapping("/comment-list")
     public String doList() {
-        return "site/cms/category-list";
+        return "cms/comment-list";
+    }
+
+    @RequestMapping("/comment-edit")
+    public String doEdit() {
+        return "cms/comment-edit";
     }
 
 }

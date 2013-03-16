@@ -13,7 +13,7 @@
 
     <mvc:annotation-driven validator="beanValidator">
         <mvc:argument-resolvers>
-            <bean class="org.focusns.web.springmvc.resolver.CustomWebArgumentResolver" />
+            <bean class="org.focusns.web.springmvc.bind.CustomWebArgumentResolver" />
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 
@@ -59,13 +59,13 @@
 	<bean id="overrideDirective" class="org.focusns.common.freemarker.directive.OverrideDirective"/>
 	<bean id="superDirective" class="org.focusns.common.freemarker.directive.SuperDirective"/>
 
-    <bean id="themeViewResolver" class="org.focusns.web.springmvc.resolver.ExtInternalResourceViewResolver">
+    <bean id="themeViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
         <property name="prefix" value="/WEB-INF/themes/" />
         <property name="suffix" value=".jsp" />
         <property name="cache" value="false" />
     </bean>
-    <bean id="widgetViewResolver" class="org.focusns.web.springmvc.resolver.ExtInternalResourceViewResolver">
+    <bean id="widgetViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
         <property name="prefix" value="/WEB-INF/widgets/" />
         <property name="suffix" value=".jsp" />

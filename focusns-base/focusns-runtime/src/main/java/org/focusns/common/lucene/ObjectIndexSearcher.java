@@ -1,8 +1,8 @@
-package org.focusns.web.site.cms;
+package org.focusns.common.lucene;
 
 /*
  * #%L
- * FocusSNS Web
+ * FocusSNS Runtime
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -23,26 +23,13 @@ package org.focusns.web.site.cms;
  */
 
 
-import org.focusns.service.blog.BlogCommentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.lucene.search.IndexSearcher;
 
-@Controller
-@RequestMapping("/site/cms")
-public class ArticleCommentWidget {
+public final class ObjectIndexSearcher {
 
-    @Autowired
-    private BlogCommentService blogCommentService;
+    private IndexSearcher indexSearcher;
 
-    @RequestMapping("/comment-list")
-    public String doList() {
-        return "site/cms/comment-list";
+    public ObjectIndexSearcher(IndexSearcher indexSearcher) {
+        this.indexSearcher = indexSearcher;
     }
-
-    @RequestMapping("/comment-edit")
-    public String doEdit() {
-        return "site/cms/comment-edit";
-    }
-
 }
