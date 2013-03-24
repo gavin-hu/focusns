@@ -150,7 +150,4 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         projectUserDao.deleteRole(projectId, userId, roleId);
     }
 
-    public static void main(String[] args) {
-        System.out.println(DigestUtils.md5DigestAsHex("123456".getBytes()));
-    }
 }

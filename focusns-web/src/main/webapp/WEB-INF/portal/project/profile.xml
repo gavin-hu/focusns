@@ -11,11 +11,10 @@
             <widget target="/site/menu-sub" />
         </position>
         <position name="leftColumn">
+            <widget target="/project/user-view" />
             <widget target="/project/link-edit">
-
             </widget>
             <widget target="/project/link-list">
-
             </widget>
             <widget target="/project/link-list">
                 <preference>
@@ -24,8 +23,28 @@
             </widget>
         </position>
         <position name="mainColumn">
-            <widget target="/project/history-form" />
+            <widget target="/project/history-edit" />
             <widget target="/project/history-list" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/profile" category="people" mode="edit">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/project/user-view" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/project/user-edit" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />

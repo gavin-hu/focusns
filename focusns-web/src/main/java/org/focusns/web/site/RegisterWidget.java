@@ -23,14 +23,32 @@ package org.focusns.web.site;
  */
 
 
+import org.focusns.model.core.ProjectUser;
+import org.focusns.service.core.ProjectUserService;
+import org.focusns.validation.group.Register;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/site")
 public class RegisterWidget {
 
-    @RequestMapping("site/register-form")
+    @Autowired
+    private ProjectUserService projectUserService;
+
+    @RequestMapping("/register-form")
     public String doEdit() {
         return "site/register-form";
     }
+
+    @RequestMapping("/register-user")
+    public String doCreate(@Validated(Register.class) ProjectUser user) {
+        //
+        projectUserService.createUser(user);
+        //
+        return "redirect:/welcome";
+    }
+
 }

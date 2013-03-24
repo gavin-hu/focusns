@@ -1,4 +1,4 @@
-package org.focusns.web.modules.profile;
+package org.focusns.web.helper;
 
 /*
  * #%L
@@ -23,25 +23,25 @@ package org.focusns.web.modules.profile;
  */
 
 
-import org.focusns.web.helper.ApplicationHelper;
-import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+public class Coordinate {
 
-import java.io.File;
-import java.io.IOException;
+    private Object project;
+    private Object projectId;
+    private Object feature;
+    private Object entity;
+    private Object name;
 
-@Controller
-@RequestMapping("/project")
-public class ProjectController {
-
-    @RequestMapping("{projectId}/logo")
-    public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
-        //
-        File target = ApplicationHelper.getInstance().getProjectLogo(projectId);
-        return FileCopyUtils.copyToByteArray(target);
+    public Coordinate(Object projectId, Object feature, Object entity, Object name) {
+        this.projectId = projectId;
+        this.feature = feature;
+        this.entity = entity;
+        this.name = name;
     }
-    
+
+    @Override
+    public String toString() {
+        return new StringBuilder("/project").append("/").append(projectId)
+                .append("/").append(feature).append("/").append(entity)
+                .append("/").append(name).toString();
+    }
 }

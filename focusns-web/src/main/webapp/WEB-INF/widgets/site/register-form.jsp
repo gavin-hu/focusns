@@ -4,7 +4,7 @@
 
 <div class="register">
     <div class="register-left">
-        <form action="<c:url value="/widget/site/register-action" />" method="post">
+        <form action="<c:url value="/site/register-user.action" />" method="post">
             <div>
                 <label>邮箱</label>
                 <input name="email" value="" />

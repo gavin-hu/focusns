@@ -24,7 +24,6 @@ package org.focusns.web.helper;
 
 
 import org.focusns.common.image.ImageUtils;
-import org.focusns.model.common.Rectangle;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.NumberUtils;
 
@@ -33,7 +32,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ApplicationHelper {
+public class RuntimeHelper {
 
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
     
@@ -41,48 +40,57 @@ public class ApplicationHelper {
 
     private static final File application = new File(RUNTIME_DIR, "application.properties");
     
-    private static ApplicationHelper instance = new ApplicationHelper();
+    private static RuntimeHelper instance = new RuntimeHelper();
 
-    private ApplicationHelper() {
-    }
-    
-    public static ApplicationHelper getInstance() {
-        return instance;
-    }
-
-    public boolean isInstalled() {
+    public static boolean isInstalled() {
         return application.exists();
     }
 
-    public File getTmpProjectLogo(String tmpId) {
-        return new File(String.format("%s/project/logo/%s", TMP_DIR, tmpId));
+    public static boolean isTempFileExists(Coordinate coordinate) {
+        return isFileExists(TMP_DIR, coordinate);
     }
-    
-    public void storeTmpProjectLogo(InputStream inputStream, String tmpId) throws IOException {
-        File tmpFile = new File(String.format("%s/project/logo/%s", TMP_DIR, tmpId));
-        if(tmpFile.exists()) {
-            tmpFile.delete();
+
+    public static File getTempFile(Coordinate coordinate) throws IOException {
+        return getFile(TMP_DIR, coordinate);
+    }
+
+    public static void setTempFile(Coordinate coordinate, InputStream inputStream) throws IOException {
+        setFile(TMP_DIR, coordinate, inputStream);
+    }
+
+    public static boolean isTargetFileExists(Coordinate coordinate) {
+        return isFileExists(RUNTIME_DIR, coordinate);
+    }
+
+    public static File getTargetFile(Coordinate coordinate) throws IOException {
+        return getFile(RUNTIME_DIR, coordinate);
+    }
+
+    public static void setTargetFile(Coordinate coordinate, InputStream inputStream) throws IOException {
+        setFile(RUNTIME_DIR, coordinate, inputStream);
+    }
+
+    private static boolean isFileExists(String rootDir, Coordinate coordinate) {
+        File file = new File(rootDir, coordinate.toString());
+        return file.exists();
+    }
+
+    private static File getFile(String rootDir, Coordinate coordinate) throws IOException {
+        File file = new File(rootDir, coordinate.toString());
+        return file;
+    }
+
+    private static void setFile(String rootDir, Coordinate coordinate, InputStream inputStream) throws IOException {
+        File file = new File(rootDir, coordinate.toString());
+        if(file.exists()) {
+            file.delete();
         }
-        tmpFile.getParentFile().mkdirs();
-        tmpFile.createNewFile();
-        FileCopyUtils.copy(inputStream, new FileOutputStream(tmpFile));
+        file.getParentFile().mkdirs();
+        file.createNewFile();
+        FileCopyUtils.copy(inputStream, new FileOutputStream(file));
     }
-    
-    public File getProjectLogo(long projectId) {
-        return new File(String.format("%s/project/%s/logo.jpg", RUNTIME_DIR, projectId));
-    }
-    
-    public void storeProjectLogo(InputStream inputStream, long projectId) throws IOException {
-        File logoFile = new File(String.format("%s/project/%s/logo.jpg", RUNTIME_DIR, projectId));
-        if(logoFile.exists()) {
-            logoFile.delete();
-        }
-        logoFile.getParentFile().mkdirs();
-        logoFile.createNewFile();
-        FileCopyUtils.copy(inputStream, new FileOutputStream(logoFile));
-    }
-    
-    public void cropProjectLogo(File original, File target, Rectangle rectangle) throws IOException {
+
+    public static void cropThumbnail(File original, File target, Rectangle rectangle) throws IOException {
         //
         String xStr = rectangle.getX();
         String yStr = rectangle.getY();
@@ -107,7 +115,7 @@ public class ApplicationHelper {
         int w = NumberUtils.parseNumber(wStr, Integer.class);
         int h = NumberUtils.parseNumber(hStr, Integer.class);
         //
-        ImageUtils.crop(original, target, x, y, w, h, "JPG");
+        ImageUtils.crop(original, target, x, y, w, h, "PNG");
     }
     
 }

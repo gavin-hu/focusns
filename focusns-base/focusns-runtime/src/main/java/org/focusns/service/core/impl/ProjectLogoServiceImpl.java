@@ -24,7 +24,6 @@ package org.focusns.service.core.impl;
 
 
 import org.focusns.dao.core.ProjectLogoDao;
-import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
 import org.focusns.service.core.ProjectLogoService;
@@ -68,7 +67,7 @@ public class ProjectLogoServiceImpl implements ProjectLogoService {
         return null;
     }
 
-    public void cropProjectLogoImage(Project project, File original, Rectangle rectangle) throws IOException {
+    public void cropProjectLogoImage(Project project, File original) throws IOException {
         //
       /*  ProjectLogo logo = new ProjectLogo();
         logo.setProjectId(project.getId());

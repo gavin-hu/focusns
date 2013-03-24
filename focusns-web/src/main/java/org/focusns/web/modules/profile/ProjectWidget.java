@@ -43,8 +43,7 @@ public class ProjectWidget {
     @Autowired
     private ProjectAttributeService projectAttributeService;
     
-	public String view(Map<String, Object> model,
-            Project project) {
+	public String view(Map<String, Object> model, Project project) {
         //
         List<ProjectAttribute> attributes = projectAttributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);

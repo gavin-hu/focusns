@@ -65,9 +65,9 @@ public class ProjectLinkWidget {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if(reverse.booleanValue()) {
-            page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
-        } else {
             page = projectLinkService.fetchPageByToProjectId(page, project.getId());
+        } else {
+            page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
         }
         model.addAttribute(Page.KEY, page);
         model.addAttribute("reverse", reverse.booleanValue());

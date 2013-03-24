@@ -40,7 +40,7 @@ public class ProjectLogoController {
         //
         ProjectLogo logo = projectLogoService.getProjectLogo(logoId);
         //
-        File target = ApplicationHelper.getInstance().getProjectLogo(logo);
+        File target = RuntimeHelper.getInstance().getProjectLogo(logo);
         return FileCopyUtils.copyToByteArray(target);
     }*/
 

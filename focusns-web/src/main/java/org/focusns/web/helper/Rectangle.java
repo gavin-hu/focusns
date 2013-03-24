@@ -1,4 +1,4 @@
-package org.focusns.model.common;
+package org.focusns.web.helper;
 
 /*
  * #%L

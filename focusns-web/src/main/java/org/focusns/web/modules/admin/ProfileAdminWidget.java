@@ -26,11 +26,9 @@ package org.focusns.web.modules.admin;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
-import org.focusns.web.helper.ApplicationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -44,11 +42,11 @@ public class ProfileAdminWidget {
             String sessionId,
             Project project) {
         //
-        File tmpLogo = ApplicationHelper.getInstance().getTmpProjectLogo(sessionId);
-        model.put("hasTmpLogo", tmpLogo.canRead());
-        //
-        File targetLogo = ApplicationHelper.getInstance().getProjectLogo(project.getId());
-        model.put("hasLogo", targetLogo.canRead());
+//        File tmpLogo = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
+//        model.put("hasTmpLogo", tmpLogo.canRead());
+//        //
+//        File targetLogo = RuntimeHelper.getInstance().getProjectLogo(project.getId());
+//        model.put("hasLogo", targetLogo.canRead());
         //
         return "modules/admin/profile/logo-edit";
     }

@@ -23,13 +23,12 @@ package org.focusns.web.modules.admin;
  */
 
 
-import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.helper.ApplicationHelper;
+import org.focusns.web.helper.Rectangle;
 import org.focusns.web.helper.WebRequestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,44 +51,44 @@ public class ProfileAdminController {
     @Autowired
     private ProjectAttributeService projectAttributeService;
     
-    @RequestMapping("/project/logo/upload")
+    @RequestMapping("/profile/logo/upload")
     public String uploadLogo(MultipartFile file, WebRequest webRequest) throws IOException {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        ApplicationHelper.getInstance().storeTmpProjectLogo(file.getInputStream(), webRequest.getSessionId());
+        //RuntimeHelper.getInstance().storeTmpProjectLogo(file.getInputStream(), webRequest.getSessionId());
         //
         return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
     }
     
-    @RequestMapping("/project/logo/crop")
+    @RequestMapping("/profile/logo/crop")
     public String cropLogo(Rectangle rectangle, WebRequest webRequest) throws IOException {
         //
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        File target = ApplicationHelper.getInstance().getProjectLogo(project.getId());
-        File original = ApplicationHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
-        ApplicationHelper.getInstance().cropProjectLogo(original, target, rectangle);
+//        File target = RuntimeHelper.getInstance().getProjectLogo(project.getId());
+//        File original = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+//        RuntimeHelper.getInstance().cropProjectLogo(original, target, rectangle);
         //
         return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
     }
     
-    @RequestMapping("/project/logo/tmp")
+    @RequestMapping("/profile/logo/tmp")
     public @ResponseBody byte[] linkLogoTemp(WebRequest webRequest) throws IOException {
         //
-        File temp = ApplicationHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        File temp =null;// RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
         return FileCopyUtils.copyToByteArray(temp);
     }
 
-    @RequestMapping("/project/{projectId}/logo")
+    @RequestMapping("/profile/{projectId}/logo")
     public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
         //
-        File target = ApplicationHelper.getInstance().getProjectLogo(projectId);
+        File target = null;
         return FileCopyUtils.copyToByteArray(target);
     }
     
-    @RequestMapping("/project/edit")
+    @RequestMapping("/profile/edit")
     public String editProject(Project project, WebRequest webRequest) {
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //

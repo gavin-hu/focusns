@@ -48,7 +48,7 @@ public class ProjectHistoryWidget {
         historyService.createProjectHistory(history);
     }
 
-    @RequestMapping("/history-form")
+    @RequestMapping("/history-edit")
     @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
     public String doEdit(@WidgetAttribute Project project,
                          @WidgetAttribute ProjectUser user, Model model) {
@@ -56,7 +56,7 @@ public class ProjectHistoryWidget {
         ProjectHistory template = createTemplate(user, project);
         model.addAttribute("template", template);
         //
-        return "modules/profile/history-form";
+        return "modules/profile/history-edit";
     }
 
     @RequestMapping("/history-list")

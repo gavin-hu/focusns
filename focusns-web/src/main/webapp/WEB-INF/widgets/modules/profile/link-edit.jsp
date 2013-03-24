@@ -10,10 +10,10 @@
             <c:url value="${currentPath}" var="redirectTo" />
             <c:choose>
                 <c:when test="${empty projectLink}">
-                    <a href='<c:url value="/project/link/create?fromProjectId=${fromProject.id}&toProjectId=${toProject.id}&redirect=${redirectTo}" />'>添加关注</a>
+                    <a href='<c:url value="/project/link/create.action?fromProjectId=${fromProject.id}&toProjectId=${toProject.id}&redirect=${redirectTo}" />'>添加关注</a>
                 </c:when>
                 <c:otherwise>
-                    <a href='<c:url value="/project/link/remove?fromProjectId=${projectLink.fromProjectId}&toProjectId=${projectLink.toProjectId}&redirect=${redirectTo}" />'>取消关注</a>
+                    <a href='<c:url value="/project/link/remove.action?fromProjectId=${projectLink.fromProjectId}&toProjectId=${projectLink.toProjectId}&redirect=${redirectTo}" />'>取消关注</a>
                 </c:otherwise>
             </c:choose>
         </div>

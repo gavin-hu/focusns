@@ -28,6 +28,17 @@
             <widget target="/site/copyright" />
         </position>
     </page>
+    <page path="/welcome">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
     <page path="/index">
         <position name="userMenu">
             <widget target="/site/menu-user" />

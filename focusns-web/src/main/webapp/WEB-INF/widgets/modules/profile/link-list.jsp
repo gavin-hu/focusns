@@ -19,9 +19,9 @@
                     为空
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${page.results}">
+                    <c:forEach items="${page.results}" var="link">
                         <div class="project-link">
-                            <a href='<c:url value="${link.toProject.code}/profile" />'>
+                            <a href='<c:url value="/${link.toProject.code}/profile" />'>
                                 <img class="thumbnail" src='<c:url value="/project/${link.toProjectId}/logo" />' />
                             </a>
                         </div>

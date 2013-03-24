@@ -23,7 +23,6 @@ package org.focusns.service.core;
  */
 
 
-import org.focusns.model.common.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
 
@@ -45,6 +44,6 @@ public interface ProjectLogoService {
     
     File loadProjectLogoImage(ProjectLogo logo);
     
-    void cropProjectLogoImage(Project project, File original, Rectangle rectangle) throws IOException;
+    void cropProjectLogoImage(Project project, File original) throws IOException;
     
 }

@@ -8,7 +8,7 @@
             <c:forEach items="${page.results}" var="history">
             <div class="history">
                 <a href='<c:url value="/index" />'>
-                    <img class="thumbnail" src='<c:url value="/project/${history.projectId}/logo" />'/>
+                    <img class="thumbnail" src='<c:url value="/profile/${history.projectId}/logo" />'/>
                 </a>
 
                 <div class="content">${history.content}</div>
@@ -19,7 +19,7 @@
                 <div class="history-children">
                     <c:forEach items="${history.children}" var="childHistory">
                     <div class="history">
-                        <img class="thumbnail" src='<c:url value="/project/user/${childHistory.createById}/logo" />'/>
+                        <img class="thumbnail" src='<c:url value="/profile/user/${childHistory.createById}/logo" />'/>
                         <div class="content">${childHistory.content}</div>
                         <div class="status">
                             <abbr class="date"title="${childHistory.createAt}">${childHistory.createAt}</abbr>

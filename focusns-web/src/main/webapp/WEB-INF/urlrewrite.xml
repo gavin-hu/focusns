@@ -10,7 +10,7 @@
     </rule>
     <rule>
         <note>Site Page</note>
-        <from>^/(login|register|index|people)$</from>
+        <from>^/(login|register|welcome|index|people)$</from>
         <to>/portal?path=/$1</to>
     </rule>
     <!-- cms pages -->
