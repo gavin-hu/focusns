@@ -30,7 +30,7 @@
                 </c:choose>
                 <c:set value="${queryString}redirect${paramKV.key}=${paramKV.value}" var="queryString" />
             </c:forEach>
-            <a href='<c:url value="/login${queryString}" />'>登录</a>
+            <a href='<c:url value="/login" />'>登录</a>
         </li>
         <li>
             <a href='<c:url value="/register" />'>注册</a>

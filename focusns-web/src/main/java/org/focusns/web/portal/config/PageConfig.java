@@ -67,6 +67,10 @@ public class PageConfig {
         return positionConfigMap;
     }
 
+    public PositionConfig getPositionConfig(String name) {
+        return positionConfigMap.get(name);
+    }
+
     public void addPositionConfig(PositionConfig positionConfig) {
         this.positionConfigMap.put(positionConfig.getName(), positionConfig);
     }

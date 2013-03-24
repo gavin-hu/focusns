@@ -1,4 +1,4 @@
-package org.focusns.web.modules.profile;
+package org.focusns.web.widget.annotation;
 
 /*
  * #%L
@@ -23,26 +23,18 @@ package org.focusns.web.modules.profile;
  */
 
 
-import org.focusns.model.core.ProjectLink;
-import org.focusns.service.core.ProjectLinkService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-@Controller
-public class ProjectLinkController {
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface WidgetPreference {
 
-    @Autowired
-    private ProjectLinkService projectLinkService;
+    String value() default "";
 
-    @RequestMapping("/project/link/create")
-    public void link(ProjectLink link) {
-        projectLinkService.createProjectLink(link);
-    }
+    boolean required() default true;
 
-    @RequestMapping("/project/link/remove")
-    public void unlink(ProjectLink link) {
-        projectLinkService.removeProjectLink(link.getFromProjectId(), link.getToProjectId());
-    }
-
+    String defaultValue() default "";
 }

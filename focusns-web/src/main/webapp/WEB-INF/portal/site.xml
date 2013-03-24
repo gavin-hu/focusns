@@ -28,4 +28,52 @@
             <widget target="/site/copyright" />
         </position>
     </page>
+    <page path="/index">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="mainColumn" grid="2,2">
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>5</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>6</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>7</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>8</categoryId>
+                </preference>
+            </widget>
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/people">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
 </pages>

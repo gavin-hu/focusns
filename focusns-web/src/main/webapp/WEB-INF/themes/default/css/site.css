@@ -1,0 +1,11 @@
+.article-category {
+    padding:10px;
+}
+.article-category span.date {
+
+}
+
+.article .article-head h3 {
+    font-size: 200%;
+    font-weight: bold;
+}

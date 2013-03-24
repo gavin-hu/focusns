@@ -13,7 +13,7 @@
 
     <mvc:annotation-driven validator="beanValidator">
         <mvc:argument-resolvers>
-            <bean class="org.focusns.web.springmvc.bind.CustomWebArgumentResolver" />
+            <bean class="org.focusns.web.springmvc.bind.WidgetArgumentResolver" />
         </mvc:argument-resolvers>
     </mvc:annotation-driven>
 

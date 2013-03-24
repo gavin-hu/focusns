@@ -49,6 +49,7 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-form")
+    @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
     public String doEdit(@WidgetAttribute Project project,
                          @WidgetAttribute ProjectUser user, Model model) {
         //

@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
-    <page path="/index">
+    <page path="/article">
         <position name="userMenu">
             <widget target="/site/menu-user" />
         </position>
         <position name="mainMenu">
             <widget target="/site/menu-main" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/cms/article-view" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />
         </position>
     </page>
-    <page path="/people">
+    <page path="/articles">
         <position name="userMenu">
             <widget target="/site/menu-user" />
         </position>
         <position name="mainMenu">
             <widget target="/site/menu-main" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/cms/article-list" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />

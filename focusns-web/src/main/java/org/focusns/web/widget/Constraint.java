@@ -24,6 +24,8 @@ package org.focusns.web.widget;
 
 
 public enum Constraint {
+    PAGE_NOT_EMPTY,
     PROJECT_REQUIRED,
-    PROJECT_USER_REQUIRED, PAGE_NOT_EMPTY,
+    PROJECT_USER_REQUIRED,
+    PROJECT_NOT_MY_PROFILE,
 }

@@ -25,8 +25,10 @@ package org.focusns.web.portal.config;
 
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 
 public class PositionConfig {
 
@@ -35,7 +37,7 @@ public class PositionConfig {
     private int rows;
     private int columns;
     //
-    private List<WidgetConfig> widgetConfigList = new ArrayList<WidgetConfig>();
+    private Map<String, WidgetConfig> widgetConfigMap = new LinkedHashMap<String, WidgetConfig>();
 
     public String getName() {
         return name;
@@ -72,12 +74,16 @@ public class PositionConfig {
         return columns;
     }
 
-    public List<WidgetConfig> getWidgetConfigList() {
-        return widgetConfigList;
+    public Collection<WidgetConfig> getWidgetConfigList() {
+        return widgetConfigMap.values();
+    }
+
+    public WidgetConfig getWidgetConfig(String id) {
+        return widgetConfigMap.get(id);
     }
 
     public void addWidgetConfig(WidgetConfig widgetConfig) {
-        this.widgetConfigList.add(widgetConfig);
+        this.widgetConfigMap.put(widgetConfig.getId(), widgetConfig);
     }
 
 }

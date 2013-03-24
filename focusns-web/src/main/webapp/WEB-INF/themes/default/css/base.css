@@ -7,6 +7,8 @@ body {
 #right-column{
     min-height:500px;
 }
+#main-column {
+}
 #copyright {
 	padding-bottom:20px;
 	text-align:center;
@@ -183,6 +185,11 @@ button {
     top:0;
 }
 
+img {
+    border: none;
+    border-style: none;
+}
+
 img.thumbnail{
     position:absolute;
     display: inline-block;
@@ -250,4 +257,19 @@ a {
 }
 .register .register-right ul li.tencent {
     background-position: 0 -164px;
+}
+
+table.grids {
+    width: 100%;
+    border-collapse:collapse;
+}
+
+table.grids td {
+    padding: 0 5px;
+}
+table.grids td.first {
+    padding-left: 0;
+}
+table.grids td.last {
+    padding-right: 0;
 }

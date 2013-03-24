@@ -25,8 +25,12 @@ package org.focusns.web.springmvc.bind;
 
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
+import org.focusns.web.portal.config.WidgetConfig;
 import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.web.widget.annotation.WidgetPreference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
@@ -34,7 +38,14 @@ import org.springframework.web.bind.support.WebArgumentResolver;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.WebRequest;
 
-public class CustomWebArgumentResolver implements WebArgumentResolver {
+public class WidgetArgumentResolver implements WebArgumentResolver {
+
+    private ConversionService conversionService;
+
+    @Autowired
+    public void setConversionService(ConversionService conversionService) {
+        this.conversionService = conversionService;
+    }
 
     public Object resolveArgument(MethodParameter methodParameter,
                                   NativeWebRequest webRequest) throws Exception {
@@ -44,9 +55,28 @@ public class CustomWebArgumentResolver implements WebArgumentResolver {
             String widgetAttributeName = getWidgetAttributeName(methodParameter, widgetAttribute);
             Object value = webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
             if(widgetAttribute.required()) {
-                Assert.notNull(value, String.format("Widget attribute %s can not be null", value));
+                Assert.notNull(value, String.format("Widget attribute %s can not be null!", value));
             }
             return value;
+        }
+        //
+        WidgetPreference widgetPreference = methodParameter.getParameterAnnotation(WidgetPreference.class);
+        if(widgetPreference!=null) {
+            WidgetConfig widgetConfig = (WidgetConfig) webRequest.getAttribute("widgetConfig", WebRequest.SCOPE_REQUEST);
+            String widgetPreferenceName = getWidgetPreferenceName(methodParameter, widgetPreference);
+            if(widgetConfig!=null) {
+                String defaultValue = widgetPreference.defaultValue();
+                Object value = widgetConfig.getPreferences().get(widgetPreferenceName);
+                if(StringUtils.hasText(defaultValue) && value==null) {
+                    value = defaultValue;
+                }
+                //
+                if(widgetPreference.required()) {
+                    Assert.notNull(value, String.format("Widget preference %s can not be null!", value));
+                }
+                //
+                return conversionService.convert(value, methodParameter.getParameterType());
+            }
         }
         //
         return UNRESOLVED;
@@ -63,6 +93,16 @@ public class CustomWebArgumentResolver implements WebArgumentResolver {
         }
         //
         return widgetAttributeName;
+    }
+
+    private String getWidgetPreferenceName(MethodParameter methodParameter, WidgetPreference widgetPreference) {
+        String widgetPreferenceName = methodParameter.getParameterName();
+        //
+        if(StringUtils.hasText(widgetPreference.value())) {
+            widgetPreferenceName = widgetPreference.value();
+        }
+        //
+        return widgetPreferenceName;
     }
 }
 

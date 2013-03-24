@@ -23,6 +23,7 @@ package org.focusns.web.portal.interceptor;
  */
 
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
@@ -37,7 +38,12 @@ public class PortalInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //
-
+        String requestPath = urlPathHelper.getOriginatingServletPath(request);
+        String requestQueryString = urlPathHelper.getOriginatingQueryString(request);
+        if(StringUtils.hasText(requestQueryString)) {
+            requestPath += "?" + requestQueryString;
+        }
+        request.setAttribute("currentPath", requestPath);
         //
         return true;
     }

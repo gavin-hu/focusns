@@ -29,6 +29,7 @@ import java.util.Map;
 public class WidgetConfig {
 
     private String id;
+    private String title;
     private String target;
     private Map<String, Object> preferences = new HashMap<String, Object>();
 	
@@ -42,6 +43,14 @@ public class WidgetConfig {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getTarget() {

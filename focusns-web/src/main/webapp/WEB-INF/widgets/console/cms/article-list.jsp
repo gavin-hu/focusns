@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<div class="widget">
+<div id="${widgetConfig.id}" class="widget">
     <div class="widget-hd">
         <h2>文章管理</h2>
     </div>
@@ -22,9 +22,10 @@
                 <c:otherwise>
                     <div>
                         <label>栏目</label>
-                        <form:select path="articleCategory.id">
+                        <form:select id="categorySelect" path="articleCategory.id">
                             <form:options items="${articleCategories}" itemLabel="label" itemValue="id" />
                         </form:select>
+                        <a href='<c:url value="/console/cms?mode=article-edit" /><c:if test="${not empty param.categoryId}">&categoryId=${param.categoryId}</c:if>'>新建</a>
                     </div>
                     <ul>
                         <c:forEach items="${page.results}" var="article">
@@ -41,3 +42,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('div#${widgetConfig.id} #categorySelect').change(function(){
+        window.location.href = '<c:url value="/console/cms?mode=article-list" />&categoryId=' + $(this).val();
+    });
+});
+</script>

@@ -28,38 +28,61 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectLinkService;
+import org.focusns.web.widget.Constraint;
+import org.focusns.web.widget.annotation.Constraints;
+import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.web.widget.annotation.WidgetPreference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.Map;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/project")
 public class ProjectLinkWidget {
     
     @Autowired
     private ProjectLinkService projectLinkService;
-    
-    public String action(Map<String, Object> model,
-                         ProjectUser user,
-                         Project project) {
+
+    @RequestMapping("/link-edit")
+    @Constraints({Constraint.PROJECT_NOT_MY_PROFILE})
+    public String doEdit(@WidgetAttribute ProjectUser user,
+                         @WidgetAttribute Project project, Model model) {
         //
         ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
-        model.put("projectLink", projectLink);
-        model.put("fromProject", user.getProject());
-        model.put("toProject", project);
+        model.addAttribute("projectLink", projectLink);
+        model.addAttribute("fromProject", user.getProject());
+        model.addAttribute("toProject", project);
         //
-        return "modules/profile/link-action";
+        return "modules/profile/link-edit";
     }
 
-    public String list(Map<String, Object> model,
-                       int limit,
-                       Project project) {
+    @RequestMapping("/link-list")
+    @Constraints({Constraint.PROJECT_REQUIRED})
+    public String doList(@WidgetPreference(defaultValue = "6") Integer limit,
+                         @WidgetPreference(defaultValue = "false") Boolean reverse,
+                         @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
-        page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
-        model.put("portal", page);
+        if(reverse.booleanValue()) {
+            page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
+        } else {
+            page = projectLinkService.fetchPageByToProjectId(page, project.getId());
+        }
+        model.addAttribute(Page.KEY, page);
+        model.addAttribute("reverse", reverse.booleanValue());
         //
         return "modules/profile/link-list";
+    }
+
+    @RequestMapping("/link/create")
+    public void doCreate(ProjectLink link) {
+        projectLinkService.createProjectLink(link);
+    }
+
+    @RequestMapping("/link/remove")
+    public void doRemove(ProjectLink link) {
+        projectLinkService.removeProjectLink(link.getFromProjectId(), link.getToProjectId());
     }
     
 }

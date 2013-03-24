@@ -23,21 +23,44 @@ package org.focusns.web.cms;
  */
 
 
+import org.focusns.model.blog.BlogCategory;
+import org.focusns.model.blog.BlogPost;
+import org.focusns.model.common.Page;
 import org.focusns.service.blog.BlogCategoryService;
+import org.focusns.service.blog.BlogPostService;
+import org.focusns.web.widget.annotation.WidgetPreference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/site/cms")
+@RequestMapping("/cms")
 public class ArticleCategoryWidget {
 
+    @Autowired
+    private BlogPostService blogPostService;
     @Autowired
     private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/category-list")
     public String doList() {
         return "cms/category-list";
+    }
+
+    @RequestMapping("/category-view")
+    public String doView(@WidgetPreference Long categoryId,
+                         @WidgetPreference Integer limit, Model model) {
+        //
+        BlogCategory articleCategory = blogCategoryService.getBlogCategory(categoryId);
+        //
+        Page<BlogPost> page = new Page<BlogPost>(limit);
+        page = blogPostService.fetchPageByCategoryId(page, categoryId);
+        //
+        model.addAttribute("articleCategory", articleCategory);
+        model.addAttribute(Page.KEY, page);
+        //
+        return "cms/category-view";
     }
 
 }

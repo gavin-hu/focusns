@@ -10,12 +10,21 @@
         <position name="subMenu">
             <widget target="/site/menu-sub" />
         </position>
-        <position name="mainColumn">
-            <widget target="/project/history-form">
-                <rules>
-                    <rule>projectUserRequired</rule>
-                </rules>
+        <position name="leftColumn">
+            <widget target="/project/link-edit">
+
             </widget>
+            <widget target="/project/link-list">
+
+            </widget>
+            <widget target="/project/link-list">
+                <preference>
+                    <reverse>true</reverse>
+                </preference>
+            </widget>
+        </position>
+        <position name="mainColumn">
+            <widget target="/project/history-form" />
             <widget target="/project/history-list" />
         </position>
         <position name="copyright">

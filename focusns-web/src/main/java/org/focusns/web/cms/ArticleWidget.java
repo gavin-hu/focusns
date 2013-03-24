@@ -23,17 +23,23 @@ package org.focusns.web.cms;
  */
 
 
+import org.focusns.model.blog.BlogPost;
+import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/site/cms")
+@RequestMapping("/cms")
 public class ArticleWidget {
 
     @Autowired
     private BlogPostService blogPostService;
+    @Autowired
+    private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/article-list")
     public String doList() {
@@ -41,7 +47,11 @@ public class ArticleWidget {
     }
 
     @RequestMapping("/article-view")
-    public String doView() {
+    public String doView(@RequestParam Long id, Model model) {
+        //
+        BlogPost blogPost = blogPostService.getBlogPost(id);
+        model.addAttribute("article", blogPost);
+        //
         return "cms/article-view";
     }
 

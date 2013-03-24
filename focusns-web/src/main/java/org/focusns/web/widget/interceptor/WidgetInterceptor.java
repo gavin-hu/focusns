@@ -27,6 +27,8 @@ import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.web.portal.config.PageConfig;
+import org.focusns.web.portal.config.PositionConfig;
+import org.focusns.web.portal.config.WidgetConfig;
 import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.annotation.Constraints;
 import org.springframework.util.StringUtils;
@@ -53,6 +55,14 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                     return false;
                 }
             }
+            //
+            String positionName = request.getParameter("position");
+            String widgetId = request.getParameter("widget");
+            if(StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig!=null) {
+                PositionConfig positionConfig = pageConfig.getPositionConfig(positionName);
+                WidgetConfig widgetConfig = positionConfig.getWidgetConfig(widgetId);
+                request.setAttribute("widgetConfig", widgetConfig);
+            }
         }
         //
         return true;
@@ -69,6 +79,12 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                     }
                 } else if(Constraint.PROJECT_USER_REQUIRED==constraint) {
                     if(request.getAttribute(ProjectUser.KEY)==null) {
+                        return true;
+                    }
+                } else if(Constraint.PROJECT_NOT_MY_PROFILE==constraint) {
+                    Project project = (Project) request.getAttribute(Project.KEY);
+                    ProjectUser projectUser = (ProjectUser) request.getAttribute(ProjectUser.KEY);
+                    if(project==null || projectUser==null || projectUser.getProjectId()== project.getId()) {
                         return true;
                     }
                 }

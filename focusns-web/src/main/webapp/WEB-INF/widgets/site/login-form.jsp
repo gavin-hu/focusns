@@ -29,7 +29,7 @@
                     </c:if>
                 </c:if>
             </c:forEach>
-            <button type="submit" name="redirect" value='<c:url value="${redirectTo}" />'>登录</button>
+            <button type="submit">登录</button>
         </div>
     </form>
 </div>

@@ -1,7 +1,6 @@
 <%@page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <ul class="menu">
     <li><a href='<c:url value="/index"/>' >首页</a></li>
     <c:forEach items="${requestScope.categories}" var="category">
@@ -20,6 +19,4 @@
         <input type="text" name="keywords" />
         <input type="submit" value="搜索" />
     </form>
-</div>
-</div>
 </div>
