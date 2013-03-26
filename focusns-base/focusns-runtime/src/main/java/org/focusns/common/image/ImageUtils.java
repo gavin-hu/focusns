@@ -31,6 +31,16 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 
 public class ImageUtils {
+
+    public static void crop(File original, File target, Rectangle rectangle) throws IOException {
+        //
+        int x = rectangle.getXInt();
+        int y = rectangle.getYInt();
+        int w = rectangle.getWInt();
+        int h = rectangle.getHInt();
+        //
+        ImageUtils.crop(original, target, x, y, w, h, "PNG");
+    }
     
     /**
      * 裁剪图片
@@ -100,16 +110,25 @@ public class ImageUtils {
      */
     public static void resize(InputStream originalStream, OutputStream thumbnailStream,
             int newWidth, int newHeight, String format) throws IOException {
-        BufferedImage originalImage = ImageIO.read(originalStream);
-        // 获得原始图片的宽度及高度
-        int width = originalImage.getWidth();
-        int height = originalImage.getHeight();
-        // 判断是否有必要缩放
-        if (width > 0 || height > 0) {
-            AdvancedResizeOp resizeOp = new ThumpnailRescaleOp(newWidth, newHeight);
-            resizeOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Normal);
-            BufferedImage thumbnailImage = resizeOp.filter(originalImage, null);
-            ImageIO.write(thumbnailImage, format, thumbnailStream);
+        try {
+            BufferedImage originalImage = ImageIO.read(originalStream);
+            // 获得原始图片的宽度及高度
+            int width = originalImage.getWidth();
+            int height = originalImage.getHeight();
+            // 判断是否有必要缩放
+            if (width > 0 || height > 0) {
+                AdvancedResizeOp resizeOp = new ThumpnailRescaleOp(newWidth, newHeight);
+                resizeOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.Normal);
+                BufferedImage thumbnailImage = resizeOp.filter(originalImage, null);
+                ImageIO.write(thumbnailImage, format, thumbnailStream);
+            }
+        } finally {
+            if(originalStream!=null) {
+                originalStream.close();
+            }
+            if(thumbnailStream!=null) {
+                thumbnailStream.close();
+            }
         }
     }
 }

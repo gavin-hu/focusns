@@ -23,12 +23,12 @@ package org.focusns.web.modules.admin;
  */
 
 
+import org.focusns.common.image.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectService;
-import org.focusns.web.helper.Rectangle;
 import org.focusns.web.helper.WebRequestHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

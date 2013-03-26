@@ -23,9 +23,7 @@ package org.focusns.web.helper;
  */
 
 
-import org.focusns.common.image.ImageUtils;
 import org.springframework.util.FileCopyUtils;
-import org.springframework.util.NumberUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -58,6 +56,11 @@ public class RuntimeHelper {
         setFile(TMP_DIR, coordinate, inputStream);
     }
 
+    public static void cleanTempFile(Coordinate coordinate) {
+        File file = new File(TMP_DIR, coordinate.toPath());
+        file.delete();
+    }
+
     public static boolean isTargetFileExists(Coordinate coordinate) {
         return isFileExists(RUNTIME_DIR, coordinate);
     }
@@ -70,52 +73,41 @@ public class RuntimeHelper {
         setFile(RUNTIME_DIR, coordinate, inputStream);
     }
 
+    public static void cleanTargetFile(Coordinate coordinate) {
+        File file = new File(RUNTIME_DIR, coordinate.toPath());
+        File parentFile = file.getParentFile();
+        //
+        String baseCoordinate = coordinate.toPath(false) + "_";
+        if(parentFile!=null) {
+            for(File tmp : parentFile.listFiles()) {
+                if(tmp.getAbsolutePath().contains(baseCoordinate)) {
+                    tmp.delete();
+                }
+            }
+        }
+        //
+        file.delete();
+    }
+
     private static boolean isFileExists(String rootDir, Coordinate coordinate) {
-        File file = new File(rootDir, coordinate.toString());
+        File file = new File(rootDir, coordinate.toPath());
         return file.exists();
     }
 
     private static File getFile(String rootDir, Coordinate coordinate) throws IOException {
-        File file = new File(rootDir, coordinate.toString());
+        File file = new File(rootDir, coordinate.toPath());
         return file;
     }
 
     private static void setFile(String rootDir, Coordinate coordinate, InputStream inputStream) throws IOException {
-        File file = new File(rootDir, coordinate.toString());
+        // override
+        File file = new File(rootDir, coordinate.toPath());
         if(file.exists()) {
             file.delete();
         }
         file.getParentFile().mkdirs();
         file.createNewFile();
         FileCopyUtils.copy(inputStream, new FileOutputStream(file));
-    }
-
-    public static void cropThumbnail(File original, File target, Rectangle rectangle) throws IOException {
-        //
-        String xStr = rectangle.getX();
-        String yStr = rectangle.getY();
-        String wStr = rectangle.getW();
-        String hStr = rectangle.getH();
-        //
-        if(xStr.contains(".")) {
-            xStr = xStr.substring(0, xStr.indexOf("."));
-        }
-        if(yStr.contains(".")) {
-            yStr = yStr.substring(0, yStr.indexOf("."));
-        }
-        if(wStr.contains(".")) {
-            wStr = wStr.substring(0, wStr.indexOf("."));
-        }
-        if(hStr.contains(".")) {
-            hStr = hStr.substring(0, hStr.indexOf("."));
-        }
-        //
-        int x = NumberUtils.parseNumber(xStr, Integer.class);
-        int y = NumberUtils.parseNumber(yStr, Integer.class);
-        int w = NumberUtils.parseNumber(wStr, Integer.class);
-        int h = NumberUtils.parseNumber(hStr, Integer.class);
-        //
-        ImageUtils.crop(original, target, x, y, w, h, "PNG");
     }
     
 }

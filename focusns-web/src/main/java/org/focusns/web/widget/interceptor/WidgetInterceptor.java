@@ -23,6 +23,7 @@ package org.focusns.web.widget.interceptor;
  */
 
 
+import org.apache.commons.codec.binary.Base64;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
@@ -41,6 +42,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class WidgetInterceptor extends HandlerInterceptorAdapter {
+
+    private Base64 base64 = new Base64();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -108,9 +111,15 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         }
         //
         String redirect = request.getParameter("redirect");
+        //
         if(StringUtils.hasText(redirect)) {
+            // decode first
+            if(!redirect.contains("/")) {
+                redirect = new String(base64.decode(redirect));
+            }
+            //
             String contextPath = request.getContextPath();
-            if(contextPath.length()>1) {
+            if(redirect.startsWith(contextPath)) {
                 redirect = redirect.substring(contextPath.length());
             }
             //

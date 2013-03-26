@@ -22,11 +22,12 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import org.focusns.common.image.ImageUtils;
+import org.focusns.common.image.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
 import org.focusns.web.helper.Coordinate;
-import org.focusns.web.helper.Rectangle;
 import org.focusns.web.helper.RuntimeHelper;
 import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.annotation.Constraints;
@@ -60,6 +61,10 @@ public class ProjectUserWidget {
             model.addAttribute("hasTempFile", true);
         }
         //
+        if(RuntimeHelper.isTargetFileExists(avatarCoordinate)) {
+            model.addAttribute("hasTargetFile", true);
+        }
+        //
         model.addAttribute("project", project);
         model.addAttribute("projectUser", projectUser);
         //
@@ -72,17 +77,35 @@ public class ProjectUserWidget {
         //
         ProjectUser projectUser = projectUserService.getUser(project.getCreateById());
         model.addAttribute("projectUser", projectUser);
+        model.addAttribute("project", project);
         //
         return "modules/profile/user-view";
     }
 
     @RequestMapping("/user-avatar")
-    public @ResponseBody byte[] doAvatar(@RequestParam Long projectId,
-                                         @RequestParam Long userId) throws IOException {
+    public @ResponseBody byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
+                                         @RequestParam(required = false) Boolean isTempFile,
+                                         @RequestParam(required = false) Integer dimension) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
-        File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
-        return FileCopyUtils.copyToByteArray(tempFile);
+        if(isTempFile!=null && isTempFile.booleanValue()) {
+            File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
+            return FileCopyUtils.copyToByteArray(tempFile);
+        } else {
+            File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
+            //
+            if(dimension!=null) {
+                avatarCoordinate.setDimension(dimension);
+                File resizedTargetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
+                if(!resizedTargetFile.exists()) {
+                    ImageUtils.resize(targetFile, resizedTargetFile, dimension, dimension, "PNG");
+                }
+                //
+                targetFile = resizedTargetFile;
+            }
+            //
+            return FileCopyUtils.copyToByteArray(targetFile);
+        }
     }
 
     @RequestMapping("/user-avatar/upload")
@@ -98,9 +121,11 @@ public class ProjectUserWidget {
                        @RequestParam Long userId, Rectangle rectangle) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
+        RuntimeHelper.cleanTargetFile(avatarCoordinate);
+        //
         File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
         File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-        RuntimeHelper.cropThumbnail(tempFile, targetFile, rectangle);
+        ImageUtils.crop(tempFile, targetFile, rectangle);
     }
 
     private Coordinate getAvatarCoordinate(Object projectId, Object userId) {

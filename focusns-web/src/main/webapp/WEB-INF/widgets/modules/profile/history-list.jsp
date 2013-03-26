@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ui" tagdir="/WEB-INF/tags/ui" %>
 
 <div class="widget">
     <div class="widget-bd">
@@ -8,21 +9,21 @@
             <c:forEach items="${page.results}" var="history">
             <div class="history">
                 <a href='<c:url value="/index" />'>
-                    <img class="thumbnail" src='<c:url value="/profile/${history.projectId}/logo" />'/>
+                    <ui:avatar styleClass="thumbnail" dimension="50" projectId="${history.projectId}" projectUserId="${history.createById}" />
                 </a>
 
                 <div class="content">${history.content}</div>
                 <div class="status">
-                    <abbr class="date" title="${history.createAt}">${history.createAt}</abbr>
+                    <abbr class="date" title='<fmt:formatDate value="${history.createAt}" />'>${history.createAt}</abbr>
                 </div>
                 <c:if test="${not empty history.children}">
                 <div class="history-children">
                     <c:forEach items="${history.children}" var="childHistory">
                     <div class="history">
-                        <img class="thumbnail" src='<c:url value="/profile/user/${childHistory.createById}/logo" />'/>
+                        <ui:avatar styleClass="thumbnail" dimension="50" projectId="${childHistory.projectId}" projectUserId="${childHistory.createById}" />
                         <div class="content">${childHistory.content}</div>
                         <div class="status">
-                            <abbr class="date"title="${childHistory.createAt}">${childHistory.createAt}</abbr>
+                            <abbr class="date" title='<fmt:formatDate value="${childHistory.createAt}" />'>${childHistory.createAt}</abbr>
                         </div>
                     </div>
                     </c:forEach>

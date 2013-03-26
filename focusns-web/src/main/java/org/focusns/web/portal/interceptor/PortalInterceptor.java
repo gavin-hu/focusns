@@ -23,6 +23,7 @@ package org.focusns.web.portal.interceptor;
  */
 
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -33,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PortalInterceptor extends HandlerInterceptorAdapter {
 
+    private Base64 base64 = new Base64();
     private UrlPathHelper urlPathHelper = new UrlPathHelper();
     
     @Override
@@ -43,6 +45,7 @@ public class PortalInterceptor extends HandlerInterceptorAdapter {
         if(StringUtils.hasText(requestQueryString)) {
             requestPath += "?" + requestQueryString;
         }
+        requestPath = base64.encodeToString(requestPath.getBytes());
         request.setAttribute("currentPath", requestPath);
         //
         return true;

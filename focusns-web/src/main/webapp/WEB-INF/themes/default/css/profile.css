@@ -190,3 +190,15 @@
     width:40px;
     height:40px;
 }
+
+div.target-avatar img {
+    position: inherit;
+}
+
+div.profile-user {
+    padding: 10px;
+}
+
+div.profile-user-edit {
+    padding: 10px;
+}

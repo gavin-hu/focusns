@@ -23,6 +23,8 @@ package org.focusns.web.helper;
  */
 
 
+import java.io.File;
+
 public class Coordinate {
 
     private Object project;
@@ -30,6 +32,7 @@ public class Coordinate {
     private Object feature;
     private Object entity;
     private Object name;
+    private Object dimension;
 
     public Coordinate(Object projectId, Object feature, Object entity, Object name) {
         this.projectId = projectId;
@@ -38,10 +41,24 @@ public class Coordinate {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder("/project").append("/").append(projectId)
-                .append("/").append(feature).append("/").append(entity)
-                .append("/").append(name).toString();
+    public void setDimension(Object dimension) {
+        this.dimension = dimension;
     }
+
+    public String toPath() {
+        return toPath(true);
+    }
+
+    public String toPath(boolean includeDimension) {
+        StringBuilder pathBuilder = new StringBuilder().append(File.separator).append("project")
+                .append(File.separator).append(projectId).append(File.separator).append(feature)
+                .append(File.separator).append(entity).append(File.separator).append(name);
+        //
+        if(dimension!=null && includeDimension) {
+            pathBuilder.append("_").append(dimension);
+        }
+        //
+        return pathBuilder.toString();
+    }
+
 }
