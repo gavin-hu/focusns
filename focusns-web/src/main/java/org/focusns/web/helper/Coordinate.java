@@ -27,7 +27,6 @@ import java.io.File;
 
 public class Coordinate {
 
-    private Object project;
     private Object projectId;
     private Object feature;
     private Object entity;
@@ -50,7 +49,7 @@ public class Coordinate {
     }
 
     public String toPath(boolean includeDimension) {
-        StringBuilder pathBuilder = new StringBuilder().append(File.separator).append("project")
+        StringBuilder pathBuilder = new StringBuilder().append(File.separator).append("projects")
                 .append(File.separator).append(projectId).append(File.separator).append(feature)
                 .append(File.separator).append(entity).append(File.separator).append(name);
         //
