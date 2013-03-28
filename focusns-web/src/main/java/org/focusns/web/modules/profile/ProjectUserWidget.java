@@ -33,6 +33,8 @@ import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.annotation.Constraints;
 import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -46,10 +48,16 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectUserWidget {
+public class ProjectUserWidget implements ResourceLoaderAware {
 
     @Autowired
     private ProjectUserService projectUserService;
+
+    private ResourceLoader resourceLoader;
+    @Override
+    public void setResourceLoader(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @RequestMapping("/user-edit")
     @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
@@ -72,7 +80,7 @@ public class ProjectUserWidget {
     }
 
     @RequestMapping("/user-view")
-    @Constraints(Constraint.PROJECT_REQUIRED)
+    @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
     public String doView(@WidgetAttribute Project project, Model model) {
         //
         ProjectUser projectUser = projectUserService.getUser(project.getCreateById());
@@ -93,6 +101,9 @@ public class ProjectUserWidget {
             return FileCopyUtils.copyToByteArray(tempFile);
         } else {
             File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
+            if(targetFile==null||!targetFile.exists()) {
+                targetFile = getDefaultAvatarFile("default");
+            }
             //
             if(dimension!=null) {
                 avatarCoordinate.setDimension(dimension);
@@ -131,4 +142,11 @@ public class ProjectUserWidget {
     private Coordinate getAvatarCoordinate(Object projectId, Object userId) {
         return new Coordinate(projectId, "profile", "avatar", userId);
     }
+
+    private File getDefaultAvatarFile(String themeName) throws IOException {
+        return resourceLoader.getResource(
+                String.format("/WEB-INF/themes/%s/img/person_65.png", themeName)).getFile();
+    }
+
+
 }
