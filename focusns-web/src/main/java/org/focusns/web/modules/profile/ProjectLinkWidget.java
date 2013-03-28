@@ -61,13 +61,14 @@ public class ProjectLinkWidget {
     @Constraints({Constraint.PROJECT_REQUIRED})
     public String doList(@WidgetPreference(defaultValue = "6") Integer limit,
                          @WidgetPreference(defaultValue = "false") Boolean reverse,
+                         @WidgetPreference(defaultValue = "people") String category,
                          @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if(reverse.booleanValue()) {
-            page = projectLinkService.fetchPageByToProjectId(page, project.getId());
+            page = projectLinkService.fetchPageByToProjectId(page, project.getId(), category);
         } else {
-            page = projectLinkService.fetchPageByFromProjectId(page, project.getId());
+            page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
         }
         model.addAttribute(Page.KEY, page);
         model.addAttribute("reverse", reverse.booleanValue());

@@ -7,6 +7,23 @@
 		<result column="from_project_id" property="fromProjectId" jdbcType="VARCHAR" />
         <result column="to_project_id" property="toProjectId" jdbcType="VARCHAR" />
         <result column="mutual" property="mutual" jdbcType="BOOLEAN" />
+
+        <association property="fromProject" javaType="org.focusns.model.core.Project">
+            <id property="id" column="from_project_id"/>
+            <result property="code" column="from_project_code"/>
+            <result property="title" column="from_project_title"/>
+            <result property="description" column="from_project_description"/>
+            <result property="createById" column="from_project_create_by_id"/>
+            <result property="modifyById" column="from_project_modify_by_id"/>
+        </association>
+        <association property="toProject" javaType="org.focusns.model.core.Project">
+            <id property="id" column="to_project_id"/>
+            <result property="code" column="to_project_code"/>
+            <result property="title" column="to_project_title"/>
+            <result property="description" column="to_project_description"/>
+            <result property="createById" column="to_project_create_by_id"/>
+            <result property="modifyById" column="to_project_modify_by_id"/>
+        </association>
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectLink">
@@ -47,21 +64,41 @@
     </delete>
 
     <sql id="fetchPageSql">
-        from tb_project_link
+        from tb_project_link a, tb_project b
         <where>
+            <if test="category != null">
+                and b.category_id in (select id from tb_project_category where code = #{category})
+            </if>
             <if test="toProjectId!=null">
-                to_project_id = #{toProjectId}
+                and a.from_project_id = b.id and a.to_project_id = #{toProjectId}
             </if>
             <if test="fromProjectId!=null">
-                from_project_id = #{fromProjectId}
+                and a.to_project_id = b.id and a.from_project_id = #{fromProjectId}
             </if>
             <if test="mutual!=null">
-                mutual = #{mutual}
+                and a.mutual = #{mutual}
             </if>
         </where>
     </sql>
     <select id="fetchPage" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchPageSql"/>
+        select a.*,
+        <if test="toProjectId!=null">
+               b.id as from_project_id,
+               b.code as from_project_code,
+               b.title as from_project_title,
+               b.description as from_project_description,
+               b.create_by_id as from_project_create_by_id,
+               b.modify_by_id as from_project_modify_by_id
+        </if>
+        <if test="fromProjectId!=null">
+            b.id as to_project_id,
+            b.code as to_project_code,
+            b.title as to_project_title,
+            b.description as to_project_description,
+            b.create_by_id as to_project_create_by_id,
+            b.modify_by_id as to_project_modify_by_id
+        </if>
+        <include refid="fetchPageSql"/>
     </select>
     <select id="fetchPageCount" parameterType="java.util.Map" resultType="java.lang.Long">
         select count(1) <include refid="fetchPageSql"/>

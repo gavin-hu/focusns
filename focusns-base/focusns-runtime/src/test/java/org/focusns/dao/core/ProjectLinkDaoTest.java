@@ -24,6 +24,7 @@ package org.focusns.dao.core;
 
 
 import org.focusns.dao.AbstractDaoTest;
+import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,5 +43,12 @@ public class ProjectLinkDaoTest extends AbstractDaoTest {
         link.setToProjectId(1);
         //
         projectLinkDao.insert(link);
+    }
+
+    @Test
+    public void testFetchByFromProjectId() {
+        Page<ProjectLink> page = new Page<ProjectLink>(10);
+        page = projectLinkDao.fetchByFromProjectId(page, 2L, "people", null);
+        System.out.println(page.getResults().size());
     }
 }

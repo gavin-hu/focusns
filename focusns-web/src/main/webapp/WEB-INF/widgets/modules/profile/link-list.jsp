@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="ui" tagdir="/WEB-INF/tags/ui" %>
 
 <div class="widget">
     <div class="widget-hd">
@@ -21,9 +22,16 @@
                 <c:otherwise>
                     <c:forEach items="${page.results}" var="link">
                         <div class="project-link">
-                            <a href='<c:url value="/${link.toProject.code}/profile" />'>
-                                <img class="thumbnail" src='<c:url value="/project/${link.toProjectId}/logo" />' />
-                            </a>
+                            <c:if test="${reverse}">
+                                <a href='<c:url value="/${link.toProject.code}/profile" />'>
+                                    <ui:avatar dimension="50" projectId="${link.fromProject.id}" projectUserId="${link.fromProject.createById}" />
+                                </a>
+                            </c:if>
+                            <c:if test="${!reverse}">
+                                <a href='<c:url value="/${link.toProject.code}/profile" />'>
+                                    <ui:avatar dimension="50" projectId="${link.toProject.id}" projectUserId="${link.toProject.createById}" />
+                                </a>
+                            </c:if>
                         </div>
                     </c:forEach>
                 </c:otherwise>

@@ -72,24 +72,24 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         return linkDao.selectByFromAndToProjectId(fromProjectId, toProjectId);
     }
 
-    public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId) {
-        page = linkDao.fetchByToProjectId(page, toProjectId, null);
+    public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
+        //
+        page = linkDao.fetchByToProjectId(page, toProjectId, category, null);
+        //
+        Project toProject = projectDao.select(toProjectId);
         for(ProjectLink projectLink : page.getResults()) {
-            Project fromProject = projectDao.select(projectLink.getFromProjectId());
-            Project toProject = projectDao.select(projectLink.getToProjectId());
-            projectLink.setFromProject(fromProject);
             projectLink.setToProject(toProject);
         }
         return page;
     }
 
-    public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId) {
-        page = linkDao.fetchByFromProjectId(page, fromProjectId, null);
+    public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
+        //
+        page = linkDao.fetchByFromProjectId(page, fromProjectId, category, null);
+        //
+        Project fromProject = projectDao.select(fromProjectId);
         for(ProjectLink projectLink : page.getResults()) {
-            Project fromProject = projectDao.select(projectLink.getFromProjectId());
-            Project toProject = projectDao.select(projectLink.getToProjectId());
             projectLink.setFromProject(fromProject);
-            projectLink.setToProject(toProject);
         }
         return page;
     }

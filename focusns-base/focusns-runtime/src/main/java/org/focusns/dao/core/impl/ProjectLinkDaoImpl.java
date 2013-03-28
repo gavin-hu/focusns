@@ -38,37 +38,38 @@ public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink>
 
     public ProjectLink selectByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //
-        Map parameter = createParameter(fromProjectId, toProjectId, null);
+        Map parameter = createParameter(fromProjectId, toProjectId, null, null);
         //
         return getSqlSession().selectOne(NAMESPACE.concat(".selectByFromAndToProjectId"), parameter);
     }
 
     public void deleteByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //
-        Map parameter = createParameter(fromProjectId, toProjectId, null);
+        Map parameter = createParameter(fromProjectId, toProjectId, null, null);
         //
         getSqlSession().delete(NAMESPACE.concat(".deleteByFromAndToProjectId"), parameter);
     }
 
-    public Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, Boolean mutual) {
+    public Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, String category, Boolean mutual) {
         //
-        Map parameter = createParameter(null, toProjectId, mutual);
-        //
-        return fetchPage(".fetchPage", page, parameter);
-    }
-
-    public Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, Boolean mutual) {
-        //
-        Map parameter = createParameter(fromProjectId, null, mutual);
+        Map parameter = createParameter(null, toProjectId, category, mutual);
         //
         return fetchPage(".fetchPage", page, parameter);
     }
 
-    private Map createParameter(Long fromProjectId, Long toProjectId, Boolean mutual) {
+    public Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category, Boolean mutual) {
+        //
+        Map parameter = createParameter(fromProjectId, null, category, mutual);
+        //
+        return fetchPage(".fetchPage", page, parameter);
+    }
+
+    private Map createParameter(Long fromProjectId, Long toProjectId, String category, Boolean mutual) {
         Map parameter = new HashMap();
         //
         parameter.put("fromProjectId", fromProjectId);
         parameter.put("toProjectId", toProjectId);
+        parameter.put("category", category);
         parameter.put("mutual", mutual);
         //
         return parameter;
