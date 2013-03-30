@@ -90,16 +90,11 @@
 }
 .project-links li {
     display: inline-block;
-    padding-bottom: 5px;
 }
-.project-links li.last,
-.project-links li.only {
-    padding-bottom: 0;
-}
-.project-links .project-link img.thumbnail {
-    position:static;
-    width:50px;
-    height:50px;
+.project-links img {
+    padding: 0 2px;
+    width:35px;
+    height:35px;
 }
 
 .share {
@@ -197,6 +192,13 @@ div.target-avatar img {
 
 div.profile-user {
     padding: 10px;
+    min-height: 65px;
+}
+div.profile-user img {
+    position: absolute;
+}
+div.profile-user ul.actions li {
+    padding-left: 70px;
 }
 
 div.profile-user-edit {

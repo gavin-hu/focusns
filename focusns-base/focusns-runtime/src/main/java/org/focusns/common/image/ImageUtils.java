@@ -95,6 +95,12 @@ public class ImageUtils {
      */
     public static void resize(File originalFile, File thumnailFile,
             int newWidth, int newHeight, String format) throws IOException {
+        //
+        if(!thumnailFile.exists()) {
+            thumnailFile.getParentFile().mkdirs();
+            thumnailFile.createNewFile();
+        }
+        //
         resize(new FileInputStream(originalFile), new FileOutputStream(thumnailFile), 
                 newWidth, newHeight, format);
     }

@@ -78,7 +78,7 @@ public class RuntimeHelper {
         File parentFile = file.getParentFile();
         //
         String baseCoordinate = coordinate.toPath(false) + "_";
-        if(parentFile!=null) {
+        if(parentFile!=null && parentFile.listFiles()!=null) {
             for(File tmp : parentFile.listFiles()) {
                 if(tmp.getAbsolutePath().contains(baseCoordinate)) {
                     tmp.delete();

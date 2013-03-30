@@ -12,8 +12,6 @@
         </position>
         <position name="leftColumn">
             <widget target="/project/user-view" />
-            <widget target="/project/link-edit">
-            </widget>
             <widget target="/project/link-list">
             </widget>
             <widget target="/project/link-list">

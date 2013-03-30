@@ -17,23 +17,36 @@
         <div class="project-links">
             <c:choose>
                 <c:when test="${empty page.results}">
-                    为空
+                    <c:choose>
+                        <c:when test="${reverse}">
+                        当前还没有粉丝...
+                        </c:when>
+                        <c:otherwise>
+                            当前还没有关注...
+                        </c:otherwise>
+                    </c:choose>
                 </c:when>
                 <c:otherwise>
-                    <c:forEach items="${page.results}" var="link">
-                        <div class="project-link">
-                            <c:if test="${reverse}">
+                    <ul>
+                        <c:forEach items="${page.results}" var="link" varStatus="status">
+                            <c:if test="${status.index % 3 == 0}">
+                            <li>
+                            </c:if>
+                                <c:if test="${reverse}">
                                 <a href='<c:url value="/${link.toProject.code}/profile" />'>
                                     <ui:avatar dimension="50" projectId="${link.fromProject.id}" projectUserId="${link.fromProject.createById}" />
                                 </a>
+                                </c:if>
+                                <c:if test="${!reverse}">
+                                    <a href='<c:url value="/${link.toProject.code}/profile" />'>
+                                        <ui:avatar dimension="50" projectId="${link.toProject.id}" projectUserId="${link.toProject.createById}" />
+                                    </a>
+                                </c:if>
+                            <c:if test="${status.index % 3 == 2}">
+                            </li>
                             </c:if>
-                            <c:if test="${!reverse}">
-                                <a href='<c:url value="/${link.toProject.code}/profile" />'>
-                                    <ui:avatar dimension="50" projectId="${link.toProject.id}" projectUserId="${link.toProject.createById}" />
-                                </a>
-                            </c:if>
-                        </div>
-                    </c:forEach>
+                        </c:forEach>
+                    </ul>
                 </c:otherwise>
             </c:choose>
         </div>
