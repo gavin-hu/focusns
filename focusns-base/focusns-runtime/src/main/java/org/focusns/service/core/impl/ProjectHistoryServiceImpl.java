@@ -27,7 +27,9 @@ import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.common.Page;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,9 @@ import java.util.List;
 public class ProjectHistoryServiceImpl implements ProjectHistoryService {
 
     @Autowired
-    private ProjectUserDao projectUserDao;
-    @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    private ProjectUserDao projectUserDao;
     @Autowired
     private ProjectHistoryDao projectHistoryDao;
     
@@ -65,10 +67,21 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
 
     public Page<ProjectHistory> fetchPage(Page<ProjectHistory> page, long projectId) {
         page = projectHistoryDao.fetchByProjectId(page, projectId);
-        //
+        // TODO performance tuning
         for(ProjectHistory history : page.getResults()) {
-            List<ProjectHistory> children = projectHistoryDao
-                    .selectByParentId(history.getId());
+            Project project = projectDao.select(history.getProjectId());
+            ProjectUser projectUser = projectUserDao.selectWithProject(history.getCreateById());
+            history.setProject(project);
+            history.setCreateBy(projectUser);
+            //
+            List<ProjectHistory> children = projectHistoryDao.selectByParentId(history.getId());
+            for(ProjectHistory child : children) {
+                //
+                Project childProject = projectDao.select(child.getProjectId());
+                ProjectUser childProjectUser = projectUserDao.selectWithProject(child.getCreateById());
+                child.setProject(childProject);
+                child.setCreateBy(childProjectUser);
+            }
             history.setChildren(children);
         }
         //

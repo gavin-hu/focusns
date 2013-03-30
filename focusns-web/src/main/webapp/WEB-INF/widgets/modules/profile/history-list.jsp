@@ -8,22 +8,25 @@
         <div class="histories">
             <c:forEach items="${page.results}" var="history">
             <div class="history">
-                <a href='<c:url value="/index" />'>
-                    <ui:avatar styleClass="thumbnail" dimension="50" projectId="${history.projectId}" projectUserId="${history.createById}" />
+                <a href='<c:url value="/${history.createBy.project.code}/profile" />'>
+                    <ui:avatar styleClass="thumbnail" dimension="50" projectId="${history.createBy.projectId}" projectUserId="${history.createBy.id}" />
                 </a>
-
                 <div class="content">${history.content}</div>
                 <div class="status">
-                    <abbr class="date" title='<fmt:formatDate value="${history.createAt}" />'>${history.createAt}</abbr>
+                    <abbr class="date" title='<fmt:formatDate value="${history.createAt}" pattern="yyyy-MM-dd HH:mm:ss" />'>
+                    ${history.createAt}</abbr>
                 </div>
                 <c:if test="${not empty history.children}">
                 <div class="history-children">
                     <c:forEach items="${history.children}" var="childHistory">
                     <div class="history">
-                        <ui:avatar styleClass="thumbnail" dimension="50" projectId="${childHistory.projectId}" projectUserId="${childHistory.createById}" />
+                        <a href='<c:url value="/${childHistory.createBy.project.code}/profile" />'>
+                        <ui:avatar styleClass="thumbnail" dimension="50" projectId="${childHistory.createBy.projectId}" projectUserId="${childHistory.createBy.id}" />
+                        </a>
                         <div class="content">${childHistory.content}</div>
                         <div class="status">
-                            <abbr class="date" title='<fmt:formatDate value="${childHistory.createAt}" />'>${childHistory.createAt}</abbr>
+                            <abbr class="date" title='<fmt:formatDate value="${childHistory.createAt}" pattern="yyyy-MM-dd HH:mm:ss" />'>
+                            ${childHistory.createAt}</abbr>
                         </div>
                     </div>
                     </c:forEach>
