@@ -35,7 +35,13 @@ import java.util.Map;
 public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser>
 	implements ProjectUserDao {
 
-	public ProjectUser selectByUsername(String username) {
+    @Override
+    public ProjectUser selectWithProject(long id) {
+        return getSqlSession()
+                .selectOne(NAMESPACE.concat(".selectWithProject"), id);
+    }
+
+    public ProjectUser selectByUsername(String username) {
 		return getSqlSession()
 				.selectOne(NAMESPACE.concat(".selectByUsername"), username);
 	}

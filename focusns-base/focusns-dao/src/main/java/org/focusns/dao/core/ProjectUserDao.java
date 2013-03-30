@@ -28,6 +28,8 @@ import org.focusns.model.core.ProjectUser;
 
 public interface ProjectUserDao extends BaseDao<ProjectUser> {
 
+    ProjectUser selectWithProject(long id);
+
 	ProjectUser selectByUsername(String username);
 
     void insertRole(long projectId, long userId, long roleId);

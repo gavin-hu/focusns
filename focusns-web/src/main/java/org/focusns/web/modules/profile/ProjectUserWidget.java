@@ -25,7 +25,9 @@ package org.focusns.web.modules.profile;
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
+import org.focusns.service.core.ProjectLinkService;
 import org.focusns.service.core.ProjectUserService;
 import org.focusns.web.helper.Coordinate;
 import org.focusns.web.helper.RuntimeHelper;
@@ -52,6 +54,8 @@ public class ProjectUserWidget implements ResourceLoaderAware {
 
     @Autowired
     private ProjectUserService projectUserService;
+    @Autowired
+    private ProjectLinkService projectLinkService;
 
     private ResourceLoader resourceLoader;
     @Override
@@ -81,11 +85,18 @@ public class ProjectUserWidget implements ResourceLoaderAware {
 
     @RequestMapping("/user-view")
     @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
-    public String doView(@WidgetAttribute Project project, Model model) {
+    public String doView(@WidgetAttribute ProjectUser sessionUser,
+                         @WidgetAttribute Project project, Model model) {
         //
         ProjectUser projectUser = projectUserService.getUser(project.getCreateById());
         model.addAttribute("projectUser", projectUser);
         model.addAttribute("project", project);
+        //
+        ProjectLink projectLink = projectLinkService.getProjectLink(
+                sessionUser.getProjectId(), project.getId());
+        model.addAttribute("projectLink", projectLink);
+        model.addAttribute("fromProject", sessionUser.getProject());
+        model.addAttribute("toProject", project);
         //
         return "modules/profile/user-view";
     }

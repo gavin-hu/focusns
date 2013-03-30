@@ -8,6 +8,14 @@
 		<result column="password" property="password" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
+        <association property="project" javaType="org.focusns.model.core.Project">
+            <id property="id" column="project_id"/>
+            <result property="code" column="project_code"/>
+            <result property="title" column="project_title"/>
+            <result property="description" column="project_description"/>
+            <result property="createById" column="project_create_by_id"/>
+            <result property="modifyById" column="project_modify_by_id"/>
+        </association>
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectUser">
@@ -21,6 +29,18 @@
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_project_user where id = #{id}
 	</select>
+
+    <select id="selectWithProject" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select a.*,
+               b.id as project_id,
+               b.code as project_code,
+               b.title as project_title,
+               b.description as project_description,
+               b.create_by_id as project_create_by_id,
+               b.modify_by_id as project_modify_by_id
+        from tb_project_user a, tb_project b
+        where a.project_id = b.id and a.id = #{id}
+    </select>
 
 	<select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from tb_project_user where username = #{username}
