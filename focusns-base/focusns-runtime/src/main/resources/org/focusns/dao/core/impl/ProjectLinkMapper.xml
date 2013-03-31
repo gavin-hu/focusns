@@ -47,6 +47,9 @@
 			<if test="toProjectId != null" >
 		        to_project_id = #{toProjectId},
 			</if>
+            <if test="mutual != null">
+                mutual = #{mutual},
+            </if>
 		</set>
 		where id = #{id}
 	</update>
