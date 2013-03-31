@@ -5,7 +5,12 @@
 <div class="widget">
     <div class="widget-bd">
         <div class="profile-user">
-            <ui:avatar dimension="65" projectId="${project.id}" projectUserId="${projectUser.id}" />
+            <div class="avatar">
+                <ui:avatar dimension="65" projectId="${project.id}" projectUserId="${projectUser.id}" />
+                <label>
+                    <a href="#">${projectUser.username}</a>
+                </label>
+            </div>
             <ul class="actions">
                 <li>
                     <a href='<c:url value="/${project.code}/profile?mode=edit" />'>编辑</a>

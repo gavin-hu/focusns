@@ -202,9 +202,40 @@ div.profile-user .avatar label {
     text-align: center;
 }
 div.profile-user ul.actions li {
-    padding-left: 90px;
+    padding-left: 72px;
 }
 
 div.profile-user-edit {
     padding: 10px;
+}
+
+div.project-links-detail {
+    padding: 10px;
+}
+
+div.project-links-detail ul {
+
+}
+div.project-links-detail ul li {
+    position: relative;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: #DDD dashed thin;
+}
+div.project-links-detail ul li:hover {
+    background-color: #DDF0F8;
+}
+div.project-links-detail ul li img {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+div.project-links-detail ul li h3 {
+    padding: 5px 5px 5px 75px;
+}
+div.project-links-detail ul li p {
+    width: 180px;
+    min-height: 40px;
+    padding: 5px 5px 5px 75px;
 }

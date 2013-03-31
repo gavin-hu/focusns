@@ -12,8 +12,7 @@
         </position>
         <position name="leftColumn">
             <widget target="/project/user-view" />
-            <widget target="/project/link-list">
-            </widget>
+            <widget target="/project/link-list"/>
             <widget target="/project/link-list">
                 <preference>
                     <reverse>true</reverse>
@@ -40,9 +39,40 @@
         </position>
         <position name="leftColumn">
             <widget target="/project/user-view" />
+            <widget target="/project/link-list"/>
+            <widget target="/project/link-list">
+                <preference>
+                    <reverse>true</reverse>
+                </preference>
+            </widget>
         </position>
         <position name="mainColumn">
             <widget target="/project/user-edit" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page path="/profile" category="people" mode="link-list">
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/project/link-list"/>
+            <widget target="/project/link-list">
+                <preference>
+                    <reverse>true</reverse>
+                </preference>
+            </widget>
+        </position>
+        <position name="mainColumn">
+            <widget target="/project/link-list-detail" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />

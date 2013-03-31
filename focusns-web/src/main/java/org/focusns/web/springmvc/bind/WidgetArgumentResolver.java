@@ -55,7 +55,7 @@ public class WidgetArgumentResolver implements WebArgumentResolver {
             String widgetAttributeName = getWidgetAttributeName(methodParameter, widgetAttribute);
             Object value = webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
             if(widgetAttribute.required()) {
-                Assert.notNull(value, String.format("Widget attribute %s can not be null!", value));
+                Assert.notNull(value, String.format("Widget attribute %s can not be null!", widgetAttributeName));
             }
             return value;
         }

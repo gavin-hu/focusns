@@ -76,13 +76,43 @@ public class ProjectLinkWidget {
         return "modules/profile/link-list";
     }
 
+    @RequestMapping("/link-list-detail")
+    @Constraints({Constraint.PROJECT_REQUIRED})
+    public String doListDetail(@WidgetPreference(defaultValue = "10") Integer pageSize,
+                               @WidgetPreference(defaultValue = "people") String category,
+                               @WidgetAttribute Project project, Model model) {
+        //
+        Page<ProjectLink> page = new Page<ProjectLink>(pageSize);
+        page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
+        model.addAttribute(Page.KEY, page);
+        //
+        return "modules/profile/link-list-detail";
+    }
+
     @RequestMapping("/link/create")
     public void doCreate(ProjectLink link) {
+        ProjectLink reverseProjectLink = projectLinkService
+                .getProjectLink(link.getToProjectId(), link.getFromProjectId());
+        if(reverseProjectLink!=null) {
+            reverseProjectLink.setMutual(true);
+            projectLinkService.modifyProjectLink(reverseProjectLink);
+            //
+            link.setMutual(true);
+        }
+        //
         projectLinkService.createProjectLink(link);
     }
 
     @RequestMapping("/link/remove")
     public void doRemove(ProjectLink link) {
+        //
+        ProjectLink reverseProjectLink = projectLinkService
+                .getProjectLink(link.getToProjectId(), link.getFromProjectId());
+        if(reverseProjectLink!=null) {
+            reverseProjectLink.setMutual(false);
+            projectLinkService.modifyProjectLink(reverseProjectLink);
+        }
+        //
         projectLinkService.removeProjectLink(link.getFromProjectId(), link.getToProjectId());
     }
     
