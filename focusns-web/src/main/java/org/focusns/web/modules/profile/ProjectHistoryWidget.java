@@ -61,8 +61,8 @@ public class ProjectHistoryWidget {
 
     @RequestMapping("/history-list")
     @Constraints({Constraint.PAGE_NOT_EMPTY})
-    public String doList(@WidgetAttribute Project project,
-                         @WidgetAttribute ProjectUser user, Model model) {
+    public String doList(@WidgetAttribute(required = false) ProjectUser user,
+                         @WidgetAttribute Project project, Model model) {
         //
         if(user!=null) {
             ProjectHistory template = createTemplate(user, project);
