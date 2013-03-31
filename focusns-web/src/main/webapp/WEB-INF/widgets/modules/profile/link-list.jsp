@@ -33,7 +33,7 @@
                             <li>
                             </c:if>
                                 <c:if test="${reverse}">
-                                <a href='<c:url value="/${link.toProject.code}/profile" />'>
+                                <a href='<c:url value="/${link.fromProject.code}/profile" />'>
                                     <ui:avatar dimension="50" projectId="${link.fromProject.id}" projectUserId="${link.fromProject.createById}" />
                                 </a>
                                 </c:if>
