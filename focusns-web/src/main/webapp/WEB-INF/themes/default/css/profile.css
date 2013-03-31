@@ -185,20 +185,24 @@
     width:40px;
     height:40px;
 }
-
-div.target-avatar img {
-    position: inherit;
+div.profile-user-edit .temp-avatar,
+div.profile-user-edit .temp-avatar form {
+    padding-top: 10px;
 }
 
 div.profile-user {
     padding: 10px;
-    min-height: 65px;
+    min-height: 95px;
 }
-div.profile-user img {
+div.profile-user .avatar {
     position: absolute;
 }
+div.profile-user .avatar label {
+    display: block;
+    text-align: center;
+}
 div.profile-user ul.actions li {
-    padding-left: 70px;
+    padding-left: 90px;
 }
 
 div.profile-user-edit {

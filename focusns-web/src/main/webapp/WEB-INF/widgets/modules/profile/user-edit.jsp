@@ -11,11 +11,13 @@
                 <input type="hidden" name="userId" value="${projectUser.id}" />
                 <button type="submit" name="redirect" value="${currentPath}">上传</button>
             </form>
+            <%--
             <c:if test="${hasTargetFile}">
                 <div class="target-avatar">
                     <img class="thumbnail" src='<c:url value="/project/user-avatar.action?projectId=${project.id}&userId=${projectUser.id}" />' />
                 </div>
             </c:if>
+            --%>
             <c:if test="${hasTempFile}">
             <div class="cropper-wrapper temp-avatar">
                 <img id="cropper" src='<c:url value="/project/user-avatar.action?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />' alt="Avatar" />
