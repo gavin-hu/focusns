@@ -22,11 +22,11 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-import org.springframework.util.StringUtils;
-
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.springframework.util.StringUtils;
 
 public class PositionConfig {
 

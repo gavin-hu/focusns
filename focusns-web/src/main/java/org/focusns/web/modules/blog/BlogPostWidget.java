@@ -22,6 +22,8 @@ package org.focusns.web.modules.blog;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -35,8 +37,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/blog")

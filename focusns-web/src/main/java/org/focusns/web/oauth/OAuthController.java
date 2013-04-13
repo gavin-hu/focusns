@@ -22,6 +22,8 @@ package org.focusns.web.oauth;
  * #L%
  */
 
+import java.util.Properties;
+
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.Api;
 import org.scribe.model.Token;
@@ -34,8 +36,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-
-import java.util.Properties;
 
 @Controller
 @RequestMapping("/oauth")

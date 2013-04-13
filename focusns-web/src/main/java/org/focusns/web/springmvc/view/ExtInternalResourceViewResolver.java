@@ -22,12 +22,12 @@ package org.focusns.web.springmvc.view;
  * #L%
  */
 
+import java.util.Locale;
+
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.Locale;
 
 public class ExtInternalResourceViewResolver extends InternalResourceViewResolver implements ResourceLoaderAware {
 

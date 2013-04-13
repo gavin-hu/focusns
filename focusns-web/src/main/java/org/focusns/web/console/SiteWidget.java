@@ -22,12 +22,12 @@ package org.focusns.web.console;
  * #L%
  */
 
+import java.util.List;
+import java.util.Map;
+
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.Map;
 
 public class SiteWidget {
 

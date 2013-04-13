@@ -22,12 +22,12 @@ package org.focusns.web.widget.annotation;
  * #L%
  */
 
-import org.focusns.web.widget.Constraint;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import org.focusns.web.widget.Constraint;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

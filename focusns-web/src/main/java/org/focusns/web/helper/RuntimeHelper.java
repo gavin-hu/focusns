@@ -22,12 +22,12 @@ package org.focusns.web.helper;
  * #L%
  */
 
-import org.springframework.util.FileCopyUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.springframework.util.FileCopyUtils;
 
 public class RuntimeHelper {
 

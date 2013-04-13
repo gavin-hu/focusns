@@ -22,6 +22,8 @@ package org.focusns.web.console;
  * #L%
  */
 
+import java.util.Properties;
+
 import org.focusns.model.console.User;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.web.helper.PropertyHelper;
@@ -29,8 +31,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
-
-import java.util.Properties;
 
 @Controller
 @RequestMapping("/console")

@@ -22,14 +22,14 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
+import java.util.List;
+import java.util.Map;
+
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ProfileAdminWidget {

@@ -22,14 +22,14 @@ package org.focusns.web.portal.interceptor;
  * #L%
  */
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UrlPathHelper;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class PortalInterceptor extends HandlerInterceptorAdapter {
 

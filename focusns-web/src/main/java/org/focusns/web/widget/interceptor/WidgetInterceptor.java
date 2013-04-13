@@ -22,6 +22,9 @@ package org.focusns.web.widget.interceptor;
  * #L%
  */
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.codec.binary.Base64;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
@@ -36,9 +39,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class WidgetInterceptor extends HandlerInterceptorAdapter {
 

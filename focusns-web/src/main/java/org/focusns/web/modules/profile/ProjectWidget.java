@@ -22,6 +22,9 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import java.util.List;
+import java.util.Map;
+
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectLink;
@@ -30,9 +33,6 @@ import org.focusns.service.core.ProjectAttributeService;
 import org.focusns.service.core.ProjectLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class ProjectWidget {

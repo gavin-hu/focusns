@@ -22,6 +22,10 @@ package org.focusns.web.portal;
  * #L%
  */
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.model.core.Project;
@@ -42,10 +46,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 @Controller
 public class Portal {

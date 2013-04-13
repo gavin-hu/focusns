@@ -22,6 +22,8 @@ package org.focusns.web.modules.msg;
  * #L%
  */
 
+import java.util.Map;
+
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
@@ -29,8 +31,6 @@ import org.focusns.model.msg.Message;
 import org.focusns.service.msg.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import java.util.Map;
 
 @Controller
 public class MessageWidget {

@@ -22,12 +22,12 @@ package org.focusns.web.helper;
  * #L%
  */
 
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
-
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 public class UrlTemplateHelper {
 

@@ -22,6 +22,9 @@ package org.focusns.web.portal.config.xml;
  * #L%
  */
 
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.focusns.common.xml.XmlParser;
 import org.focusns.web.portal.config.*;
 import org.springframework.context.ResourceLoaderAware;
@@ -30,9 +33,6 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
-
-import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class XmlPageConfigFactory extends AbstractPageConfigFactory implements PageConfigFactory, ResourceLoaderAware {
 
