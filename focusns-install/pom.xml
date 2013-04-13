@@ -24,14 +24,6 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>javafmt-maven-plugin</groupId>
-                <artifactId>javafmt-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -44,7 +36,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}-tomcat-bundled</finalName>
     </build>
 
     <profiles>
@@ -70,7 +61,6 @@
                                 <goals>
                                     <goal>copy</goal>
                                 </goals>
-
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
@@ -86,6 +76,22 @@
                                 </configuration>
                             </execution>
                         </executions>
+                    </plugin>
+                </plugins>
+                <finalName>${project.artifactId}-tomcat-bundled</finalName>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>javafmt-maven-plugin</groupId>
+                        <artifactId>javafmt-maven-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>
