@@ -22,7 +22,6 @@ package org.focusns.service.msg.impl;
  * #L%
  */
 
-
 import org.focusns.dao.msg.MessageDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;
@@ -37,7 +36,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MessageDao messageDao;
-        
+
     public Message getMessage(long messageId) {
         return messageDao.select(messageId);
     }
@@ -56,14 +55,14 @@ public class MessageServiceImpl implements MessageService {
 
     public Page<Message> fetchPageByBox(Page<Message> page, String box, long projectId) {
         //
-        if("IN".equalsIgnoreCase(box)) {
+        if ("IN".equalsIgnoreCase(box)) {
             page = messageDao.fetchByToProjectId(page, projectId);
         }
-        if("SENT".equalsIgnoreCase(box)) {
+        if ("SENT".equalsIgnoreCase(box)) {
             page = messageDao.fetchByProjectId(page, projectId);
         }
         //
         return page;
     }
-    
+
 }

@@ -22,7 +22,6 @@ package org.focusns.service.blog;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 
 import java.util.List;
@@ -30,17 +29,18 @@ import java.util.List;
 public interface BlogCategoryService {
 
     BlogCategory getBlogCategory(long categoryId);
-    
+
     void createBlogCategory(BlogCategory category);
-    
+
     void modifyBlogCategory(BlogCategory category);
-    
+
     void removeBlogCategory(BlogCategory category);
-    
+
     List<BlogCategory> getBlogCategories(long projectId);
 
     /**
      * Get cms categories
+     * 
      * @return
      */
     List<BlogCategory> getBlogCategories();

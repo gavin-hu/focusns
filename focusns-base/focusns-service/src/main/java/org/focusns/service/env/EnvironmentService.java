@@ -22,11 +22,10 @@ package org.focusns.service.env;
  * #L%
  */
 
-
 import org.focusns.model.env.Environment;
 
 public interface EnvironmentService {
 
-	Environment lookupEnvironment(Environment.Type type);
-	
+    Environment lookupEnvironment(Environment.Type type);
+
 }

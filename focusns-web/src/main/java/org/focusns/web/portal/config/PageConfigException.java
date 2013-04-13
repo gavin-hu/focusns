@@ -22,12 +22,11 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 public class PageConfigException extends RuntimeException {
-	private static final long serialVersionUID = 955088583037442516L;
-	
-	public PageConfigException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    private static final long serialVersionUID = 955088583037442516L;
+
+    public PageConfigException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }

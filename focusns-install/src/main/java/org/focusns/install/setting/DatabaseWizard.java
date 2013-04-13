@@ -22,13 +22,13 @@ package org.focusns.install.setting;
  * #L%
  */
 
-
 import org.focusns.install.utils.Properties;
 
 import java.util.Scanner;
 
 /**
  * A wizard for database admin
+ * 
  * @author Gavin Hu
  * @since 2.0
  */
@@ -79,23 +79,24 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database type from console
+     * 
      * @param scanner
      */
     private void scanType(Scanner scanner) {
         System.out.print("请输入数据库类型（可选 [mysql]- 默认：mysql）：");
         String type = scanner.nextLine();
         // set default type
-        if("".equalsIgnoreCase(type)) {
+        if ("".equalsIgnoreCase(type)) {
             type = "mysql";
         }
         //
-        if(!"mysql".equalsIgnoreCase(type)) {
+        if (!"mysql".equalsIgnoreCase(type)) {
             System.out.println("FocusSNS当前只支持MySQL数据库！");
             scanType(scanner);
         } else {
             System.out.print(String.format("您输入的数据库类型为 %s 【Y/N】：", type));
             String yesOrNo = scanner.nextLine();
-            if(!"Y".equalsIgnoreCase(yesOrNo)) {
+            if (!"Y".equalsIgnoreCase(yesOrNo)) {
                 scanType(scanner);
             } else {
                 this.type = type;
@@ -105,20 +106,21 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database host from console
+     * 
      * @param scanner
      */
     private void scanHost(Scanner scanner) {
         System.out.print("请输入数据库IP（默认：127.0.0.1）：");
         String host = scanner.nextLine();
         // set default host
-        if("".equals(host)) {
+        if ("".equals(host)) {
             host = "127.0.0.1";
         }
         //
-        if(host.matches(REGEX_IP)) {
+        if (host.matches(REGEX_IP)) {
             System.out.print(String.format("您输入的数据库IP为 %s 【Y/N】：", host));
             String yesOrNo = scanner.nextLine();
-            if(!"Y".equalsIgnoreCase(yesOrNo)) {
+            if (!"Y".equalsIgnoreCase(yesOrNo)) {
                 scanHost(scanner);
             } else {
                 this.host = host;
@@ -131,20 +133,21 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database port from console
+     * 
      * @param scanner
      */
     private void scanPort(Scanner scanner) {
         System.out.print("请输入数据库端口（默认为：3306）：");
         String port = scanner.nextLine();
         // set default port
-        if("".equals(port)) {
+        if ("".equals(port)) {
             port = "3306";
         }
         //
-        if(port.matches(REGEX_PORT)) {
+        if (port.matches(REGEX_PORT)) {
             System.out.print(String.format("您输入的数据库端口为 %s 【Y/N】：", port));
             String yesOrNo = scanner.nextLine();
-            if(!"Y".equalsIgnoreCase(yesOrNo)) {
+            if (!"Y".equalsIgnoreCase(yesOrNo)) {
                 scanPort(scanner);
             } else {
                 this.port = port;
@@ -157,12 +160,13 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database schema from console
+     * 
      * @param scanner
      */
     private void scanDatabase(Scanner scanner) {
         System.out.print("请输入数据库名称：");
         String database = scanner.nextLine();
-        if("".equals(database.trim())) {
+        if ("".equals(database.trim())) {
             System.out.println("数据库名称不能为空！");
             scanDatabase(scanner);
             return;
@@ -170,7 +174,7 @@ public class DatabaseWizard implements Wizard {
         //
         System.out.print(String.format("您输入的数据库名称为 %s 【Y/N】：", database));
         String yesOrNo = scanner.nextLine();
-        if(!"Y".equalsIgnoreCase(yesOrNo)) {
+        if (!"Y".equalsIgnoreCase(yesOrNo)) {
             scanDatabase(scanner);
         } else {
             this.database = database;
@@ -179,12 +183,13 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database username from console
+     * 
      * @param scanner
      */
     private void scanUsername(Scanner scanner) {
         System.out.print("请输入数据库用户名：");
         String username = scanner.nextLine();
-        if("".equals(username.trim())) {
+        if ("".equals(username.trim())) {
             System.out.println("数据库用户名不能为空！");
             scanUsername(scanner);
             //
@@ -193,7 +198,7 @@ public class DatabaseWizard implements Wizard {
         //
         System.out.print(String.format("您输入的数据库用户名为 %s 【Y/N】：", username));
         String yesOrNo = scanner.nextLine();
-        if(!"Y".equalsIgnoreCase(yesOrNo)) {
+        if (!"Y".equalsIgnoreCase(yesOrNo)) {
             scanUsername(scanner);
         } else {
             this.username = username;
@@ -202,15 +207,15 @@ public class DatabaseWizard implements Wizard {
 
     /**
      * Scan database password from console
+     * 
      * @param scanner
      */
     private void scanPassword(Scanner scanner) {
         System.out.print("请输入数据库密码：");
         String password = scanner.nextLine();
-        System.out.print(String.format("您输入的数据库密码为 %s 【Y/N】：",
-                "".equals(password.trim())?"空":password));
+        System.out.print(String.format("您输入的数据库密码为 %s 【Y/N】：", "".equals(password.trim()) ? "空" : password));
         String yesOrNo = scanner.nextLine();
-        if(!"Y".equalsIgnoreCase(yesOrNo)) {
+        if (!"Y".equalsIgnoreCase(yesOrNo)) {
             scanPassword(scanner);
         } else {
             this.password = password;
@@ -242,13 +247,11 @@ public class DatabaseWizard implements Wizard {
     }
 
     private String parseJdbcDriver() {
-        if("mysql".equalsIgnoreCase(type)) {
+        if ("mysql".equalsIgnoreCase(type)) {
             return "com.mysql.jdbc.Driver";
         }
         //
-        throw new UnsupportedOperationException(
-                String.format("Database %s is not supported yet!", type)
-        );
+        throw new UnsupportedOperationException(String.format("Database %s is not supported yet!", type));
     }
 
     private String parseJdbcUrl() {

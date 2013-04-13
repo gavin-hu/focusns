@@ -22,7 +22,6 @@ package org.focusns.dao.console;
  * #L%
  */
 
-
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.console.User;
 import org.junit.Ignore;

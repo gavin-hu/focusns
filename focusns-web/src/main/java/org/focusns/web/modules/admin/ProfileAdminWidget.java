@@ -22,7 +22,6 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
@@ -37,24 +36,24 @@ public class ProfileAdminWidget {
 
     @Autowired
     private ProjectAttributeService attributeService;
-    
-    public String editLogo(Map<String, Object> model,
-            String sessionId,
-            Project project) {
+
+    public String editLogo(Map<String, Object> model, String sessionId, Project project) {
         //
-//        File tmpLogo = RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
-//        model.put("hasTmpLogo", tmpLogo.canRead());
-//        //
-//        File targetLogo = RuntimeHelper.getInstance().getProjectLogo(project.getId());
-//        model.put("hasLogo", targetLogo.canRead());
+        // File tmpLogo =
+        // RuntimeHelper.getInstance().getTmpProjectLogo(sessionId);
+        // model.put("hasTmpLogo", tmpLogo.canRead());
+        // //
+        // File targetLogo =
+        // RuntimeHelper.getInstance().getProjectLogo(project.getId());
+        // model.put("hasLogo", targetLogo.canRead());
         //
         return "modules/admin/profile/logo-edit";
     }
-    
+
     public String editProject(Project project) {
         return "modules/admin/profile/project-edit";
     }
-    
+
     public String editAttribute(Map<String, Object> model, Project project) {
         //
         List<ProjectAttribute> attributes = attributeService.getProjectAttributes(project.getId());
@@ -62,5 +61,5 @@ public class ProfileAdminWidget {
         //
         return "modules/admin/profile/attribute-edit";
     }
-    
+
 }

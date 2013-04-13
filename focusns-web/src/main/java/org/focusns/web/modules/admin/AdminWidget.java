@@ -22,7 +22,6 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectFeatureService;
@@ -34,21 +33,21 @@ import java.util.Map;
 
 @Controller
 public class AdminWidget {
-    
+
     @Autowired
     private ProjectFeatureService featureService;
-    
+
     public String menu(Project project, Map<String, Object> model) {
-         //
+        //
         List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());
         model.put("features", features);
         //
         return "modules/admin/menu";
     }
-    
+
     public String summary() {
         //
         return "modules/admin/summary";
     }
-     
+
 }

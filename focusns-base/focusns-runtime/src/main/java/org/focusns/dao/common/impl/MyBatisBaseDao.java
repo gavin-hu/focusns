@@ -22,7 +22,6 @@ package org.focusns.dao.common.impl;
  * #L%
  */
 
-
 import org.apache.ibatis.session.RowBounds;
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.common.Page;
@@ -36,11 +35,11 @@ import java.util.Map;
 public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements BaseDao<M> {
 
     protected String NAMESPACE;
-    
+
     public MyBatisBaseDao() {
-    	inspectNamespace();
+        inspectNamespace();
     }
-   
+
     public M select(long id) {
         return getSqlSession().selectOne(NAMESPACE.concat(".select"), id);
     }
@@ -64,35 +63,35 @@ public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements 
     public List<M> selectList(String selectId, Object parameter) {
         return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
     }
-    
+
     public Page<M> fetchPage(String selectId, Page<M> page, Map<String, Object> model) {
         //
-        if(page.isAutoCount()) {
+        if (page.isAutoCount()) {
             String countId = selectId.concat("Count");
             long totalCount = fetchPageCount(countId, model);
             page.setTotalCount(totalCount);
         }
         //
-        RowBounds rowBounds = new RowBounds(page.getFirst()-1, page.getPageSize());
+        RowBounds rowBounds = new RowBounds(page.getFirst() - 1, page.getPageSize());
         List<M> results = getSqlSession().selectList(NAMESPACE.concat(selectId), model, rowBounds);
         //
         return page.setResults(results);
     }
-    
+
     public long fetchPageCount(String countId, Map<String, Object> model) {
         Long count = getSqlSession().selectOne(NAMESPACE.concat(countId), model);
         return count;
     }
-    
+
     private void inspectNamespace() {
-    	Class<?>[] interfaceClasses = ClassUtils.getAllInterfaces(this);
-    	for(Class<?> interfaceClass : interfaceClasses) {
-    		if(ClassUtils.isAssignable(BaseDao.class, interfaceClass) && interfaceClass != BaseDao.class) {
-    			this.NAMESPACE = interfaceClass.getName();
-    		}
-    	}
-    	//
-    	Assert.notNull(NAMESPACE, "Custom dao interface must implements BaseDao interface");
+        Class<?>[] interfaceClasses = ClassUtils.getAllInterfaces(this);
+        for (Class<?> interfaceClass : interfaceClasses) {
+            if (ClassUtils.isAssignable(BaseDao.class, interfaceClass) && interfaceClass != BaseDao.class) {
+                this.NAMESPACE = interfaceClass.getName();
+            }
+        }
+        //
+        Assert.notNull(NAMESPACE, "Custom dao interface must implements BaseDao interface");
     }
-    
+
 }

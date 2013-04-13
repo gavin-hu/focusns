@@ -22,7 +22,6 @@ package org.focusns.dao.blog.impl;
  * #L%
  */
 
-
 import org.focusns.dao.blog.BlogCategoryDao;
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.blog.BlogCategory;
@@ -33,8 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class BlogCategoryDaoImpl extends MyBatisBaseDao<BlogCategory> 
-    implements BlogCategoryDao {
+public class BlogCategoryDaoImpl extends MyBatisBaseDao<BlogCategory> implements BlogCategoryDao {
 
     public List<BlogCategory> selectByProjectId(long projectId) {
         //

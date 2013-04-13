@@ -22,7 +22,6 @@ package org.focusns.service.blog.impl;
  * #L%
  */
 
-
 import org.focusns.dao.blog.BlogCategoryDao;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.service.blog.BlogCategoryService;
@@ -46,7 +45,7 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
     }
 
     public void createBlogCategory(BlogCategory category) {
-        if(category.getCreateAt()==null) {
+        if (category.getCreateAt() == null) {
             category.setCreateAt(new Date());
         }
         categoryDao.insert(category);

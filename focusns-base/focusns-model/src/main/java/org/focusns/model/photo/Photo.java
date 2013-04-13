@@ -22,7 +22,6 @@ package org.focusns.model.photo;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
@@ -66,5 +65,5 @@ public class Photo extends Id {
     public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
-    
+
 }

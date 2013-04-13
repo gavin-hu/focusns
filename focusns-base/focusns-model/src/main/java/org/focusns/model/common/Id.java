@@ -22,19 +22,18 @@ package org.focusns.model.common;
  * #L%
  */
 
-
 import java.io.Serializable;
 
 public abstract class Id implements Serializable {
 
-	private long id;
+    private long id;
 
     public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
-	
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 }

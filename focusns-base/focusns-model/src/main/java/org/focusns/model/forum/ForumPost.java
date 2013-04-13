@@ -22,13 +22,12 @@ package org.focusns.model.forum;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class ForumPost extends Id {
-    
+
     private String title;
     private String content;
     private Date createAt;

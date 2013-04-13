@@ -22,7 +22,6 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
@@ -33,8 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink>
-    implements ProjectLinkDao {
+public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink> implements ProjectLinkDao {
 
     public ProjectLink selectByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //

@@ -22,7 +22,6 @@ package org.focusns.model.console;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class Authority extends Id {

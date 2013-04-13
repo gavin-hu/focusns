@@ -22,7 +22,6 @@ package org.focusns.service.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
@@ -37,14 +36,14 @@ import java.util.Date;
 
 @Ignore
 public class ProjectHistoryServiceTest extends AbstractServiceTest {
-    
+
     @Autowired
     private ProjectUserService projectUserService;
     @Autowired
     private ProjectService projectService;
     @Autowired
     private ProjectHistoryService projectHistoryService;
-    
+
     @Test
     public void testCreateProjectHistroy() {
         Project project = projectService.getProject("admin");

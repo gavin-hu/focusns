@@ -22,7 +22,6 @@ package org.focusns.dao.event.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.event.EventDao;
 import org.focusns.model.event.Event;

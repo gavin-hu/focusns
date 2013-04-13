@@ -22,7 +22,6 @@ package org.focusns.common.freemarker.model;
  * #L%
  */
 
-
 import freemarker.ext.beans.BeanModel;
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.SimpleHash;
@@ -48,12 +47,12 @@ public class DynamicInvoker {
         String key = generateKey(name);
         Object target = findTarget(name);
         // target is null
-        if(target==null) {
-            return ;
+        if (target == null) {
+            return;
         }
         // check type
         Assert.isAssignable(BeanModel.class, target.getClass());
-        target = ((BeanModel)target).getWrappedObject();
+        target = ((BeanModel) target).getWrappedObject();
         // new BeanWrapper
         BeanWrapper beanWrapper = new BeanWrapperImpl(target);
         beanWrapper.setAutoGrowNestedPaths(true);
@@ -66,7 +65,7 @@ public class DynamicInvoker {
         String key = generateKey(name);
         BeanWrapper beanWrapper = beanWrapperMap.get(key);
         // check beanWrapper
-        if(beanWrapper==null) {
+        if (beanWrapper == null) {
             return null;
         }
         //
@@ -83,12 +82,12 @@ public class DynamicInvoker {
             SimpleHash model = (SimpleHash) simpleHash.get(FreemarkerServlet.KEY_REQUEST);
             target = model.get(name);
             //
-            if(target==null) {
+            if (target == null) {
                 model = (SimpleHash) simpleHash.get(FreemarkerServlet.KEY_SESSION);
                 target = model.get(name);
             }
             //
-            if(target==null) {
+            if (target == null) {
                 model = (SimpleHash) simpleHash.get(FreemarkerServlet.KEY_APPLICATION);
                 target = model.get(name);
             }

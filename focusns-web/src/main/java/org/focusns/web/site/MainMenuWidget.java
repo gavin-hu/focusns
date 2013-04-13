@@ -22,7 +22,6 @@ package org.focusns.web.site;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

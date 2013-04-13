@@ -22,7 +22,6 @@ package org.focusns.service.msg;
  * #L%
  */
 
-
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;
 import org.focusns.service.AbstractServiceTest;

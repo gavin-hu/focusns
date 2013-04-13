@@ -22,7 +22,6 @@ package org.focusns.dao.photo.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.photo.PhotoDao;
 import org.focusns.model.photo.Photo;

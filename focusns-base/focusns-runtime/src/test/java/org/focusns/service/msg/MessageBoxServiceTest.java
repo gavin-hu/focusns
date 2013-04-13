@@ -22,7 +22,6 @@ package org.focusns.service.msg;
  * #L%
  */
 
-
 import org.focusns.model.msg.MessageBox;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
@@ -39,12 +38,12 @@ public class MessageBoxServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCreateMessageBox() {
-         MessageBox messageBox = new MessageBox();
-         messageBox.setLabel("收件箱");
-         messageBox.setType(MessageBox.TYPE_IN);
-         messageBox.setProjectId(1);
-         messageBox.setCreateAt(new Date());
-         messageBox.setCreateById(1);
-         messageBoxService.createMessageBox(messageBox);
+        MessageBox messageBox = new MessageBox();
+        messageBox.setLabel("收件箱");
+        messageBox.setType(MessageBox.TYPE_IN);
+        messageBox.setProjectId(1);
+        messageBox.setCreateAt(new Date());
+        messageBox.setCreateById(1);
+        messageBoxService.createMessageBox(messageBox);
     }
 }

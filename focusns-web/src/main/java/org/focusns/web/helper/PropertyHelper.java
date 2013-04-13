@@ -22,7 +22,6 @@ package org.focusns.web.helper;
  * #L%
  */
 
-
 import java.util.Properties;
 
 public class PropertyHelper {

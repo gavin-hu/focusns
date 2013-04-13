@@ -22,13 +22,12 @@ package org.focusns.model.env;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class Environment extends Id {
-	
-	public enum Type {
-		OS, JRE, DB
-	}
-	
+
+    public enum Type {
+        OS, JRE, DB
+    }
+
 }

@@ -22,7 +22,6 @@ package org.focusns.service.photo;
  * #L%
  */
 
-
 import org.focusns.model.photo.Photo;
 
 import java.util.List;
@@ -30,11 +29,11 @@ import java.util.List;
 public interface PhotoService {
 
     void createPhoto(Photo photo);
-    
+
     void modifyPhoto(Photo photo);
-    
+
     void removePhoto(Photo photo);
-    
+
     List<Photo> listPhoto(long albumId);
-    
+
 }

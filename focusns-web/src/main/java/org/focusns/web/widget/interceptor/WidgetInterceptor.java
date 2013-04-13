@@ -22,7 +22,6 @@ package org.focusns.web.widget.interceptor;
  * #L%
  */
 
-
 import org.apache.commons.codec.binary.Base64;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
@@ -48,20 +47,20 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //
-        if(WebUtils.isIncludeRequest(request)) {
+        if (WebUtils.isIncludeRequest(request)) {
             PageConfig pageConfig = (PageConfig) request.getAttribute("pageConfig");
-            if (pageConfig!=null && handler instanceof HandlerMethod) {
+            if (pageConfig != null && handler instanceof HandlerMethod) {
                 //
                 HandlerMethod handlerMethod = (HandlerMethod) handler;
                 //
-                if(processConstraintsBeforeHandle(request, handlerMethod)) {
+                if (processConstraintsBeforeHandle(request, handlerMethod)) {
                     return false;
                 }
             }
             //
             String positionName = request.getParameter("position");
             String widgetId = request.getParameter("widget");
-            if(StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig!=null) {
+            if (StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig != null) {
                 PositionConfig positionConfig = pageConfig.getPositionConfig(positionName);
                 WidgetConfig widgetConfig = positionConfig.getWidgetConfig(widgetId);
                 request.setAttribute("widgetConfig", widgetConfig);
@@ -73,21 +72,21 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
 
     private boolean processConstraintsBeforeHandle(HttpServletRequest request, HandlerMethod handlerMethod) {
         Constraints constraints = handlerMethod.getMethodAnnotation(Constraints.class);
-        if(constraints!=null) {
-            for(Constraint constraint : constraints.value()) {
+        if (constraints != null) {
+            for (Constraint constraint : constraints.value()) {
                 //
-                if(Constraint.PROJECT_REQUIRED==constraint) {
-                    if(request.getAttribute(Project.KEY)==null) {
+                if (Constraint.PROJECT_REQUIRED == constraint) {
+                    if (request.getAttribute(Project.KEY) == null) {
                         return true;
                     }
-                } else if(Constraint.PROJECT_USER_REQUIRED==constraint) {
-                    if(request.getAttribute(ProjectUser.KEY)==null) {
+                } else if (Constraint.PROJECT_USER_REQUIRED == constraint) {
+                    if (request.getAttribute(ProjectUser.KEY) == null) {
                         return true;
                     }
-                } else if(Constraint.PROJECT_NOT_MY_PROFILE==constraint) {
+                } else if (Constraint.PROJECT_NOT_MY_PROFILE == constraint) {
                     Project project = (Project) request.getAttribute(Project.KEY);
                     ProjectUser projectUser = (ProjectUser) request.getAttribute(ProjectUser.KEY);
-                    if(project==null || projectUser==null || projectUser.getProjectId()== project.getId()) {
+                    if (project == null || projectUser == null || projectUser.getProjectId() == project.getId()) {
                         return true;
                     }
                 }
@@ -100,9 +99,9 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         //
-        if(WebUtils.isIncludeRequest(request)) {
+        if (WebUtils.isIncludeRequest(request)) {
             PageConfig pageConfig = (PageConfig) request.getAttribute("pageConfig");
-            if (pageConfig!=null && handler instanceof HandlerMethod) {
+            if (pageConfig != null && handler instanceof HandlerMethod) {
                 //
                 HandlerMethod handlerMethod = (HandlerMethod) handler;
                 //
@@ -112,37 +111,37 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         //
         String redirect = request.getParameter("redirect");
         //
-        if(StringUtils.hasText(redirect)) {
+        if (StringUtils.hasText(redirect)) {
             // decode first
-            if(!redirect.contains("/")) {
+            if (!redirect.contains("/")) {
                 redirect = new String(base64.decode(redirect));
             }
             //
             String contextPath = request.getContextPath();
-            if(redirect.startsWith(contextPath)) {
+            if (redirect.startsWith(contextPath)) {
                 redirect = redirect.substring(contextPath.length());
             }
             //
             modelAndView.setViewName("redirect:".concat(redirect));
         }
         //
-        if(modelAndView==null) {
-            return ;
+        if (modelAndView == null) {
+            return;
         }
-        //X
-        if(modelAndView.getViewName()!=null) {
-            return ;
+        // X
+        if (modelAndView.getViewName() != null) {
+            return;
         }
     }
 
     private void processConstraintsAfterHandle(HandlerMethod handlerMethod, ModelAndView modelAndView) {
         Constraints constraints = handlerMethod.getMethodAnnotation(Constraints.class);
-        if(constraints!=null) {
-            for(Constraint constraint : constraints.value()) {
+        if (constraints != null) {
+            for (Constraint constraint : constraints.value()) {
                 //
-                if(Constraint.PAGE_NOT_EMPTY == constraint) {
+                if (Constraint.PAGE_NOT_EMPTY == constraint) {
                     Page<?> page = (Page<?>) modelAndView.getModel().get(Page.KEY);
-                    if(page==null || page.getResults().isEmpty()) {
+                    if (page == null || page.getResults().isEmpty()) {
                         modelAndView.setViewName("blank");
                     }
                 }

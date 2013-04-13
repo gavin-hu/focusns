@@ -22,13 +22,12 @@ package org.focusns.model.photo;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class Album extends Id {
-    
+
     private String label;
     private Date createAt;
     //

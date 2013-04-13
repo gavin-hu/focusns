@@ -22,7 +22,6 @@ package org.focusns.service.console;
  * #L%
  */
 
-
 import org.focusns.model.console.Authority;
 
 public interface AuthorityService {

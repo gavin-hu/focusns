@@ -22,7 +22,6 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
-
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
@@ -31,6 +30,7 @@ import org.focusns.service.core.ProjectHistoryService;
 import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.annotation.Constraints;
 import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.web.widget.annotation.WidgetPreference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/project")
 public class ProjectHistoryWidget {
-    
+
     @Autowired
     private ProjectHistoryService historyService;
 
@@ -49,9 +49,8 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-edit")
-    @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
-    public String doEdit(@WidgetAttribute Project project,
-                         @WidgetAttribute ProjectUser user, Model model) {
+    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
+    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser user, Model model) {
         //
         ProjectHistory template = createTemplate(user, project);
         model.addAttribute("template", template);
@@ -60,16 +59,15 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-list")
-    @Constraints({Constraint.PAGE_NOT_EMPTY})
-    public String doList(@WidgetAttribute(required = false) ProjectUser user,
-                         @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PAGE_NOT_EMPTY })
+    public String doList(@WidgetPreference(required = false, defaultValue = "10") Integer limit, @WidgetAttribute(required = false) ProjectUser user, @WidgetAttribute Project project, Model model) {
         //
-        if(user!=null) {
+        if (user != null) {
             ProjectHistory template = createTemplate(user, project);
             model.addAttribute("template", template);
         }
         //
-        Page<ProjectHistory> page = new Page<ProjectHistory>(20);
+        Page<ProjectHistory> page = new Page<ProjectHistory>(limit);
         page = historyService.fetchPage(page, project.getId());
         model.addAttribute("page", page);
         //
@@ -84,5 +82,5 @@ public class ProjectHistoryWidget {
         template.setCreateById(user.getId());
         return template;
     }
-    
+
 }

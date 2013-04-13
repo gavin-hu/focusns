@@ -22,13 +22,12 @@ package org.focusns.model.blog;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class BlogCategory extends Id {
-    
+
     private String label;
     private Date createAt;
     //

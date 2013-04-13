@@ -22,7 +22,6 @@ package org.focusns.service.event;
  * #L%
  */
 
-
 import org.focusns.model.event.Event;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;

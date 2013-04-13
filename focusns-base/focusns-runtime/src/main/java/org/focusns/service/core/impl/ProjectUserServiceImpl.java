@@ -22,7 +22,6 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectFeatureDao;
@@ -54,7 +53,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
 
     public ProjectUser getUser(String username) {
         ProjectUser user = projectUserDao.selectByUsername(username);
-        if(user.getProjectId()>0) {
+        if (user.getProjectId() > 0) {
             Project project = projectDao.select(user.getProjectId());
             user.setProject(project);
         }
@@ -71,7 +70,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         user.setPassword(md5Password);
         //
-		projectUserDao.insert(user);
+        projectUserDao.insert(user);
         //
         ProjectCategory category = projectCategoryDao.selectByCode("people");
         //
@@ -132,15 +131,15 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         projectFeatureDao.insert(teamFeature);
         projectFeatureDao.insert(msgFeature);
         projectFeatureDao.insert(settingFeature);
-	}
+    }
 
     public void modifyUser(ProjectUser user) {
-       projectUserDao.update(user);
+        projectUserDao.update(user);
     }
 
     public void removeUser(ProjectUser user) {
-		projectUserDao.delete(user.getId());
-	}
+        projectUserDao.delete(user.getId());
+    }
 
     public void assignRole(long projectId, long userId, long roleId) {
         projectUserDao.insertRole(projectId, userId, roleId);

@@ -22,7 +22,6 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,18 +29,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/project")
 public class ProjectLogoController {
 
-   /* @Autowired
-    private ProjectService projectService;
-    @Autowired
-    private ProjectLogoService projectLogoService;
-    
-    @RequestMapping("/logo")
-    public @ResponseBody byte[] linkLogo(@PathVariable long logoId) throws IOException {
-        //
-        ProjectLogo logo = projectLogoService.getProjectLogo(logoId);
-        //
-        File target = RuntimeHelper.getInstance().getProjectLogo(logo);
-        return FileCopyUtils.copyToByteArray(target);
-    }*/
+    /*
+     * @Autowired private ProjectService projectService;
+     * 
+     * @Autowired private ProjectLogoService projectLogoService;
+     * 
+     * @RequestMapping("/logo") public @ResponseBody byte[]
+     * linkLogo(@PathVariable long logoId) throws IOException { // ProjectLogo
+     * logo = projectLogoService.getProjectLogo(logoId); // File target =
+     * RuntimeHelper.getInstance().getProjectLogo(logo); return
+     * FileCopyUtils.copyToByteArray(target); }
+     */
 
 }

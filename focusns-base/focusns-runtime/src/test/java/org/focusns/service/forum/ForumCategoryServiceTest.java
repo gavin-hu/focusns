@@ -22,7 +22,6 @@ package org.focusns.service.forum;
  * #L%
  */
 
-
 import org.focusns.model.forum.ForumCategory;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;

@@ -22,7 +22,6 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.model.core.ProjectLink;
@@ -37,13 +36,13 @@ import java.util.Map;
 
 @Controller
 public class ProjectWidget {
-    
+
     @Autowired
     private ProjectLinkService projectLinkService;
     @Autowired
     private ProjectAttributeService projectAttributeService;
-    
-	public String view(Map<String, Object> model, Project project) {
+
+    public String view(Map<String, Object> model, Project project) {
         //
         List<ProjectAttribute> attributes = projectAttributeService.getProjectAttributes(project.getId());
         model.put("attributes", attributes);
@@ -51,15 +50,12 @@ public class ProjectWidget {
         return "modules/profile/project-view";
     }
 
-    public String status(Map<String, Object> model,
-             Project project) {
+    public String status(Map<String, Object> model, Project project) {
         //
         return "modules/profile/project-status";
     }
 
-    public String action(Map<String, Object> model,
-                         ProjectUser user,
-                         Project project) {
+    public String action(Map<String, Object> model, ProjectUser user, Project project) {
         //
         ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
         model.put("projectLink", projectLink);
@@ -68,5 +64,5 @@ public class ProjectWidget {
         //
         return "modules/profile/project-action";
     }
-	
+
 }

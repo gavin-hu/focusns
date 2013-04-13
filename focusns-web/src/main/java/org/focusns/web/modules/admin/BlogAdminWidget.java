@@ -22,7 +22,6 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.blog.BlogCategoryService;
@@ -35,10 +34,10 @@ import java.util.Map;
 
 @Controller
 public class BlogAdminWidget {
-    
+
     @Autowired
     private BlogCategoryService categoryService;
-    
+
     public String editCategory(Map<String, Object> model, Project project) {
         //
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
@@ -46,7 +45,7 @@ public class BlogAdminWidget {
         //
         return "modules/admin/blog/category-edit";
     }
-    
+
     public String editPost(Map<String, Object> model, @RequestParam Long id, Project project) {
         //
         List<BlogCategory> blogCategories = categoryService.getBlogCategories(project.getId());
@@ -54,5 +53,5 @@ public class BlogAdminWidget {
         //
         return "modules/admin/blog/post-edit";
     }
-    
+
 }

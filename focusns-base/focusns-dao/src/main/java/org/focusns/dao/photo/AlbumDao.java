@@ -22,7 +22,6 @@ package org.focusns.dao.photo;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.photo.Album;
 

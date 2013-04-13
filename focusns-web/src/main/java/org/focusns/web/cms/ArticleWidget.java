@@ -22,7 +22,6 @@ package org.focusns.web.cms;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogPost;
 import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;

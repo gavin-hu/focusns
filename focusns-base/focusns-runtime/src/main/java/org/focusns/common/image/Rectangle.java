@@ -22,10 +22,9 @@ package org.focusns.common.image;
  * #L%
  */
 
-
 public class Rectangle {
 
-    private String x; // x 
+    private String x; // x
     private String y; // y
     private String w; // width
     private String h; // height
@@ -33,13 +32,13 @@ public class Rectangle {
     public String getX() {
         return x;
     }
-    
+
     public int getXInt() {
         return parseInt(x);
     }
-    
+
     public void setX(String xStr) {
-        if(xStr.contains(".")) {
+        if (xStr.contains(".")) {
             xStr = xStr.substring(0, xStr.indexOf("."));
         }
         this.x = xStr;
@@ -52,8 +51,9 @@ public class Rectangle {
     public int getYInt() {
         return parseInt(y);
     }
+
     public void setY(String yStr) {
-        if(yStr.contains(".")) {
+        if (yStr.contains(".")) {
             yStr = yStr.substring(0, yStr.indexOf("."));
         }
         this.y = yStr;
@@ -66,9 +66,9 @@ public class Rectangle {
     public int getWInt() {
         return parseInt(w);
     }
-    
+
     public void setW(String wStr) {
-        if(wStr.contains(".")) {
+        if (wStr.contains(".")) {
             wStr = wStr.substring(0, wStr.indexOf("."));
         }
         this.w = wStr;
@@ -77,20 +77,20 @@ public class Rectangle {
     public String getH() {
         return h;
     }
-    
+
     public int getHInt() {
         return parseInt(h);
     }
-    
+
     public void setH(String hStr) {
-        if(hStr.contains(".")) {
+        if (hStr.contains(".")) {
             hStr = hStr.substring(0, hStr.indexOf("."));
         }
         this.h = hStr;
     }
-    
+
     private int parseInt(String num) {
         return Integer.parseInt(num);
     }
-    
+
 }

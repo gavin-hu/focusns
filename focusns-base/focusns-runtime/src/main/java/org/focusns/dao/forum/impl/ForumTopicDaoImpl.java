@@ -22,7 +22,6 @@ package org.focusns.dao.forum.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.forum.ForumTopicDao;
 import org.focusns.model.forum.ForumTopic;

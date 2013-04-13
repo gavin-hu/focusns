@@ -22,7 +22,6 @@ package org.focusns.web.helper;
  * #L%
  */
 
-
 import java.io.File;
 
 public class Coordinate {
@@ -49,11 +48,9 @@ public class Coordinate {
     }
 
     public String toPath(boolean includeDimension) {
-        StringBuilder pathBuilder = new StringBuilder().append(File.separator).append("projects")
-                .append(File.separator).append(projectId).append(File.separator).append(feature)
-                .append(File.separator).append(entity).append(File.separator).append(name);
+        StringBuilder pathBuilder = new StringBuilder().append(File.separator).append("projects").append(File.separator).append(projectId).append(File.separator).append(feature).append(File.separator).append(entity).append(File.separator).append(name);
         //
-        if(dimension!=null && includeDimension) {
+        if (dimension != null && includeDimension) {
             pathBuilder.append("_").append(dimension);
         }
         //

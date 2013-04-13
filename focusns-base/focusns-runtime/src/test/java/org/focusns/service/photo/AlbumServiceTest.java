@@ -22,7 +22,6 @@ package org.focusns.service.photo;
  * #L%
  */
 
-
 import org.focusns.model.photo.Album;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
@@ -39,12 +38,12 @@ public class AlbumServiceTest extends AbstractServiceTest {
 
     @Test
     public void createAlbum() {
-         Album album = new Album();
-         album.setLabel("label");
-         album.setCreateAt(new Date());
-         album.setCreateById(1);
-         album.setProjectId(1);
-         //
+        Album album = new Album();
+        album.setLabel("label");
+        album.setCreateAt(new Date());
+        album.setCreateById(1);
+        album.setProjectId(1);
+        //
         albumService.createAlbum(album);
     }
 

@@ -22,16 +22,21 @@ package org.focusns.web.modules.blog;
  * #L%
  */
 
-
+import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
+import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
+import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/blog")
@@ -39,29 +44,59 @@ public class BlogPostWidget {
 
     @Autowired
     private BlogPostService blogPostService;
+    @Autowired
+    private BlogCategoryService blogCategoryService;
+
+    @RequestMapping("/post-edit")
+    public String doEdit(@RequestParam(required = false) Long id, @WidgetAttribute ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
+        //
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
+        //
+        BlogPost blogPost = null;
+        if (id == null) {
+            blogPost = new BlogPost();
+            blogPost.setCreateById(projectUser.getId());
+            blogPost.setModifyById(projectUser.getId());
+        } else {
+            blogPost = blogPostService.getBlogPost(id);
+        }
+        //
+        model.addAttribute("blogPost", blogPost);
+        model.addAttribute("blogCategories", blogCategories);
+        //
+        return "modules/blog/post-edit";
+    }
 
     @RequestMapping("/post-view")
-	public String doView(@RequestParam long postId, Model model) {
+    public String doView(@RequestParam Long id, Model model) {
         //
-        BlogPost blogPost = blogPostService.getBlogPost(postId);
+        BlogPost blogPost = blogPostService.getBlogPost(id);
         model.addAttribute("blogPost", blogPost);
         //
-		return "modules/blog/post-view";
-	}
+        return "modules/blog/post-view";
+    }
 
     @RequestMapping("/post-list")
-	public String doList(@RequestParam(required = false) Long categoryId,
-                         Project project, Model model) {
+    public String doList(@RequestParam(required = false) Long categoryId, Project project, Model model) {
         //
         Page<BlogPost> page = new Page<BlogPost>(20);
-        if(categoryId != null) {
+        if (categoryId != null) {
             page = blogPostService.fetchPageByCategoryId(page, categoryId);
         } else {
             page = blogPostService.fetchPageByProjectId(page, project.getId());
         }
         model.addAttribute("page", page);
         //
-		return "modules/blog/post-list";
-	}
-	
+        return "modules/blog/post-list";
+    }
+
+    @RequestMapping("/post-modify")
+    public void doModify(BlogPost blogPost) {
+        if (blogPost.getId() > 0) {
+            blogPostService.modifyBlogPost(blogPost);
+        } else {
+            blogPostService.createBlogPost(blogPost);
+        }
+    }
+
 }

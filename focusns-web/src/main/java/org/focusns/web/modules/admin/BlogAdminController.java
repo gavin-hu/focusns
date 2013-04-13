@@ -22,7 +22,6 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.core.Project;
@@ -39,46 +38,47 @@ import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class BlogAdminController {
-    
+
     @Autowired
     private BlogPostService blogPostService;
     @Autowired
     private BlogCategoryService blogCategoryService;
-     
+
     @RequestMapping("/blog/post/edit")
     public String editPost(@RequestParam String action, BlogPost blogPost, WebRequest webRequest) {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        if(ActionHelper.isCreate(action)) {
+        if (ActionHelper.isCreate(action)) {
             blogPostService.createBlogPost(blogPost);
         }
-        if(ActionHelper.isModify(action)) {
+        if (ActionHelper.isModify(action)) {
             blogPostService.modifyBlogPost(blogPost);
         }
-        if(ActionHelper.isRemove(action)) {
+        if (ActionHelper.isRemove(action)) {
             blogPostService.removeBlogPost(blogPost);
         }
         //
-        return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/blog/post-edit";
+        return "redirect:/" + project.getCode() + "/" + feature.getCode() + "/blog/post-edit";
     }
+
     @RequestMapping("/blog/category/edit")
     public String editCategory(@RequestParam String action, BlogCategory blogCategory, WebRequest webRequest) {
         //
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        if(ActionHelper.isCreate(action)) {
+        if (ActionHelper.isCreate(action)) {
             blogCategoryService.createBlogCategory(blogCategory);
         }
-        if(ActionHelper.isModify(action)) {
+        if (ActionHelper.isModify(action)) {
             blogCategoryService.modifyBlogCategory(blogCategory);
         }
-        if(ActionHelper.isRemove(action)) {
+        if (ActionHelper.isRemove(action)) {
             blogCategoryService.removeBlogCategory(blogCategory);
         }
         //
-        return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/blog/category-edit";
+        return "redirect:/" + project.getCode() + "/" + feature.getCode() + "/blog/category-edit";
     }
-    
+
 }

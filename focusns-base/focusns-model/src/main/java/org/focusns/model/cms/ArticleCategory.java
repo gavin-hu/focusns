@@ -22,7 +22,6 @@ package org.focusns.model.cms;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class ArticleCategory extends Id {

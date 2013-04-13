@@ -22,7 +22,6 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class ProjectRole extends Id {

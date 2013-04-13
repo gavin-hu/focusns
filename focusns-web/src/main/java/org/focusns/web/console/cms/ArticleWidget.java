@@ -50,11 +50,11 @@ public class ArticleWidget {
     public String doList(@RequestParam(required = false) Long categoryId, Model model) {
         //
         List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
-        if(!articleCategories.isEmpty()) {
+        if (!articleCategories.isEmpty()) {
             BlogCategory articleCategory = articleCategories.get(0);
-            if(categoryId!=null) {
-                for(BlogCategory tmp : articleCategories) {
-                    if(categoryId.longValue()==tmp.getId()) {
+            if (categoryId != null) {
+                for (BlogCategory tmp : articleCategories) {
+                    if (categoryId.longValue() == tmp.getId()) {
                         articleCategory = tmp;
                     }
                 }
@@ -72,17 +72,15 @@ public class ArticleWidget {
     }
 
     @RequestMapping("/article-edit")
-    public String doEdit(@RequestParam(required = false) Long articleId,
-                         @RequestParam(required = false) Long categoryId,
-                         @WidgetAttribute ProjectUser user, Model model) {
+    public String doEdit(@RequestParam(required = false) Long articleId, @RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser user, Model model) {
         //
         List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
         //
         BlogPost article = new BlogPost();
-        article.setCategoryId(categoryId!=null?categoryId:0);
+        article.setCategoryId(categoryId != null ? categoryId : 0);
         article.setCreateById(user.getId());
         article.setModifyById(user.getId());
-        if(articleId!=null) {
+        if (articleId != null) {
             article = blogPostService.getBlogPost(articleId);
         }
         //
@@ -94,7 +92,7 @@ public class ArticleWidget {
 
     @RequestMapping("/article-modify")
     public void modifyAction(BlogPost article) {
-        if(article.getId()>0) {
+        if (article.getId() > 0) {
             blogPostService.modifyBlogPost(article);
         } else {
             blogPostService.createBlogPost(article);

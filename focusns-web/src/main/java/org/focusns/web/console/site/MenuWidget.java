@@ -22,7 +22,6 @@ package org.focusns.web.console.site;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +48,9 @@ public class MenuWidget {
     }
 
     @RequestMapping("/menu-edit")
-    public String doEdit(@RequestParam(required=false) Long id, Model model) {
+    public String doEdit(@RequestParam(required = false) Long id, Model model) {
         ProjectCategory category = new ProjectCategory();
-        if(id!=null) {
+        if (id != null) {
             category = categoryService.getCategory(id);
         }
         model.addAttribute("category", category);
@@ -61,7 +60,7 @@ public class MenuWidget {
 
     @RequestMapping("/menu-modify")
     public void modify(ProjectCategory category, Model model) {
-        if(category.getId()>0) {
+        if (category.getId() > 0) {
             categoryService.modifyCategory(category);
         } else {
             categoryService.createCategory(category);

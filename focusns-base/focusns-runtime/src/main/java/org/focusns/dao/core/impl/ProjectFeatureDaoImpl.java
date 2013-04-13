@@ -22,7 +22,6 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectFeatureDao;
 import org.focusns.model.core.ProjectFeature;
@@ -33,20 +32,17 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ProjectFeatureDaoImpl extends MyBatisBaseDao<ProjectFeature> 
-	implements ProjectFeatureDao {
+public class ProjectFeatureDaoImpl extends MyBatisBaseDao<ProjectFeature> implements ProjectFeatureDao {
 
-	public List<ProjectFeature> selectByProjectId(long projectId) {
-		return getSqlSession()
-				.selectList(NAMESPACE.concat(".selectByProjectId"), projectId);
-	}
+    public List<ProjectFeature> selectByProjectId(long projectId) {
+        return getSqlSession().selectList(NAMESPACE.concat(".selectByProjectId"), projectId);
+    }
 
-	public ProjectFeature selectByProjectIdAndCode(long projectId, String code) {
-		Map<String, String> parameter = new HashMap<String, String>();
-		parameter.put("projectId", String.valueOf(projectId));
-		parameter.put("code", code);
-		return getSqlSession()
-				.selectOne(NAMESPACE.concat(".selectByProjectIdAndCode"), parameter);
-	}
-	
+    public ProjectFeature selectByProjectIdAndCode(long projectId, String code) {
+        Map<String, String> parameter = new HashMap<String, String>();
+        parameter.put("projectId", String.valueOf(projectId));
+        parameter.put("code", code);
+        return getSqlSession().selectOne(NAMESPACE.concat(".selectByProjectIdAndCode"), parameter);
+    }
+
 }

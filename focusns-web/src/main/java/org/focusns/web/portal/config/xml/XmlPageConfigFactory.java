@@ -22,7 +22,6 @@ package org.focusns.web.portal.config.xml;
  * #L%
  */
 
-
 import org.focusns.common.xml.XmlParser;
 import org.focusns.web.portal.config.*;
 import org.springframework.context.ResourceLoaderAware;
@@ -35,15 +34,14 @@ import org.w3c.dom.Element;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class XmlPageConfigFactory extends AbstractPageConfigFactory 
-	implements PageConfigFactory, ResourceLoaderAware {
-	
-	private String prefix = "/WEB-INF/portal/";
-	private String suffix = ".xml";
+public class XmlPageConfigFactory extends AbstractPageConfigFactory implements PageConfigFactory, ResourceLoaderAware {
 
-	private ResourceLoader resourceLoader;
-	
-	private XmlParser xmlParser = new XmlParser();
+    private String prefix = "/WEB-INF/portal/";
+    private String suffix = ".xml";
+
+    private ResourceLoader resourceLoader;
+
+    private XmlParser xmlParser = new XmlParser();
 
     private AtomicLong atomicLong = new AtomicLong(0);
 
@@ -56,19 +54,18 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
     }
 
     public void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
-	}
+        this.resourceLoader = resourceLoader;
+    }
 
     @Override
     protected Map<String, PageConfig> loadPages() throws Exception {
         //
         Map<String, PageConfig> pageConfigMap = new HashMap<String, PageConfig>();
         //
-        Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader)
-                .getResources(prefix + "/**/*" + suffix);
-        for(Resource resource : resources) {
+        Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(prefix + "/**/*" + suffix);
+        for (Resource resource : resources) {
             List<PageConfig> pageConfigList = parse(getRootElement(resource));
-            for(PageConfig pageConfig : pageConfigList) {
+            for (PageConfig pageConfig : pageConfigList) {
                 Map<String, String> paramsMap = new HashMap<String, String>();
                 paramsMap.put("mode", pageConfig.getMode());
                 paramsMap.put("category", pageConfig.getCategory());
@@ -80,16 +77,16 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
         return pageConfigMap;
     }
 
-	private List<PageConfig> parse(Element element) throws Exception {
-		//
+    private List<PageConfig> parse(Element element) throws Exception {
+        //
         List<PageConfig> pageConfigList = new ArrayList<PageConfig>();
         //
         List<Element> pageEles = Arrays.asList(element);
-        if("pages".equals(element.getTagName())) {
+        if ("pages".equals(element.getTagName())) {
             pageEles = DomUtils.getChildElementsByTagName(element, "page");
         }
         //
-        for(Element pageEle : pageEles) {
+        for (Element pageEle : pageEles) {
             //
             PageConfig pageConfig = new PageConfig();
             pageConfig.setPath(pageEle.getAttribute("path"));
@@ -97,19 +94,19 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
             pageConfig.setCategory(pageEle.getAttribute("category"));
             //
             List<Element> positionEles = DomUtils.getChildElementsByTagName(pageEle, "position");
-            for(Element positionEle : positionEles) {
+            for (Element positionEle : positionEles) {
                 PositionConfig positionConfig = new PositionConfig();
                 positionConfig.setName(positionEle.getAttribute("name"));
                 positionConfig.setGrid(positionEle.getAttribute("grid"));
                 //
                 List<Element> widgetEles = DomUtils.getChildElementsByTagName(positionEle, "widget");
-                for(Element widgetEle : widgetEles) {
+                for (Element widgetEle : widgetEles) {
                     WidgetConfig widgetConfig = new WidgetConfig(widgetEle.getAttribute("target"));
                     widgetConfig.setId(String.valueOf(atomicLong.incrementAndGet()));
                     // preferences element
                     Element prefsEle = DomUtils.getChildElementByTagName(widgetEle, "preference");
-                    if(prefsEle!=null) {
-                        for(Element prefEle : DomUtils.getChildElements(prefsEle)) {
+                    if (prefsEle != null) {
+                        for (Element prefEle : DomUtils.getChildElements(prefsEle)) {
                             String name = prefEle.getTagName();
                             String value = DomUtils.getTextValue(prefEle);
                             widgetConfig.getPreferences().put(name, value);
@@ -124,12 +121,12 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory
                 pageConfigList.add(pageConfig);
             }
         }
-		//
-		return pageConfigList;
-	}
-	
-	private Element getRootElement(Resource pageResource) throws Exception {
-		return xmlParser.parse(pageResource).getDocumentElement();
-	}
-	
+        //
+        return pageConfigList;
+    }
+
+    private Element getRootElement(Resource pageResource) throws Exception {
+        return xmlParser.parse(pageResource).getDocumentElement();
+    }
+
 }

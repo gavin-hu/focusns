@@ -22,7 +22,6 @@ package org.focusns.common.lucene;
  * #L%
  */
 
-
 import org.apache.lucene.search.IndexSearcher;
 
 public final class ObjectIndexSearcher {

@@ -22,7 +22,6 @@ package org.focusns.dao.team;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.team.TeamRole;
 

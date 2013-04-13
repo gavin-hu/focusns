@@ -22,11 +22,10 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 import java.util.Map;
 
 public interface PageConfigFactory {
 
     PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception;
-	
+
 }

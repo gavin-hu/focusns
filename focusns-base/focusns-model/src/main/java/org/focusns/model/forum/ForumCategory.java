@@ -22,13 +22,12 @@ package org.focusns.model.forum;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class ForumCategory extends Id {
-    
+
     private String label;
     private Date createAt;
     //

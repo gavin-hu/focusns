@@ -22,13 +22,12 @@ package org.focusns.model.blog;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class BlogPost extends Id {
-    
+
     private String title;
     private String summary;
     private String content;

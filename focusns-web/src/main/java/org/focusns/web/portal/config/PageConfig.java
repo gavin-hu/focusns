@@ -22,7 +22,6 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,8 +33,8 @@ public class PageConfig {
 
     private Map<String, PositionConfig> positionConfigMap = new LinkedHashMap<String, PositionConfig>();
 
-	public PageConfig() {
-	}
+    public PageConfig() {
+    }
 
     public String getPath() {
         return path;
@@ -58,7 +57,7 @@ public class PageConfig {
     }
 
     public void setCategory(String category) {
-        if(category!=null) {
+        if (category != null) {
             this.category = category;
         }
     }

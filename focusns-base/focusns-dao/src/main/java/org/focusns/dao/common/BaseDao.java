@@ -22,15 +22,14 @@ package org.focusns.dao.common;
  * #L%
  */
 
-
 public interface BaseDao<M> {
 
-	M select(long id);
-	
-	int insert(M model);
-	
-	int update(M model);
-	
-	int delete(long id);
-    
+    M select(long id);
+
+    int insert(M model);
+
+    int update(M model);
+
+    int delete(long id);
+
 }

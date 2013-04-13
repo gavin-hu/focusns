@@ -22,7 +22,6 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class ProjectLogo extends Id {
@@ -37,7 +36,7 @@ public class ProjectLogo extends Id {
     public void setMain(boolean main) {
         this.main = main;
     }
-    
+
     public long getProjectId() {
         return projectId;
     }
@@ -45,5 +44,5 @@ public class ProjectLogo extends Id {
     public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
-    
+
 }

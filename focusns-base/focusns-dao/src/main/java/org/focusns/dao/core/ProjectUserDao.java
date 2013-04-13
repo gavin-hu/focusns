@@ -22,7 +22,6 @@ package org.focusns.dao.core;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.core.ProjectUser;
 
@@ -30,7 +29,7 @@ public interface ProjectUserDao extends BaseDao<ProjectUser> {
 
     ProjectUser selectWithProject(long id);
 
-	ProjectUser selectByUsername(String username);
+    ProjectUser selectByUsername(String username);
 
     void insertRole(long projectId, long userId, long roleId);
 

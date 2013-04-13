@@ -22,7 +22,6 @@ package org.focusns.common.event.support;
  * #L%
  */
 
-
 import org.focusns.common.event.annotation.Subscriber;
 import org.focusns.common.event.annotation.Subscriber.OnEvent;
 import org.springframework.beans.BeansException;
@@ -42,19 +41,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-public class EventMulticaster extends SimpleApplicationEventMulticaster 
-    implements ApplicationContextAware, InitializingBean {
-    
+public class EventMulticaster extends SimpleApplicationEventMulticaster implements ApplicationContextAware, InitializingBean {
+
     private ApplicationContext applicationContext;
-    
+
     private ApplicationListener eventListener;
-    
+
     private Map<Method, String> eventSubscribers = new HashMap<Method, String>();
-    
+
     private Map<String, List<Method>> eventHandlers = new HashMap<String, List<Method>>();
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-       this.applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
     public Map<String, List<Method>> getEventHandlers() {
@@ -74,18 +72,18 @@ public class EventMulticaster extends SimpleApplicationEventMulticaster
 
     @Override
     public void multicastEvent(final ApplicationEvent event) {
-        if(ClassUtils.isAssignableValue(EventContext.class, event)) {
+        if (ClassUtils.isAssignableValue(EventContext.class, event)) {
             //
             Executor executor = getTaskExecutor();
             EventContext eventCtx = (EventContext) event;
             List<Method> handlers = getEventHandlers().get(eventCtx.getTrigger().event());
-            if(handlers==null) {
-                return ;
+            if (handlers == null) {
+                return;
             }
             //
-            for(Method handler : handlers) {
+            for (Method handler : handlers) {
                 OnEvent onEvent = AnnotationUtils.getAnnotation(handler, OnEvent.class);
-                if(onEvent.async() && executor!=null) {
+                if (onEvent.async() && executor != null) {
                     executor.execute(new Runnable() {
                         @SuppressWarnings("unchecked")
                         public void run() {
@@ -96,22 +94,22 @@ public class EventMulticaster extends SimpleApplicationEventMulticaster
                     eventListener.onApplicationEvent(event);
                 }
             }
-        } 
+        }
         //
         super.multicastEvent(event);
     }
-    
+
     private void scanSubscribers(ApplicationContext appContext) {
         Map<String, Object> subscriberMap = appContext.getBeansWithAnnotation(Subscriber.class);
-        for(String subscriberName : subscriberMap.keySet()) {
+        for (String subscriberName : subscriberMap.keySet()) {
             Class<?> subscriberType = appContext.getType(subscriberName);
             Method[] methods = subscriberType.getDeclaredMethods();
-            for(Method method : methods) {
+            for (Method method : methods) {
                 Subscriber.OnEvent onEvent = AnnotationUtils.getAnnotation(method, Subscriber.OnEvent.class);
-                if(onEvent!=null) {
+                if (onEvent != null) {
                     this.eventSubscribers.put(method, subscriberName);
                     List<Method> handlers = this.eventHandlers.get(onEvent.value());
-                    if(handlers==null) {
+                    if (handlers == null) {
                         handlers = new ArrayList<Method>();
                     }
                     handlers.add(method);

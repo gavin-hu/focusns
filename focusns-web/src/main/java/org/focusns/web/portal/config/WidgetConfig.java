@@ -22,7 +22,6 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,10 +31,10 @@ public class WidgetConfig {
     private String title;
     private String target;
     private Map<String, Object> preferences = new HashMap<String, Object>();
-	
-	public WidgetConfig(String target) {
+
+    public WidgetConfig(String target) {
         this.target = target;
-	}
+    }
 
     public String getId() {
         return id;

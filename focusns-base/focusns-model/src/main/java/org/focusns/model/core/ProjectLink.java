@@ -22,11 +22,10 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class ProjectLink extends Id {
-    
+
     private long fromProjectId;
     private long toProjectId;
     private boolean mutual;
@@ -52,7 +51,7 @@ public class ProjectLink extends Id {
     public void setToProjectId(long toProjectId) {
         this.toProjectId = toProjectId;
     }
-    
+
     public boolean isMutual() {
         return mutual;
     }

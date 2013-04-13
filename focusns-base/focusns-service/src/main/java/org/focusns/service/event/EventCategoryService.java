@@ -22,7 +22,6 @@ package org.focusns.service.event;
  * #L%
  */
 
-
 import org.focusns.model.event.EventCategory;
 
 public interface EventCategoryService {

@@ -22,7 +22,6 @@ package org.focusns.service.blog.impl;
  * #L%
  */
 
-
 import org.focusns.dao.blog.BlogCommentDao;
 import org.focusns.model.blog.BlogComment;
 import org.focusns.model.common.Page;
@@ -37,7 +36,7 @@ public class BlogCommentServiceImpl implements BlogCommentService {
 
     @Autowired
     private BlogCommentDao commentDao;
-    
+
     public void createBlogComment(BlogComment comment) {
         commentDao.insert(comment);
     }
@@ -53,5 +52,5 @@ public class BlogCommentServiceImpl implements BlogCommentService {
     public Page<BlogComment> fetchPageByPostId(Page<BlogComment> page, long postId) {
         return commentDao.fetchByPostId(page, postId);
     }
-    
+
 }

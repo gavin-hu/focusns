@@ -22,7 +22,6 @@ package org.focusns.dao.msg;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;

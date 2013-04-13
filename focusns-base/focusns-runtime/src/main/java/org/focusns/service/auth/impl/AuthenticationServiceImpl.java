@@ -22,7 +22,6 @@ package org.focusns.service.auth.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
@@ -38,14 +37,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     private ProjectUserDao projectUserDao;
-    
+
     public void authenticate(ProjectUser user) {
         String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
         ProjectUser dbUser = projectUserDao.selectByUsername(user.getUsername());
         //
-        if(dbUser==null || !md5Password.equals(dbUser.getPassword())) {
+        if (dbUser == null || !md5Password.equals(dbUser.getPassword())) {
             throw new AuthenticationException("Username or password miss matched!");
         }
     }
-    
+
 }

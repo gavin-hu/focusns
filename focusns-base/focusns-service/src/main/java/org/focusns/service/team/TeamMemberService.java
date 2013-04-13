@@ -22,7 +22,6 @@ package org.focusns.service.team;
  * #L%
  */
 
-
 import org.focusns.model.team.TeamMember;
 
 public interface TeamMemberService {

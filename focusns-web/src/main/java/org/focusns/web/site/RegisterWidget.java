@@ -22,7 +22,6 @@ package org.focusns.web.site;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
 import org.focusns.validation.group.Register;

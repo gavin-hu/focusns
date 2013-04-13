@@ -22,7 +22,6 @@ package org.focusns.web.portal.interceptor;
  * #L%
  */
 
-
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,13 +35,13 @@ public class PortalInterceptor extends HandlerInterceptorAdapter {
 
     private Base64 base64 = new Base64();
     private UrlPathHelper urlPathHelper = new UrlPathHelper();
-    
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //
         String requestPath = urlPathHelper.getOriginatingServletPath(request);
         String requestQueryString = urlPathHelper.getOriginatingQueryString(request);
-        if(StringUtils.hasText(requestQueryString)) {
+        if (StringUtils.hasText(requestQueryString)) {
             requestPath += "?" + requestQueryString;
         }
         requestPath = base64.encodeToString(requestPath.getBytes());
@@ -52,19 +51,18 @@ public class PortalInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response,
-                           Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         //
-        if(modelAndView==null) {
-            return ;
+        if (modelAndView == null) {
+            return;
         }
         //
         String viewName = modelAndView.getViewName();
-        if(viewName!=null && viewName.contains(":")) {
-            return ;
+        if (viewName != null && viewName.contains(":")) {
+            return;
         }
         //
         modelAndView.setViewName("default/layout");
     }
-    
+
 }

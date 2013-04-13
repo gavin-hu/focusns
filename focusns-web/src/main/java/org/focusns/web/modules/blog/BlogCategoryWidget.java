@@ -22,7 +22,6 @@ package org.focusns.web.modules.blog;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.blog.BlogCategoryService;
@@ -36,15 +35,15 @@ import java.util.List;
 @Controller
 @RequestMapping("/blog")
 public class BlogCategoryWidget {
-    
+
     @Autowired
     private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/category-list")
     public String list(Project project, Model model) {
         //
-    	Long projectId = project.getId();
-    	//
+        Long projectId = project.getId();
+        //
         BlogCategory blogCategory = new BlogCategory();
         blogCategory.setLabel("未分类");
         blogCategory.setProjectId(projectId);
@@ -54,5 +53,5 @@ public class BlogCategoryWidget {
         //
         return "modules/blog/category-list";
     }
-    
+
 }

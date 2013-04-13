@@ -22,7 +22,6 @@ package org.focusns.dao.core;
  * #L%
  */
 
-
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.core.ProjectRole;
 import org.junit.Ignore;

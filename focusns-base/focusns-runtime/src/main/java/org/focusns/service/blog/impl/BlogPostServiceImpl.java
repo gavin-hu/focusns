@@ -22,7 +22,6 @@ package org.focusns.service.blog.impl;
  * #L%
  */
 
-
 import org.focusns.dao.blog.BlogPostDao;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -46,14 +45,14 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     public void createBlogPost(BlogPost post) {
         Date now = new Date();
-        if(post.getCreateAt()==null) {
+        if (post.getCreateAt() == null) {
             post.setCreateAt(now);
         }
-        if(post.getModifyAt()==null) {
+        if (post.getModifyAt() == null) {
             post.setModifyAt(now);
         }
         //
-        if(post.getSummary()==null) {
+        if (post.getSummary() == null) {
             post.setSummary("Summary!");
         }
         //
@@ -75,5 +74,5 @@ public class BlogPostServiceImpl implements BlogPostService {
     public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {
         return postDao.fetchByProjectAndCategoryId(page, projectId, null);
     }
-    
+
 }

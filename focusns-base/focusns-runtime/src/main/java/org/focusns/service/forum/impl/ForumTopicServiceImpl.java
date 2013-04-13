@@ -22,7 +22,6 @@ package org.focusns.service.forum.impl;
  * #L%
  */
 
-
 import org.focusns.dao.forum.ForumTopicDao;
 import org.focusns.model.forum.ForumTopic;
 import org.focusns.service.forum.ForumTopicService;

@@ -22,7 +22,6 @@ package org.focusns.dao.cms;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.cms.ArticleKeyword;
 

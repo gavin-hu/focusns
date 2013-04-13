@@ -22,7 +22,6 @@ package org.focusns.install.setting;
  * #L%
  */
 
-
 import org.focusns.install.utils.Properties;
 
 import java.util.LinkedHashMap;
@@ -31,14 +30,14 @@ import java.util.Scanner;
 
 public class OpenApiWizard implements Wizard {
 
-    private String[] providers = new String[]{"sina", "renren", "tencent"};
+    private String[] providers = new String[] { "sina", "renren", "tencent" };
 
     private Map<String, Map<String, String>> openAPIProviders = new LinkedHashMap<String, Map<String, String>>();
 
     public void setup(Scanner scanner, Properties globalSettings) {
         printWelcome();
         //
-        for(String provider : providers) {
+        for (String provider : providers) {
             //
             scanApiKey(scanner);
             //
@@ -48,8 +47,6 @@ public class OpenApiWizard implements Wizard {
         //
         printOpenAPIInfo();
     }
-
-
 
     private void printWelcome() {
         System.out.println("欢迎进入OpenAPI设置向导...");

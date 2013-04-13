@@ -58,22 +58,22 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     private ProjectLinkService projectLinkService;
 
     private ResourceLoader resourceLoader;
+
     @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
 
     @RequestMapping("/user-edit")
-    @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
-    public String doEdit(@WidgetAttribute Project project,
-                         @WidgetAttribute ProjectUser projectUser, Model model) {
+    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
+    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(project.getId(), projectUser.getId());
-        if(RuntimeHelper.isTempFileExists(avatarCoordinate)) {
+        if (RuntimeHelper.isTempFileExists(avatarCoordinate)) {
             model.addAttribute("hasTempFile", true);
         }
         //
-        if(RuntimeHelper.isTargetFileExists(avatarCoordinate)) {
+        if (RuntimeHelper.isTargetFileExists(avatarCoordinate)) {
             model.addAttribute("hasTargetFile", true);
         }
         //
@@ -84,16 +84,14 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-view")
-    @Constraints({Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED})
-    public String doView(@WidgetAttribute ProjectUser sessionUser,
-                         @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
+    public String doView(@WidgetAttribute ProjectUser sessionUser, @WidgetAttribute Project project, Model model) {
         //
         ProjectUser projectUser = projectUserService.getUser(project.getCreateById());
         model.addAttribute("projectUser", projectUser);
         model.addAttribute("project", project);
         //
-        ProjectLink projectLink = projectLinkService.getProjectLink(
-                sessionUser.getProjectId(), project.getId());
+        ProjectLink projectLink = projectLinkService.getProjectLink(sessionUser.getProjectId(), project.getId());
         model.addAttribute("projectLink", projectLink);
         model.addAttribute("fromProject", sessionUser.getProject());
         model.addAttribute("toProject", project);
@@ -102,24 +100,23 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar")
-    public @ResponseBody byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
-                                         @RequestParam(required = false) Boolean isTempFile,
-                                         @RequestParam(required = false) Integer dimension) throws IOException {
+    public @ResponseBody
+    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId, @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
-        if(isTempFile!=null && isTempFile.booleanValue()) {
+        if (isTempFile != null && isTempFile.booleanValue()) {
             File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
             return FileCopyUtils.copyToByteArray(tempFile);
         } else {
             File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-            if(targetFile==null||!targetFile.exists()) {
+            if (targetFile == null || !targetFile.exists()) {
                 targetFile = getDefaultAvatarFile("default");
             }
             //
-            if(dimension!=null) {
+            if (dimension != null) {
                 avatarCoordinate.setDimension(dimension);
                 File resizedTargetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-                if(!resizedTargetFile.exists()) {
+                if (!resizedTargetFile.exists()) {
                     ImageUtils.resize(targetFile, resizedTargetFile, dimension, dimension, "PNG");
                 }
                 //
@@ -131,16 +128,14 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar/upload")
-    public void doUpload(@RequestParam Long projectId,
-                         @RequestParam Long userId, MultipartFile file) throws IOException {
+    public void doUpload(@RequestParam Long projectId, @RequestParam Long userId, MultipartFile file) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         RuntimeHelper.setTempFile(avatarCoordinate, file.getInputStream());
     }
 
     @RequestMapping("/user-avatar/crop")
-    public void doCrop(@RequestParam Long projectId,
-                       @RequestParam Long userId, Rectangle rectangle) throws IOException {
+    public void doCrop(@RequestParam Long projectId, @RequestParam Long userId, Rectangle rectangle) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         RuntimeHelper.cleanTargetFile(avatarCoordinate);
@@ -155,9 +150,7 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     private File getDefaultAvatarFile(String themeName) throws IOException {
-        return resourceLoader.getResource(
-                String.format("/WEB-INF/themes/%s/img/person_65.png", themeName)).getFile();
+        return resourceLoader.getResource(String.format("/WEB-INF/themes/%s/img/person_65.png", themeName)).getFile();
     }
-
 
 }

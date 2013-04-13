@@ -51,12 +51,11 @@ public class ArticleCategoryWidget {
     }
 
     @RequestMapping("/category-edit")
-    public String doEdit(@RequestParam(required = false) Long categoryId,
-                         @WidgetAttribute ProjectUser user, Model model) {
+    public String doEdit(@RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser user, Model model) {
         //
         BlogCategory articleCategory = new BlogCategory();
         articleCategory.setCreateById(user.getId());
-        if(categoryId!=null) {
+        if (categoryId != null) {
             articleCategory = blogCategoryService.getBlogCategory(categoryId);
         }
         model.addAttribute("articleCategory", articleCategory);
@@ -66,7 +65,7 @@ public class ArticleCategoryWidget {
 
     @RequestMapping("/category-modify")
     public void modifyAction(BlogCategory articleCategory) {
-        if(articleCategory.getId()>0) {
+        if (articleCategory.getId() > 0) {
             blogCategoryService.modifyBlogCategory(articleCategory);
         } else {
             blogCategoryService.createBlogCategory(articleCategory);

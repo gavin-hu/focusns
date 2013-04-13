@@ -22,11 +22,10 @@ package org.focusns.service.auth;
  * #L%
  */
 
-
 public class AuthenticationException extends RuntimeException {
 
     public AuthenticationException(String message) {
         super(message);
     }
-    
+
 }

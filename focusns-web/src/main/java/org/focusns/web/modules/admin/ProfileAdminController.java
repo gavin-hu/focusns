@@ -22,7 +22,6 @@ package org.focusns.web.modules.admin;
  * #L%
  */
 
-
 import org.focusns.common.image.Rectangle;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
@@ -45,49 +44,55 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/admin")
 public class ProfileAdminController {
-    
+
     @Autowired
     private ProjectService projectService;
     @Autowired
     private ProjectAttributeService projectAttributeService;
-    
+
     @RequestMapping("/profile/logo/upload")
     public String uploadLogo(MultipartFile file, WebRequest webRequest) throws IOException {
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        //RuntimeHelper.getInstance().storeTmpProjectLogo(file.getInputStream(), webRequest.getSessionId());
+        // RuntimeHelper.getInstance().storeTmpProjectLogo(file.getInputStream(),
+        // webRequest.getSessionId());
         //
-        return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
+        return "redirect:/" + project.getCode() + "/" + feature.getCode() + "/profile/logo-edit";
     }
-    
+
     @RequestMapping("/profile/logo/crop")
     public String cropLogo(Rectangle rectangle, WebRequest webRequest) throws IOException {
         //
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-//        File target = RuntimeHelper.getInstance().getProjectLogo(project.getId());
-//        File original = RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
-//        RuntimeHelper.getInstance().cropProjectLogo(original, target, rectangle);
+        // File target =
+        // RuntimeHelper.getInstance().getProjectLogo(project.getId());
+        // File original =
+        // RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        // RuntimeHelper.getInstance().cropProjectLogo(original, target,
+        // rectangle);
         //
-        return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/logo-edit";
+        return "redirect:/" + project.getCode() + "/" + feature.getCode() + "/profile/logo-edit";
     }
-    
+
     @RequestMapping("/profile/logo/tmp")
-    public @ResponseBody byte[] linkLogoTemp(WebRequest webRequest) throws IOException {
+    public @ResponseBody
+    byte[] linkLogoTemp(WebRequest webRequest) throws IOException {
         //
-        File temp =null;// RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
+        File temp = null;// RuntimeHelper.getInstance().getTmpProjectLogo(webRequest.getSessionId());
         return FileCopyUtils.copyToByteArray(temp);
     }
 
     @RequestMapping("/profile/{projectId}/logo")
-    public @ResponseBody byte[] linkLogo(@PathVariable long projectId) throws IOException {
+    public @ResponseBody
+    byte[] linkLogo(@PathVariable long projectId) throws IOException {
         //
         File target = null;
         return FileCopyUtils.copyToByteArray(target);
     }
-    
+
     @RequestMapping("/profile/edit")
     public String editProject(Project project, WebRequest webRequest) {
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
@@ -98,21 +103,21 @@ public class ProfileAdminController {
         dbProject.setDescription(project.getDescription());
         projectService.modifyProject(dbProject);
         //
-        return "redirect:/"+dbProject.getCode()+"/"+feature.getCode()+"/profile/project-edit";
+        return "redirect:/" + dbProject.getCode() + "/" + feature.getCode() + "/profile/project-edit";
     }
-    
+
     @RequestMapping("/project/attribute/edit")
     public String editAttribute(ProjectAttribute attribute, WebRequest webRequest) {
         //
         Project project = WebRequestHelper.getProject(webRequest);
         ProjectFeature feature = WebRequestHelper.getProjectFeature(webRequest);
         //
-        if(attribute.getId()>0) {
+        if (attribute.getId() > 0) {
             projectAttributeService.modifyProjectAttribute(attribute);
         } else {
             projectAttributeService.createProjectAttribute(attribute);
         }
         //
-        return "redirect:/"+project.getCode()+"/"+feature.getCode()+"/profile/attribute-edit";
+        return "redirect:/" + project.getCode() + "/" + feature.getCode() + "/profile/attribute-edit";
     }
 }

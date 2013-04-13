@@ -22,7 +22,6 @@ package org.focusns.service.blog;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.AbstractServiceTest;
@@ -37,12 +36,12 @@ import java.util.List;
 
 @Ignore
 public class BlogCategoryServiceTest extends AbstractServiceTest {
-    
+
     @Autowired
     private ProjectService projectService;
     @Autowired
     private BlogCategoryService blogCategoryService;
-    
+
     @Test
     public void testCreateBlogCategory() {
         Project project = projectService.getProject("admin");
@@ -54,14 +53,14 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
 
         blogCategoryService.createBlogCategory(blogCategory);
     }
-    
+
     @Test
     public void testRemoveBlogCategory() {
         Project project = projectService.getProject("admin");
         Assert.assertNotNull(project);
         //
         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
-        for(BlogCategory blogCategory : blogCategories) {
+        for (BlogCategory blogCategory : blogCategories) {
             blogCategoryService.removeBlogCategory(blogCategory);
         }
     }
@@ -78,7 +77,7 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
 
     @Test
     public void testGetBlogCategoriesNoProject() {
-         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories();
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories();
         System.out.println(blogCategories.size());
     }
 

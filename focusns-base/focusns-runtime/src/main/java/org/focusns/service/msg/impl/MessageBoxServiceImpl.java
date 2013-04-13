@@ -22,7 +22,6 @@ package org.focusns.service.msg.impl;
  * #L%
  */
 
-
 import org.focusns.dao.msg.MessageBoxDao;
 import org.focusns.model.msg.MessageBox;
 import org.focusns.service.msg.MessageBoxService;

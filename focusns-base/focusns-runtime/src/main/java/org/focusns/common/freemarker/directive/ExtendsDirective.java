@@ -22,7 +22,6 @@ package org.focusns.common.freemarker.directive;
  * #L%
  */
 
-
 import freemarker.cache.TemplateCache;
 import freemarker.core.Environment;
 import freemarker.template.TemplateDirectiveBody;
@@ -35,21 +34,19 @@ import java.util.Map;
 
 public class ExtendsDirective implements TemplateDirectiveModel {
 
-	public final static String DIRECTIVE_NAME = "extends";
-	
-	public void execute(Environment env,
-            Map params, TemplateModel[] loopVars,
-            TemplateDirectiveBody body) throws TemplateException, IOException {
-		
-		String name = DirectiveUtils.getRequiredParam(params, "name");
-		String encoding = DirectiveUtils.getParam(params, "encoding",null);
-		String includeTemplateName = TemplateCache.getFullTemplatePath(env, getTemplatePath(env), name);
-		env.include(includeTemplateName, encoding, true);
-	}
+    public final static String DIRECTIVE_NAME = "extends";
 
-	private String getTemplatePath(Environment env) {
-		String templateName = env.getTemplate().getName();
+    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
+
+        String name = DirectiveUtils.getRequiredParam(params, "name");
+        String encoding = DirectiveUtils.getParam(params, "encoding", null);
+        String includeTemplateName = TemplateCache.getFullTemplatePath(env, getTemplatePath(env), name);
+        env.include(includeTemplateName, encoding, true);
+    }
+
+    private String getTemplatePath(Environment env) {
+        String templateName = env.getTemplate().getName();
         return templateName.lastIndexOf('/') == -1 ? "" : templateName.substring(0, templateName.lastIndexOf('/') + 1);
-	}
+    }
 
 }

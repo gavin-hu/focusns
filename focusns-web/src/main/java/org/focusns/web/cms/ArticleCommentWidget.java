@@ -22,7 +22,6 @@ package org.focusns.web.cms;
  * #L%
  */
 
-
 import org.focusns.service.blog.BlogCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -22,7 +22,6 @@ package org.focusns.install.setting;
  * #L%
  */
 
-
 import org.focusns.install.utils.FileCopyUtils;
 import org.focusns.install.utils.Properties;
 
@@ -32,24 +31,25 @@ import java.util.Scanner;
 
 /**
  * A server wizard for install servlet server such as jetty, tomcat...
+ * 
  * @author Gavin Hu
  * @since 2.0
  */
 public class ServerWizard implements Wizard {
 
     // supported servers
-    private String[] servers = new String[]{"tomcat"};
+    private String[] servers = new String[] { "tomcat" };
     //
     private String installPath;
 
     public void setup(Scanner scanner, Properties globalSettings) throws Exception {
         //
         ClassLoader classLoader = getClass().getClassLoader();
-        for(String server : servers) {
+        for (String server : servers) {
             //
             URL url = classLoader.getResource("META-INF/" + server);
             //
-            if(url!=null) {
+            if (url != null) {
                 printWelcome();
                 //
                 scanInstallPath(scanner);
@@ -81,13 +81,13 @@ public class ServerWizard implements Wizard {
         //
         try {
             File targetIntallPath = new File(installPath);
-            if(!targetIntallPath.exists()) {
+            if (!targetIntallPath.exists()) {
                 targetIntallPath.mkdir();
             }
             //
             System.out.print(String.format("您输入的安装目录为 %s 【Y/N】：", installPath));
             String yesOrNo = scanner.nextLine();
-            if(!"Y".equalsIgnoreCase(yesOrNo)) {
+            if (!"Y".equalsIgnoreCase(yesOrNo)) {
                 scanInstallPath(scanner);
             } else {
                 this.installPath = installPath;

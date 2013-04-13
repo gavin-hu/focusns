@@ -22,13 +22,12 @@ package org.focusns.model.blog;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
 
 public class BlogComment extends Id {
-    
+
     private String title;
     private String content;
     private Date createAt;
@@ -40,7 +39,7 @@ public class BlogComment extends Id {
     public BlogComment(long postId) {
         this.postId = postId;
     }
-    
+
     public String getTitle() {
         return title;
     }
@@ -88,5 +87,5 @@ public class BlogComment extends Id {
     public void setCreateById(long createById) {
         this.createById = createById;
     }
-    
+
 }

@@ -22,7 +22,6 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.model.common.Page;
@@ -34,8 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class ProjectHistoryDaoImpl extends MyBatisBaseDao<ProjectHistory>
-    implements ProjectHistoryDao {
+public class ProjectHistoryDaoImpl extends MyBatisBaseDao<ProjectHistory> implements ProjectHistoryDao {
 
     public List<ProjectHistory> selectByParentId(long parentId) {
         return getSqlSession().selectList(NAMESPACE.concat(".selectByParentId"), parentId);
@@ -48,5 +46,5 @@ public class ProjectHistoryDaoImpl extends MyBatisBaseDao<ProjectHistory>
         //
         return fetchPage(".fetchByProjectId", page, parameter);
     }
-    
+
 }

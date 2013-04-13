@@ -22,7 +22,6 @@ package org.focusns.web.console;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +39,14 @@ public class SiteWidget {
         model.put("categories", categories);
         return "console/menu-items";
     }
-    
+
     public String menuItem(long id, Map<String, Object> model) {
-       ProjectCategory category = new ProjectCategory();
-        if(id>0) {
+        ProjectCategory category = new ProjectCategory();
+        if (id > 0) {
             category = categoryService.getCategory(id);
         }
         model.put("category", category);
         return "console/menu-item";
     }
-    
+
 }

@@ -22,120 +22,119 @@ package org.focusns.model.env;
  * #L%
  */
 
-
 public class EnvironmentJava extends Environment {
 
-	private String javaHome;
-	private String javaOptions;
-	private String javaVendor;
-	private String javaVersion;
-	private String javaRuntimeName;
-	private String javaRuntimeVersion;
-	private String javaClassPath;
-	private String javaLibraryPath;
-	//
-	private String javaVMName;
-	private String javaVMVendor;
-	private String javaVMVersion;
-	private String javaVMInfo;
-	
-	public EnvironmentJava() {
-	}
+    private String javaHome;
+    private String javaOptions;
+    private String javaVendor;
+    private String javaVersion;
+    private String javaRuntimeName;
+    private String javaRuntimeVersion;
+    private String javaClassPath;
+    private String javaLibraryPath;
+    //
+    private String javaVMName;
+    private String javaVMVendor;
+    private String javaVMVersion;
+    private String javaVMInfo;
 
-	public String getJavaHome() {
-		return javaHome;
-	}
+    public EnvironmentJava() {
+    }
 
-	public void setJavaHome(String javaHome) {
-		this.javaHome = javaHome;
-	}
+    public String getJavaHome() {
+        return javaHome;
+    }
 
-	public String getJavaOptions() {
-		return javaOptions;
-	}
+    public void setJavaHome(String javaHome) {
+        this.javaHome = javaHome;
+    }
 
-	public void setJavaOptions(String javaOptions) {
-		this.javaOptions = javaOptions;
-	}
+    public String getJavaOptions() {
+        return javaOptions;
+    }
 
-	public String getJavaVendor() {
-		return javaVendor;
-	}
+    public void setJavaOptions(String javaOptions) {
+        this.javaOptions = javaOptions;
+    }
 
-	public void setJavaVendor(String javaVendor) {
-		this.javaVendor = javaVendor;
-	}
+    public String getJavaVendor() {
+        return javaVendor;
+    }
 
-	public String getJavaVersion() {
-		return javaVersion;
-	}
+    public void setJavaVendor(String javaVendor) {
+        this.javaVendor = javaVendor;
+    }
 
-	public void setJavaVersion(String javaVersion) {
-		this.javaVersion = javaVersion;
-	}
+    public String getJavaVersion() {
+        return javaVersion;
+    }
 
-	public String getJavaRuntimeName() {
-		return javaRuntimeName;
-	}
-	
-	public void setJavaRuntimeName(String javaRuntimeName) {
-		this.javaRuntimeName = javaRuntimeName;
-	}
-	
-	public String getJavaRuntimeVersion() {
-		return javaRuntimeVersion;
-	}
-	
-	public void setJavaRuntimeVersion(String javaRuntimeVersion) {
-		this.javaRuntimeVersion = javaRuntimeVersion;
-	}
+    public void setJavaVersion(String javaVersion) {
+        this.javaVersion = javaVersion;
+    }
 
-	public String getJavaClassPath() {
-		return javaClassPath;
-	}
-	
-	public void setJavaClassPath(String javaClassPath) {
-		this.javaClassPath = javaClassPath;
-	}
-	
-	public String getJavaLibraryPath() {
-		return javaLibraryPath;
-	}
-	
-	public void setJavaLibraryPath(String javaLibraryPath) {
-		this.javaLibraryPath = javaLibraryPath;
-	}
+    public String getJavaRuntimeName() {
+        return javaRuntimeName;
+    }
 
-	public String getJavaVMName() {
-		return javaVMName;
-	}
+    public void setJavaRuntimeName(String javaRuntimeName) {
+        this.javaRuntimeName = javaRuntimeName;
+    }
 
-	public void setJavaVMName(String javaVMName) {
-		this.javaVMName = javaVMName;
-	}
+    public String getJavaRuntimeVersion() {
+        return javaRuntimeVersion;
+    }
 
-	public String getJavaVMVendor() {
-		return javaVMVendor;
-	}
+    public void setJavaRuntimeVersion(String javaRuntimeVersion) {
+        this.javaRuntimeVersion = javaRuntimeVersion;
+    }
 
-	public void setJavaVMVendor(String javaVMVendor) {
-		this.javaVMVendor = javaVMVendor;
-	}
+    public String getJavaClassPath() {
+        return javaClassPath;
+    }
 
-	public String getJavaVMVersion() {
-		return javaVMVersion;
-	}
+    public void setJavaClassPath(String javaClassPath) {
+        this.javaClassPath = javaClassPath;
+    }
 
-	public void setJavaVMVersion(String javaVMVersion) {
-		this.javaVMVersion = javaVMVersion;
-	}
+    public String getJavaLibraryPath() {
+        return javaLibraryPath;
+    }
 
-	public String getJavaVMInfo() {
-		return javaVMInfo;
-	}
+    public void setJavaLibraryPath(String javaLibraryPath) {
+        this.javaLibraryPath = javaLibraryPath;
+    }
 
-	public void setJavaVMInfo(String javaVMInfo) {
-		this.javaVMInfo = javaVMInfo;
-	}
-	
+    public String getJavaVMName() {
+        return javaVMName;
+    }
+
+    public void setJavaVMName(String javaVMName) {
+        this.javaVMName = javaVMName;
+    }
+
+    public String getJavaVMVendor() {
+        return javaVMVendor;
+    }
+
+    public void setJavaVMVendor(String javaVMVendor) {
+        this.javaVMVendor = javaVMVendor;
+    }
+
+    public String getJavaVMVersion() {
+        return javaVMVersion;
+    }
+
+    public void setJavaVMVersion(String javaVMVersion) {
+        this.javaVMVersion = javaVMVersion;
+    }
+
+    public String getJavaVMInfo() {
+        return javaVMInfo;
+    }
+
+    public void setJavaVMInfo(String javaVMInfo) {
+        this.javaVMInfo = javaVMInfo;
+    }
+
 }

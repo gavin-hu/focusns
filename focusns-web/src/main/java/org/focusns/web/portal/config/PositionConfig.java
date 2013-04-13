@@ -22,13 +22,11 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 
 public class PositionConfig {
 
@@ -52,18 +50,18 @@ public class PositionConfig {
     }
 
     public void setGrid(String grid) {
-        if(!StringUtils.hasText(grid)) {
-            return ;
+        if (!StringUtils.hasText(grid)) {
+            return;
         }
         //
-        if(!grid.matches("^\\d+,\\d+$")) {
-            return ;
+        if (!grid.matches("^\\d+,\\d+$")) {
+            return;
         }
         //
         this.grid = grid;
         //
         this.rows = Integer.parseInt(grid.substring(0, grid.indexOf(",")));
-        this.columns = Integer.parseInt(grid.substring(grid.indexOf(",")+1));
+        this.columns = Integer.parseInt(grid.substring(grid.indexOf(",") + 1));
     }
 
     public int getRows() {

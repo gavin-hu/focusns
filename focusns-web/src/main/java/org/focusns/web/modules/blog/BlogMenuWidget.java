@@ -22,7 +22,6 @@ package org.focusns.web.modules.blog;
  * #L%
  */
 
-
 import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.annotation.Constraints;
 import org.springframework.stereotype.Controller;
@@ -33,8 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BlogMenuWidget {
 
     @RequestMapping("/menu-view")
-    @Constraints({Constraint.PROJECT_REQUIRED,
-                  Constraint.PROJECT_USER_REQUIRED})
+    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
     public String doView() {
         return "modules/blog/menu-view";
     }

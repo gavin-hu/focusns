@@ -22,7 +22,6 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 public class ProjectHistory extends Id {
-    
+
     private String content;
     private Date createAt;
     private long targetId;

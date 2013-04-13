@@ -22,7 +22,6 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.ProjectUser;
@@ -32,19 +31,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser>
-	implements ProjectUserDao {
+public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser> implements ProjectUserDao {
 
     @Override
     public ProjectUser selectWithProject(long id) {
-        return getSqlSession()
-                .selectOne(NAMESPACE.concat(".selectWithProject"), id);
+        return getSqlSession().selectOne(NAMESPACE.concat(".selectWithProject"), id);
     }
 
     public ProjectUser selectByUsername(String username) {
-		return getSqlSession()
-				.selectOne(NAMESPACE.concat(".selectByUsername"), username);
-	}
+        return getSqlSession().selectOne(NAMESPACE.concat(".selectByUsername"), username);
+    }
 
     public void insertRole(long projectId, long userId, long roleId) {
         Map parameter = new HashMap();

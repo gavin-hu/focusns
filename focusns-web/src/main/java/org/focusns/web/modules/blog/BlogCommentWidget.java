@@ -22,7 +22,6 @@ package org.focusns.web.modules.blog;
  * #L%
  */
 
-
 public class BlogCommentWidget {
 
 }

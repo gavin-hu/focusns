@@ -22,7 +22,6 @@ package org.focusns.web.cms;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -49,8 +48,7 @@ public class ArticleCategoryWidget {
     }
 
     @RequestMapping("/category-view")
-    public String doView(@WidgetPreference Long categoryId,
-                         @WidgetPreference Integer limit, Model model) {
+    public String doView(@WidgetPreference Long categoryId, @WidgetPreference Integer limit, Model model) {
         //
         BlogCategory articleCategory = blogCategoryService.getBlogCategory(categoryId);
         //

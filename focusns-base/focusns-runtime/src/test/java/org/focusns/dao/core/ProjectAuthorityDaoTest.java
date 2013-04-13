@@ -22,7 +22,6 @@ package org.focusns.dao.core;
  * #L%
  */
 
-
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.core.ProjectAuthority;
 import org.junit.Ignore;
@@ -37,7 +36,7 @@ public class ProjectAuthorityDaoTest extends AbstractDaoTest {
 
     @Test
     public void testInsert() {
-         ProjectAuthority authority = new ProjectAuthority();
+        ProjectAuthority authority = new ProjectAuthority();
         authority.setCode("project-profile-view");
         authority.setDescription("查看主页模块");
         //

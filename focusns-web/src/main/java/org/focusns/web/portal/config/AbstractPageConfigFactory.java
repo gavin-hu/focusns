@@ -22,7 +22,6 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
-
 import org.springframework.util.StringUtils;
 
 import java.util.LinkedHashMap;
@@ -30,22 +29,22 @@ import java.util.Map;
 
 public abstract class AbstractPageConfigFactory implements PageConfigFactory {
 
-    private static final String[] PARAM_NAMES = new String[]{"mode", "category"};
+    private static final String[] PARAM_NAMES = new String[] { "mode", "category" };
 
-	private boolean cacheable;
-	//
-	private Map<String, PageConfig> cache = new LinkedHashMap<String, PageConfig>();
-	
-	public void setCacheable(boolean cacheable) {
-		this.cacheable = cacheable;
-	}
+    private boolean cacheable;
+    //
+    private Map<String, PageConfig> cache = new LinkedHashMap<String, PageConfig>();
 
-	protected abstract Map<String, PageConfig> loadPages() throws Exception;
+    public void setCacheable(boolean cacheable) {
+        this.cacheable = cacheable;
+    }
+
+    protected abstract Map<String, PageConfig> loadPages() throws Exception;
 
     public PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception {
         //
         String key = generateKey(path, paramsMap);
-        if(cacheable && cache.containsKey(key)) {
+        if (cacheable && cache.containsKey(key)) {
             return cache.get(key);
         }
         //
@@ -56,14 +55,14 @@ public abstract class AbstractPageConfigFactory implements PageConfigFactory {
     }
 
     protected String generateKey(String path, Map<String, String> paramsMap) {
-        if(paramsMap.isEmpty()) {
+        if (paramsMap.isEmpty()) {
             return path;
         }
         //
         StringBuilder sb = new StringBuilder(path);
-        for(String paramName : PARAM_NAMES) {
+        for (String paramName : PARAM_NAMES) {
             String paramValue = paramsMap.get(paramName);
-            if(StringUtils.hasText(paramValue)) {
+            if (StringUtils.hasText(paramValue)) {
                 sb.append(paramName).append("=").append(paramsMap.get(paramName));
             }
         }

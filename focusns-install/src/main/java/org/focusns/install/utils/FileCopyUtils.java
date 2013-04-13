@@ -22,7 +22,6 @@ package org.focusns.install.utils;
  * #L%
  */
 
-
 import java.io.*;
 import java.net.JarURLConnection;
 import java.net.URL;
@@ -34,16 +33,14 @@ import java.util.jar.JarFile;
 public class FileCopyUtils {
     public static boolean copyFile(final File toCopy, final File destFile) {
         try {
-            return FileCopyUtils.copyStream(new FileInputStream(toCopy),
-                    new FileOutputStream(destFile));
+            return FileCopyUtils.copyStream(new FileInputStream(toCopy), new FileOutputStream(destFile));
         } catch (final FileNotFoundException e) {
             e.printStackTrace();
         }
         return false;
     }
 
-    private static boolean copyFilesRecusively(final File toCopy,
-                                               final File destDir) {
+    private static boolean copyFilesRecusively(final File toCopy, final File destDir) {
         assert destDir.isDirectory();
 
         if (!toCopy.isDirectory()) {
@@ -62,12 +59,11 @@ public class FileCopyUtils {
         return true;
     }
 
-    public static boolean copyJarResourcesRecursively(final File destDir,
-                                                      final JarURLConnection jarConnection) throws IOException {
+    public static boolean copyJarResourcesRecursively(final File destDir, final JarURLConnection jarConnection) throws IOException {
 
         final JarFile jarFile = jarConnection.getJarFile();
 
-        for (final Enumeration<JarEntry> e = jarFile.entries(); e.hasMoreElements(); ) {
+        for (final Enumeration<JarEntry> e = jarFile.entries(); e.hasMoreElements();) {
             final JarEntry entry = e.nextElement();
             if (entry.getName().startsWith(jarConnection.getEntryName())) {
                 final String filename = removeStart(entry.getName(), //
@@ -82,8 +78,7 @@ public class FileCopyUtils {
                     entryInputStream.close();
                 } else {
                     if (!FileCopyUtils.ensureDirectoryExists(f)) {
-                        throw new IOException("Could not create directory: "
-                                + f.getAbsolutePath());
+                        throw new IOException("Could not create directory: " + f.getAbsolutePath());
                     }
                 }
             }
@@ -92,15 +87,13 @@ public class FileCopyUtils {
     }
 
     public static boolean copyResourcesRecursively( //
-                                                    final URL originUrl, final File destination) {
+    final URL originUrl, final File destination) {
         try {
             final URLConnection urlConnection = originUrl.openConnection();
             if (urlConnection instanceof JarURLConnection) {
-                return FileCopyUtils.copyJarResourcesRecursively(destination,
-                        (JarURLConnection) urlConnection);
+                return FileCopyUtils.copyJarResourcesRecursively(destination, (JarURLConnection) urlConnection);
             } else {
-                return FileCopyUtils.copyFilesRecusively(new File(originUrl.getPath()),
-                        destination);
+                return FileCopyUtils.copyFilesRecusively(new File(originUrl.getPath()), destination);
             }
         } catch (final IOException e) {
             e.printStackTrace();

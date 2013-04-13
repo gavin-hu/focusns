@@ -22,7 +22,6 @@ package org.focusns.model.team;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;

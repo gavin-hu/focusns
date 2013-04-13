@@ -22,9 +22,8 @@ package org.focusns.model.common;
  * #L%
  */
 
-
 public interface Caches {
-    
+
     String PROJECT = "ProjectCache";
-    
+
 }

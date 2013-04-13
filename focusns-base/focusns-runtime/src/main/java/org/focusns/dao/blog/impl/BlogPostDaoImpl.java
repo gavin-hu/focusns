@@ -22,7 +22,6 @@ package org.focusns.dao.blog.impl;
  * #L%
  */
 
-
 import org.focusns.dao.blog.BlogPostDao;
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.blog.BlogPost;

@@ -22,7 +22,6 @@ package org.focusns.install;
  * #L%
  */
 
-
 import org.focusns.install.setting.DatabaseWizard;
 import org.focusns.install.setting.OpenApiWizard;
 import org.focusns.install.setting.ServerWizard;
@@ -76,7 +75,7 @@ public class Installer {
         //
         System.out.print("如需退出安装程序，请输入【exit】：");
         String exit = scanner.nextLine();
-        if("exit".equalsIgnoreCase(exit)) {
+        if ("exit".equalsIgnoreCase(exit)) {
             System.exit(0);
         }
     }
@@ -92,12 +91,12 @@ public class Installer {
 
     private static void storeToRuntime(Properties globalSettings) throws IOException {
         File runtime = new File(RUNTIME_PATH);
-        if(!runtime.exists()) {
+        if (!runtime.exists()) {
             runtime.mkdirs();
         }
         //
         File application = new File(RUNTIME_PATH + File.separator + "application.properties");
-        if(application.exists()) {
+        if (application.exists()) {
             application.createNewFile();
         }
         //

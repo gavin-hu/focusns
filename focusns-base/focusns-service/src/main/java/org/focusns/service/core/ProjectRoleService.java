@@ -22,7 +22,6 @@ package org.focusns.service.core;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectRole;
 
 public interface ProjectRoleService {

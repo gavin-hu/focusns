@@ -22,7 +22,6 @@ package org.focusns.service.team.impl;
  * #L%
  */
 
-
 import org.focusns.dao.team.TeamMemberDao;
 import org.focusns.model.team.TeamMember;
 import org.focusns.service.team.TeamMemberService;

@@ -22,7 +22,6 @@ package org.focusns.social.service;
  * #L%
  */
 
-
 import org.focusns.social.api.SinaApi;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -40,17 +39,12 @@ public class SinaServiceTest {
 
     @Before
     public void setup() {
-        oAuthService = new ServiceBuilder()
-                .provider(SinaApi.class)
-                .apiKey("1530323438")
-                .apiSecret("5578be7bd2ff290413ab1046cea7e99c")
-                .callback("http://www.opensourceforce.org")
-                .build();
+        oAuthService = new ServiceBuilder().provider(SinaApi.class).apiKey("1530323438").apiSecret("5578be7bd2ff290413ab1046cea7e99c").callback("http://www.opensourceforce.org").build();
     }
 
     @Test
     public void testOAuth() {
-        //Scanner scanner = new Scanner(System.in);
+        // Scanner scanner = new Scanner(System.in);
 
         String authorizationUrl = oAuthService.getAuthorizationUrl(EMPTY_TOKEN);
         System.out.println(authorizationUrl);

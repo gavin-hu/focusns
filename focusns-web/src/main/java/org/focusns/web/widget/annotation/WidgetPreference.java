@@ -22,7 +22,6 @@ package org.focusns.web.widget.annotation;
  * #L%
  */
 
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

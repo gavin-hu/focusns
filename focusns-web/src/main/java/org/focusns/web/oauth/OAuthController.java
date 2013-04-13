@@ -22,7 +22,6 @@ package org.focusns.web.oauth;
  * #L%
  */
 
-
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.Api;
 import org.scribe.model.Token;
@@ -69,7 +68,7 @@ public class OAuthController {
     }
 
     @SuppressWarnings("unchecked")
-	private OAuthService getOAuthService(String provider) throws Exception {
+    private OAuthService getOAuthService(String provider) throws Exception {
         String apiClass = application.getProperty(String.format("oauth.%s.apiClass", provider));
         String apiKey = application.getProperty(String.format("oauth.%s.apiKey", provider));
         String apiSecret = application.getProperty(String.format("oauth.%s.apiSecret", provider));

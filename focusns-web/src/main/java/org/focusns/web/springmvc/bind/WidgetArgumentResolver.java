@@ -22,7 +22,6 @@ package org.focusns.web.springmvc.bind;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.web.portal.config.WidgetConfig;
@@ -47,31 +46,30 @@ public class WidgetArgumentResolver implements WebArgumentResolver {
         this.conversionService = conversionService;
     }
 
-    public Object resolveArgument(MethodParameter methodParameter,
-                                  NativeWebRequest webRequest) throws Exception {
+    public Object resolveArgument(MethodParameter methodParameter, NativeWebRequest webRequest) throws Exception {
         //
         WidgetAttribute widgetAttribute = methodParameter.getParameterAnnotation(WidgetAttribute.class);
-        if(widgetAttribute!=null) {
+        if (widgetAttribute != null) {
             String widgetAttributeName = getWidgetAttributeName(methodParameter, widgetAttribute);
             Object value = webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
-            if(widgetAttribute.required()) {
+            if (widgetAttribute.required()) {
                 Assert.notNull(value, String.format("Widget attribute %s can not be null!", widgetAttributeName));
             }
             return value;
         }
         //
         WidgetPreference widgetPreference = methodParameter.getParameterAnnotation(WidgetPreference.class);
-        if(widgetPreference!=null) {
+        if (widgetPreference != null) {
             WidgetConfig widgetConfig = (WidgetConfig) webRequest.getAttribute("widgetConfig", WebRequest.SCOPE_REQUEST);
             String widgetPreferenceName = getWidgetPreferenceName(methodParameter, widgetPreference);
-            if(widgetConfig!=null) {
+            if (widgetConfig != null) {
                 String defaultValue = widgetPreference.defaultValue();
                 Object value = widgetConfig.getPreferences().get(widgetPreferenceName);
-                if(StringUtils.hasText(defaultValue) && value==null) {
+                if (StringUtils.hasText(defaultValue) && value == null) {
                     value = defaultValue;
                 }
                 //
-                if(widgetPreference.required()) {
+                if (widgetPreference.required()) {
                     Assert.notNull(value, String.format("Widget preference %s can not be null!", value));
                 }
                 //
@@ -84,11 +82,11 @@ public class WidgetArgumentResolver implements WebArgumentResolver {
 
     private String getWidgetAttributeName(MethodParameter methodParameter, WidgetAttribute widgetAttribute) {
         String widgetAttributeName = methodParameter.getParameterName();
-        if(StringUtils.hasText(widgetAttribute.value())) {
+        if (StringUtils.hasText(widgetAttribute.value())) {
             widgetAttributeName = widgetAttribute.value();
-        } else if(ClassUtils.isAssignable(Project.class, methodParameter.getParameterType())) {
+        } else if (ClassUtils.isAssignable(Project.class, methodParameter.getParameterType())) {
             widgetAttributeName = Project.KEY;
-        } else if(ClassUtils.isAssignable(ProjectUser.class, methodParameter.getParameterType())) {
+        } else if (ClassUtils.isAssignable(ProjectUser.class, methodParameter.getParameterType())) {
             widgetAttributeName = ProjectUser.KEY;
         }
         //
@@ -98,11 +96,10 @@ public class WidgetArgumentResolver implements WebArgumentResolver {
     private String getWidgetPreferenceName(MethodParameter methodParameter, WidgetPreference widgetPreference) {
         String widgetPreferenceName = methodParameter.getParameterName();
         //
-        if(StringUtils.hasText(widgetPreference.value())) {
+        if (StringUtils.hasText(widgetPreference.value())) {
             widgetPreferenceName = widgetPreference.value();
         }
         //
         return widgetPreferenceName;
     }
 }
-

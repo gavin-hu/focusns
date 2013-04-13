@@ -22,7 +22,6 @@ package org.focusns.console.impl;
  * #L%
  */
 
-
 import org.focusns.dao.console.UserDao;
 import org.focusns.model.console.User;
 import org.focusns.service.console.UserService;

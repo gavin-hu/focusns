@@ -22,7 +22,6 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.dao.core.ProjectUserDao;
@@ -48,7 +47,7 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
     private ProjectUserDao projectUserDao;
     @Autowired
     private ProjectHistoryDao projectHistoryDao;
-    
+
     public void createProjectHistory(ProjectHistory histroy) {
         //
         Date now = new Date();
@@ -68,14 +67,14 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
     public Page<ProjectHistory> fetchPage(Page<ProjectHistory> page, long projectId) {
         page = projectHistoryDao.fetchByProjectId(page, projectId);
         // TODO performance tuning
-        for(ProjectHistory history : page.getResults()) {
+        for (ProjectHistory history : page.getResults()) {
             Project project = projectDao.select(history.getProjectId());
             ProjectUser projectUser = projectUserDao.selectWithProject(history.getCreateById());
             history.setProject(project);
             history.setCreateBy(projectUser);
             //
             List<ProjectHistory> children = projectHistoryDao.selectByParentId(history.getId());
-            for(ProjectHistory child : children) {
+            for (ProjectHistory child : children) {
                 //
                 Project childProject = projectDao.select(child.getProjectId());
                 ProjectUser childProjectUser = projectUserDao.selectWithProject(child.getCreateById());
@@ -87,5 +86,5 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
         //
         return page;
     }
-    
+
 }

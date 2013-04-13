@@ -22,7 +22,6 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
@@ -42,14 +41,13 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     @Autowired
     private ProjectLinkDao linkDao;
 
-    
     public ProjectLink getProjectLink(long id) {
         return linkDao.select(id);
     }
 
     public void createProjectLink(ProjectLink link) {
         ProjectLink dbLink = linkDao.selectByFromAndToProjectId(link.getFromProjectId(), link.getToProjectId());
-        if(dbLink==null) {
+        if (dbLink == null) {
             linkDao.insert(link);
         } else {
             throw new RuntimeException("The link already exist!");
@@ -77,7 +75,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         page = linkDao.fetchByToProjectId(page, toProjectId, category, null);
         //
         Project toProject = projectDao.select(toProjectId);
-        for(ProjectLink projectLink : page.getResults()) {
+        for (ProjectLink projectLink : page.getResults()) {
             projectLink.setToProject(toProject);
         }
         return page;
@@ -88,7 +86,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         page = linkDao.fetchByFromProjectId(page, fromProjectId, category, null);
         //
         Project fromProject = projectDao.select(fromProjectId);
-        for(ProjectLink projectLink : page.getResults()) {
+        for (ProjectLink projectLink : page.getResults()) {
             projectLink.setFromProject(fromProject);
         }
         return page;

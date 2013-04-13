@@ -22,7 +22,6 @@ package org.focusns.service.event.impl;
  * #L%
  */
 
-
 import org.focusns.dao.event.EventDao;
 import org.focusns.model.event.Event;
 import org.focusns.service.event.EventService;

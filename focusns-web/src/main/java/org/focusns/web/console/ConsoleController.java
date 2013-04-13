@@ -22,7 +22,6 @@ package org.focusns.web.console;
  * #L%
  */
 
-
 import org.focusns.model.console.User;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.web.helper.PropertyHelper;
@@ -44,8 +43,7 @@ public class ConsoleController {
     public void login(User user, WebRequest webRequest) {
         String username = PropertyHelper.getConsoleUsername(application);
         String password = PropertyHelper.getConsolePassword(application);
-        if(user.getUsername().equals(username)
-                && user.getPassword().equals(password)) {
+        if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
             //
             webRequest.setAttribute("user", user, WebRequest.SCOPE_SESSION);
         } else {

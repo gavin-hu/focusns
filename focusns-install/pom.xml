@@ -28,6 +28,10 @@
                 <artifactId>license-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>javafmt-maven-plugin</groupId>
+                <artifactId>javafmt-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>

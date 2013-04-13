@@ -22,7 +22,6 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 public class ProjectFeature extends Id {
@@ -30,12 +29,11 @@ public class ProjectFeature extends Id {
     public static final String KEY = ProjectFeature.class.getName();
 
     private String code;
-	private String label;
-	private int level; // 排序字段
-	private boolean enabled;
-	//
-	private long projectId;
-
+    private String label;
+    private int level; // 排序字段
+    private boolean enabled;
+    //
+    private long projectId;
 
     public ProjectFeature() {
     }
@@ -45,43 +43,43 @@ public class ProjectFeature extends Id {
     }
 
     public String getCode() {
-		return code;
-	}
+        return code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getLabel() {
-		return label;
-	}
+    public String getLabel() {
+        return label;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	
-	public int getLevel() {
-		return level;
-	}
-	
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-	public boolean isEnabled() {
-		return enabled;
-	}
-	
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	public long getProjectId() {
-		return projectId;
-	}
+    public int getLevel() {
+        return level;
+    }
 
-	public void setProjectId(long projectId) {
-		this.projectId = projectId;
-	}
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
 
 }

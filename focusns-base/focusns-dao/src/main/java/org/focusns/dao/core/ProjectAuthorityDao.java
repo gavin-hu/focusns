@@ -22,7 +22,6 @@ package org.focusns.dao.core;
  * #L%
  */
 
-
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.core.ProjectAuthority;
 

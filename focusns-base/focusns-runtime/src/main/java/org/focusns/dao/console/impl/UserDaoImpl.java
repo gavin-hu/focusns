@@ -22,7 +22,6 @@ package org.focusns.dao.console.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.console.UserDao;
 import org.focusns.model.console.User;
@@ -32,9 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Repository
-public class UserDaoImpl extends MyBatisBaseDao<User>
-        implements UserDao {
-	
+public class UserDaoImpl extends MyBatisBaseDao<User> implements UserDao {
+
     public void assign(long userId, long roleId) {
         //
         Map parameter = getParameter(userId, roleId);

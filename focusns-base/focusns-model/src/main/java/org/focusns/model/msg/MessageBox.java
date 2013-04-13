@@ -22,7 +22,6 @@ package org.focusns.model.msg;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
@@ -31,7 +30,7 @@ public class MessageBox extends Id {
 
     public static String TYPE_IN = "IN";
     public static String TYPE_SENT = "SENT";
-    
+
     private String label;
     private String type;
     private Date createAt;

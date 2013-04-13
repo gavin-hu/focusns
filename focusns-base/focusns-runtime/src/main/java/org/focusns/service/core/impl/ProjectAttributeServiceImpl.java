@@ -22,7 +22,6 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectAttributeDao;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
@@ -35,7 +34,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ProjectAttributeServiceImpl implements ProjectAttributeService {
-    
+
     @Autowired
     private ProjectAttributeDao attributeDao;
 
@@ -54,5 +53,5 @@ public class ProjectAttributeServiceImpl implements ProjectAttributeService {
     public List<ProjectAttribute> getProjectAttributes(long projectId) {
         return attributeDao.selectByProjectId(projectId);
     }
-    
+
 }

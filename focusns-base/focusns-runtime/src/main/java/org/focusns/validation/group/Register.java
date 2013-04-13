@@ -22,6 +22,5 @@ package org.focusns.validation.group;
  * #L%
  */
 
-
 public interface Register {
 }

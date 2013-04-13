@@ -22,7 +22,6 @@ package org.focusns.web.portal;
  * #L%
  */
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.model.core.Project;
@@ -50,28 +49,26 @@ import java.util.Map;
 
 @Controller
 public class Portal {
-	
+
     private static final Log log = LogFactory.getLog(Portal.class);
-    
-	@Autowired
-	private ProjectService projectService;
+
+    @Autowired
+    private ProjectService projectService;
     @Autowired
     private ProjectFeatureService featureService;
-	@Autowired
-	private ProjectCategoryService categoryService;
+    @Autowired
+    private ProjectCategoryService categoryService;
     @Autowired
     private PageConfigFactory pageConfigFactory;
 
     @RequestMapping("/portal")
-	public String doRender(@RequestParam(required = false) String mode,
-                           @RequestParam(required = false) String projectCode,
-                           @RequestParam String path, WebRequest webRequest) throws Exception {
+    public String doRender(@RequestParam(required = false) String mode, @RequestParam(required = false) String projectCode, @RequestParam String path, WebRequest webRequest) throws Exception {
         //
         String categoryCode = null;
         // export project
-        if(StringUtils.hasText(projectCode)) {
+        if (StringUtils.hasText(projectCode)) {
             Project project = projectService.getProject(projectCode);
-            if(project!=null) {
+            if (project != null) {
                 ProjectCategory projectCategory = categoryService.getCategory(project.getCategoryId());
                 categoryCode = projectCategory.getCode();
                 //
@@ -81,7 +78,7 @@ public class Portal {
                 webRequest.setAttribute(ProjectCategory.KEY, projectCategory, WebRequest.SCOPE_REQUEST);
                 // export feature
                 String featureCode = webRequest.getParameter("featureCode");
-                if(StringUtils.hasText(featureCode)) {
+                if (StringUtils.hasText(featureCode)) {
                     ProjectFeature projectFeature = featureService.getProjectFeature(project.getId(), featureCode);
                     webRequest.setAttribute("projectFeature", projectFeature, WebRequest.SCOPE_REQUEST);
                     webRequest.setAttribute(ProjectFeature.KEY, projectFeature, WebRequest.SCOPE_REQUEST);
@@ -90,7 +87,7 @@ public class Portal {
         }
         // export ProjectUser
         ProjectUser projectUser = (ProjectUser) webRequest.getAttribute(ProjectUser.KEY, WebRequest.SCOPE_SESSION);
-        if(projectUser!=null) {
+        if (projectUser != null) {
             webRequest.setAttribute("user", projectUser, WebRequest.SCOPE_REQUEST);
             webRequest.setAttribute(ProjectUser.KEY, projectUser, WebRequest.SCOPE_REQUEST);
         }
@@ -103,14 +100,14 @@ public class Portal {
         webRequest.setAttribute("pageConfig", pageConfig, WebRequest.SCOPE_REQUEST);
         //
         return "viewName";
-	}
+    }
 
     protected PageConfig resolvePage(String pagePath, String mode, String category) throws Exception {
         Map<String, String> paramsMap = new HashMap<String, String>();
-        if(StringUtils.hasText(mode)) {
+        if (StringUtils.hasText(mode)) {
             paramsMap.put("mode", mode);
         }
-        if(StringUtils.hasText(category)) {
+        if (StringUtils.hasText(category)) {
             paramsMap.put("category", category);
         }
         //
@@ -118,7 +115,7 @@ public class Portal {
     }
 
     protected void processPageConfig(PageConfig pageConfig, WebRequest webRequest) {
-        for(PositionConfig positionConfig : pageConfig.getPositionConfigMap().values()) {
+        for (PositionConfig positionConfig : pageConfig.getPositionConfigMap().values()) {
             Iterator<WidgetConfig> iter = positionConfig.getWidgetConfigList().iterator();
             //
             while (iter.hasNext()) {
@@ -126,7 +123,7 @@ public class Portal {
                 //
                 boolean needRemove = false;
                 //
-                if(needRemove) {
+                if (needRemove) {
                     iter.remove();
                 }
             }

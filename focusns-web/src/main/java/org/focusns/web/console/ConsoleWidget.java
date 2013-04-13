@@ -22,7 +22,6 @@ package org.focusns.web.console;
  * #L%
  */
 
-
 public class ConsoleWidget {
 
     public String login() {

@@ -22,7 +22,6 @@ package org.focusns.social.api;
  * #L%
  */
 
-
 import org.scribe.builder.api.DefaultApi20;
 import org.scribe.model.OAuthConfig;
 import org.scribe.model.Verb;

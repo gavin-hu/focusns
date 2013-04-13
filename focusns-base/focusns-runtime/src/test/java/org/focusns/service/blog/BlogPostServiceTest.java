@@ -22,7 +22,6 @@ package org.focusns.service.blog;
  * #L%
  */
 
-
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -49,7 +48,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
     private BlogCategoryService tagService;
     @Autowired
     private BlogPostService postService;
-    
+
     @Test
     public void testCreateBlogPost() {
         Project project = projectService.getProject("focusns");
@@ -75,7 +74,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         //
         postService.createBlogPost(blogPost);
     }
-    
+
     @Test
     public void testRemoveBlogPost() {
         Project project = projectService.getProject("focusns");
@@ -83,9 +82,9 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         //
         Page<BlogPost> page = new Page<BlogPost>(10);
         page = postService.fetchPageByProjectId(page, project.getId());
-        for(BlogPost post : page.getResults()) {
+        for (BlogPost post : page.getResults()) {
             postService.removeBlogPost(post);
         }
     }
-    
+
 }

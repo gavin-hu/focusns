@@ -22,7 +22,6 @@ package org.focusns.web.springmvc.view;
  * #L%
  */
 
-
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -30,8 +29,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.util.Locale;
 
-public class ExtInternalResourceViewResolver extends InternalResourceViewResolver
-    implements ResourceLoaderAware {
+public class ExtInternalResourceViewResolver extends InternalResourceViewResolver implements ResourceLoaderAware {
 
     private ResourceLoader resourceLoader;
 
@@ -42,14 +40,12 @@ public class ExtInternalResourceViewResolver extends InternalResourceViewResolve
 
     @Override
     protected boolean canHandle(String viewName, Locale locale) {
-        return super.canHandle(viewName, locale) && isViewExist(viewName,  locale);
+        return super.canHandle(viewName, locale) && isViewExist(viewName, locale);
     }
 
     private boolean isViewExist(String viewName, Locale locale) {
         //
-        if(viewName==null ||
-                viewName.startsWith("forward:") ||
-                viewName.startsWith("redirect:")) {
+        if (viewName == null || viewName.startsWith("forward:") || viewName.startsWith("redirect:")) {
             return true;
         }
         //

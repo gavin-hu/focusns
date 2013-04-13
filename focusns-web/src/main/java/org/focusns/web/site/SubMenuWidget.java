@@ -22,7 +22,6 @@ package org.focusns.web.site;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectFeatureService;

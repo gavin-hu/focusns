@@ -22,7 +22,6 @@ package org.focusns.web.helper;
  * #L%
  */
 
-
 import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
@@ -33,11 +32,11 @@ import java.io.InputStream;
 public class RuntimeHelper {
 
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
-    
+
     private static final String RUNTIME_DIR = System.getProperty("user.home") + File.separator + ".focusns";
 
     private static final File application = new File(RUNTIME_DIR, "application.properties");
-    
+
     private static RuntimeHelper instance = new RuntimeHelper();
 
     public static boolean isInstalled() {
@@ -78,9 +77,9 @@ public class RuntimeHelper {
         File parentFile = file.getParentFile();
         //
         String baseCoordinate = coordinate.toPath(false) + "_";
-        if(parentFile!=null && parentFile.listFiles()!=null) {
-            for(File tmp : parentFile.listFiles()) {
-                if(tmp.getAbsolutePath().contains(baseCoordinate)) {
+        if (parentFile != null && parentFile.listFiles() != null) {
+            for (File tmp : parentFile.listFiles()) {
+                if (tmp.getAbsolutePath().contains(baseCoordinate)) {
                     tmp.delete();
                 }
             }
@@ -102,12 +101,12 @@ public class RuntimeHelper {
     private static void setFile(String rootDir, Coordinate coordinate, InputStream inputStream) throws IOException {
         // override
         File file = new File(rootDir, coordinate.toPath());
-        if(file.exists()) {
+        if (file.exists()) {
             file.delete();
         }
         file.getParentFile().mkdirs();
         file.createNewFile();
         FileCopyUtils.copy(inputStream, new FileOutputStream(file));
     }
-    
+
 }

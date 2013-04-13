@@ -22,6 +22,5 @@ package org.focusns.social.service;
  * #L%
  */
 
-
 public interface SinaService {
 }

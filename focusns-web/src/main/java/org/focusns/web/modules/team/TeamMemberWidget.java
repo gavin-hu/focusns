@@ -22,7 +22,6 @@ package org.focusns.web.modules.team;
  * #L%
  */
 
-
 public class TeamMemberWidget {
 
 }

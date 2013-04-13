@@ -22,7 +22,6 @@ package org.focusns.model.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
@@ -31,8 +30,8 @@ public class ProjectUser extends Id {
 
     public static String KEY = ProjectUser.class.getName();
 
-	private String username;
-	private String password;
+    private String username;
+    private String password;
     private String nickname;
     private String realname;
     private String province;
@@ -44,13 +43,13 @@ public class ProjectUser extends Id {
     private float weight;
     private String identityNo;
 
-	private String email;
+    private String email;
     //
     private long projectId;
     private Project project;
 
     public ProjectUser() {
-	}
+    }
 
     public String getUsername() {
         return username;

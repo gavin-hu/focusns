@@ -22,7 +22,6 @@ package org.focusns.dao.msg.impl;
  * #L%
  */
 
-
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.msg.MessageDao;
 import org.focusns.model.common.Page;

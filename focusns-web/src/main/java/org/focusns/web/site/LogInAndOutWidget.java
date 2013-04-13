@@ -22,7 +22,6 @@ package org.focusns.web.site;
  * #L%
  */
 
-
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationService;
 import org.focusns.service.core.ProjectService;
@@ -52,8 +51,7 @@ public class LogInAndOutWidget {
     }
 
     @RequestMapping("/login")
-    public String doLogin(@RequestParam(required = false) String redirect,
-                          @ModelAttribute ProjectUser user, WebRequest webRequest) {
+    public String doLogin(@RequestParam(required = false) String redirect, @ModelAttribute ProjectUser user, WebRequest webRequest) {
         //
         authenticationService.authenticate(user);
         //
@@ -61,11 +59,11 @@ public class LogInAndOutWidget {
         webRequest.setAttribute("user", dbUser, WebRequest.SCOPE_SESSION);
         webRequest.setAttribute(ProjectUser.KEY, dbUser, WebRequest.SCOPE_SESSION);
         //
-        if(StringUtils.hasText(redirect)) {
-            return "redirect:"+redirect;
+        if (StringUtils.hasText(redirect)) {
+            return "redirect:" + redirect;
         }
         //
-        return "redirect:/" + dbUser.getProject().getCode() + "/profile" ;
+        return "redirect:/" + dbUser.getProject().getCode() + "/profile";
     }
 
     @RequestMapping("/logout")

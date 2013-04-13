@@ -22,7 +22,6 @@ package org.focusns.service.event;
  * #L%
  */
 
-
 import org.focusns.model.event.EventCategory;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
@@ -39,7 +38,7 @@ public class EventCategoryServiceTest extends AbstractServiceTest {
 
     @Test
     public void testCreateEventCategory() {
-         EventCategory category = new EventCategory();
+        EventCategory category = new EventCategory();
         category.setLabel("任务");
         category.setCreateAt(new Date());
         category.setProjectId(1);

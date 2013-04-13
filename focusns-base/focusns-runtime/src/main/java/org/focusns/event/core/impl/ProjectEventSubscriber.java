@@ -22,7 +22,6 @@ package org.focusns.event.core.impl;
  * #L%
  */
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.common.event.Event;
@@ -40,10 +39,10 @@ import java.util.Date;
 public class ProjectEventSubscriber {
 
     private Log log = LogFactory.getLog(ProjectEventSubscriber.class);
-    
+
     @Autowired
     private ProjectHistoryService projectHistoryService;
-    
+
     @OnEvent(Event.MODIFIED)
     public void onProjectModified(EventContext taskContext) {
         log.info("event triggered!");
@@ -60,5 +59,5 @@ public class ProjectEventSubscriber {
         //
         projectHistoryService.createProjectHistory(projectHistory);
     }
-    
+
 }

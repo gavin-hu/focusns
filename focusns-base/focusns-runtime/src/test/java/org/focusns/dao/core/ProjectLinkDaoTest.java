@@ -22,7 +22,6 @@ package org.focusns.dao.core;
  * #L%
  */
 
-
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;

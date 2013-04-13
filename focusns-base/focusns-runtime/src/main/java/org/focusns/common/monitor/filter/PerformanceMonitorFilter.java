@@ -22,7 +22,6 @@ package org.focusns.common.monitor.filter;
  * #L%
  */
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StopWatch;
@@ -38,12 +37,11 @@ import java.io.IOException;
 public class PerformanceMonitorFilter extends OncePerRequestFilter {
 
     private static final Log log = LogFactory.getLog(PerformanceMonitorFilter.class);
-    
+
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, 
-            FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //
-        if(log.isTraceEnabled()) {
+        if (log.isTraceEnabled()) {
             //
             String requestDesc = getRequestDescription(request);
             StopWatch stopWatch = new StopWatch();
@@ -58,14 +56,14 @@ public class PerformanceMonitorFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }
     }
-    
+
     private String getRequestDescription(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder(request.getRequestURI());
-        if(StringUtils.hasText(request.getQueryString())) {
+        if (StringUtils.hasText(request.getQueryString())) {
             sb.append("?").append(request.getQueryString());
         }
         sb.append(" [").append(request.getMethod()).append("]");
         return sb.toString();
     }
-    
+
 }

@@ -22,7 +22,6 @@ package org.focusns.model.cms;
  * #L%
  */
 
-
 import org.focusns.model.common.Id;
 
 import java.util.Date;
@@ -46,7 +45,5 @@ public class Article extends Id {
     private long removeById;
     //
     private long categoryId;
-
-
 
 }

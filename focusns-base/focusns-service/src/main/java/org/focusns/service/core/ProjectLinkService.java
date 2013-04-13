@@ -22,18 +22,17 @@ package org.focusns.service.core;
  * #L%
  */
 
-
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
 
 public interface ProjectLinkService {
 
     ProjectLink getProjectLink(long id);
-    
+
     void createProjectLink(ProjectLink link);
-    
+
     void modifyProjectLink(ProjectLink link);
-    
+
     void removeProjectLink(ProjectLink link);
 
     void removeProjectLink(long fromProjectId, long toProjectId);

@@ -22,7 +22,6 @@ package org.focusns.common.xml;
  * #L%
  */
 
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
@@ -40,35 +39,35 @@ import org.xml.sax.InputSource;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public final class XmlParser {
-	
-	private static final Log log = LogFactory.getLog(XmlParser.class);
-	
-	private DocumentBuilderFactory documentBuildFactory = DocumentBuilderFactory.newInstance();
-	//
-	private DocumentLoader documentLoader = new DefaultDocumentLoader();
-	
-	private ErrorHandler errorHandler = new SimpleSaxErrorHandler(log);
-	
-	private XmlValidationModeDetector validationModeDetector = new XmlValidationModeDetector();
-	
-	private EntityResolver entityResolver; 
 
-	public XmlParser() {
-		this(ClassUtils.getDefaultClassLoader());
-	}
-	
-	public XmlParser(ClassLoader classLoader) {
-		this.entityResolver = new PluggableSchemaResolver(classLoader);
-	}
-	
-	public Document parse(Resource resource) throws Exception {
-		return documentBuildFactory.newDocumentBuilder().parse(resource.getInputStream());
-	}
-	
-	public Document parseAndValidate(Resource resource) throws Exception {
-		InputSource inputSource = new InputSource(resource.getInputStream());
-		int validationMode = validationModeDetector.detectValidationMode(resource.getInputStream());
-		return documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode, false);
-	}
+    private static final Log log = LogFactory.getLog(XmlParser.class);
+
+    private DocumentBuilderFactory documentBuildFactory = DocumentBuilderFactory.newInstance();
+    //
+    private DocumentLoader documentLoader = new DefaultDocumentLoader();
+
+    private ErrorHandler errorHandler = new SimpleSaxErrorHandler(log);
+
+    private XmlValidationModeDetector validationModeDetector = new XmlValidationModeDetector();
+
+    private EntityResolver entityResolver;
+
+    public XmlParser() {
+        this(ClassUtils.getDefaultClassLoader());
+    }
+
+    public XmlParser(ClassLoader classLoader) {
+        this.entityResolver = new PluggableSchemaResolver(classLoader);
+    }
+
+    public Document parse(Resource resource) throws Exception {
+        return documentBuildFactory.newDocumentBuilder().parse(resource.getInputStream());
+    }
+
+    public Document parseAndValidate(Resource resource) throws Exception {
+        InputSource inputSource = new InputSource(resource.getInputStream());
+        int validationMode = validationModeDetector.detectValidationMode(resource.getInputStream());
+        return documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode, false);
+    }
 
 }

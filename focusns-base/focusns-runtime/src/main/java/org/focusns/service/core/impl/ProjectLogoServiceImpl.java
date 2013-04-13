@@ -22,7 +22,6 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-
 import org.focusns.dao.core.ProjectLogoDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
@@ -41,7 +40,7 @@ public class ProjectLogoServiceImpl implements ProjectLogoService {
 
     @Autowired
     private ProjectLogoDao logoDao;
-    
+
     public void createProjectLogo(ProjectLogo logo) {
         logoDao.insert(logo);
     }
@@ -63,19 +62,20 @@ public class ProjectLogoServiceImpl implements ProjectLogoService {
     }
 
     public File loadProjectLogoImage(ProjectLogo logo) {
-//        return RuntimeHelper.getInstance().getProjectLogo(logo);
+        // return RuntimeHelper.getInstance().getProjectLogo(logo);
         return null;
     }
 
     public void cropProjectLogoImage(Project project, File original) throws IOException {
         //
-      /*  ProjectLogo logo = new ProjectLogo();
-        logo.setProjectId(project.getId());
-        logoDao.insert(logo);
-        //
-        File target = RuntimeHelper.getInstance().getProjectLogo(logo);
-        ImageUtils.crop(original, target, rectangle.getXInt(), rectangle.getYInt(),
-                rectangle.getWInt(), rectangle.getHInt(), "JPG");*/
+        /*
+         * ProjectLogo logo = new ProjectLogo();
+         * logo.setProjectId(project.getId()); logoDao.insert(logo); // File
+         * target = RuntimeHelper.getInstance().getProjectLogo(logo);
+         * ImageUtils.crop(original, target, rectangle.getXInt(),
+         * rectangle.getYInt(), rectangle.getWInt(), rectangle.getHInt(),
+         * "JPG");
+         */
     }
-    
+
 }

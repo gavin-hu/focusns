@@ -22,7 +22,6 @@ package org.focusns.common.image;
  * #L%
  */
 
-
 import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.ThumpnailRescaleOp;
 
@@ -41,9 +40,10 @@ public class ImageUtils {
         //
         ImageUtils.crop(original, target, x, y, w, h, "PNG");
     }
-    
+
     /**
      * 裁剪图片
+     * 
      * @param originalFile
      * @param targetFile
      * @param x
@@ -51,23 +51,22 @@ public class ImageUtils {
      * @param w
      * @param h
      * @param format
-     * @throws IOException 
+     * @throws IOException
      */
-    public static void crop(File originalFile, File targetFile, 
-            int x, int y, int w, int h, String format) throws IOException {
+    public static void crop(File originalFile, File targetFile, int x, int y, int w, int h, String format) throws IOException {
         //
-        if(targetFile.exists()) {
+        if (targetFile.exists()) {
             targetFile.delete();
         }
         targetFile.getParentFile().mkdirs();
         targetFile.createNewFile();
         //
-        crop(new FileInputStream(originalFile), new FileOutputStream(targetFile),
-                x, y, w, h, format);
+        crop(new FileInputStream(originalFile), new FileOutputStream(targetFile), x, y, w, h, format);
     }
-    
+
     /**
      * 裁剪图片
+     * 
      * @param originalStream
      * @param targetStream
      * @param x
@@ -75,10 +74,9 @@ public class ImageUtils {
      * @param w
      * @param h
      * @param format
-     * @throws IOException 
+     * @throws IOException
      */
-    public static void crop(InputStream originalStream, OutputStream targetStream, 
-            int x, int y, int w, int h, String format) throws IOException {
+    public static void crop(InputStream originalStream, OutputStream targetStream, int x, int y, int w, int h, String format) throws IOException {
         BufferedImage originalImage = ImageIO.read(originalStream);
         BufferedImage targetImage = originalImage.getSubimage(x, y, w, h);
         ImageIO.write(targetImage, format, targetStream);
@@ -86,36 +84,33 @@ public class ImageUtils {
 
     /**
      * 图片缩放
-     *
+     * 
      * @param originalFile
      * @param thumnailFile
      * @param newWidth
      * @param newHeight
      * @param format
      */
-    public static void resize(File originalFile, File thumnailFile,
-            int newWidth, int newHeight, String format) throws IOException {
+    public static void resize(File originalFile, File thumnailFile, int newWidth, int newHeight, String format) throws IOException {
         //
-        if(!thumnailFile.exists()) {
+        if (!thumnailFile.exists()) {
             thumnailFile.getParentFile().mkdirs();
             thumnailFile.createNewFile();
         }
         //
-        resize(new FileInputStream(originalFile), new FileOutputStream(thumnailFile), 
-                newWidth, newHeight, format);
+        resize(new FileInputStream(originalFile), new FileOutputStream(thumnailFile), newWidth, newHeight, format);
     }
 
     /**
      * 图片缩放
-     *
+     * 
      * @param originalStream
      * @param thumbnailStream
      * @param newWidth
      * @param newHeight
      * @param format
      */
-    public static void resize(InputStream originalStream, OutputStream thumbnailStream,
-            int newWidth, int newHeight, String format) throws IOException {
+    public static void resize(InputStream originalStream, OutputStream thumbnailStream, int newWidth, int newHeight, String format) throws IOException {
         try {
             BufferedImage originalImage = ImageIO.read(originalStream);
             // 获得原始图片的宽度及高度
@@ -129,10 +124,10 @@ public class ImageUtils {
                 ImageIO.write(thumbnailImage, format, thumbnailStream);
             }
         } finally {
-            if(originalStream!=null) {
+            if (originalStream != null) {
                 originalStream.close();
             }
-            if(thumbnailStream!=null) {
+            if (thumbnailStream != null) {
                 thumbnailStream.close();
             }
         }

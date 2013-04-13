@@ -22,7 +22,6 @@ package org.focusns.web.modules.msg;
  * #L%
  */
 
-
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
@@ -54,8 +53,7 @@ public class MessageWidget {
         return "modules/msg/message-box";
     }
 
-    public String list(Map<String, Object> model, String box,
-                       Project project) {
+    public String list(Map<String, Object> model, String box, Project project) {
         //
         Page<Message> page = new Page<Message>(10);
         page = messageService.fetchPageByBox(page, box, project.getId());
@@ -69,9 +67,7 @@ public class MessageWidget {
         return "modules/msg/message-view";
     }
 
-    public String edit(Map<String, Object> model,
-                       ProjectUser user,
-                       Project project) {
+    public String edit(Map<String, Object> model, ProjectUser user, Project project) {
         //
         Message message = new Message();
         message.setCreateById(user.getId());

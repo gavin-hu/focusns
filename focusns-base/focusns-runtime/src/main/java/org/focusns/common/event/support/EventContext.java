@@ -22,7 +22,6 @@ package org.focusns.common.event.support;
  * #L%
  */
 
-
 import org.focusns.common.event.annotation.Trigger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
@@ -33,22 +32,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EventContext extends ApplicationContextEvent {
-    
+
     private Trigger trigger;
-    
+
     private Method method;
-    
+
     private Object returnValue;
-    
+
     private Map<String, Object> parameters = new HashMap<String, Object>();
-    
+
     public EventContext(ApplicationContext appContext, Method method, Map<String, Object> parameters) {
         super(appContext);
         //
         this.method = method;
         this.parameters = parameters;
     }
-    
+
     public EventContext(ApplicationContext appContext, Method method, Map<String, Object> parameters, Object returnValue) {
         super(appContext);
         //
@@ -64,23 +63,23 @@ public class EventContext extends ApplicationContextEvent {
     public void setTrigger(Trigger trigger) {
         this.trigger = trigger;
     }
-    
+
     public Method getMethod() {
         return method;
     }
-    
+
     public Object getParameter(String paramName) {
         return parameters.get(paramName);
     }
-    
+
     @SuppressWarnings("unchecked")
-	public <T> T getParameter(String paramName, Class<?> requiredType) {
+    public <T> T getParameter(String paramName, Class<?> requiredType) {
         Object paramValue = parameters.get(paramName);
         //
-        if(paramValue==null) {
+        if (paramValue == null) {
             return null;
         }
-        if(ClassUtils.isAssignableValue(requiredType, paramValue)) {
+        if (ClassUtils.isAssignableValue(requiredType, paramValue)) {
             return (T) paramValue;
         }
         //

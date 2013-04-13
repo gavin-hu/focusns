@@ -22,7 +22,6 @@ package org.focusns.service.photo.impl;
  * #L%
  */
 
-
 import org.focusns.dao.photo.AlbumDao;
 import org.focusns.model.photo.Album;
 import org.focusns.service.photo.AlbumService;

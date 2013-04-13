@@ -22,20 +22,19 @@ package org.focusns.web.initializer;
  * #L%
  */
 
-
 import org.focusns.web.helper.RuntimeHelper;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class ApplicationInitializer  implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+public class ApplicationInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-	public void initialize(ConfigurableApplicationContext applicationContext) {
+    public void initialize(ConfigurableApplicationContext applicationContext) {
         // check runtime environment
         checkRuntimeInstalled();
-	}
+    }
 
     private void checkRuntimeInstalled() {
-        if(!RuntimeHelper.isInstalled()) {
+        if (!RuntimeHelper.isInstalled()) {
             throw new RuntimeException("FocusSNS Runtime is not installed now!");
         }
     }

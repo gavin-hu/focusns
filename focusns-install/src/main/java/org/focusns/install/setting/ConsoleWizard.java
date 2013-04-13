@@ -22,7 +22,6 @@ package org.focusns.install.setting;
  * #L%
  */
 
-
 import org.focusns.install.utils.Properties;
 
 import java.util.Scanner;

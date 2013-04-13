@@ -22,19 +22,18 @@ package org.focusns.service.core;
  * #L%
  */
 
-
 import org.focusns.model.core.Project;
 
 public interface ProjectService {
-	
+
     Project getProject(long id);
-    
-	Project getProject(String code);
 
-	void createProject(Project project);
+    Project getProject(String code);
 
-	void removeProject(Project project);
+    void createProject(Project project);
+
+    void removeProject(Project project);
 
     void modifyProject(Project project);
-	
+
 }
