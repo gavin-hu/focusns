@@ -9,3 +9,7 @@ FocusSNS 是一款开源的主题社会化网络软件(SNS)，可以用于构建
 文档支持
 ========
 [https://github.com/gavin-hu/focusns/wiki](https://github.com/gavin-hu/focusns/wiki)
+
+版本发布
+========
+FocusSNS 当前正在开发中...
