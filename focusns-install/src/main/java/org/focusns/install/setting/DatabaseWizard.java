@@ -71,7 +71,7 @@ public class DatabaseWizard implements Wizard {
         StringBuilder welcomeBuilder = new StringBuilder();
         welcomeBuilder.append("\n###################################\n");
         welcomeBuilder.append("#                                 #\n");
-        welcomeBuilder.append("#            数据库设置            #\n");
+        welcomeBuilder.append("#            数据库设置           #\n");
         welcomeBuilder.append("#                                 #\n");
         welcomeBuilder.append("###################################\n");
         System.out.println(welcomeBuilder);

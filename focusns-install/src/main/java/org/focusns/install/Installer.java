@@ -54,7 +54,7 @@ public class Installer {
         //
         databaseWizard.setup(scanner, globalSettings);
         //
-        openApiWizard.setup(scanner, globalSettings);
+        //openApiWizard.setup(scanner, globalSettings);
         //
         serverWizader.setup(scanner, globalSettings);
         //
@@ -65,11 +65,12 @@ public class Installer {
 
     private static void printWelcome(Scanner scanner) {
         StringBuilder welcome = new StringBuilder();
-        welcome.append("###################################\n");
-        welcome.append("#     欢迎使用 FocusSNS 安装程序    #\n");
-        welcome.append("#     当前版本 2.0.0               #\n");
-        welcome.append("#     发布日期 2013年02月14日       #\n");
-        welcome.append("###################################\n");
+        welcome.append("######################################\n");
+        welcome.append("#                                    #\n");
+        welcome.append("#     欢迎进入 FocusSNS 安装程序     #\n");
+        welcome.append("#     当前版本 2.0.0                 #\n");
+        welcome.append("#                                    #\n");
+        welcome.append("######################################\n");
         //
         System.out.println(welcome);
         //
