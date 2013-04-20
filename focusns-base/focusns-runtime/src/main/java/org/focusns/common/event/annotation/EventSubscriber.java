@@ -22,26 +22,15 @@ package org.focusns.common.event.annotation;
  * #L%
  */
 
-import org.springframework.stereotype.Component;
-
 import java.lang.annotation.*;
+
+import org.springframework.stereotype.Component;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-public @interface Subscriber {
+public @interface EventSubscriber {
 
     String value() default "";
-
-    @Target(ElementType.METHOD)
-    @Retention(RetentionPolicy.RUNTIME)
-    @Inherited
-    public @interface OnEvent {
-
-        String value();
-
-        boolean async() default true;
-
-    }
 
 }

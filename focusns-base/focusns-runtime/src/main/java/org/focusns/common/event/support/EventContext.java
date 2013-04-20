@@ -22,59 +22,63 @@ package org.focusns.common.event.support;
  * #L%
  */
 
-import org.focusns.common.event.annotation.Trigger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class EventContext extends ApplicationContextEvent {
 
-    private Trigger trigger;
-
+    private Method eventHandler;
+    private Object eventSubscriber;
+    //
     private Method method;
-
     private Object returnValue;
+    private Throwable throwable;
+    private Map<String, Object> arguments = new LinkedHashMap<String, Object>();
 
-    private Map<String, Object> parameters = new HashMap<String, Object>();
-
-    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> parameters) {
+    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> arguments) {
         super(appContext);
         //
         this.method = method;
-        this.parameters = parameters;
+        this.arguments = arguments;
     }
 
-    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> parameters, Object returnValue) {
+    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> arguments, Object returnValue) {
         super(appContext);
         //
         this.method = method;
-        this.parameters = parameters;
+        this.arguments = arguments;
         this.returnValue = returnValue;
     }
 
-    public Trigger getTrigger() {
-        return trigger;
-    }
-
-    public void setTrigger(Trigger trigger) {
-        this.trigger = trigger;
+    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> arguments, Object returnValue, Throwable throwable) {
+        super(appContext);
+        //
+        this.method = method;
+        this.returnValue = returnValue;
+        this.throwable = throwable;
+        this.arguments = arguments;
     }
 
     public Method getMethod() {
         return method;
     }
 
-    public Object getParameter(String paramName) {
-        return parameters.get(paramName);
+    public Object getArgument(String argName) {
+        return arguments.get(argName);
+    }
+
+    public Object getArguments() {
+        return arguments.values();
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getParameter(String paramName, Class<?> requiredType) {
-        Object paramValue = parameters.get(paramName);
+    public <T> T getArgument(String paramName, Class<?> requiredType) {
+        Object paramValue = arguments.get(paramName);
         //
         if (paramValue == null) {
             return null;
@@ -90,4 +94,23 @@ public class EventContext extends ApplicationContextEvent {
         return returnValue;
     }
 
+    public Object getThrowable() {
+        return throwable;
+    }
+
+    Object getEventSubscriber() {
+        return eventSubscriber;
+    }
+
+    void setEventSubscriber(Object eventSubscriber) {
+        this.eventSubscriber = eventSubscriber;
+    }
+
+    Method getEventHandler() {
+        return eventHandler;
+    }
+
+    void setEventHandler(Method eventHandler) {
+        this.eventHandler = eventHandler;
+    }
 }

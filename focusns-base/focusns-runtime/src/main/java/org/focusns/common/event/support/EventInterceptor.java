@@ -22,6 +22,7 @@ package org.focusns.common.event.support;
  * #L%
  */
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
@@ -29,10 +30,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.focusns.common.event.annotation.Trigger;
-import org.focusns.common.event.annotation.Trigger.Point;
-import org.focusns.common.event.annotation.Triggers;
+import org.focusns.common.event.annotation.Event;
+import org.focusns.common.event.annotation.EventSubscriber;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
@@ -41,61 +43,104 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Aspect
-public class EventInterceptor implements ApplicationContextAware {
+public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationContextAware {
 
     private static final Log log = LogFactory.getLog(EventInterceptor.class);
 
-    private ApplicationContext applicationContext;
+    private ApplicationContext appContext;
 
     private Map<String, Method> methodCache = new HashMap<String, Method>();
 
+    private Map<Method, String> eventKeyCache = new HashMap<Method, String>();
+
+    private Map<String, Event> eventMapping = new HashMap<String, Event>();
+
+    private Map<String, Method> eventMethodMapping = new HashMap<String, Method>();
+
+    private Map<String, String> eventSubscriberMapping = new HashMap<String, String>();
+
     private ParameterNameDiscoverer paramNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+        this.appContext = applicationContext;
     }
 
-    @Around("@annotation(org.focusns.common.event.annotation.Trigger) || " + "@annotation(org.focusns.common.event.annotation.Triggers)")
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        //
+        Map<String, Object> beansMap = beanFactory.getBeansWithAnnotation(EventSubscriber.class);
+        for(Map.Entry<String, Object> entry : beansMap.entrySet()) {
+            String beanName = entry.getKey();
+            Object beanObject = entry.getValue();
+            Class<?> beanClass = beanObject.getClass();
+            //
+            Method[] declearedMethods = beanClass.getDeclaredMethods();
+            for(Method declearedMethod : declearedMethods) {
+                //
+                Event event = AnnotationUtils.getAnnotation(declearedMethod, Event.class);
+                if(event == null) {
+                    log.warn(String.format("Event Subscribe method %s must be annotated with @Event(\"xxx\")", declearedMethod));
+                } else {
+                    String eventKey = generateEventKey(event);
+                    eventMapping.put(eventKey, event);
+                    eventMethodMapping.put(eventKey, declearedMethod);
+                    eventSubscriberMapping.put(eventKey, beanName);
+                }
+            }
+        }
+    }
+
+    @Around("@within(org.springframework.stereotype.Service)")
     public Object weave(ProceedingJoinPoint pjp) throws Throwable {
         // MethodInvocation invocation = (MethodInvocation) pjp;
-        //
-        Object[] args = pjp.getArgs();
         Method method = getMethod(pjp);
-        EventContext context = buildTaskContext(method, args);
-        Map<Point, List<Trigger>> triggerMap = getTriggerMap(method);
+        Map<String, Object> args = getArguments(method, pjp.getArgs());
         //
         Object result = null;
         try {
-            triggerEvent(context, Point.BEFORE, triggerMap);
-            result = pjp.proceed(args);
-            triggerEvent(context, Point.AFTER, triggerMap);
-        } catch (Throwable t) {
-            log.error(t.getMessage(), t);
+            triggerEvent(Event.Point.BEFORE, method, args, null, null);
             //
-            triggerEvent(context, Point.AFTER_THROWING, triggerMap);
-            throw t;
+            result = pjp.proceed();
+            //
+            triggerEvent(Event.Point.AFTER, method, args, result, null);
+            //
+        } catch (Throwable throwable) {
+            //
+            triggerEvent(Event.Point.AFTER_THROWING, method, args, result, throwable);
         }
         //
         return result;
     }
 
-    public void triggerEvent(EventContext context, Point point, Map<Point, List<Trigger>> triggerMap) throws Exception {
+    protected void triggerEvent(Event.Point point, Method method, Map<String, Object> arguments, Object returnValue, Throwable throwable) throws Exception {
         //
-        List<Trigger> triggers = triggerMap.get(point);
-        if (triggers != null) {
-            for (Trigger trigger : triggerMap.get(point)) {
-                //
-                if (log.isDebugEnabled()) {
-                    log.debug(String.format("Trigger %s at point %s", trigger.event(), trigger.point()));
-                }
-                //
-                context.setTrigger(trigger);
-                //
-                applicationContext.publishEvent(context);
-            }
+        Event event = getEvent(method, point);
+        //
+        EventContext eventContext = null;
+        if(point == Event.Point.BEFORE) {
+            eventContext = new EventContext(appContext, method, arguments);
+        } else if (point == Event.Point.AFTER) {
+            eventContext = new EventContext(appContext, method, arguments, returnValue);
+        } else if(point == Event.Point.AFTER_THROWING) {
+            eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
+        }
+        //
+        if(eventContext!=null) {
+            //
+            String eventKey = generateEventKey(event);
+            String subscriberName = eventSubscriberMapping.get(eventKey);
+            Object eventSubscriber = appContext.getBean(subscriberName);
+            Method eventHandler = eventMethodMapping.get(eventKey);
+            eventContext.setEventHandler(eventHandler);
+            eventContext.setEventSubscriber(eventSubscriber);
+            //
+            appContext.publishEvent(eventContext);
         }
     }
 
@@ -120,6 +165,26 @@ public class EventInterceptor implements ApplicationContextAware {
         return target;
     }
 
+    private Event getEvent(Method method, Event.Point point) {
+        //
+        String eventKey = eventKeyCache.get(method);
+        if(eventKey==null) {
+            StringBuilder eventKeyBuilder = new StringBuilder();
+            String methodName = method.getName();
+            for(int i=0; i < methodName.length(); i++) {
+                char c = methodName.charAt(i);
+                if(Character.isUpperCase(c)) {
+                    eventKeyBuilder.append("_");
+                }
+                eventKeyBuilder.append(Character.toUpperCase(c));
+            }
+            //
+            eventKey = eventKeyBuilder.append("|").append(point.name()).toString();
+        }
+        //
+        return eventMapping.get(eventKey);
+    }
+
     private boolean isSameMethod(Method target, String methodName, Object[] paramValues) {
         Class<?>[] paramTypes = target.getParameterTypes();
         for (int i = 0; i < paramTypes.length; i++) {
@@ -131,46 +196,18 @@ public class EventInterceptor implements ApplicationContextAware {
         return false;
     }
 
-    protected Map<Point, List<Trigger>> getTriggerMap(Method method) {
-        Map<Point, List<Trigger>> triggerMap = new EnumMap<Point, List<Trigger>>(Point.class);
-        //
-        Triggers triggers = AnnotationUtils.getAnnotation(method, Triggers.class);
-        if (triggers != null) {
-            for (Trigger trigger : triggers.value()) {
-                List<Trigger> triggerList = getTriggerList(triggerMap, trigger.point());
-                triggerList.add(trigger);
-                triggerMap.put(trigger.point(), triggerList);
-            }
-        }
-        //
-        Trigger trigger = AnnotationUtils.getAnnotation(method, Trigger.class);
-        if (trigger != null) {
-            List<Trigger> triggerList = getTriggerList(triggerMap, trigger.point());
-            triggerList.add(trigger);
-            triggerMap.put(trigger.point(), triggerList);
-        }
-        //
-        return triggerMap;
-    }
-
-    private List<Trigger> getTriggerList(Map<Point, List<Trigger>> triggerMap, Point point) {
-        List<Trigger> triggerList = triggerMap.get(point);
-        if (triggerList == null) {
-            triggerList = new ArrayList<Trigger>();
-        }
-        //
-        return triggerList;
-    }
-
-    private EventContext buildTaskContext(Method method, Object[] args) {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    private Map<String, Object> getArguments(Method method, Object[] args) {
+        LinkedHashMap<String, Object> argumentMap = new LinkedHashMap<String, Object>();
         String[] paramNames = paramNameDiscoverer.getParameterNames(method);
         if (paramNames != null) {
             for (int i = 0; i < paramNames.length; i++) {
-                parameters.put(paramNames[i], args[i]);
+                argumentMap.put(paramNames[i], args[i]);
             }
         }
-        return new EventContext(applicationContext, method, parameters);
+        return argumentMap;
     }
 
+    private String generateEventKey(Event event) {
+        return event.on() + "|" + event.point().name();
+    }
 }
