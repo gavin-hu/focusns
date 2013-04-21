@@ -22,11 +22,11 @@ package org.focusns.model.core;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.focusns.model.common.Id;
 
 public class Project extends Id {
 
@@ -35,16 +35,16 @@ public class Project extends Id {
     private String code;
     private String title;
     private String description;
-    private Date createAt;
-    private Date modifyAt;
+    private Date createdAt;
+    private Date modifiedAt;
     private boolean _private;
-    private long createById;
-    private long modifyById;
+    private long createdById;
+    private long modifiedById;
     private long categoryId;
     private long logoId;
     //
-    private ProjectUser createBy;
-    private ProjectUser modifyBy;
+    private ProjectUser createdBy;
+    private ProjectUser modifiedBy;
     private ProjectLogo logo;
     private ProjectCategory category;
     private List<ProjectAttribute> attributes = new ArrayList<ProjectAttribute>();
@@ -74,20 +74,20 @@ public class Project extends Id {
         this.description = description;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getModifyAt() {
-        return modifyAt;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setModifyAt(Date modifyAt) {
-        this.modifyAt = modifyAt;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public long getLogoId() {
@@ -98,20 +98,20 @@ public class Project extends Id {
         this.logoId = logoId;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
-    public long getModifyById() {
-        return modifyById;
+    public long getModifiedById() {
+        return modifiedById;
     }
 
-    public void setModifyById(long modifyById) {
-        this.modifyById = modifyById;
+    public void setModifiedById(long modifiedById) {
+        this.modifiedById = modifiedById;
     }
 
     public long getCategoryId() {
@@ -130,20 +130,20 @@ public class Project extends Id {
         this._private = _private;
     }
 
-    public ProjectUser getCreateBy() {
-        return createBy;
+    public ProjectUser getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(ProjectUser createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
     }
 
-    public ProjectUser getModifyBy() {
-        return modifyBy;
+    public ProjectUser getModifiedBy() {
+        return modifiedBy;
     }
 
-    public void setModifyBy(ProjectUser modifyBy) {
-        this.modifyBy = modifyBy;
+    public void setModifiedBy(ProjectUser modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
     public ProjectLogo getLogo() {

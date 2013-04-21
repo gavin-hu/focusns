@@ -22,21 +22,21 @@ package org.focusns.model.forum;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class ForumPost extends Id {
 
     private String title;
     private String content;
-    private Date createAt;
-    private Date modifyAt;
+    private Date createdAt;
+    private Date modifiedAt;
     //
     private long projectId;
     private long topicId;
-    private long createById;
-    private long modifyById;
+    private long createdById;
+    private long modifiedById;
 
     public String getTitle() {
         return title;
@@ -54,20 +54,20 @@ public class ForumPost extends Id {
         this.content = content;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getModifyAt() {
-        return modifyAt;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setModifyAt(Date modifyAt) {
-        this.modifyAt = modifyAt;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public long getProjectId() {
@@ -86,19 +86,19 @@ public class ForumPost extends Id {
         this.topicId = topicId;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
-    public long getModifyById() {
-        return modifyById;
+    public long getModifiedById() {
+        return modifiedById;
     }
 
-    public void setModifyById(long modifyById) {
-        this.modifyById = modifyById;
+    public void setModifiedById(long modifiedById) {
+        this.modifiedById = modifiedById;
     }
 }

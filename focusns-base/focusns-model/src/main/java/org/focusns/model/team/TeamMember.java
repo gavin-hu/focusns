@@ -22,33 +22,33 @@ package org.focusns.model.team;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class TeamMember extends Id {
 
-    private Date createAt;
-    private Date modifyAt;
+    private Date createdAt;
+    private Date modifiedAt;
     //
     private long userId;
     private long roleId;
     private long projectId;
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Date getModifyAt() {
-        return modifyAt;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setModifyAt(Date modifyAt) {
-        this.modifyAt = modifyAt;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
     }
 
     public long getUserId() {

@@ -22,32 +22,32 @@ package org.focusns.model.photo;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class Photo extends Id {
 
-    private Date createAt;
-    private long createById;
+    private Date createdAt;
+    private long createdById;
     //
     private long albumId;
     private long projectId;
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
     public long getAlbumId() {

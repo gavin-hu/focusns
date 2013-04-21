@@ -1,4 +1,4 @@
-package org.focusns.model.cms;
+package org.focusns.model.calendar;
 
 /*
  * #%L
@@ -26,24 +26,43 @@ import java.util.Date;
 
 import org.focusns.model.common.Id;
 
-public class Article extends Id {
+public class EventCategory extends Id {
 
-    private String title;
-    private String summary;
-    private String content;
-    private String keywords;
-    //
-    private String from;
-    private String link;
-    //
+    private String label;
     private Date createAt;
-    private Date modifyAt;
-    private Date removeAt;
     //
+    private long projectId;
     private long createById;
-    private long modifyById;
-    private long removeById;
-    //
-    private long categoryId;
 
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public Date getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Date createAt) {
+        this.createAt = createAt;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
+    public long getCreateById() {
+        return createById;
+    }
+
+    public void setCreateById(long createById) {
+        this.createById = createById;
+    }
 }

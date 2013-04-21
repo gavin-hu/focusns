@@ -22,19 +22,19 @@ package org.focusns.model.msg;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class Message extends Id {
 
     private String title;
     private String content;
     private Date readAt;
-    private Date createAt;
+    private Date createdAt;
     //
     private long projectId;
-    private long createById;
+    private long createdById;
     private long toProjectId;
 
     public String getTitle() {
@@ -61,12 +61,12 @@ public class Message extends Id {
         this.readAt = readAt;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public long getProjectId() {
@@ -77,12 +77,12 @@ public class Message extends Id {
         this.projectId = projectId;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
     public long getToProjectId() {

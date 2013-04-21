@@ -22,11 +22,11 @@ package org.focusns.dao.core;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectHistory;
-
-import java.util.List;
 
 public interface ProjectHistoryDao extends BaseDao<ProjectHistory> {
 

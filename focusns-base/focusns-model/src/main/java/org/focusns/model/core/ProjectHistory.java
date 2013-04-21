@@ -22,26 +22,26 @@ package org.focusns.model.core;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.focusns.model.common.Id;
+
 public class ProjectHistory extends Id {
 
     private String content;
-    private Date createAt;
+    private Date createdAt;
     private long targetId;
     private String targetType;
     //
     private long parentId;
     private long projectId;
-    private long createById;
+    private long createdById;
 
     //
     private Project project;
-    private ProjectUser createBy;
+    private ProjectUser createdBy;
     private Object target;
     //
     private List<ProjectHistory> children = new ArrayList<ProjectHistory>();
@@ -54,12 +54,12 @@ public class ProjectHistory extends Id {
         this.content = content;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public long getTargetId() {
@@ -94,12 +94,12 @@ public class ProjectHistory extends Id {
         this.projectId = projectId;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 
     public Project getProject() {
@@ -110,12 +110,12 @@ public class ProjectHistory extends Id {
         this.project = project;
     }
 
-    public ProjectUser getCreateBy() {
-        return createBy;
+    public ProjectUser getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreateBy(ProjectUser createBy) {
-        this.createBy = createBy;
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Object getTarget() {

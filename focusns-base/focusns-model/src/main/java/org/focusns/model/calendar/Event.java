@@ -1,4 +1,4 @@
-package org.focusns.model.blog;
+package org.focusns.model.calendar;
 
 /*
  * #%L
@@ -25,26 +25,21 @@ package org.focusns.model.blog;
 import java.util.Date;
 
 import org.focusns.model.common.Id;
-import org.focusns.model.core.ProjectUser;
 
-public class BlogPost extends Id {
+public class Event extends Id {
 
     private String title;
-    private String summary;
     private String content;
+    private String link;
+    private Date begin;
+    private Date end;
     private Date createdAt;
     private Date modifiedAt;
     //
     private long categoryId;
+    private long projectId;
     private long createdById;
     private long modifiedById;
-    private long projectId;
-    //
-    private ProjectUser createdBy;
-    private ProjectUser modifiedBy;
-
-    public BlogPost() {
-    }
 
     public String getTitle() {
         return title;
@@ -54,20 +49,36 @@ public class BlogPost extends Id {
         this.title = title;
     }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public Date getBegin() {
+        return begin;
+    }
+
+    public void setBegin(Date begin) {
+        this.begin = begin;
+    }
+
+    public Date getEnd() {
+        return end;
+    }
+
+    public void setEnd(Date end) {
+        this.end = end;
     }
 
     public Date getCreatedAt() {
@@ -94,6 +105,14 @@ public class BlogPost extends Id {
         this.categoryId = categoryId;
     }
 
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+
     public long getCreatedById() {
         return createdById;
     }
@@ -108,29 +127,5 @@ public class BlogPost extends Id {
 
     public void setModifiedById(long modifiedById) {
         this.modifiedById = modifiedById;
-    }
-
-    public long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
-    }
-
-    public ProjectUser getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(ProjectUser createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public ProjectUser getModifiedBy() {
-        return modifiedBy;
-    }
-
-    public void setModifiedBy(ProjectUser modifiedBy) {
-        this.modifiedBy = modifiedBy;
     }
 }

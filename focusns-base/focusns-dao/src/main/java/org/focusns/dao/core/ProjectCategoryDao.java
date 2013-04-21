@@ -22,10 +22,10 @@ package org.focusns.dao.core;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.common.BaseDao;
 import org.focusns.model.core.ProjectCategory;
-
-import java.util.List;
 
 public interface ProjectCategoryDao extends BaseDao<ProjectCategory> {
 

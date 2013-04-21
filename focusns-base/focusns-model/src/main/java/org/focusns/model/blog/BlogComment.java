@@ -22,9 +22,9 @@ package org.focusns.model.blog;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class BlogComment extends Id {
 

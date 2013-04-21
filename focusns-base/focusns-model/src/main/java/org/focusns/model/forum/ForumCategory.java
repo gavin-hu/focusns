@@ -22,17 +22,17 @@ package org.focusns.model.forum;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class ForumCategory extends Id {
 
     private String label;
-    private Date createAt;
+    private Date createdAt;
     //
     private long projectId;
-    private long createById;
+    private long createdById;
 
     public ForumCategory() {
     }
@@ -45,12 +45,12 @@ public class ForumCategory extends Id {
         this.label = label;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public long getProjectId() {
@@ -61,11 +61,11 @@ public class ForumCategory extends Id {
         this.projectId = projectId;
     }
 
-    public long getCreateById() {
-        return createById;
+    public long getCreatedById() {
+        return createdById;
     }
 
-    public void setCreateById(long createById) {
-        this.createById = createById;
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
     }
 }
