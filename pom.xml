@@ -12,7 +12,6 @@
     <modules>
         <module>focusns-base</module>
         <module>focusns-web</module>
-        <module>focusns-install</module>
     </modules>
 
     <organization>
