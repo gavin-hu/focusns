@@ -28,7 +28,7 @@
 
     <rule>
         <note>Module Page</note>
-        <from>^/([a-z]+)/(profile|blog|photo|team|msg|admin)/(.*?)$</from>
+        <from>^/([a-z]+)/(profile|blog|photo|team|msg|admin)/([a-z|-]+)$</from>
         <to>/portal?path=/$2/$3&amp;projectCode=$1&amp;featureCode=$2</to>
     </rule>
 
@@ -47,7 +47,7 @@
         <condition type="context-path" operator="equal" next="or">/</condition>
         <condition type="context-path" operator="greater">/</condition>
         <from>^/([a-z]+)/(.*)\.action(.*)$</from>
-        <to>/$1/widget/$2$3</to>
+        <to>/$1/widget/$2.do$3</to>
     </outbound-rule>
 
 </urlrewrite>

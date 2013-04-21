@@ -72,14 +72,15 @@ public class ArticleWidget {
     }
 
     @RequestMapping("/article-edit")
-    public String doEdit(@RequestParam(required = false) Long articleId, @RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser user, Model model) {
+    public String doEdit(@RequestParam(required = false) Long articleId,
+            @RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser user, Model model) {
         //
         List<BlogCategory> articleCategories = blogCategoryService.getBlogCategories();
         //
         BlogPost article = new BlogPost();
         article.setCategoryId(categoryId != null ? categoryId : 0);
-        article.setCreateById(user.getId());
-        article.setModifyById(user.getId());
+        article.setCreatedById(user.getId());
+        article.setModifiedById(user.getId());
         if (articleId != null) {
             article = blogPostService.getBlogPost(articleId);
         }

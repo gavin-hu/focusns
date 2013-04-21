@@ -1,6 +1,6 @@
 <div class="widget">
     <div class="widget-hd">
-        <h2>标志编辑</h2>
+        <h3>标志编辑</h3>
     </div>
     <div class="widget-bd">
          <div class="admin-logo">

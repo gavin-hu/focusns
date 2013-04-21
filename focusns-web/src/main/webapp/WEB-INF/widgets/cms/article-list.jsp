@@ -4,7 +4,7 @@
 
 <div id="${widgetConfig.id}" class="widget">
     <div class="widget-hd">
-        <h2>文章列表</h2>
+        <h3>文章列表</h3>
     </div>
     <div class="widget-bd">
         哈哈！

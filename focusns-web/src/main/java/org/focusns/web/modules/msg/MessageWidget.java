@@ -70,7 +70,7 @@ public class MessageWidget {
     public String edit(Map<String, Object> model, ProjectUser user, Project project) {
         //
         Message message = new Message();
-        message.setCreateById(user.getId());
+        message.setCreatedById(user.getId());
         message.setProjectId(project.getId());
         message.setToProjectId(project.getId());
         model.put("message", message);

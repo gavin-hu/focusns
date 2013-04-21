@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div class="widget">
     <div class="widget-hd">
-        <h2>评论管理</h2>
+        <h3>评论管理</h3>
     </div>
     <div class="widget-bd">
 

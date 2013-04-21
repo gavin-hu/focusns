@@ -23,12 +23,16 @@ package org.focusns.web.site;
  */
 
 import org.focusns.model.core.ProjectUser;
+import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.service.core.ProjectUserService;
+import org.focusns.web.widget.Constraint;
+import org.focusns.web.widget.annotation.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,12 +50,17 @@ public class LogInAndOutWidget {
     private AuthenticationService authenticationService;
 
     @RequestMapping("/login-form")
-    public String doEdit() {
-        return "site/login-form";
+    public void doForm() {
+    }
+
+    @RequestMapping("/login-bar")
+    @Constraints({ Constraint.PROJECT_USER_NOT_REQUIRED })
+    public void doFormBar() {
     }
 
     @RequestMapping("/login")
-    public String doLogin(@RequestParam(required = false) String redirect, @ModelAttribute ProjectUser user, WebRequest webRequest) {
+    public String doLogin(@RequestParam(required = false) String redirect, @ModelAttribute ProjectUser user,
+            WebRequest webRequest) {
         //
         authenticationService.authenticate(user);
         //
@@ -72,6 +81,11 @@ public class LogInAndOutWidget {
         webRequest.removeAttribute("user", WebRequest.SCOPE_SESSION);
         webRequest.removeAttribute(ProjectUser.KEY, WebRequest.SCOPE_SESSION);
         //
+        return "redirect:/index";
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public String handleAuthenticationException(AuthenticationException e) {
         return "redirect:/login";
     }
 

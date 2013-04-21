@@ -53,7 +53,7 @@ public class ArticleCategoryWidget {
         BlogCategory articleCategory = blogCategoryService.getBlogCategory(categoryId);
         //
         Page<BlogPost> page = new Page<BlogPost>(limit);
-        page = blogPostService.fetchPageByCategoryId(page, categoryId);
+        page = blogPostService.fetchPageByCategoryId(page, -1, categoryId);
         //
         model.addAttribute("articleCategory", articleCategory);
         model.addAttribute(Page.KEY, page);

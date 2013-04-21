@@ -84,24 +84,28 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-view")
-    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
-    public String doView(@WidgetAttribute ProjectUser sessionUser, @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PROJECT_REQUIRED})
+    public String doView(@WidgetAttribute(required = false) ProjectUser sessionUser, @WidgetAttribute Project project, Model model) {
         //
-        ProjectUser projectUser = projectUserService.getUser(project.getCreateById());
+        ProjectUser projectUser = projectUserService.getUser(project.getCreatedById());
         model.addAttribute("projectUser", projectUser);
         model.addAttribute("project", project);
         //
-        ProjectLink projectLink = projectLinkService.getProjectLink(sessionUser.getProjectId(), project.getId());
-        model.addAttribute("projectLink", projectLink);
-        model.addAttribute("fromProject", sessionUser.getProject());
-        model.addAttribute("toProject", project);
+        if(sessionUser != null) {
+            ProjectLink projectLink = projectLinkService.getProjectLink(sessionUser.getProjectId(), project.getId());
+            model.addAttribute("projectLink", projectLink);
+            model.addAttribute("fromProject", sessionUser.getProject());
+            model.addAttribute("toProject", project);
+        }
         //
         return "modules/profile/user-view";
     }
 
     @RequestMapping("/user-avatar")
     public @ResponseBody
-    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId, @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension) throws IOException {
+    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
+            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension)
+            throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         if (isTempFile != null && isTempFile.booleanValue()) {
@@ -128,7 +132,8 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar/upload")
-    public void doUpload(@RequestParam Long projectId, @RequestParam Long userId, MultipartFile file) throws IOException {
+    public void doUpload(@RequestParam Long projectId, @RequestParam Long userId, MultipartFile file)
+            throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         RuntimeHelper.setTempFile(avatarCoordinate, file.getInputStream());

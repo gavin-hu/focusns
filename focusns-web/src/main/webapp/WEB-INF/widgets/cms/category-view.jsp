@@ -4,7 +4,7 @@
 
 <div id="${widgetConfig.id}" class="widget">
     <div class="widget-hd">
-        <h2>${articleCategory.label}</h2>
+        <h3>${articleCategory.label}</h3>
     </div>
     <div class="widget-bd">
         <div class="article-category">

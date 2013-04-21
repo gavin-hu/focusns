@@ -1,3 +1,4 @@
+/*
 @charset "utf-8";
 @import url("base.css");
 @import url("site.css");
@@ -6,4 +7,66 @@
 @import url("blog.css");
 @import url("msg.css");
 @import url("admin.css");
+*/
+/* Global */
+ul {
+    list-style: none outside none;
+}
 
+/* UserMenuWidget */
+#id_8c0211d336b724c9fac3ee538df08515 .avatar {
+    max-width: none;
+}
+
+/* ProjectLinkWidget */
+#id_31f672f893e3179261bafc5b353b9c78 .widget-hd {
+    padding-left: 5px;
+}
+#id_31f672f893e3179261bafc5b353b9c78 ul {
+    margin: 0 5px;
+    padding: 0;
+}
+#id_31f672f893e3179261bafc5b353b9c78 ul li {
+    display: inline-block;
+    padding-bottom: 3px;
+}
+
+/* ProjectHistoryWidget edit */
+#id_df996c0d5d6f6e618d63fb5c6fac657c textarea {
+    display: block;
+    width: 98%;
+    height: 55px;
+}
+/* ProjectHistoryWidget list */
+#id_a993efce53e27d65e81a74f00580d4b8 form {
+    padding-top: 10px;
+    padding-left:60px;
+}
+#id_a993efce53e27d65e81a74f00580d4b8 form textarea {
+    display: block;
+    width: 98.3%;
+    height: 24px;
+}
+
+/* ProjectUserWidget edit */
+#id_e5c9e25ec291fb6019047b05718f8e4c .jcrop-holder {
+    margin-bottom: 10px;
+}
+
+/* BlogPostWidget edit*/
+#id_aaae74198a7d8e3d5286d35346616049 textarea {
+    width: 100%;
+    height: 300px;
+}
+#id_aaae74198a7d8e3d5286d35346616049 button {
+    margin-top: 10px;
+}
+
+/* BlogPostWidget list*/
+#id_6f6edf6e4c4d52cd80394d407b4706c6 .widget-bd {
+    padding-top: 15px;
+}
+
+/*BlogCategoryWidget list */
+#id_f9573a5fb8691112103a1b42a1336dff ul {
+}

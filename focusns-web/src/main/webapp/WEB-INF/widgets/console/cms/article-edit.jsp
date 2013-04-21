@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div class="widget">
     <div class="widget-hd">
-        <h2>文章编辑</h2>
+        <h3>文章编辑</h3>
     </div>
     <div class="widget-bd">
         <div class="article">
@@ -25,9 +24,9 @@
                 </div>
                 <div class="submit">
                     <form:hidden path="article.id" />
-                    <form:hidden path="article.createById" />
-                    <form:hidden path="article.modifyById" />
-                    <button type="submit" name="redirect" value='<c:url value="/console/cms?mode=article-list" />'>提交</button>
+                    <form:hidden path="article.createdById" />
+                    <form:hidden path="article.modifiedById" />
+                    <button type="submit" name="redirect" value="${currentPath}">提交</button>
                 </div>
             </form>
         </div>

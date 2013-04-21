@@ -59,8 +59,8 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-list")
-    @Constraints({ Constraint.PAGE_NOT_EMPTY })
-    public String doList(@WidgetPreference(required = false, defaultValue = "10") Integer limit, @WidgetAttribute(required = false) ProjectUser user, @WidgetAttribute Project project, Model model) {
+    public String doList(@WidgetPreference(required = false, defaultValue = "10") Integer limit,
+            @WidgetAttribute(required = false) ProjectUser user, @WidgetAttribute Project project, Model model) {
         //
         if (user != null) {
             ProjectHistory template = createTemplate(user, project);
@@ -79,7 +79,7 @@ public class ProjectHistoryWidget {
         template.setProjectId(project.getId());
         template.setTargetId(project.getId());
         template.setTargetType("project");
-        template.setCreateById(user.getId());
+        template.setCreatedById(user.getId());
         return template;
     }
 

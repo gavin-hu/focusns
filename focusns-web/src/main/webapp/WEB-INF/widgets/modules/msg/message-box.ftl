@@ -1,6 +1,6 @@
 <div class="widget">
     <div class="widget-hd">
-        <h2>信箱</h2>
+        <h3>信箱</h3>
     </div>
     <div class="widget-bd">
         <div class="message-box">

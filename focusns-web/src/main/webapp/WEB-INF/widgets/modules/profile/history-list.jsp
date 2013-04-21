@@ -1,67 +1,64 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="ui" tagdir="/WEB-INF/tags/ui" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<div class="widget">
-    <div class="widget-bd">
-        <div class="histories">
-            <c:forEach items="${page.results}" var="history">
-            <div class="history">
-                <a href='<c:url value="/${history.createBy.project.code}/profile" />'>
-                    <ui:avatar styleClass="thumbnail" dimension="50" projectId="${history.createBy.projectId}" projectUserId="${history.createBy.id}" />
-                </a>
-                <div class="content">${history.content}</div>
-                <div class="status">
-                    <abbr class="date" title='<fmt:formatDate value="${history.createAt}" pattern="yyyy-MM-dd HH:mm:ss" />'>
-                    ${history.createAt}</abbr>
-                </div>
-                <c:if test="${not empty history.children}">
-                <div class="history-children">
-                    <c:forEach items="${history.children}" var="childHistory">
-                    <div class="history">
-                        <a href='<c:url value="/${childHistory.createBy.project.code}/profile" />'>
-                        <ui:avatar styleClass="thumbnail" dimension="50" projectId="${childHistory.createBy.projectId}" projectUserId="${childHistory.createBy.id}" />
-                        </a>
-                        <div class="content">${childHistory.content}</div>
-                        <div class="status">
-                            <abbr class="date" title='<fmt:formatDate value="${childHistory.createAt}" pattern="yyyy-MM-dd HH:mm:ss" />'>
-                            ${childHistory.createAt}</abbr>
-                        </div>
-                    </div>
-                    </c:forEach>
-                </div>
-                </c:if>
-                <c:if test="${not empty sessionScope.user}">
-                <div class="history-reply">
-                    <form action='<c:url value="/widget/project/history-create" />' method="post">
-                        <textarea name="content"></textarea>
+<ui:widget>
+    <ui:widget-bd>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#">全部</a>
+            </li>
+            <li><a href="#">说说</a></li>
+            <li><a href="#">...</a></li>
+        </ul>
 
-                        <input type="hidden" name="targetType" value="${template.targetType}"/>
-                        <input type="hidden" name="targetId" value="${template.targetId}"/>
-                        <input type="hidden" name="projectId" value="${template.projectId}"/>
-                        <input type="hidden" name="createById" value="${template.createById}"/>
-                        <input type="hidden" name="parentId" value="${history.id}"/>
-                        <input type="hidden" name="redirect" value='<c:url value="/${project.code}/profile" />' />
-                        <div class="submit">
-                            <button type="submit">回复</button>
-                        </div>
-                    </form>
+        <c:choose>
+            <c:when test="${empty page.results}">
+                <div class="alert alert-info">
+                    当前还没有任何动态...
                 </div>
-                </c:if>
-            </div>
-        </c:forEach>
-        </div>
-    </div>
-</div>
+            </c:when>
+            <c:otherwise>
+                <c:forEach items="${page.results}" var="history">
+                    <ul class="media-list">
+                        <li class="media">
+                            <a class="pull-left" href='<c:url value="/${history.createdBy.project.code}/profile" />'>
+                                <t:img-avatar styleClass="media-object" dimension="50" projectId="${history.createdBy.projectId}" projectUserId="${history.createdBy.id}" />
+                            </a>
+                            <div class="media-body">
+                                <!--<h4 class="media-heading">Media heading</h4>-->
+                                <p>${history.content}</p>
+                                <t:abbr-date value="${history.createdAt}" />
+                                <!-- Nested media object -->
+                                <c:forEach items="${history.children}" var="childHistory">
+                                    <div class="media">
+                                        <a class="pull-left" href='<c:url value="/${childHistory.createdBy.project.code}/profile" />'>
+                                            <t:img-avatar styleClass="media-object" dimension="50" projectId="${childHistory.createdBy.projectId}" projectUserId="${childHistory.createdBy.id}" />
+                                        </a>
+                                        <p>${childHistory.content}</p>
+                                        <t:abbr-date value="${childHistory.createdAt}" />
+                                    </div>
+                                </c:forEach>
+                            </div>
 
-<script type="text/javascript">
-    $(function () {
-        // time ago
-        $('abbr.date').timeago();
-        //
-        $('div.history-reply textarea').focus(function () {
-            $(this).height(50);
-        });
-    });
-</script>
+                            <c:if test="${not empty sessionScope.user}">
+                                <form action='<c:url value="/widget/project/history-create" />' method="post">
+
+                                    <textarea name="content"></textarea>
+
+                                    <input type="hidden" name="targetType" value="${template.targetType}"/>
+                                    <input type="hidden" name="targetId" value="${template.targetId}"/>
+                                    <input type="hidden" name="projectId" value="${template.projectId}"/>
+                                    <input type="hidden" name="createdById" value="${template.createdById}"/>
+                                    <input type="hidden" name="parentId" value="${history.id}"/>
+                                    <input type="hidden" name="redirect" value='<c:url value="/${project.code}/profile" />' />
+
+                                    <button class="btn btn-primary pull-right" type="submit">回复</button>
+                                </form>
+                            </c:if>
+                        </li>
+                    </ul>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
+    </ui:widget-bd>
+</ui:widget>

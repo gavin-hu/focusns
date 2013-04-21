@@ -9,8 +9,8 @@
             <div class="article-head">
                 <h3>${article.title}</h3>
                 <span class="author">
-                    ${article.createById} 发表于
-                    <fmt:formatDate value="${article.createAt}" pattern="yyyy/M/d"/>
+                    ${article.createdById} 发表于
+                    <fmt:formatDate value="${article.createdAt}" pattern="yyyy/M/d"/>
                 </span>
             </div>
             <div class="article-body">

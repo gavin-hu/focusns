@@ -31,6 +31,7 @@ import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.ResourcePatternUtils;
+import org.springframework.util.DigestUtils;
 import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Element;
 
@@ -42,8 +43,6 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory implements P
     private ResourceLoader resourceLoader;
 
     private XmlParser xmlParser = new XmlParser();
-
-    private AtomicLong atomicLong = new AtomicLong(0);
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
@@ -101,8 +100,9 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory implements P
                 //
                 List<Element> widgetEles = DomUtils.getChildElementsByTagName(positionEle, "widget");
                 for (Element widgetEle : widgetEles) {
-                    WidgetConfig widgetConfig = new WidgetConfig(widgetEle.getAttribute("target"));
-                    widgetConfig.setId(String.valueOf(atomicLong.incrementAndGet()));
+                    String target = widgetEle.getAttribute("target");
+                    String id = DigestUtils.md5DigestAsHex(target.getBytes());
+                    WidgetConfig widgetConfig = new WidgetConfig(id, target);
                     // preferences element
                     Element prefsEle = DomUtils.getChildElementByTagName(widgetEle, "preference");
                     if (prefsEle != null) {

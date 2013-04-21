@@ -32,7 +32,11 @@ public class WidgetConfig {
     private String target;
     private Map<String, Object> preferences = new HashMap<String, Object>();
 
-    public WidgetConfig(String target) {
+    public WidgetConfig() {
+    }
+
+    public WidgetConfig(String id, String target) {
+        this.id = id;
         this.target = target;
     }
 

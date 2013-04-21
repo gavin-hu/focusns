@@ -26,11 +26,14 @@ import java.util.List;
 
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
+import org.focusns.web.widget.annotation.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/blog")
@@ -40,18 +43,46 @@ public class BlogCategoryWidget {
     private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/category-list")
-    public String list(Project project, Model model) {
+    public String list(@WidgetAttribute Project project, Model model) {
         //
         Long projectId = project.getId();
-        //
-        BlogCategory blogCategory = new BlogCategory();
-        blogCategory.setLabel("未分类");
-        blogCategory.setProjectId(projectId);
         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(projectId);
-        blogCategories.add(0, blogCategory);
         model.addAttribute("blogCategories", blogCategories);
         //
         return "modules/blog/category-list";
+    }
+
+    @RequestMapping("/category-edit")
+    public String doEdit(@RequestParam(required = false) Long id, @WidgetAttribute ProjectUser projectUser,
+            @WidgetAttribute Project project, Model model) {
+        //
+        Long projectId = project.getId();
+        List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(projectId);
+        model.addAttribute("blogCategories", blogCategories);
+        //
+        BlogCategory blogCategory = new BlogCategory();
+        if (id == null) {
+            blogCategory.setProjectId(projectId);
+            blogCategory.setCreatedById(projectUser.getId());
+        } else {
+            blogCategory = blogCategoryService.getBlogCategory(id);
+        }
+        //
+        return "modules/blog/category-edit";
+    }
+
+    @RequestMapping({"/category-create", "/category-modify"})
+    public void doModify(BlogCategory blogCategory) {
+        if(blogCategory.getId() > 0) {
+            blogCategoryService.modifyBlogCategory(blogCategory);
+        } else {
+            blogCategoryService.createBlogCategory(blogCategory);
+        }
+    }
+
+    @RequestMapping("/category-remove")
+    public void doRemove(BlogCategory blogCategory) {
+        blogCategoryService.removeBlogCategory(blogCategory);
     }
 
 }

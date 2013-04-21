@@ -83,6 +83,10 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                     if (request.getAttribute(ProjectUser.KEY) == null) {
                         return true;
                     }
+                } else if (Constraint.PROJECT_USER_NOT_REQUIRED == constraint) {
+                    if (request.getAttribute(ProjectUser.KEY) != null) {
+                        return true;
+                    }
                 } else if (Constraint.PROJECT_NOT_MY_PROFILE == constraint) {
                     Project project = (Project) request.getAttribute(Project.KEY);
                     ProjectUser projectUser = (ProjectUser) request.getAttribute(ProjectUser.KEY);
@@ -97,7 +101,8 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+            ModelAndView modelAndView) throws Exception {
         //
         if (WebUtils.isIncludeRequest(request)) {
             PageConfig pageConfig = (PageConfig) request.getAttribute("pageConfig");

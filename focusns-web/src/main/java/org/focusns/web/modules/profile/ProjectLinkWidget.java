@@ -57,7 +57,9 @@ public class ProjectLinkWidget {
 
     @RequestMapping("/link-list")
     @Constraints({ Constraint.PROJECT_REQUIRED })
-    public String doList(@WidgetPreference(defaultValue = "6") Integer limit, @WidgetPreference(defaultValue = "false") Boolean reverse, @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
+    public String doList(@WidgetPreference(defaultValue = "6") Integer limit,
+            @WidgetPreference(defaultValue = "false") Boolean reverse,
+            @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if (reverse.booleanValue()) {
@@ -73,7 +75,8 @@ public class ProjectLinkWidget {
 
     @RequestMapping("/link-list-detail")
     @Constraints({ Constraint.PROJECT_REQUIRED })
-    public String doListDetail(@WidgetPreference(defaultValue = "10") Integer pageSize, @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
+    public String doListDetail(@WidgetPreference(defaultValue = "10") Integer pageSize,
+            @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(pageSize);
         page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);

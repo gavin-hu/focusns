@@ -9,6 +9,14 @@
 	margin-right:60px;
 }
 
+.blog-menu {
+    padding:10px;
+}
+
+.blog-menu ul li {
+    padding-bottom: 2px;
+}
+
 .blog-categories {
     padding:10px;
 }
@@ -46,4 +54,23 @@
 .blog-post .title h3 {
     font-size:200%;
     font-weight:bold;
+}
+
+.blog-post-edit {
+    padding:10px;
+}
+.blog-post-edit div {
+    padding-bottom: 10px;
+}
+.blog-post-edit label {
+    display: block;
+    font-weight: bold;
+}
+
+.blog-post-edit .title input {
+    width: 80%;
+}
+.blog-post-edit .content textarea {
+    width: 98%;
+    min-height: 300px;
 }

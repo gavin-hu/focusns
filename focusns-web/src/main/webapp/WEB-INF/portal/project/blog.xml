@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
     <page path="/blog" category="people">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
-        </position>
-        <position name="subMenu">
-            <widget target="/site/menu-sub" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="leftColumn">
             <widget target="/blog/menu-view" />
@@ -16,30 +12,51 @@
         </position>
         <position name="mainColumn">
             <widget target="/blog/post-list" />
+        </position>
+    </page>
+    <page path="/blog/post-edit" category="people">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/blog/menu-view" />
+            <widget target="/blog/category-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/blog/post-edit" />
+        </position>
+    </page>
+    <page path="/blog/post-view" category="people">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/blog/menu-view" />
+            <widget target="/blog/category-list" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/blog/post-view" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />
         </position>
     </page>
-    <page path="/blog/post/edit" category="people">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+    <page path="/blog/category-edit" category="people">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
-        </position>
-        <position name="subMenu">
-            <widget target="/site/menu-sub" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="leftColumn">
             <widget target="/blog/menu-view" />
             <widget target="/blog/category-list" />
         </position>
         <position name="mainColumn">
-            <widget target="/blog/post-list" />
-        </position>
-        <position name="copyright">
-            <widget target="/site/copyright" />
+            <widget target="/blog/category-edit" />
         </position>
     </page>
 </pages>

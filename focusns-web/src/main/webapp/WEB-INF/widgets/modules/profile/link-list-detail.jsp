@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="ui" tagdir="/WEB-INF/tags/ui" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div id="${widgetConfig.id}" class="widget">
     <div class="widget-hd">
-        <h2>关注列表</h2>
+        <h3>关注列表</h3>
     </div>
     <div class="widget-bd">
         <div class="project-links-detail">
@@ -16,7 +15,7 @@
                     <ul class="">
                     <c:forEach items="${page.results}" var="projectLink">
                         <li url='<c:url value="/${projectLink.toProject.code}/profile"/>'>
-                            <ui:avatar dimension="65" projectId="${projectLink.toProject.id}" projectUserId="${projectLink.toProject.createById}" />
+                            <t:img-avatar dimension="65" projectId="${projectLink.toProject.id}" projectUserId="${projectLink.toProject.createById}" />
                             <h3>
                                 ${projectLink.toProject.title}
                                 <c:choose>

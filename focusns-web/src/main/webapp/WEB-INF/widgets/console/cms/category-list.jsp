@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div class="widget">
     <div class="widget-hd">
-        <h2>栏目管理</h2>
+        <h3>栏目管理</h3>
     </div>
     <div class="widget-bd">
         <div class="article-categories">
@@ -26,8 +25,8 @@
                         <c:forEach items="${articleCategories}" var="articleCategory">
                             <tr>
                                 <td>${articleCategory.label}</td>
-                                <td>${articleCategory.createById}</td>
-                                <td><fmt:formatDate value="${articleCategory.createAt}" pattern="yyyy/M/d HH:mm" /></td>
+                                <td>${articleCategory.createdById}</td>
+                                <td><fmt:formatDate value="${articleCategory.createdAt}" pattern="yyyy/M/d HH:mm" /></td>
                                 <td>
                                     <a href='<c:url value="/console/cms?mode=category-edit" />'>新增</a>
                                     |

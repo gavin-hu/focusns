@@ -2,7 +2,7 @@
 
 <div class="widget">
     <div class="widget-hd">
-        <h2>私信列表</h2>
+        <h3>私信列表</h3>
     </div>
     <div class="widget-bd">
         <div class="messages">

@@ -48,12 +48,13 @@ public class WidgetArgumentResolver implements WebArgumentResolver {
 
     public Object resolveArgument(MethodParameter methodParameter, NativeWebRequest webRequest) throws Exception {
         //
+        Class<?> widgetClass = methodParameter.getMethod().getDeclaringClass();
         WidgetAttribute widgetAttribute = methodParameter.getParameterAnnotation(WidgetAttribute.class);
         if (widgetAttribute != null) {
             String widgetAttributeName = getWidgetAttributeName(methodParameter, widgetAttribute);
             Object value = webRequest.getAttribute(widgetAttributeName, WebRequest.SCOPE_REQUEST);
             if (widgetAttribute.required()) {
-                Assert.notNull(value, String.format("Widget attribute %s can not be null!", widgetAttributeName));
+                Assert.notNull(value, String.format("%s attribute %s can not be null!", widgetClass, widgetAttributeName));
             }
             return value;
         }

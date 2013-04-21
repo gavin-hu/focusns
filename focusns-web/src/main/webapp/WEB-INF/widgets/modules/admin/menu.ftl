@@ -1,6 +1,6 @@
 <div class="widget">
     <div class="widget-hd">
-        <h2>管理菜单</h2>
+        <h3>管理菜单</h3>
     </div>
     <div class="widget-bd">
         <div class="admin-menu">

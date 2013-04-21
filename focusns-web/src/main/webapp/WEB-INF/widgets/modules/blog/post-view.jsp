@@ -1,20 +1,11 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<div class="widget">
-    <div class="widget-hd">
-        <h2>日志内容</h2>
-    </div>
-    <div class="widget-bd">
-        <div class="blog-post">
-            <div class="title">
-                <h3>${blogPost.title}</h3>
-            </div>
-            <div class="content">
-                ${blogPost.content}
-            </div>
-            <div class="status">
-
-            </div>
-        </div>
-    </div>
-</div>
+<ui:widget>
+    <ui:widget-hd>
+        <h3>${blogPost.title}</h3>
+    </ui:widget-hd>
+    <ui:widget-bd>
+        <p>${blogPost.content}</p>
+    </ui:widget-bd>
+</ui:widget>

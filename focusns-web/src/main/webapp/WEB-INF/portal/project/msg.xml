@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
     <page path="/msg" category="people">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
-        </position>
-        <position name="subMenu">
-            <widget target="/site/menu-sub" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />

@@ -62,7 +62,9 @@ public class Portal {
     private PageConfigFactory pageConfigFactory;
 
     @RequestMapping("/portal")
-    public String doRender(@RequestParam(required = false) String mode, @RequestParam(required = false) String projectCode, @RequestParam String path, WebRequest webRequest) throws Exception {
+    public String doRender(@RequestParam(required = false) String mode,
+            @RequestParam(required = false) String projectCode, @RequestParam String path, WebRequest webRequest)
+            throws Exception {
         //
         String categoryCode = null;
         // export project

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pages>
     <page path="/login">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">
             <widget target="/site/login-form" />
@@ -15,11 +13,10 @@
         </position>
     </page>
     <page path="/register">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">
             <widget target="/site/register-form" />
@@ -40,11 +37,10 @@
         </position>
     </page>
     <page path="/index">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn" grid="2,2">
             <widget target="/cms/category-view">
@@ -77,11 +73,10 @@
         </position>
     </page>
     <page path="/people">
-        <position name="userMenu">
-            <widget target="/site/menu-user" />
-        </position>
-        <position name="mainMenu">
+        <position name="headerBar">
             <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
         </position>
         <position name="copyright">
             <widget target="/site/copyright" />

@@ -1,6 +1,6 @@
 <div class="widget">
     <div class="widget-hd">
-        <h2>博文编辑</h2>
+        <h3>博文编辑</h3>
     </div>
     <div class="widget-bd">
         <div class="admin-post">
@@ -27,7 +27,7 @@
                     <textarea id="content" name="content"></textarea>
                 </div>
                 <div class="submit">
-                    <input type="hidden" name="createById" value="${Session.user.id}" />
+                    <input type="hidden" name="createdById" value="${Session.user.id}" />
                     <input type="hidden" name="projectId" value="${Session.project.id}" />
                     <button type="submit" name="action" value="create">提交</button>
                 <div>

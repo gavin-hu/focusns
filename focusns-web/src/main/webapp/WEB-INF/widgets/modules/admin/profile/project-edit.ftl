@@ -1,6 +1,6 @@
 <div class="widget">
     <div class="widget-hd">
-        <h2>空间编辑</h2>
+        <h3>空间编辑</h3>
     </div>
     <div class="widget-bd">
         <div class="admin-project">

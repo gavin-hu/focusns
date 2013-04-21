@@ -1,12 +1,9 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div id="${widgetConfig.id}" class="widget">
     <div class="widget-hd">
-        <h2>文章管理</h2>
+        <h3>文章管理</h3>
     </div>
     <div class="widget-bd">
         <div class="articles">
@@ -31,7 +28,7 @@
                         <c:forEach items="${page.results}" var="article">
                         <li>
                             <h3>${article.title}</h3>
-                            | <fmt:formatDate value="${article.modifyAt}" />
+                            | <fmt:formatDate value="${article.modifiedAt}" />
                             | (<a href='<c:url value="/console/cms?mode=article-edit&articleId=${article.id}" />'>编辑</a>)
                         </li>
                         </c:forEach>

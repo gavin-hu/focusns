@@ -54,7 +54,7 @@ public class ArticleCategoryWidget {
     public String doEdit(@RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser user, Model model) {
         //
         BlogCategory articleCategory = new BlogCategory();
-        articleCategory.setCreateById(user.getId());
+        articleCategory.setCreatedById(user.getId());
         if (categoryId != null) {
             articleCategory = blogCategoryService.getBlogCategory(categoryId);
         }
