@@ -6,18 +6,18 @@
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
         <result column="content" property="title" jdbcType="VARCHAR" />
-        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+		<result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
         <result column="post_id" property="postId" jdbcType="BIGINT" />
-        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.blog.BlogComment">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_blog_comment (title, content, create_at, modify_at, post_id, create_by_id) 
-		values (#{title}, #{content}, #{createAt}, #{modifyAt}, #{postId}, #{createById})
+		insert into tb_blog_comment (title, content, created_at, modified_at, post_id, created_by_id)
+		values (#{title}, #{content}, #{createdAt}, #{modifiedAt}, #{postId}, #{createdById})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -40,16 +40,16 @@
 		        content = #{content},
 			</if>
             <if test="craeteAt != null" >
-		        create_at = #{createAt},
+		        created_at = #{createdAt},
 			</if>
-            <if test="modifyAt != null" >
-		        modify_at = #{modifyAt},
+            <if test="modifiedAt != null" >
+		        modified_at = #{modifiedAt},
 			</if>
             <if test="postId != null" >
                 post_id = #{postId},
 			</if>
-            <if test="createById != null" >
-		        create_by_id = #{createById},
+            <if test="createdById != null" >
+		        created_by_id = #{createdById},
 			</if>
 		</set>
 		where id = #{id}

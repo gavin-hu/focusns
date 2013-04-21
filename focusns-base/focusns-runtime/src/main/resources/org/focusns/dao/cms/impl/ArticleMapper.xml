@@ -9,11 +9,11 @@
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="from" property="from" jdbcType="VARCHAR" />
         <result column="link" property="link" jdbcType="VARCHAR" />
-        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+		<result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
         <result column="remove_at" property="removeAt" jdbcType="TIMESTAMP" />
-        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
-        <result column="modify_by_id" property="modifyById" jdbcType="BIGINT" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
+        <result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
         <result column="remove_by_id" property="removeById" jdbcType="BIGINT" />
         <result column="category_id" property="categoryId" jdbcType="BIGINT" />
 	</resultMap>
@@ -22,8 +22,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-        insert into tb_article (title, summary, content, create_at, modify_at, remove_at, create_by_id, modify_by_id, remove_by_id, category_id)
-        values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{removeAt}, #{createById}, #{modifyById}, #{removeById}, #{categoryId})
+        insert into tb_article (title, summary, content, created_at, modified_at, remove_at, created_by_id, modified_by_id, remove_by_id, category_id)
+        values (#{title}, #{summary}, #{content}, #{createdAt}, #{modifiedAt}, #{removeAt}, #{createdById}, #{modifiedById}, #{removeById}, #{categoryId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -43,19 +43,19 @@
 		        content = #{content},
 			</if>
             <if test="craeteAt != null" >
-		        create_at = #{createAt},
+		        created_at = #{createdAt},
 			</if>
-            <if test="modifyAt != null" >
-		        modify_at = #{modifyAt},
+            <if test="modifiedAt != null" >
+		        modified_at = #{modifiedAt},
 			</if>
             <if test="removeAt != null" >
                 remove_at = #{removeAt},
             </if>
-            <if test="createById > 0" >
-                create_by_id = #{createById},
+            <if test="createdById > 0" >
+                created_by_id = #{createdById},
             </if>
-            <if test="modifyById > 0" >
-                modify_by_id = #{modifyById},
+            <if test="modifiedById > 0" >
+                modified_by_id = #{modifiedById},
             </if>
             <if test="removeById > 0" >
                 remove_by_id = #{removeById},
@@ -76,12 +76,12 @@
             <when test="categoryId > 0">
                 from tb_article a, tb_blog_category b
                 where a.category_id = b.id and b.id = #{categoryId}
-                order by a.create_at desc
+                order by a.created_at desc
             </when>
             <otherwise>
                 from tb_article a
                 where a.project_id = #{projectId}
-                order by a.create_at desc
+                order by a.created_at desc
             </otherwise>
         </choose>
     </sql>

@@ -4,8 +4,8 @@
 
 	<resultMap id="BaseResultMap" type="org.focusns.model.photo.Photo">
 		<id column="id" property="id" jdbcType="BIGINT" />
-        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
         <result column="album_id" property="albumId" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
 	</resultMap>
@@ -14,8 +14,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_photo (create_at, create_by_id, album_id, project_id)
-		values (#{createAt}, #{createById}, #{albumId}, #{projectId})
+		insert into tb_photo (created_at, created_by_id, album_id, project_id)
+		values (#{createdAt}, #{createdById}, #{albumId}, #{projectId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -26,10 +26,10 @@
 		update tb_blog_comment 
 		<set>
             <if test="craeteAt != null" >
-		        create_at = #{createAt},
+		        created_at = #{createdAt},
 			</if>
-            <if test="createById > 0" >
-                create_by_id = #{createById},
+            <if test="createdById > 0" >
+                created_by_id = #{createdById},
             </if>
             <if test="albumId > 0" >
                 album_id = #{albumId},

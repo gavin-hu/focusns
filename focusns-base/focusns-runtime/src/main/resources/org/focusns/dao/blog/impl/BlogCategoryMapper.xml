@@ -5,9 +5,9 @@
 	<resultMap id="BaseResultMap" type="org.focusns.model.blog.BlogCategory">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="label" property="label" jdbcType="VARCHAR" />
-        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
 		<result column="project_id" property="projectId" jdbcType="VARCHAR" />
-        <result column="create_by_id" property="createById" jdbcType="VARCHAR" />
+        <result column="created_by_id" property="createdById" jdbcType="VARCHAR" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.blog.BlogCategory">
@@ -16,12 +16,12 @@
 		</selectKey>
         <choose>
             <when test="projectId > 0">
-                insert into tb_blog_category (label, create_at, project_id, create_by_id)
-                values (#{label}, #{createAt}, #{projectId}, #{createById})
+                insert into tb_blog_category (label, created_at, project_id, created_by_id)
+                values (#{label}, #{createdAt}, #{projectId}, #{createdById})
             </when>
             <otherwise>
-                insert into tb_blog_category (label, create_at, create_by_id)
-                values (#{label}, #{createAt}, #{createById})
+                insert into tb_blog_category (label, created_at, created_by_id)
+                values (#{label}, #{createdAt}, #{createdById})
             </otherwise>
         </choose>
 
@@ -48,14 +48,14 @@
 			<if test="label != null" >
 		        label = #{label},
 			</if>
-            <if test="createAt != null" >
-                create_at = #{createAt},
+            <if test="createdAt != null" >
+                created_at = #{createdAt},
             </if>
 			<if test="projectId > 0" >
 		        project_id = #{projectId},
 			</if>
-            <if test="createById > 0" >
-                create_by_id = #{createById},
+            <if test="createdById > 0" >
+                created_by_id = #{createdById},
             </if>
 		</set>
 		where id = #{id}

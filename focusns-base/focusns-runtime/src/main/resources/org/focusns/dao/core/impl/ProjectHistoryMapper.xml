@@ -5,12 +5,12 @@
 	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectHistory">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="content" property="content" jdbcType="VARCHAR" />
-		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+		<result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
 		<result column="target_id" property="targetId" jdbcType="BIGINT" />
 		<result column="target_type" property="targetType" jdbcType="VARCHAR" />
         <result column="parent_id" property="parentId" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
-        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectHistory">
@@ -19,12 +19,12 @@
 		</selectKey>
         <choose>
             <when test="parentId > 0">
-                insert into tb_project_history (content, create_at, target_id, target_type, parent_id, project_id, create_by_id)
-                values (#{content}, #{createAt}, #{targetId}, #{targetType}, #{parentId}, #{projectId}, #{createById})
+                insert into tb_project_history (content, created_at, target_id, target_type, parent_id, project_id, created_by_id)
+                values (#{content}, #{createdAt}, #{targetId}, #{targetType}, #{parentId}, #{projectId}, #{createdById})
             </when>
             <otherwise>
-                insert into tb_project_history (content, create_at, target_id, target_type, project_id, create_by_id)
-                values (#{content}, #{createAt}, #{targetId}, #{targetType}, #{projectId}, #{createById})
+                insert into tb_project_history (content, created_at, target_id, target_type, project_id, created_by_id)
+                values (#{content}, #{createdAt}, #{targetId}, #{targetType}, #{projectId}, #{createdById})
             </otherwise>
         </choose>
 	</insert>
@@ -39,8 +39,8 @@
 			<if test="content != null" >
 		        content = #{content},
 			</if>
-			<if test="createAt != null" >
-		        create_at = #{createAt},
+			<if test="createdAt != null" >
+		        created_at = #{createdAt},
 			</if>
 			<if test="targetId > 0" >
 		        target_id = #{targetId},
@@ -54,8 +54,8 @@
 			<if test="projectId > 0" >
 		        project_id = #{projectId},
 			</if>
-            <if test="createById > 0" >
-		        create_by_id = #{createById},
+            <if test="createdById > 0" >
+		        created_by_id = #{createdById},
 			</if>
 		</set>
 		where id = #{id}
@@ -75,7 +75,7 @@
             and (   project_id = #{projectId}
                     or project_id in (select to_project_id from tb_project_link
                     where from_project_id = #{projectId} ))
-        order by create_at desc
+        order by created_at desc
     </sql>
     <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
         select * <include refid="fetchByProjectIdSql"/>

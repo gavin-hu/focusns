@@ -7,10 +7,10 @@
 		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
-		<result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
-		<result column="create_by_id" property="createById" jdbcType="BIGINT" />
-		<result column="modify_by_id" property="modifyById" jdbcType="BIGINT" />
+		<result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+		<result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
+		<result column="created_by_id" property="createdById" jdbcType="BIGINT" />
+		<result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
 		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
 		<result column="private" property="private" jdbcType="BOOLEAN" />
 	</resultMap>
@@ -19,8 +19,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_project (code, title, description, create_at, modify_at, private, create_by_id, modify_by_id, category_id) 
-		values (#{code}, #{title}, #{description}, #{createAt}, #{modifyAt}, #{private}, #{createById}, #{modifyById}, #{categoryId})
+		insert into tb_project (code, title, description, created_at, modified_at, private, created_by_id, modified_by_id, category_id)
+		values (#{code}, #{title}, #{description}, #{createdAt}, #{modifiedAt}, #{private}, #{createdById}, #{modifiedById}, #{categoryId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -43,20 +43,20 @@
 			<if test="description != null" >
 		        description = #{description},
 			</if>
-			<if test="createAt != null" >
-		        create_at = #{createAt},
+			<if test="createdAt != null" >
+		        created_at = #{createdAt},
 			</if>
-			<if test="modifyAt != null" >
-		        modify_at = #{modifyAt},
+			<if test="modifiedAt != null" >
+		        modified_at = #{modifiedAt},
 			</if>
 			<if test="private != null" >
 		        private = #{private},
 			</if>
-			<if test="createById != null" >
-		        create_by_id = #{createById},
+			<if test="createdById != null" >
+		        created_by_id = #{createdById},
 			</if>
-			<if test="modifyById != null" >
-		        modify_by_id = #{modifyById},
+			<if test="modifiedById != null" >
+		        modified_by_id = #{modifiedById},
 			</if>
 			<if test="categoryId != null" >
 		        category_id = #{categoryId},

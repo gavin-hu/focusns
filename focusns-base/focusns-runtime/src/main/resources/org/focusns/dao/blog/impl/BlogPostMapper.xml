@@ -7,11 +7,11 @@
 		<result column="title" property="title" jdbcType="VARCHAR" />
         <result column="summary" property="summary" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
-        <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
-		<result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+		<result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
         <result column="category_id" property="categoryId" jdbcType="BIGINT" />
-        <result column="create_by_id" property="createById" jdbcType="BIGINT" />
-        <result column="modify_by_id" property="modifyById" jdbcType="BIGINT" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
+        <result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
 	</resultMap>
 	
@@ -21,20 +21,20 @@
 		</selectKey>
         <choose>
             <when test="categoryId > 0 and projectId > 0">
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, modify_by_id, project_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{modifyById}, #{projectId})
+                insert into tb_blog_post (title, summary, content, created_at, modified_at, category_id, created_by_id, modified_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createdAt}, #{modifiedAt}, #{categoryId}, #{createdById}, #{modifiedById}, #{projectId})
             </when>
             <when test="categoryId &gt; 0 and projectId &lt; 1">
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, category_id, create_by_id, modify_by_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{categoryId}, #{createById}, #{modifyById})
+                insert into tb_blog_post (title, summary, content, created_at, modified_at, category_id, created_by_id, modified_by_id)
+                values (#{title}, #{summary}, #{content}, #{createdAt}, #{modifiedAt}, #{categoryId}, #{createdById}, #{modifiedById})
             </when>
             <when test="categoryId &lt; 0 and projectId &gt; 0">
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, modify_by_id, project_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{modifyById}, #{projectId})
+                insert into tb_blog_post (title, summary, content, created_at, modified_at, created_by_id, modified_by_id, project_id)
+                values (#{title}, #{summary}, #{content}, #{createdAt}, #{modifiedAt}, #{createdById}, #{modifiedById}, #{projectId})
             </when>
             <otherwise>
-                insert into tb_blog_post (title, summary, content, create_at, modify_at, create_by_id, modify_by_id)
-                values (#{title}, #{summary}, #{content}, #{createAt}, #{modifyAt}, #{createById}, #{modifyById})
+                insert into tb_blog_post (title, summary, content, created_at, modified_at, created_by_id, modified_by_id)
+                values (#{title}, #{summary}, #{content}, #{createdAt}, #{modifiedAt}, #{createdById}, #{modifiedById})
             </otherwise>
         </choose>
 	</insert>
@@ -50,22 +50,22 @@
 		        title = #{title},
 			</if>
             <if test="summary != null" >
-                title = #{summary},
+                summary = #{summary},
             </if>
 			<if test="content != null" >
 		        content = #{content},
 			</if>
-            <if test="createAt != null" >
-		        create_at = #{createAt},
+            <if test="createdAt != null" >
+		        created_at = #{createdAt},
 			</if>
-            <if test="modifyAt != null" >
-		        modify_at = #{modifyAt},
+            <if test="modifiedAt != null" >
+		        modified_at = #{modifiedAt},
 			</if>
             <if test="categoryId > 0" >
 		        category_id = #{categoryId},
 			</if>
-            <if test="createById > 0" >
-		        create_by_id = #{createById},
+            <if test="createdById > 0" >
+		        created_by_id = #{createdById},
 			</if>
             <if test="projectId > 0" >
                 project_id = #{projectId},
@@ -83,12 +83,17 @@
             <when test="categoryId > 0">
                 from tb_blog_post a, tb_blog_category b
                 where a.category_id = b.id and b.id = #{categoryId}
-                order by a.create_at desc
+                order by a.created_at desc
+            </when>
+            <when test="categoryId == -1">
+                from tb_blog_post a
+                where a.project_id = #{projectId} and a.category_id is null
+                order by a.created_at desc
             </when>
             <otherwise>
                 from tb_blog_post a
                 where a.project_id = #{projectId}
-                order by a.create_at desc
+                order by a.created_at desc
             </otherwise>
         </choose>
     </sql>

@@ -13,16 +13,16 @@
             <result property="code" column="from_project_code"/>
             <result property="title" column="from_project_title"/>
             <result property="description" column="from_project_description"/>
-            <result property="createById" column="from_project_create_by_id"/>
-            <result property="modifyById" column="from_project_modify_by_id"/>
+            <result property="createdById" column="from_project_created_by_id"/>
+            <result property="modifiedById" column="from_project_modified_by_id"/>
         </association>
         <association property="toProject" javaType="org.focusns.model.core.Project">
             <id property="id" column="to_project_id"/>
             <result property="code" column="to_project_code"/>
             <result property="title" column="to_project_title"/>
             <result property="description" column="to_project_description"/>
-            <result property="createById" column="to_project_create_by_id"/>
-            <result property="modifyById" column="to_project_modify_by_id"/>
+            <result property="createdById" column="to_project_created_by_id"/>
+            <result property="modifiedById" column="to_project_modified_by_id"/>
         </association>
 	</resultMap>
 	
@@ -90,16 +90,16 @@
                b.code as from_project_code,
                b.title as from_project_title,
                b.description as from_project_description,
-               b.create_by_id as from_project_create_by_id,
-               b.modify_by_id as from_project_modify_by_id
+               b.created_by_id as from_project_created_by_id,
+               b.modified_by_id as from_project_modified_by_id
         </if>
         <if test="fromProjectId!=null">
             b.id as to_project_id,
             b.code as to_project_code,
             b.title as to_project_title,
             b.description as to_project_description,
-            b.create_by_id as to_project_create_by_id,
-            b.modify_by_id as to_project_modify_by_id
+            b.created_by_id as to_project_created_by_id,
+            b.modified_by_id as to_project_modified_by_id
         </if>
         <include refid="fetchPageSql"/>
     </select>
