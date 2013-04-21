@@ -22,13 +22,13 @@ package org.focusns.dao.console.impl;
  * #L%
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.console.RoleDao;
 import org.focusns.model.console.Role;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 public class RoleDaoImpl extends MyBatisBaseDao<Role> implements RoleDao {

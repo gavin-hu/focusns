@@ -23,7 +23,7 @@ package org.focusns.service.event.impl;
  */
 
 import org.focusns.dao.event.EventCategoryDao;
-import org.focusns.model.event.EventCategory;
+import org.focusns.model.calendar.EventCategory;
 import org.focusns.service.event.EventCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

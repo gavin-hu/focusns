@@ -24,7 +24,7 @@ package org.focusns.dao.event.impl;
 
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.event.EventDao;
-import org.focusns.model.event.Event;
+import org.focusns.model.calendar.Event;
 import org.springframework.stereotype.Repository;
 
 @Repository

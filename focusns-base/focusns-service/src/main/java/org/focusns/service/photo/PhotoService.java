@@ -22,9 +22,9 @@ package org.focusns.service.photo;
  * #L%
  */
 
-import org.focusns.model.photo.Photo;
-
 import java.util.List;
+
+import org.focusns.model.photo.Photo;
 
 public interface PhotoService {
 

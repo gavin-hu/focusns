@@ -22,14 +22,14 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.core.ProjectAttributeDao;
 import org.focusns.model.core.ProjectAttribute;
 import org.focusns.service.core.ProjectAttributeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

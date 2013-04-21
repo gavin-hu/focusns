@@ -22,9 +22,9 @@ package org.focusns.service.core;
  * #L%
  */
 
-import org.focusns.model.core.ProjectFeature;
-
 import java.util.List;
+
+import org.focusns.model.core.ProjectFeature;
 
 public interface ProjectFeatureService {
 

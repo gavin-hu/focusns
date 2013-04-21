@@ -22,16 +22,16 @@ package org.focusns.install;
  * #L%
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
 import org.focusns.install.setting.DatabaseWizard;
 import org.focusns.install.setting.OpenApiWizard;
 import org.focusns.install.setting.ServerWizard;
 import org.focusns.install.setting.Wizard;
 import org.focusns.install.utils.Properties;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
 
 public class Installer {
 
@@ -54,7 +54,7 @@ public class Installer {
         //
         databaseWizard.setup(scanner, globalSettings);
         //
-        //openApiWizard.setup(scanner, globalSettings);
+        // openApiWizard.setup(scanner, globalSettings);
         //
         serverWizader.setup(scanner, globalSettings);
         //

@@ -22,6 +22,10 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import org.focusns.dao.core.ProjectLogoDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLogo;
@@ -29,10 +33,6 @@ import org.focusns.service.core.ProjectLogoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 @Service
 @Transactional

@@ -22,15 +22,17 @@ package org.focusns.service.blog.impl;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.dao.blog.BlogPostDao;
+import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
 
 @Service
 @Transactional
@@ -38,6 +40,8 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     @Autowired
     private BlogPostDao postDao;
+    @Autowired
+    private ProjectUserDao projectUserDao;
 
     public BlogPost getBlogPost(long postId) {
         return postDao.select(postId);
@@ -45,11 +49,11 @@ public class BlogPostServiceImpl implements BlogPostService {
 
     public void createBlogPost(BlogPost post) {
         Date now = new Date();
-        if (post.getCreateAt() == null) {
-            post.setCreateAt(now);
+        if (post.getCreatedAt() == null) {
+            post.setCreatedAt(now);
         }
-        if (post.getModifyAt() == null) {
-            post.setModifyAt(now);
+        if (post.getModifiedAt() == null) {
+            post.setModifiedAt(now);
         }
         //
         if (post.getSummary() == null) {
@@ -60,6 +64,7 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     public void modifyBlogPost(BlogPost post) {
+        post.setModifiedAt(new Date());
         postDao.update(post);
     }
 
@@ -67,12 +72,28 @@ public class BlogPostServiceImpl implements BlogPostService {
         postDao.delete(post.getId());
     }
 
-    public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long categoryId) {
-        return postDao.fetchByProjectAndCategoryId(page, null, categoryId);
+    public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId) {
+        page = postDao.fetchByProjectAndCategoryId(page, projectId, categoryId);
+        //
+        return associateObjects(page);
     }
 
     public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {
-        return postDao.fetchByProjectAndCategoryId(page, projectId, null);
+        page = postDao.fetchByProjectAndCategoryId(page, projectId, null);
+        //
+        return associateObjects(page);
+    }
+
+    private Page<BlogPost> associateObjects(Page<BlogPost> page) {
+        for (BlogPost blogPost : page.getResults()) {
+            ProjectUser createBy = projectUserDao.selectWithProject(blogPost.getCreatedById());
+            blogPost.setCreatedBy(createBy);
+            //
+            ProjectUser modifyBy = projectUserDao.selectWithProject(blogPost.getModifiedById());
+            blogPost.setModifiedBy(modifyBy);
+        }
+        //
+        return page;
     }
 
 }

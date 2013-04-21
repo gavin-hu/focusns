@@ -22,14 +22,14 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink> implements ProjectLinkDao {
@@ -48,14 +48,16 @@ public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink> implements P
         getSqlSession().delete(NAMESPACE.concat(".deleteByFromAndToProjectId"), parameter);
     }
 
-    public Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, String category, Boolean mutual) {
+    public Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, String category,
+            Boolean mutual) {
         //
         Map parameter = createParameter(null, toProjectId, category, mutual);
         //
         return fetchPage(".fetchPage", page, parameter);
     }
 
-    public Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category, Boolean mutual) {
+    public Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category,
+            Boolean mutual) {
         //
         Map parameter = createParameter(fromProjectId, null, category, mutual);
         //

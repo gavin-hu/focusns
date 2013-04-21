@@ -22,8 +22,8 @@ package org.focusns.service.env;
  * #L%
  */
 
-import org.focusns.model.env.Environment;
 import org.focusns.model.env.Environment.Type;
+import org.focusns.model.env.Environment;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;

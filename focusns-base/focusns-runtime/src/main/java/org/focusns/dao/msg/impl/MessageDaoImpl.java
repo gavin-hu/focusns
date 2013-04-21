@@ -22,14 +22,14 @@ package org.focusns.dao.msg.impl;
  * #L%
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.msg.MessageDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 public class MessageDaoImpl extends MyBatisBaseDao<Message> implements MessageDao {

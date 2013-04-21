@@ -22,13 +22,13 @@ package org.focusns.service.event;
  * #L%
  */
 
-import org.focusns.model.event.EventCategory;
+import java.util.Date;
+
+import org.focusns.model.calendar.EventCategory;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class EventCategoryServiceTest extends AbstractServiceTest {

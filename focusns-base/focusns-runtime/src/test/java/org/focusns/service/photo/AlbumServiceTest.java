@@ -22,13 +22,13 @@ package org.focusns.service.photo;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.photo.Album;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class AlbumServiceTest extends AbstractServiceTest {
@@ -40,8 +40,8 @@ public class AlbumServiceTest extends AbstractServiceTest {
     public void createAlbum() {
         Album album = new Album();
         album.setLabel("label");
-        album.setCreateAt(new Date());
-        album.setCreateById(1);
+        album.setCreatedAt(new Date());
+        album.setCreatedById(1);
         album.setProjectId(1);
         //
         albumService.createAlbum(album);

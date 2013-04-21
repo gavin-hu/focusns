@@ -22,13 +22,13 @@ package org.focusns.service.event;
  * #L%
  */
 
-import org.focusns.model.event.Event;
+import java.util.Date;
+
+import org.focusns.model.calendar.Event;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class EventServiceTest extends AbstractServiceTest {
@@ -43,10 +43,10 @@ public class EventServiceTest extends AbstractServiceTest {
         event.setContent("event content");
         event.setBegin(new Date());
         event.setEnd(new Date());
-        event.setCreateAt(new Date());
-        event.setModifyAt(new Date());
-        event.setCreateById(1);
-        event.setModifyById(1);
+        event.setCreatedAt(new Date());
+        event.setModifiedAt(new Date());
+        event.setCreatedById(1);
+        event.setModifiedById(1);
         event.setProjectId(1);
         event.setCategoryId(1);
         //

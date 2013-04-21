@@ -22,13 +22,13 @@ package org.focusns.service.msg;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.msg.MessageBox;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class MessageBoxServiceTest extends AbstractServiceTest {

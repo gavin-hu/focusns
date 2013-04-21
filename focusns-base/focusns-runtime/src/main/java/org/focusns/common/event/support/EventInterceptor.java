@@ -122,16 +122,16 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
         //
         Event event = getEvent(method, point);
         //
-        EventContext eventContext = null;
-        if(point == Event.Point.BEFORE) {
-            eventContext = new EventContext(appContext, method, arguments);
-        } else if (point == Event.Point.AFTER) {
-            eventContext = new EventContext(appContext, method, arguments, returnValue);
-        } else if(point == Event.Point.AFTER_THROWING) {
-            eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
-        }
-        //
-        if(eventContext!=null) {
+        if(event!=null) {
+            //
+            EventContext eventContext = null;
+            if(point == Event.Point.BEFORE) {
+                eventContext = new EventContext(appContext, method, arguments);
+            } else if (point == Event.Point.AFTER) {
+                eventContext = new EventContext(appContext, method, arguments, returnValue);
+            } else if(point == Event.Point.AFTER_THROWING) {
+                eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
+            }
             //
             String eventKey = generateEventKey(event);
             String subscriberName = eventSubscriberMapping.get(eventKey);

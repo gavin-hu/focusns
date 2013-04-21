@@ -22,6 +22,8 @@ package org.focusns.service.core;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
@@ -31,8 +33,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class ProjectHistoryServiceTest extends AbstractServiceTest {
@@ -54,8 +54,8 @@ public class ProjectHistoryServiceTest extends AbstractServiceTest {
         //
         ProjectHistory history = new ProjectHistory();
         history.setContent("This is project history!");
-        history.setCreateAt(new Date());
-        history.setCreateById(user.getId());
+        history.setCreatedAt(new Date());
+        history.setCreatedById(user.getId());
         history.setTargetType("project");
         history.setTargetId(1);
         history.setParentId(1);

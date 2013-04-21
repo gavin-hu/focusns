@@ -22,6 +22,9 @@ package org.focusns.service.blog;
  * #L%
  */
 
+import java.util.Date;
+import java.util.List;
+
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.service.AbstractServiceTest;
@@ -30,9 +33,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
-import java.util.List;
 
 @Ignore
 public class BlogCategoryServiceTest extends AbstractServiceTest {
@@ -48,8 +48,8 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
         Assert.assertNotNull(project);
         //
         BlogCategory blogCategory = new BlogCategory(project.getId(), "Test");
-        blogCategory.setCreateAt(new Date());
-        blogCategory.setCreateById(1);
+        blogCategory.setCreatedAt(new Date());
+        blogCategory.setCreatedById(1);
 
         blogCategoryService.createBlogCategory(blogCategory);
     }
@@ -68,8 +68,8 @@ public class BlogCategoryServiceTest extends AbstractServiceTest {
     @Test
     public void testCreateBlogCategoryNoProject() {
         BlogCategory blogCategory = new BlogCategory();
-        blogCategory.setCreateById(1);
-        blogCategory.setCreateAt(new Date());
+        blogCategory.setCreatedById(1);
+        blogCategory.setCreatedAt(new Date());
         blogCategory.setLabel("News");
         blogCategoryService.createBlogCategory(blogCategory);
 

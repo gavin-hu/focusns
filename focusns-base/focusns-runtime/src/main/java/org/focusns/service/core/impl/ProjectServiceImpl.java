@@ -23,8 +23,6 @@ package org.focusns.service.core.impl;
  */
 
 import org.focusns.common.event.Event;
-import org.focusns.common.event.annotation.Trigger;
-import org.focusns.common.event.annotation.Triggers;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.model.common.Caches;
 import org.focusns.model.core.Project;
@@ -63,7 +61,6 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Caching(evict = { @CacheEvict(value = Caches.PROJECT, key = "#project.id"), @CacheEvict(value = Caches.PROJECT, key = "#project.code") })
-    @Triggers({ @Trigger(event = Event.MODIFY, point = Trigger.Point.BEFORE), @Trigger(event = Event.MODIFIED, point = Trigger.Point.AFTER) })
     public void modifyProject(Project project) {
         projectDao.update(project);
     }

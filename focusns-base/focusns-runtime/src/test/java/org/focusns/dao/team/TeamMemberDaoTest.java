@@ -22,13 +22,13 @@ package org.focusns.dao.team;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.team.TeamMember;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class TeamMemberDaoTest extends AbstractDaoTest {
@@ -39,8 +39,8 @@ public class TeamMemberDaoTest extends AbstractDaoTest {
     @Test
     public void testInsert() {
         TeamMember member = new TeamMember();
-        member.setCreateAt(new Date());
-        member.setModifyAt(new Date());
+        member.setCreatedAt(new Date());
+        member.setModifiedAt(new Date());
         member.setUserId(1);
         member.setRoleId(1);
         member.setProjectId(1);

@@ -22,11 +22,11 @@ package org.focusns.install.setting;
  * #L%
  */
 
-import org.focusns.install.utils.Properties;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Scanner;
+
+import org.focusns.install.utils.Properties;
 
 public class OpenApiWizard implements Wizard {
 

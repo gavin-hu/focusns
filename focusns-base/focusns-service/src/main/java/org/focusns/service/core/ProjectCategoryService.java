@@ -22,9 +22,9 @@ package org.focusns.service.core;
  * #L%
  */
 
-import org.focusns.model.core.ProjectCategory;
-
 import java.util.List;
+
+import org.focusns.model.core.ProjectCategory;
 
 public interface ProjectCategoryService {
 

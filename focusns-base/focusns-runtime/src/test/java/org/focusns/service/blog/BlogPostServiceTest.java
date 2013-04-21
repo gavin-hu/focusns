@@ -22,6 +22,8 @@ package org.focusns.service.blog;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -34,8 +36,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class BlogPostServiceTest extends AbstractServiceTest {
@@ -67,10 +67,10 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         BlogPost blogPost = new BlogPost();
         blogPost.setTitle("Blog Title");
         blogPost.setContent("Blog Content");
-        blogPost.setCreateAt(now);
-        blogPost.setModifyAt(now);
+        blogPost.setCreatedAt(now);
+        blogPost.setModifiedAt(now);
         blogPost.setCategoryId(blogTag.getId());
-        blogPost.setCreateById(user.getId());
+        blogPost.setCreatedById(user.getId());
         //
         postService.createBlogPost(blogPost);
     }

@@ -22,9 +22,9 @@ package org.focusns.service.photo;
  * #L%
  */
 
-import org.focusns.model.photo.Album;
-
 import java.util.List;
+
+import org.focusns.model.photo.Album;
 
 public interface AlbumService {
 

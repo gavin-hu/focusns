@@ -22,7 +22,13 @@ package org.focusns.install.utils;
  * #L%
  */
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
@@ -31,7 +37,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class FileCopyUtils {
-    public static boolean copyFile(final File toCopy, final File destFile) {
+
+    public static boolean copyFile(final java.io.File toCopy, final java.io.File destFile) {
         try {
             return FileCopyUtils.copyStream(new FileInputStream(toCopy), new FileOutputStream(destFile));
         } catch (final FileNotFoundException e) {
@@ -59,7 +66,8 @@ public class FileCopyUtils {
         return true;
     }
 
-    public static boolean copyJarResourcesRecursively(final File destDir, final JarURLConnection jarConnection) throws IOException {
+    public static boolean copyJarResourcesRecursively(final File destDir, final JarURLConnection jarConnection)
+            throws IOException {
 
         final JarFile jarFile = jarConnection.getJarFile();
 
@@ -86,8 +94,7 @@ public class FileCopyUtils {
         return true;
     }
 
-    public static boolean copyResourcesRecursively( //
-    final URL originUrl, final File destination) {
+    public static boolean copyResourcesRecursively(final URL originUrl, final File destination) {
         try {
             final URLConnection urlConnection = originUrl.openConnection();
             if (urlConnection instanceof JarURLConnection) {

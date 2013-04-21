@@ -22,6 +22,9 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
+import java.util.Date;
+import java.util.List;
+
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.dao.core.ProjectUserDao;
@@ -33,9 +36,6 @@ import org.focusns.service.core.ProjectHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 @Transactional
@@ -51,7 +51,7 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
     public void createProjectHistory(ProjectHistory histroy) {
         //
         Date now = new Date();
-        histroy.setCreateAt(now);
+        histroy.setCreatedAt(now);
         //
         projectHistoryDao.insert(histroy);
     }
@@ -69,17 +69,17 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
         // TODO performance tuning
         for (ProjectHistory history : page.getResults()) {
             Project project = projectDao.select(history.getProjectId());
-            ProjectUser projectUser = projectUserDao.selectWithProject(history.getCreateById());
+            ProjectUser projectUser = projectUserDao.selectWithProject(history.getCreatedById());
             history.setProject(project);
-            history.setCreateBy(projectUser);
+            history.setCreatedBy(projectUser);
             //
             List<ProjectHistory> children = projectHistoryDao.selectByParentId(history.getId());
             for (ProjectHistory child : children) {
                 //
                 Project childProject = projectDao.select(child.getProjectId());
-                ProjectUser childProjectUser = projectUserDao.selectWithProject(child.getCreateById());
+                ProjectUser childProjectUser = projectUserDao.selectWithProject(child.getCreatedById());
                 child.setProject(childProject);
-                child.setCreateBy(childProjectUser);
+                child.setCreatedBy(childProjectUser);
             }
             history.setChildren(children);
         }

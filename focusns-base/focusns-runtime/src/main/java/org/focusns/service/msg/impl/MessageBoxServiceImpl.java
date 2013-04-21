@@ -22,14 +22,14 @@ package org.focusns.service.msg.impl;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.msg.MessageBoxDao;
 import org.focusns.model.msg.MessageBox;
 import org.focusns.service.msg.MessageBoxService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

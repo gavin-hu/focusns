@@ -22,14 +22,14 @@ package org.focusns.service.photo.impl;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.photo.PhotoDao;
 import org.focusns.model.photo.Photo;
 import org.focusns.service.photo.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

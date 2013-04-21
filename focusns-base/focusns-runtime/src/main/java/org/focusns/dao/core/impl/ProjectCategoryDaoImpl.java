@@ -22,12 +22,12 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.model.core.ProjectCategory;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository
 public class ProjectCategoryDaoImpl extends MyBatisBaseDao<ProjectCategory> implements ProjectCategoryDao {

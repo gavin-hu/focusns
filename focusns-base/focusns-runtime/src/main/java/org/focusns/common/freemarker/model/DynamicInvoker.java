@@ -26,12 +26,13 @@ import freemarker.ext.beans.BeanModel;
 import freemarker.ext.servlet.FreemarkerServlet;
 import freemarker.template.SimpleHash;
 import freemarker.template.TemplateModelException;
-import org.springframework.beans.BeanWrapper;
-import org.springframework.beans.BeanWrapperImpl;
-import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.util.Assert;
 
 public class DynamicInvoker {
 

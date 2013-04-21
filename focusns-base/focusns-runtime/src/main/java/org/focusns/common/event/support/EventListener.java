@@ -40,7 +40,7 @@ public class EventListener implements ApplicationListener<EventContext> {
         //
         Event event = eventContext.getEventHandler().getAnnotation(Event.class);
         //
-        log.info(String.format("Event %s triggered!", event.on()));
+        log.debug(String.format("Event %s triggered!", event.on()));
         // invoke event handle method
         Object eventSubscriber = eventContext.getEventSubscriber();
         Method eventHandler = eventContext.getEventHandler();

@@ -9,20 +9,21 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<context:component-scan base-package="org.focusns.service">
-		<context:include-filter type="annotation" expression="org.focusns.common.event.annotation.Subscriber" />
+	<context:component-scan base-package="org.focusns.event">
+		<context:include-filter type="annotation" expression="org.focusns.common.event.annotation.EventSubscriber" />
 	</context:component-scan>
     
-    <task:annotation-driven executor="taskExecutor" scheduler="taskScheduler"/>
+    <task:annotation-driven executor="taskExecutor" />
     
-	<task:executor id="taskExecutor" pool-size="5" />
-	<task:scheduler id="taskScheduler" pool-size="5" />
+	<task:executor id="taskExecutor" pool-size="50" />
     
     <aop:aspectj-autoproxy>
         <aop:include name="eventInterceptor" />
     </aop:aspectj-autoproxy>
+
     <!-- Event Interceptor -->
     <bean id="eventInterceptor" class="org.focusns.common.event.support.EventInterceptor" />
+
     <!-- Event Multicaster -->
     <bean id="applicationEventMulticaster" class="org.focusns.common.event.support.EventMulticaster">
         <property name="taskExecutor" ref="taskExecutor" />

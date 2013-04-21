@@ -22,14 +22,14 @@ package org.focusns.service.msg;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class MessageServiceTest extends AbstractServiceTest {
@@ -42,9 +42,9 @@ public class MessageServiceTest extends AbstractServiceTest {
         Message message = new Message();
         message.setTitle("xinxi");
         message.setContent("neirong");
-        message.setCreateAt(new Date());
+        message.setCreatedAt(new Date());
         message.setProjectId(1);
-        message.setCreateById(1);
+        message.setCreatedById(1);
         message.setToProjectId(1);
         //
         messageService.createMessage(message);

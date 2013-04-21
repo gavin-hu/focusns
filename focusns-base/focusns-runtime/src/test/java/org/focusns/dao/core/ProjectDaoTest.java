@@ -22,6 +22,8 @@ package org.focusns.dao.core;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.dao.AbstractDaoTest;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
@@ -29,8 +31,6 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class ProjectDaoTest extends AbstractDaoTest {
@@ -59,8 +59,8 @@ public class ProjectDaoTest extends AbstractDaoTest {
         project.setCode("gavin");
         project.setTitle("Gavin Hu");
         project.setDescription("This is the gavin's project!");
-        project.setCreateAt(now);
-        project.setModifyAt(now);
+        project.setCreatedAt(now);
+        project.setModifiedAt(now);
         project.setCategory(category);
         //
         int count = projectDao.insert(project);

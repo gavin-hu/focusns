@@ -25,10 +25,11 @@ package org.focusns.common.event.annotation;
 import java.lang.annotation.*;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Component
+@Service
 public @interface EventSubscriber {
 
     String value() default "";

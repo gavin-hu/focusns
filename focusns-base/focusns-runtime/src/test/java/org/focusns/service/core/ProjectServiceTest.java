@@ -22,6 +22,8 @@ package org.focusns.service.core;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
@@ -30,8 +32,6 @@ import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class ProjectServiceTest extends AbstractServiceTest {
@@ -62,10 +62,10 @@ public class ProjectServiceTest extends AbstractServiceTest {
         project.setTitle("Gavin Hu");
         project.setDescription("This is gavin's profile!");
         //
-        project.setCreateAt(now);
-        project.setModifyAt(now);
-        project.setCreateById(user.getId());
-        project.setModifyById(user.getId());
+        project.setCreatedAt(now);
+        project.setModifiedAt(now);
+        project.setCreatedById(user.getId());
+        project.setModifiedById(user.getId());
         project.setCategoryId(category.getId());
         //
         projectService.createProject(project);
@@ -77,7 +77,7 @@ public class ProjectServiceTest extends AbstractServiceTest {
         //
         projectService.removeProject(project);
         //
-        projectUserDao.delete(project.getCreateById());
+        projectUserDao.delete(project.getCreatedById());
         //
         ProjectCategory category = projectCategoryService.getCategory(project.getCategoryId());
         projectCategoryService.removeCategory(category);

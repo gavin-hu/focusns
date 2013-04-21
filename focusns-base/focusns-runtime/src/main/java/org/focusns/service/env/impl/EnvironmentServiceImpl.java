@@ -22,20 +22,21 @@ package org.focusns.service.env.impl;
  * #L%
  */
 
-import org.focusns.model.env.Environment;
+import java.sql.DatabaseMetaData;
+import java.sql.SQLException;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
 import org.focusns.model.env.Environment.Type;
+import org.focusns.model.env.Environment;
 import org.focusns.model.env.EnvironmentDB;
 import org.focusns.model.env.EnvironmentJava;
 import org.focusns.model.env.EnvironmentOS;
 import org.focusns.service.env.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.sql.DataSource;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
-import java.util.Map;
-import java.util.Properties;
 
 @Service
 public class EnvironmentServiceImpl implements EnvironmentService {

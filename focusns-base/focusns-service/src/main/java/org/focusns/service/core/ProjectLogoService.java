@@ -22,12 +22,12 @@ package org.focusns.service.core;
  * #L%
  */
 
-import org.focusns.model.core.Project;
-import org.focusns.model.core.ProjectLogo;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectLogo;
 
 public interface ProjectLogoService {
 

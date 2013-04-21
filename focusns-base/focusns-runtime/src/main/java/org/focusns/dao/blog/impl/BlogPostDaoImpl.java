@@ -22,14 +22,14 @@ package org.focusns.dao.blog.impl;
  * #L%
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.focusns.dao.blog.BlogPostDao;
 import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Repository
 public class BlogPostDaoImpl extends MyBatisBaseDao<BlogPost> implements BlogPostDao {

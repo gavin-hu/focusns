@@ -26,9 +26,10 @@ import freemarker.core.Environment;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModelException;
-import org.focusns.common.freemarker.directive.OverrideDirective.TemplateDirectiveBodyOverrideWraper;
 
 import java.util.Map;
+
+import org.focusns.common.freemarker.directive.OverrideDirective.TemplateDirectiveBodyOverrideWraper;
 
 public class DirectiveUtils {
 
@@ -59,12 +60,14 @@ public class DirectiveUtils {
         return value == null ? defaultValue : value.toString();
     }
 
-    static TemplateDirectiveBodyOverrideWraper getOverrideBody(Environment env, String name) throws TemplateModelException {
+    static TemplateDirectiveBodyOverrideWraper getOverrideBody(Environment env, String name)
+            throws TemplateModelException {
         TemplateDirectiveBodyOverrideWraper value = (TemplateDirectiveBodyOverrideWraper) env.getVariable(DirectiveUtils.getOverrideVariableName(name));
         return value;
     }
 
-    static void setTopBodyForParentBody(Environment env, TemplateDirectiveBodyOverrideWraper topBody, TemplateDirectiveBodyOverrideWraper overrideBody) {
+    static void setTopBodyForParentBody(Environment env, TemplateDirectiveBodyOverrideWraper topBody,
+            TemplateDirectiveBodyOverrideWraper overrideBody) {
         TemplateDirectiveBodyOverrideWraper parent = overrideBody;
         while (parent.parentBody != null) {
             parent = parent.parentBody;

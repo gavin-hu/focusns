@@ -72,13 +72,13 @@ public class EventContext extends ApplicationContextEvent {
         return arguments.get(argName);
     }
 
-    public Object getArguments() {
-        return arguments.values();
+    public Object[] getArguments() {
+        return arguments.values().toArray();
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getArgument(String paramName, Class<?> requiredType) {
-        Object paramValue = arguments.get(paramName);
+    public <T> T getArgument(String argName, Class<?> requiredType) {
+        Object paramValue = arguments.get(argName);
         //
         if (paramValue == null) {
             return null;

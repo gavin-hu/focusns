@@ -22,9 +22,9 @@ package org.focusns.service.blog;
  * #L%
  */
 
-import org.focusns.model.blog.BlogCategory;
-
 import java.util.List;
+
+import org.focusns.model.blog.BlogCategory;
 
 public interface BlogCategoryService {
 

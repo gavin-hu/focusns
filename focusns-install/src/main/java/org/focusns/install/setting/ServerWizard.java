@@ -22,12 +22,12 @@ package org.focusns.install.setting;
  * #L%
  */
 
-import org.focusns.install.utils.FileCopyUtils;
-import org.focusns.install.utils.Properties;
-
 import java.io.File;
 import java.net.URL;
 import java.util.Scanner;
+
+import org.focusns.install.utils.FileCopyUtils;
+import org.focusns.install.utils.Properties;
 
 /**
  * A server wizard for install servlet server such as jetty, tomcat...

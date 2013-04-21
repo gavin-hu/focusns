@@ -22,13 +22,13 @@ package org.focusns.service.forum;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.model.forum.ForumTopic;
 import org.focusns.service.AbstractServiceTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Date;
 
 @Ignore
 public class ForumTopicServiceTest extends AbstractServiceTest {
@@ -41,10 +41,10 @@ public class ForumTopicServiceTest extends AbstractServiceTest {
         ForumTopic topic = new ForumTopic();
         topic.setTitle("forum title");
         topic.setContent("forum content");
-        topic.setCreateAt(new Date());
-        topic.setModifyAt(new Date());
-        topic.setCreateById(1);
-        topic.setModifyById(1);
+        topic.setCreatedAt(new Date());
+        topic.setModifiedAt(new Date());
+        topic.setCreatedById(1);
+        topic.setModifiedById(1);
         topic.setProjectId(1);
         topic.setCategoryId(1);
         //

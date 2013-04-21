@@ -36,7 +36,8 @@ public class ExtendsDirective implements TemplateDirectiveModel {
 
     public final static String DIRECTIVE_NAME = "extends";
 
-    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
+    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body)
+            throws TemplateException, IOException {
 
         String name = DirectiveUtils.getRequiredParam(params, "name");
         String encoding = DirectiveUtils.getParam(params, "encoding", null);

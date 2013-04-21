@@ -25,9 +25,10 @@ package org.focusns.common.image;
 import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.ThumpnailRescaleOp;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+
+import javax.imageio.ImageIO;
 
 public class ImageUtils {
 
@@ -53,7 +54,8 @@ public class ImageUtils {
      * @param format
      * @throws IOException
      */
-    public static void crop(File originalFile, File targetFile, int x, int y, int w, int h, String format) throws IOException {
+    public static void crop(File originalFile, File targetFile, int x, int y, int w, int h, String format)
+            throws IOException {
         //
         if (targetFile.exists()) {
             targetFile.delete();
@@ -76,7 +78,8 @@ public class ImageUtils {
      * @param format
      * @throws IOException
      */
-    public static void crop(InputStream originalStream, OutputStream targetStream, int x, int y, int w, int h, String format) throws IOException {
+    public static void crop(InputStream originalStream, OutputStream targetStream, int x, int y, int w, int h,
+            String format) throws IOException {
         BufferedImage originalImage = ImageIO.read(originalStream);
         BufferedImage targetImage = originalImage.getSubimage(x, y, w, h);
         ImageIO.write(targetImage, format, targetStream);
@@ -91,7 +94,8 @@ public class ImageUtils {
      * @param newHeight
      * @param format
      */
-    public static void resize(File originalFile, File thumnailFile, int newWidth, int newHeight, String format) throws IOException {
+    public static void resize(File originalFile, File thumnailFile, int newWidth, int newHeight, String format)
+            throws IOException {
         //
         if (!thumnailFile.exists()) {
             thumnailFile.getParentFile().mkdirs();
@@ -110,7 +114,8 @@ public class ImageUtils {
      * @param newHeight
      * @param format
      */
-    public static void resize(InputStream originalStream, OutputStream thumbnailStream, int newWidth, int newHeight, String format) throws IOException {
+    public static void resize(InputStream originalStream, OutputStream thumbnailStream, int newWidth, int newHeight,
+            String format) throws IOException {
         try {
             BufferedImage originalImage = ImageIO.read(originalStream);
             // 获得原始图片的宽度及高度

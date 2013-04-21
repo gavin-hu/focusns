@@ -22,9 +22,9 @@ package org.focusns.service.msg;
  * #L%
  */
 
-import org.focusns.model.msg.MessageBox;
-
 import java.util.List;
+
+import org.focusns.model.msg.MessageBox;
 
 public interface MessageBoxService {
 

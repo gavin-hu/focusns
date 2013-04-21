@@ -36,7 +36,8 @@ public class OverrideDirective implements TemplateDirectiveModel {
 
     public final static String DIRECTIVE_NAME = "override";
 
-    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
+    public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body)
+            throws TemplateException, IOException {
         String name = DirectiveUtils.getRequiredParam(params, "name");
         String overrideVariableName = DirectiveUtils.getOverrideVariableName(name);
 

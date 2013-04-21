@@ -22,6 +22,8 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
+import java.util.Date;
+
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectFeatureDao;
@@ -35,8 +37,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
-
-import java.util.Date;
 
 @Service
 @Transactional
@@ -80,10 +80,10 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         project.setTitle(user.getUsername());
         project.setDescription("");
         project.setCategoryId(category.getId());
-        project.setCreateAt(now);
-        project.setModifyAt(now);
-        project.setCreateById(user.getId());
-        project.setModifyById(user.getId());
+        project.setCreatedAt(now);
+        project.setModifiedAt(now);
+        project.setCreatedById(user.getId());
+        project.setModifiedById(user.getId());
         //
         projectDao.insert(project);
         user.setProjectId(project.getId());

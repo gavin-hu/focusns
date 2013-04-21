@@ -22,7 +22,7 @@ package org.focusns.service.event;
  * #L%
  */
 
-import org.focusns.model.event.Event;
+import org.focusns.model.calendar.Event;
 
 public interface EventService {
 
