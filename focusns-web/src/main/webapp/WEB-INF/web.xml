@@ -66,6 +66,17 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>/WEB-INF/spring/dispatcherContext.xml</param-value>
         </init-param>
+        <init-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.focusns.web.springmvc.context.XmlPluginWebApplicationContext</param-value>
+        </init-param>
+        <init-param>
+            <param-name>contextInitializerClasses</param-name>
+            <param-value>
+                org.focusns.web.springmvc.initializer.ApplicationInitializer,
+                org.focusns.web.springmvc.initializer.PluginApplicationContextInitializer
+            </param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>

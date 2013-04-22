@@ -1,8 +1,8 @@
-package org.focusns.model.core;
+package org.focusns.web.springmvc.initializer;
 
 /*
  * #%L
- * FocusSNS Model
+ * FocusSNS Web
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -22,11 +22,20 @@ package org.focusns.model.core;
  * #L%
  */
 
-import org.focusns.model.common.Id;
+import org.focusns.web.helper.RuntimeHelper;
+import org.springframework.context.ApplicationContextInitializer;
+import org.springframework.context.ConfigurableApplicationContext;
 
-public class ProjectComment extends Id {
+public class ApplicationInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-    private String title;
-    private String content;
+    public void initialize(ConfigurableApplicationContext applicationContext) {
+        // check runtime environment
+        checkRuntimeInstalled();
+    }
 
+    private void checkRuntimeInstalled() {
+        if (!RuntimeHelper.isInstalled()) {
+            throw new RuntimeException("FocusSNS Runtime is not installed now!");
+        }
+    }
 }

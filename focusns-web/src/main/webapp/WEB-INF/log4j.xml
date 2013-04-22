@@ -35,7 +35,7 @@
         <appender-ref ref="performance" />   
     </logger>
     <logger name="org.springframework">  
-        <level value="INFO" />
+        <level value="DEBUG" />
     </logger>
     <root>
 		<priority value="INFO" />

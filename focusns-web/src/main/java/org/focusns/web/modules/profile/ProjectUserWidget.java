@@ -84,14 +84,15 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-view")
-    @Constraints({ Constraint.PROJECT_REQUIRED})
-    public String doView(@WidgetAttribute(required = false) ProjectUser sessionUser, @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PROJECT_REQUIRED })
+    public String doView(@WidgetAttribute(required = false) ProjectUser sessionUser, @WidgetAttribute Project project,
+            Model model) {
         //
         ProjectUser projectUser = projectUserService.getUser(project.getCreatedById());
         model.addAttribute("projectUser", projectUser);
         model.addAttribute("project", project);
         //
-        if(sessionUser != null) {
+        if (sessionUser != null) {
             ProjectLink projectLink = projectLinkService.getProjectLink(sessionUser.getProjectId(), project.getId());
             model.addAttribute("projectLink", projectLink);
             model.addAttribute("fromProject", sessionUser.getProject());

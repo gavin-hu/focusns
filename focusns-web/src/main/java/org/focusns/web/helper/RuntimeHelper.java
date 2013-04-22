@@ -23,9 +23,12 @@ package org.focusns.web.helper;
  */
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.springframework.util.FileCopyUtils;
 
@@ -41,6 +44,26 @@ public class RuntimeHelper {
 
     public static boolean isInstalled() {
         return application.exists();
+    }
+
+    public static File getPluginsDir() {
+        File pluginsDir = new File(RUNTIME_DIR, "plugins");
+        if (!pluginsDir.exists()) {
+            pluginsDir.mkdirs();
+        }
+        return pluginsDir;
+    }
+
+    public static File getTempPluginsDir() {
+        File pluginsDir = new File(RUNTIME_DIR, "temp/plugins");
+        if (!pluginsDir.exists()) {
+            pluginsDir.mkdirs();
+        }
+        return pluginsDir;
+    }
+
+    public static File[] listPluginFiles(FileFilter fileFilter) {
+        return getPluginsDir().listFiles(fileFilter);
     }
 
     public static boolean isTempFileExists(Coordinate coordinate) {

@@ -71,9 +71,9 @@ public class BlogCategoryWidget {
         return "modules/blog/category-edit";
     }
 
-    @RequestMapping({"/category-create", "/category-modify"})
+    @RequestMapping({ "/category-create", "/category-modify" })
     public void doModify(BlogCategory blogCategory) {
-        if(blogCategory.getId() > 0) {
+        if (blogCategory.getId() > 0) {
             blogCategoryService.modifyBlogCategory(blogCategory);
         } else {
             blogCategoryService.createBlogCategory(blogCategory);

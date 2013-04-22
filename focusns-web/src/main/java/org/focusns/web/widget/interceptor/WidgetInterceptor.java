@@ -129,14 +129,6 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
             //
             modelAndView.setViewName("redirect:".concat(redirect));
         }
-        //
-        if (modelAndView == null) {
-            return;
-        }
-        // X
-        if (modelAndView.getViewName() != null) {
-            return;
-        }
     }
 
     private void processConstraintsAfterHandle(HandlerMethod handlerMethod, ModelAndView modelAndView) {
@@ -153,4 +145,5 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
             }
         }
     }
+
 }

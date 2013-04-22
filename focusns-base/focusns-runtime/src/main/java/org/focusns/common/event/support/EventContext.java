@@ -22,13 +22,13 @@ package org.focusns.common.event.support;
  * #L%
  */
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ApplicationContextEvent;
-import org.springframework.util.ClassUtils;
-
 import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.event.ApplicationContextEvent;
+import org.springframework.util.ClassUtils;
 
 public class EventContext extends ApplicationContextEvent {
 
@@ -55,7 +55,8 @@ public class EventContext extends ApplicationContextEvent {
         this.returnValue = returnValue;
     }
 
-    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> arguments, Object returnValue, Throwable throwable) {
+    public EventContext(ApplicationContext appContext, Method method, Map<String, Object> arguments,
+            Object returnValue, Throwable throwable) {
         super(appContext);
         //
         this.method = method;

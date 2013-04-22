@@ -1,8 +1,8 @@
-package org.focusns.model.core;
+package org.focusns.common.plugin;
 
 /*
  * #%L
- * FocusSNS Model
+ * FocusSNS Runtime
  * %%
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
@@ -22,11 +22,30 @@ package org.focusns.model.core;
  * #L%
  */
 
-import org.focusns.model.common.Id;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
-public class ProjectComment extends Id {
+public class PluginURLConnection extends URLConnection {
 
-    private String title;
-    private String content;
+    private String resourceName;
+    private Plugin plugin;
 
+    public PluginURLConnection(URL pluginUrl, String resourceName, Plugin plugin) {
+        super(pluginUrl);
+        //
+        this.resourceName = resourceName;
+        this.plugin = plugin;
+    }
+
+    @Override
+    public void connect() throws IOException {
+        // do nothing!
+    }
+
+    @Override
+    public InputStream getInputStream() throws IOException {
+        return plugin.getResourceAsStream(resourceName);
+    }
 }

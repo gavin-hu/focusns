@@ -48,10 +48,8 @@ public class BlogPostWidget {
     private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/post-edit")
-    public String doEdit(@RequestParam(required = false) Long id,
-            @RequestParam(required = false) Long categoryId,
-            @WidgetAttribute ProjectUser projectUser,
-            @WidgetAttribute Project project, Model model) {
+    public String doEdit(@RequestParam(required = false) Long id, @RequestParam(required = false) Long categoryId,
+            @WidgetAttribute ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
         //
         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
         //
@@ -61,7 +59,7 @@ public class BlogPostWidget {
             blogPost.setProjectId(project.getId());
             blogPost.setCreatedById(projectUser.getId());
             blogPost.setModifiedById(projectUser.getId());
-            blogPost.setCategoryId(categoryId!=null ? categoryId : 0);
+            blogPost.setCategoryId(categoryId != null ? categoryId : 0);
         } else {
             blogPost = blogPostService.getBlogPost(id);
         }
@@ -84,7 +82,7 @@ public class BlogPostWidget {
 
     @RequestMapping("/post-list")
     public String doList(@RequestParam(required = false, defaultValue = "0") Long categoryId,
-                         @WidgetAttribute Project project, Model model) {
+            @WidgetAttribute Project project, Model model) {
         //
         Page<BlogPost> page = new Page<BlogPost>(20);
         if (categoryId == 0) {

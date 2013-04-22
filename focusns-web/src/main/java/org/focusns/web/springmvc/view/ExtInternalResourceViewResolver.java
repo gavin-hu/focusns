@@ -31,7 +31,26 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 public class ExtInternalResourceViewResolver extends InternalResourceViewResolver implements ResourceLoaderAware {
 
+    private String pluginPrefix = "classpath:/META-INF/widgets/";
+    private String pluginSuffix = ".jsp";
+    //
     private ResourceLoader resourceLoader;
+
+    public String getPluginPrefix() {
+        return pluginPrefix;
+    }
+
+    public void setPluginPrefix(String pluginPrefix) {
+        this.pluginPrefix = pluginPrefix;
+    }
+
+    public String getPluginSuffix() {
+        return pluginSuffix;
+    }
+
+    public void setPluginSuffix(String pluginSuffix) {
+        this.pluginSuffix = pluginSuffix;
+    }
 
     @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -49,7 +68,14 @@ public class ExtInternalResourceViewResolver extends InternalResourceViewResolve
             return true;
         }
         //
-        String viewLocation = getPrefix() + viewName + getSuffix();
+        String viewLocation = null;
+        if (viewName.startsWith("plugin:")) {
+            viewLocation = getPluginPrefix() + viewName.substring("plugin:".length()) + getPluginSuffix();
+        } else {
+            viewLocation = getPrefix() + viewName + getSuffix();
+        }
+        //
+
         Resource resource = resourceLoader.getResource(viewLocation);
         return resource.exists();
     }

@@ -22,13 +22,13 @@ package org.focusns.common.event.support;
  * #L%
  */
 
+import java.util.concurrent.Executor;
+
 import org.focusns.common.event.annotation.Event;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.SimpleApplicationEventMulticaster;
 import org.springframework.util.ClassUtils;
-
-import java.util.concurrent.Executor;
 
 public class EventMulticaster extends SimpleApplicationEventMulticaster {
 
@@ -42,7 +42,7 @@ public class EventMulticaster extends SimpleApplicationEventMulticaster {
             final EventContext eventContext = (EventContext) appEvent;
             Event event = eventContext.getEventHandler().getAnnotation(Event.class);
             //
-            if(event.async()) {
+            if (event.async()) {
                 getTaskExecutor().execute(new Runnable() {
                     @Override
                     public void run() {

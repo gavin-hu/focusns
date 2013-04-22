@@ -38,7 +38,7 @@ public class ProjectLogoController {
      * linkLogo(@PathVariable long logoId) throws IOException { // ProjectLogo
      * logo = projectLogoService.getProjectLogo(logoId); // File target =
      * RuntimeHelper.getInstance().getProjectLogo(logo); return
-     * FileCopyUtils.copyToByteArray(target); }
+     * FileUtils.copyToByteArray(target); }
      */
 
 }

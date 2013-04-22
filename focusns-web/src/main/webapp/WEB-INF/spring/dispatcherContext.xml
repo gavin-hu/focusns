@@ -25,6 +25,7 @@
         </mvc:interceptor>
 
         <bean class="org.focusns.web.widget.interceptor.WidgetInterceptor" />
+        <bean class="org.focusns.web.widget.interceptor.PluginWidgetInterceptor" />
         <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
     </mvc:interceptors>
 
@@ -45,21 +46,8 @@
                 <prop key="template_update_delay">0</prop>
             </props>
         </property>
-        <property name="freemarkerVariables">
-			<map>
-				<entry key="extends" value-ref="extendsDirective" />
-				<entry key="override" value-ref="overrideDirective" />
-				<entry key="block" value-ref="blockDirective" />
-				<entry key="super" value-ref="superDirective" />
-			</map>
-        </property>
     </bean>
     
-	<bean id="blockDirective" class="org.focusns.common.freemarker.directive.BlockDirective"/>
-	<bean id="extendsDirective" class="org.focusns.common.freemarker.directive.ExtendsDirective"/>
-	<bean id="overrideDirective" class="org.focusns.common.freemarker.directive.OverrideDirective"/>
-	<bean id="superDirective" class="org.focusns.common.freemarker.directive.SuperDirective"/>
-
     <bean id="themeViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
         <property name="prefix" value="/WEB-INF/themes/" />
@@ -69,6 +57,12 @@
     <bean id="widgetViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
         <property name="prefix" value="/WEB-INF/widgets/" />
+        <property name="suffix" value=".jsp" />
+        <property name="cache" value="false" />
+    </bean>
+    <bean id="pluginWidgetViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
+        <property name="contentType" value="text/html;encoding=UTF-8" />
+        <property name="prefix" value="/WEB-INF/plugins/" />
         <property name="suffix" value=".jsp" />
         <property name="cache" value="false" />
     </bean>

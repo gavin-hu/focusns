@@ -7,6 +7,7 @@
             <widget target="/site/menu-user" />
         </position>
         <position name="leftColumn">
+            <widget target="/plugin/demo" />
             <widget target="/project/user-view" />
             <widget target="/project/link-list"/>
             <widget target="/project/link-list">

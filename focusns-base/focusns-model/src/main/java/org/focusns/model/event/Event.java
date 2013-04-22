@@ -22,9 +22,9 @@ package org.focusns.model.event;
  * #L%
  */
 
-import org.focusns.model.common.Id;
-
 import java.util.Date;
+
+import org.focusns.model.common.Id;
 
 public class Event extends Id {
 

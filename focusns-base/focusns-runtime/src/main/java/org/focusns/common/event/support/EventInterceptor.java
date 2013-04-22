@@ -22,6 +22,10 @@ package org.focusns.common.event.support;
  * #L%
  */
 
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,11 +45,6 @@ import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.ClassUtils;
-
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Aspect
 public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationContextAware {
@@ -75,16 +74,16 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         //
         Map<String, Object> beansMap = beanFactory.getBeansWithAnnotation(EventSubscriber.class);
-        for(Map.Entry<String, Object> entry : beansMap.entrySet()) {
+        for (Map.Entry<String, Object> entry : beansMap.entrySet()) {
             String beanName = entry.getKey();
             Object beanObject = entry.getValue();
             Class<?> beanClass = beanObject.getClass();
             //
             Method[] declearedMethods = beanClass.getDeclaredMethods();
-            for(Method declearedMethod : declearedMethods) {
+            for (Method declearedMethod : declearedMethods) {
                 //
                 Event event = AnnotationUtils.getAnnotation(declearedMethod, Event.class);
-                if(event == null) {
+                if (event == null) {
                     log.warn(String.format("Event Subscribe method %s must be annotated with @Event(\"xxx\")", declearedMethod));
                 } else {
                     String eventKey = generateEventKey(event);
@@ -118,18 +117,19 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
         return result;
     }
 
-    protected void triggerEvent(Event.Point point, Method method, Map<String, Object> arguments, Object returnValue, Throwable throwable) throws Exception {
+    protected void triggerEvent(Event.Point point, Method method, Map<String, Object> arguments, Object returnValue,
+            Throwable throwable) throws Exception {
         //
         Event event = getEvent(method, point);
         //
-        if(event!=null) {
+        if (event != null) {
             //
             EventContext eventContext = null;
-            if(point == Event.Point.BEFORE) {
+            if (point == Event.Point.BEFORE) {
                 eventContext = new EventContext(appContext, method, arguments);
             } else if (point == Event.Point.AFTER) {
                 eventContext = new EventContext(appContext, method, arguments, returnValue);
-            } else if(point == Event.Point.AFTER_THROWING) {
+            } else if (point == Event.Point.AFTER_THROWING) {
                 eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
             }
             //
@@ -168,12 +168,12 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
     private Event getEvent(Method method, Event.Point point) {
         //
         String eventKey = eventKeyCache.get(method);
-        if(eventKey==null) {
+        if (eventKey == null) {
             StringBuilder eventKeyBuilder = new StringBuilder();
             String methodName = method.getName();
-            for(int i=0; i < methodName.length(); i++) {
+            for (int i = 0; i < methodName.length(); i++) {
                 char c = methodName.charAt(i);
-                if(Character.isUpperCase(c)) {
+                if (Character.isUpperCase(c)) {
                     eventKeyBuilder.append("_");
                 }
                 eventKeyBuilder.append(Character.toUpperCase(c));
