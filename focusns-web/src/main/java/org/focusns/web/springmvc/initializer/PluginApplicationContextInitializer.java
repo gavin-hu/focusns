@@ -25,6 +25,7 @@ package org.focusns.web.springmvc.initializer;
 import org.focusns.web.plugin.PluginListener;
 import org.focusns.web.plugin.PluginManager;
 import org.focusns.web.springmvc.context.XmlPluginWebApplicationContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -42,7 +43,7 @@ public class PluginApplicationContextInitializer implements
             PluginListener pluginListener = (PluginListener) webApplicationContext;
             PluginManager pluginManager = new PluginManager(pluginListener);
             //
-            pluginManager.startup();
+            pluginManager.startup(10000, 10000);
         }
 
     }

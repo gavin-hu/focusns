@@ -51,8 +51,8 @@ public class PluginManager {
         public void run() {
             //
             try {
-                List<URL> pluginUrlList = scanPlugins();
-                if (!pluginUrlList.isEmpty()) {
+                List<URL> pluginUrlList = new ArrayList<URL>();
+                if (scanPlugins(pluginUrlList)) {
                     // trigger listener
                     URL[] pluinUrls = pluginUrlList.toArray(new URL[pluginUrlList.size()]);
                     pluginListener.pluginChanged(pluinUrls);
@@ -62,11 +62,23 @@ public class PluginManager {
             }
         }
 
-        private List<URL> scanPlugins() throws MalformedURLException {
+        private boolean scanPlugins(List<URL> pluginUrlList) throws MalformedURLException {
             boolean modified = false;
             //
-            List<URL> pluginUrlList = new ArrayList<URL>();
             File[] pluginFiles = RuntimeHelper.listPluginFiles(new PluginFileFilter());
+            //
+            if(pluginFiles.length != lastModifiedCache.size()) {
+                modified = true;
+            }
+            //
+            for(File pluginFile : pluginFiles) {
+                String key = pluginFile.getAbsolutePath();
+                if(!lastModifiedCache.containsKey(key)) {
+                    modified = true;
+                }
+            }
+            //
+            Map<String, Long> tmpLastModifiedCache = new HashMap<String, Long>();
             for (File pluginFile : pluginFiles) {
                 String key = pluginFile.getAbsolutePath();
                 long lastModified = pluginFile.lastModified();
@@ -75,25 +87,29 @@ public class PluginManager {
                     if (lastModified > lastModifiedCached) {
                         //
                         modified = true;
-                        lastModifiedCache.put(key, lastModified);
                     }
                 } else {
                     //
                     modified = true;
-                    lastModifiedCache.put(key, lastModified);
                 }
                 //
-                if (modified) {
+                tmpLastModifiedCache.put(key, lastModified);
+            }
+            //
+            if(modified) {
+                lastModifiedCache = tmpLastModifiedCache;
+                //
+                for(File pluginFile : pluginFiles) {
                     pluginUrlList.add(pluginFile.toURI().toURL());
                 }
             }
             //
-            return pluginUrlList;
+            return modified;
         }
     };
 
-    public void startup() {
-        monitorTimer.schedule(monitorTask, 5000, 10000);
+    public void startup(long delay, long period) {
+        monitorTimer.schedule(monitorTask, delay, period);
     }
 
     public void shutdown() {
@@ -110,24 +126,6 @@ public class PluginManager {
             //
             return true;
         }
-    }
-
-    public static void main(String[] args) {
-        PluginManager pluginManager = new PluginManager(new PluginListener() {
-
-            @Override
-            public void pluginChanged(URL[] pluginUrls) {
-                System.out.println("changed");
-                //
-                // PluginLoader pluginLoader = new PluginLoader(pluginUrls,
-                // ClassLoader.getSystemClassLoader());
-                //
-                // ResourceLoader resourceLoader = new
-                // DefaultResourceLoader(pluginLoader);
-
-            }
-        });
-        pluginManager.startup();
     }
 
 }

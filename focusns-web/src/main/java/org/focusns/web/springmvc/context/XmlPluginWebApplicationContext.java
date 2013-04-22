@@ -58,7 +58,8 @@ public class XmlPluginWebApplicationContext extends XmlWebApplicationContext imp
     }
 
     private void setPluginLoader(URL[] pluginUrls) throws IOException {
-        setClassLoader(new PluginLoader(pluginUrls, getClassLoader()));
+        ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+        setClassLoader(new PluginLoader(pluginUrls, contextClassLoader));
     }
 
     private void scanPluginContext(URL[] pluginUrls) {
