@@ -43,7 +43,7 @@ public class PluginApplicationContextInitializer implements
             PluginListener pluginListener = (PluginListener) webApplicationContext;
             PluginManager pluginManager = new PluginManager(pluginListener);
             //
-            pluginManager.startup(10000, 10000);
+            pluginManager.startup(1000, 10000);
         }
 
     }

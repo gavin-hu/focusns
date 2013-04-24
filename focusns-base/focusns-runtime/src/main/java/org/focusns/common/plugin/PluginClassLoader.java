@@ -25,20 +25,19 @@ package org.focusns.common.plugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
-import org.springframework.util.FileCopyUtils;
+import org.springframework.util.ClassUtils;
 
-public class PluginLoader extends ClassLoader {
+public class PluginClassLoader extends ClassLoader {
 
     private List<Plugin> pluginList = new ArrayList<Plugin>();
 
-    public PluginLoader(URL[] pluginUrls, ClassLoader parent) throws IOException {
+    public PluginClassLoader(URL[] pluginUrls, ClassLoader parent) throws IOException {
         super(parent);
         //
         initialize(pluginUrls);
@@ -87,10 +86,7 @@ public class PluginLoader extends ClassLoader {
             vector.add(e.nextElement());
         }
         for (Plugin plugin : pluginList) {
-            URL url = plugin.getResource(name);
-            if(url!=null) {
-                vector.add(url);
-            }
+            vector.addAll(plugin.getResources(name));
         }
         //
         return vector.elements();
@@ -116,9 +112,16 @@ public class PluginLoader extends ClassLoader {
         File file = new File("C:\\Users\\Gavin\\.focusns\\plugins\\demo-focusns-plugin-2.0.0-SNAPSHOT.jar");
         URL jarFileUrl = file.toURI().toURL();
         //
-        PluginLoader pluginLoader = new PluginLoader(new URL[] { jarFileUrl }, getSystemClassLoader());
-        Class clazz = pluginLoader.loadClass("org.focusns.plugin.demo.DemoWidget");
-        System.out.println(clazz);
+        PluginClassLoader pluginLoader = new PluginClassLoader(new URL[] { jarFileUrl }, getSystemClassLoader());
+        //
+        for(Enumeration<URL> e=pluginLoader.getResources(""); e.hasMoreElements();) {
+            String urlStr = e.nextElement().toExternalForm();
+
+            if(urlStr.startsWith("plugin:") && urlStr.endsWith(".class")) {
+                String classPathName = urlStr.substring("plugin:".length(), urlStr.indexOf(".class"));
+                System.out.println(ClassUtils.convertResourcePathToClassName(classPathName));
+            }
+        }
     }
 
 }

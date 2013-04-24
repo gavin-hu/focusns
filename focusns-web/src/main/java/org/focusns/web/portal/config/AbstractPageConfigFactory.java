@@ -22,9 +22,13 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.core.OrderComparator;
 import org.springframework.util.StringUtils;
 
 public abstract class AbstractPageConfigFactory implements PageConfigFactory {
@@ -50,6 +54,8 @@ public abstract class AbstractPageConfigFactory implements PageConfigFactory {
         //
         this.cache = loadPages();
         //
+        orderCache();
+        //
         return cache.get(key);
 
     }
@@ -68,5 +74,16 @@ public abstract class AbstractPageConfigFactory implements PageConfigFactory {
         }
         //
         return sb.toString();
+    }
+
+    private void orderCache() {
+        //
+        for(String pageConfigId : cache.keySet()) {
+            PageConfig pageConfig = cache.get(pageConfigId);
+            for(String positionConfigId : pageConfig.getPositionConfigMap().keySet()) {
+                PositionConfig positionConfig = pageConfig.getPositionConfig(positionConfigId);
+                positionConfig.order();
+            }
+        }
     }
 }

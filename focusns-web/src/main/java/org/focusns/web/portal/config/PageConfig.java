@@ -74,4 +74,12 @@ public class PageConfig {
         this.positionConfigMap.put(positionConfig.getName(), positionConfig);
     }
 
+    public void plugin(PageConfig pageConfigPlugin) {
+        //
+        for(Map.Entry<String, PositionConfig> entry : pageConfigPlugin.getPositionConfigMap().entrySet()) {
+            PositionConfig positionConfig = positionConfigMap.get(entry.getKey());
+            positionConfig.plugin(entry.getValue());
+            this.positionConfigMap.put(entry.getKey(), positionConfig);
+        }
+    }
 }

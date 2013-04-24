@@ -104,6 +104,10 @@
         <location>/error404.jsp</location>
     </error-page>
     <error-page>
+        <error-code>500</error-code>
+        <location>/error500.jsp</location>
+    </error-page>
+    <error-page>
         <error-code>503</error-code>
         <location>/error503.jsp</location>
     </error-page>

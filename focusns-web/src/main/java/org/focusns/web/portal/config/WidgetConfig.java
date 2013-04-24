@@ -22,12 +22,15 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
+import org.springframework.core.Ordered;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class WidgetConfig {
+public class WidgetConfig implements Ordered {
 
     private String id;
+    private int order;
     private String title;
     private String target;
     private Map<String, Object> preferences = new HashMap<String, Object>();
@@ -35,8 +38,9 @@ public class WidgetConfig {
     public WidgetConfig() {
     }
 
-    public WidgetConfig(String id, String target) {
+    public WidgetConfig(String id, String order, String target) {
         this.id = id;
+        this.order = Integer.parseInt(order);
         this.target = target;
     }
 
@@ -46,6 +50,11 @@ public class WidgetConfig {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public int getOrder() {
+        return order;
     }
 
     public String getTitle() {
@@ -67,4 +76,5 @@ public class WidgetConfig {
     public void setPreference(Map<String, Object> preferences) {
         this.preferences = preferences;
     }
+
 }

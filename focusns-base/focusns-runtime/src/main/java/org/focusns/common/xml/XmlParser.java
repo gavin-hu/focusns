@@ -22,14 +22,11 @@ package org.focusns.common.xml;
  * #L%
  */
 
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
 import org.springframework.beans.factory.xml.DocumentLoader;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
-import org.springframework.core.io.Resource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.xml.SimpleSaxErrorHandler;
 import org.springframework.util.xml.XmlValidationModeDetector;
@@ -37,6 +34,9 @@ import org.w3c.dom.Document;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
 
 public final class XmlParser {
 
@@ -60,13 +60,13 @@ public final class XmlParser {
         this.entityResolver = new PluggableSchemaResolver(classLoader);
     }
 
-    public Document parse(Resource resource) throws Exception {
-        return documentBuildFactory.newDocumentBuilder().parse(resource.getInputStream());
+    public Document parse(InputStream inputStream) throws Exception {
+        return documentBuildFactory.newDocumentBuilder().parse(inputStream);
     }
 
-    public Document parseAndValidate(Resource resource) throws Exception {
-        InputSource inputSource = new InputSource(resource.getInputStream());
-        int validationMode = validationModeDetector.detectValidationMode(resource.getInputStream());
+    public Document parseAndValidate(InputStream inputStream) throws Exception {
+        InputSource inputSource = new InputSource(inputStream);
+        int validationMode = validationModeDetector.detectValidationMode(inputStream);
         return documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode, false);
     }
 

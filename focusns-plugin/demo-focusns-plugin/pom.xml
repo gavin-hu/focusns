@@ -12,21 +12,29 @@
     <artifactId>demo-focusns-plugin</artifactId>
     <name>Demo FocusSNS Plugin</name>
 
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>javafmt-maven-plugin</groupId>
-                <artifactId>javafmt-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
     <dependencies>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>org.focusns</groupId>
+            <artifactId>focusns-runtime</artifactId>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>javafmt-maven-plugin</groupId>
+                        <artifactId>javafmt-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>license-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

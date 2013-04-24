@@ -22,6 +22,7 @@ package org.focusns.web.portal.config.xml;
  * #L%
  */
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -30,6 +31,7 @@ import org.focusns.web.portal.config.*;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.xml.DomUtils;
@@ -61,72 +63,41 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory implements P
         //
         Map<String, PageConfig> pageConfigMap = new HashMap<String, PageConfig>();
         //
-        Resource[] resources = ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResources(prefix + "/**/*" + suffix);
+        ResourcePatternResolver rpr = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
+        Resource[] resources = rpr.getResources(prefix + "/**/*" + suffix);
         for (Resource resource : resources) {
-            List<PageConfig> pageConfigList = parse(getRootElement(resource));
+            List<PageConfig> pageConfigList = XmlPageConfigParser.parse(resource.getInputStream());
             for (PageConfig pageConfig : pageConfigList) {
-                Map<String, String> paramsMap = new HashMap<String, String>();
-                paramsMap.put("mode", pageConfig.getMode());
-                paramsMap.put("category", pageConfig.getCategory());
-                String key = generateKey(pageConfig.getPath(), paramsMap);
+                String key = generateKey(pageConfig);
                 pageConfigMap.put(key, pageConfig);
+            }
+        }
+        // load page plugins
+        Resource[] pluginResources = rpr.getResources("classpath*:META-INF/focusns-plugin.xml");
+        for(Resource pluginResource : pluginResources) {
+            List<PageConfig> pageConfigPlugins = XmlPageConfigParser.parse(pluginResource.getInputStream());
+            for(PageConfig pageConfigPlugin : pageConfigPlugins) {
+                String key = generateKey(pageConfigPlugin);
+                PageConfig pageConfig = pageConfigMap.get(key);
+                if(pageConfig != null) {
+                    pageConfig.plugin(pageConfigPlugin);
+                    pageConfigMap.put(key, pageConfig);
+                }
             }
         }
         //
         return pageConfigMap;
     }
 
-    private List<PageConfig> parse(Element element) throws Exception {
-        //
-        List<PageConfig> pageConfigList = new ArrayList<PageConfig>();
-        //
-        List<Element> pageEles = Arrays.asList(element);
-        if ("pages".equals(element.getTagName())) {
-            pageEles = DomUtils.getChildElementsByTagName(element, "page");
-        }
-        //
-        for (Element pageEle : pageEles) {
-            //
-            PageConfig pageConfig = new PageConfig();
-            pageConfig.setPath(pageEle.getAttribute("path"));
-            pageConfig.setMode(pageEle.getAttribute("mode"));
-            pageConfig.setCategory(pageEle.getAttribute("category"));
-            //
-            List<Element> positionEles = DomUtils.getChildElementsByTagName(pageEle, "position");
-            for (Element positionEle : positionEles) {
-                PositionConfig positionConfig = new PositionConfig();
-                positionConfig.setName(positionEle.getAttribute("name"));
-                positionConfig.setGrid(positionEle.getAttribute("grid"));
-                //
-                List<Element> widgetEles = DomUtils.getChildElementsByTagName(positionEle, "widget");
-                for (Element widgetEle : widgetEles) {
-                    String target = widgetEle.getAttribute("target");
-                    String id = DigestUtils.md5DigestAsHex(target.getBytes());
-                    WidgetConfig widgetConfig = new WidgetConfig(id, target);
-                    // preferences element
-                    Element prefsEle = DomUtils.getChildElementByTagName(widgetEle, "preference");
-                    if (prefsEle != null) {
-                        for (Element prefEle : DomUtils.getChildElements(prefsEle)) {
-                            String name = prefEle.getTagName();
-                            String value = DomUtils.getTextValue(prefEle);
-                            widgetConfig.getPreferences().put(name, value);
-                        }
-                    }
-                    //
-                    positionConfig.addWidgetConfig(widgetConfig);
-                }
-                //
-                pageConfig.addPositionConfig(positionConfig);
-                //
-                pageConfigList.add(pageConfig);
-            }
-        }
-        //
-        return pageConfigList;
+    public void loadPluginPages(List<PageConfig> pageConfigList) throws Exception {
+
     }
 
-    private Element getRootElement(Resource pageResource) throws Exception {
-        return xmlParser.parse(pageResource).getDocumentElement();
+    private String generateKey(PageConfig pageConfig) {
+        Map<String, String> paramsMap = new HashMap<String, String>();
+        paramsMap.put("mode", pageConfig.getMode());
+        paramsMap.put("category", pageConfig.getCategory());
+        return generateKey(pageConfig.getPath(), paramsMap);
     }
 
 }

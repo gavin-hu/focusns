@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin name="Demo FocusSNS Plugin">
-    <widget target="/plugin/demo" />
-</plugin>
+<pages>
+    <page path="/profile" category="people">
+        <position name="leftColumn">
+            <widget target="/plugin/demo" order="100" />
+        </position>
+    </page>
+</pages>

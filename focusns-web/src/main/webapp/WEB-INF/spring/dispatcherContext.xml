@@ -11,6 +11,8 @@
     	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
+    <bean class="org.focusns.common.plugin.PluginPostProcessor" />
+
     <mvc:annotation-driven validator="beanValidator">
         <mvc:argument-resolvers>
             <bean class="org.focusns.web.springmvc.bind.WidgetArgumentResolver" />

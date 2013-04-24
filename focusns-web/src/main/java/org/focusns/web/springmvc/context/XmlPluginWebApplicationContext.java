@@ -28,11 +28,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.focusns.common.plugin.PluginLoader;
+import org.focusns.common.plugin.PluginClassLoader;
 import org.focusns.web.plugin.PluginListener;
+import org.focusns.web.portal.config.PageConfig;
+import org.focusns.web.portal.config.xml.XmlPageConfigParser;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -48,6 +51,8 @@ public class XmlPluginWebApplicationContext extends XmlWebApplicationContext imp
             //
             scanPluginContext(pluginUrls);
             //
+            pluginPageConfig(pluginUrls);
+            //
             copyPluginResources(pluginUrls);
             //
             refresh();
@@ -59,7 +64,7 @@ public class XmlPluginWebApplicationContext extends XmlWebApplicationContext imp
 
     private void setPluginLoader(URL[] pluginUrls) throws IOException {
         ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-        setClassLoader(new PluginLoader(pluginUrls, contextClassLoader));
+        setClassLoader(new PluginClassLoader(pluginUrls, contextClassLoader));
     }
 
     private void scanPluginContext(URL[] pluginUrls) {
@@ -91,6 +96,21 @@ public class XmlPluginWebApplicationContext extends XmlWebApplicationContext imp
                     FileOutputStream out = new FileOutputStream(targetFile);
                     FileCopyUtils.copy(in, out);
                 }
+            }
+        }
+    }
+
+    public void pluginPageConfig(URL[] pluginUrls) throws Exception {
+        //
+        for (URL pluginUrl : pluginUrls) {
+            File pluginFile = new File(pluginUrl.getFile());
+            JarFile pluginJarFile = new JarFile(pluginFile);
+            JarEntry jarEntry = pluginJarFile.getJarEntry("META-INF/focusns-plugin.xml");
+            //
+            if(jarEntry!=null) {
+                InputStream in = pluginJarFile.getInputStream(jarEntry);
+                List<PageConfig> pageConfigPlugins = XmlPageConfigParser.parse(in);
+                getServletContext().setAttribute("pageConfigPlugins", pageConfigPlugins);
             }
         }
     }

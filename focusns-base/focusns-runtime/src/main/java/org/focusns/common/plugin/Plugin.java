@@ -33,8 +33,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLStreamHandler;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -93,6 +95,18 @@ public class Plugin {
         }
         //
         return resourceUrl;
+    }
+
+    public List<URL> getResources(String name) {
+        //
+        List<URL> urlList = new ArrayList<URL>();
+        for(String resourceName : pluginResources.keySet()) {
+            if(resourceName.startsWith(name)) {
+                urlList.add(getResource(resourceName));
+            }
+        }
+        //
+        return urlList;
     }
 
     public InputStream getResourceAsStream(String name) {

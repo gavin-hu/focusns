@@ -22,10 +22,17 @@ package org.focusns.web.portal.config;
  * #L%
  */
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
+import org.springframework.core.OrderComparator;
+import org.springframework.util.LinkedCaseInsensitiveMap;
 import org.springframework.util.StringUtils;
 
 public class PositionConfig {
@@ -84,4 +91,23 @@ public class PositionConfig {
         this.widgetConfigMap.put(widgetConfig.getId(), widgetConfig);
     }
 
+    public void setWidgetConfigMap(Map<String, WidgetConfig> widgetConfigMap) {
+        this.widgetConfigMap = widgetConfigMap;
+    }
+
+    public void plugin(PositionConfig positionConfigPlugin) {
+        for(WidgetConfig widgetConfigPlugin : positionConfigPlugin.getWidgetConfigList()) {
+            this.widgetConfigMap.put(widgetConfigPlugin.getId(), widgetConfigPlugin);
+        }
+    }
+
+    public void order() {
+        List<WidgetConfig> widgetConfigList = new ArrayList<WidgetConfig>(widgetConfigMap.values());
+        Collections.sort(widgetConfigList, OrderComparator.INSTANCE);
+        //
+        this.widgetConfigMap.clear();
+        for(WidgetConfig widgetConfig : widgetConfigList) {
+            addWidgetConfig(widgetConfig);
+        }
+    }
 }
