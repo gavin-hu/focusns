@@ -7,9 +7,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="org.focusns.web.portal">
-    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <import resource="classpath*:/META-INF/spring/pluginContext.xml" />
+
+    <context:component-scan base-package="org.focusns.web">
+        <context:exclude-filter type="assignable" expression="org.focusns.web.portal.Portal" />
     </context:component-scan>
+
 
     <mvc:annotation-driven validator="beanValidator">
         <mvc:argument-resolvers>
@@ -19,38 +22,22 @@
 
     <!-- Configures Handler Interceptors -->
     <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/portal" />
-            <bean class="org.focusns.web.portal.interceptor.PortalInterceptor" />
-        </mvc:interceptor>
-
         <bean class="org.focusns.web.widget.interceptor.WidgetInterceptor" />
         <bean class="org.focusns.web.widget.interceptor.PluginWidgetInterceptor" />
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
     </mvc:interceptors>
-
-    <mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" cache-period="3600" />
-    <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" cache-period="3600" />
-
-
-    <bean id="pageConfigFactory" class="org.focusns.web.portal.config.xml.XmlPageConfigFactory" />
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
-    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath" value="/" />
-        <property name="freemarkerSettings">
-            <props>
-                <prop key="number_format">0.######</prop>
-                <prop key="defaultEncoding">UTF-8</prop>
-                <prop key="template_update_delay">0</prop>
-            </props>
-        </property>
-    </bean>
-    
-    <bean id="themeViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
+    <bean id="widgetViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
-        <property name="prefix" value="/WEB-INF/themes/" />
+        <property name="prefix" value="/WEB-INF/widgets/" />
+        <property name="suffix" value=".jsp" />
+        <property name="cache" value="false" />
+    </bean>
+
+    <bean id="pluginWidgetViewResolver" class="org.focusns.web.springmvc.view.ExtInternalResourceViewResolver">
+        <property name="contentType" value="text/html;encoding=UTF-8" />
+        <property name="prefix" value="/WEB-INF/plugins/" />
         <property name="suffix" value=".jsp" />
         <property name="cache" value="false" />
     </bean>

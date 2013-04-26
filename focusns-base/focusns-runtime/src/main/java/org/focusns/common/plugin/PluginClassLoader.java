@@ -1,62 +1,63 @@
 package org.focusns.common.plugin;
 
-/*
- * #%L
- * FocusSNS Runtime
- * %%
- * Copyright (C) 2011 - 2013 FocusSNS
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
+import org.focusns.common.io.FileUtils;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.type.classreading.CachingMetadataReaderFactory;
+import org.springframework.core.type.classreading.MetadataReader;
+import org.springframework.core.type.classreading.MetadataReaderFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.FileCopyUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Vector;
-
-import org.springframework.util.ClassUtils;
+import java.util.jar.JarFile;
 
 public class PluginClassLoader extends ClassLoader {
 
-    private List<Plugin> pluginList = new ArrayList<Plugin>();
+    private List<ClassLoader> classLoaders = new ArrayList<ClassLoader>();
 
-    public PluginClassLoader(URL[] pluginUrls, ClassLoader parent) throws IOException {
+    public PluginClassLoader(File pluginsDir, File[] pluginFiles, ClassLoader parent) throws IOException {
         super(parent);
         //
-        initialize(pluginUrls);
+        initialize(pluginsDir, pluginFiles);
     }
 
-    private void initialize(URL[] pluginUrls) throws IOException {
+    private void initialize(File pluginsDir, File[] pluginFiles) throws IOException {
         //
-        for (URL pluginUrl : pluginUrls) {
-            pluginList.add(new Plugin(pluginUrl));
+        for(File pluginFile : pluginFiles) {
+            //
+            String pluginName = pluginFile.getName().substring(0, pluginFile.getName().indexOf(".jar"));
+            File pluginDir = new File(pluginsDir, pluginName);
+            //
+            JarFile jarFile = new JarFile(pluginFile);
+            FileUtils.copyJarFile(jarFile, pluginDir);
+            //
+
+            URL tmpPluginUrl = pluginDir.toURI().toURL();
+            this.classLoaders.add(new URLClassLoader(new URL[]{tmpPluginUrl}));
         }
     }
 
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
         //
-        for(Plugin plugin : pluginList) {
-            byte[] classBytes = plugin.findClassBytes(name);
-            if(classBytes!=null) {
+        String classPath = ClassUtils.convertClassNameToResourcePath(name)+".class";
+        URL url = getResource(classPath);
+        if(url!=null) {
+            try {
+                byte[] classBytes = FileCopyUtils.copyToByteArray(url.openStream());
                 return defineClass(name, classBytes, 0, classBytes.length);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         //
@@ -64,64 +65,29 @@ public class PluginClassLoader extends ClassLoader {
     }
 
     @Override
-    public URL getResource(String name) {
-        URL url = super.getResource(name);
-        if (url == null) {
-            for (Plugin plugin : pluginList) {
-                url = plugin.getResource(name);
-                if (url != null) {
-                    return url;
-                }
+    protected URL findResource(String name) {
+        //
+        for(ClassLoader classLoader : classLoaders) {
+            URL url = classLoader.getResource(name);
+            if(url != null) {
+                return url;
             }
         }
         //
-        return url;
+        return super.findResource(name);
     }
 
     @Override
-    public Enumeration<URL> getResources(String name) throws IOException {
+    public Enumeration<URL> findResources(String name) throws IOException {
         //
-        Vector<URL> vector = new Vector<URL>();
-        for (Enumeration<URL> e = super.getResources(name); e.hasMoreElements();) {
-            vector.add(e.nextElement());
-        }
-        for (Plugin plugin : pluginList) {
-            vector.addAll(plugin.getResources(name));
-        }
-        //
-        return vector.elements();
-    }
-
-    @Override
-    public InputStream getResourceAsStream(String name) {
-        //
-        InputStream in = super.getResourceAsStream(name);
-        if (in == null) {
-            for (Plugin plugin : pluginList) {
-                in = plugin.getResourceAsStream(name);
-                if (in != null) {
-                    return in;
-                }
+        for(ClassLoader classLoader : classLoaders) {
+            Enumeration<URL> e = classLoader.getResources(name);
+            if(e != null) {
+                return e;
             }
         }
         //
-        return in;
-    }
-
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        File file = new File("C:\\Users\\Gavin\\.focusns\\plugins\\demo-focusns-plugin-2.0.0-SNAPSHOT.jar");
-        URL jarFileUrl = file.toURI().toURL();
-        //
-        PluginClassLoader pluginLoader = new PluginClassLoader(new URL[] { jarFileUrl }, getSystemClassLoader());
-        //
-        for(Enumeration<URL> e=pluginLoader.getResources(""); e.hasMoreElements();) {
-            String urlStr = e.nextElement().toExternalForm();
-
-            if(urlStr.startsWith("plugin:") && urlStr.endsWith(".class")) {
-                String classPathName = urlStr.substring("plugin:".length(), urlStr.indexOf(".class"));
-                System.out.println(ClassUtils.convertResourcePathToClassName(classPathName));
-            }
-        }
+        return super.findResources(name);
     }
 
 }

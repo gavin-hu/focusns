@@ -33,8 +33,6 @@ import org.springframework.util.StringUtils;
 
 public abstract class AbstractPageConfigFactory implements PageConfigFactory {
 
-    private static final String[] PARAM_NAMES = new String[] { "mode", "category" };
-
     private boolean cacheable;
     //
     private Map<String, PageConfig> cache = new LinkedHashMap<String, PageConfig>();
@@ -47,7 +45,7 @@ public abstract class AbstractPageConfigFactory implements PageConfigFactory {
 
     public PageConfig findPage(String path, Map<String, String> paramsMap) throws Exception {
         //
-        String key = generateKey(path, paramsMap);
+        String key = PageConfigKey.generateKey(path, paramsMap);
         if (cacheable && cache.containsKey(key)) {
             return cache.get(key);
         }
@@ -58,22 +56,6 @@ public abstract class AbstractPageConfigFactory implements PageConfigFactory {
         //
         return cache.get(key);
 
-    }
-
-    protected String generateKey(String path, Map<String, String> paramsMap) {
-        if (paramsMap.isEmpty()) {
-            return path;
-        }
-        //
-        StringBuilder sb = new StringBuilder(path);
-        for (String paramName : PARAM_NAMES) {
-            String paramValue = paramsMap.get(paramName);
-            if (StringUtils.hasText(paramValue)) {
-                sb.append(paramName).append("=").append(paramsMap.get(paramName));
-            }
-        }
-        //
-        return sb.toString();
     }
 
     private void orderCache() {

@@ -22,16 +22,17 @@ package org.focusns.web.springmvc.initializer;
  * #L%
  */
 
-import org.focusns.web.plugin.PluginListener;
-import org.focusns.web.plugin.PluginManager;
-import org.focusns.web.springmvc.context.XmlPluginWebApplicationContext;
-import org.springframework.beans.factory.annotation.Value;
+import org.focusns.common.plugin.PluginFilter;
+import org.focusns.common.plugin.PluginListener;
+import org.focusns.common.plugin.PluginMonitor;
+import org.focusns.common.plugin.monitor.SimplePluginMonitor;
+import org.focusns.web.helper.RuntimeHelper;
+import org.focusns.web.springmvc.context.PluginWebApplicationContext;
 import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
+
+import java.io.File;
+import java.io.FileFilter;
 
 public class PluginApplicationContextInitializer implements
         ApplicationContextInitializer<ConfigurableWebApplicationContext> {
@@ -39,11 +40,14 @@ public class PluginApplicationContextInitializer implements
     @Override
     public void initialize(ConfigurableWebApplicationContext webApplicationContext) {
         //
-        if (webApplicationContext instanceof XmlPluginWebApplicationContext) {
+        if (webApplicationContext instanceof PluginWebApplicationContext) {
+            File pluginDirs = RuntimeHelper.getPluginsDir();
+            FileFilter pluginFilter = new PluginFilter();
             PluginListener pluginListener = (PluginListener) webApplicationContext;
-            PluginManager pluginManager = new PluginManager(pluginListener);
             //
-            pluginManager.startup(1000, 10000);
+            PluginMonitor pluginMonitor = new SimplePluginMonitor(10000, 10000, pluginDirs, pluginFilter, pluginListener);
+            //
+            pluginMonitor.startup();
         }
 
     }

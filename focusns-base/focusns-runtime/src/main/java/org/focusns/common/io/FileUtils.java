@@ -67,11 +67,14 @@ public class FileUtils {
                 targetDir.mkdirs();
             } else {
                 File targetFile = new File(destDir, jarEntry.getName());
+                targetFile.getParentFile().mkdirs();
                 targetFile.createNewFile();
                 //
                 copyStream(jarFile.getInputStream(jarEntry), targetFile);
             }
         }
+        //
+        jarFile.close();
     }
 
     private static boolean copyFilesRecusively(final File toCopy, final File destDir) {

@@ -1,31 +1,11 @@
-package org.focusns.web.plugin;
+package org.focusns.common.plugin.monitor;
 
-/*
- * #%L
- * FocusSNS Web
- * %%
- * Copyright (C) 2011 - 2013 FocusSNS
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
+import org.focusns.common.plugin.PluginListener;
+import org.focusns.common.plugin.PluginMonitor;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +13,20 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.focusns.web.helper.RuntimeHelper;
+public class SimplePluginMonitor implements PluginMonitor {
 
-public class PluginManager {
-
+    private long delay;
+    private long period;
+    //
+    private File pluginsDir;
+    private FileFilter pluginFilter;
     private PluginListener pluginListener;
-
-    public PluginManager(PluginListener pluginListener) {
+    //
+    public SimplePluginMonitor(long delay, long period, File pluginsDir, FileFilter pluginFilter, PluginListener pluginListener) {
+        this.delay = delay;
+        this.period = period;
+        this.pluginsDir = pluginsDir;
+        this.pluginFilter = pluginFilter;
         this.pluginListener = pluginListener;
     }
 
@@ -51,21 +38,20 @@ public class PluginManager {
         public void run() {
             //
             try {
-                List<URL> pluginUrlList = new ArrayList<URL>();
-                if (scanPlugins(pluginUrlList)) {
+                List<File> pluginFiles = new ArrayList<File>();
+                if (scanPlugins(pluginFiles)) {
                     // trigger listener
-                    URL[] pluinUrls = pluginUrlList.toArray(new URL[pluginUrlList.size()]);
-                    pluginListener.pluginChanged(pluinUrls);
+                    pluginListener.changed(pluginFiles.toArray(new File[pluginFiles.size()]));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        private boolean scanPlugins(List<URL> pluginUrlList) throws MalformedURLException {
+        private boolean scanPlugins(List<File> pluginUrlList) throws MalformedURLException {
             boolean modified = false;
             //
-            File[] pluginFiles = RuntimeHelper.listPluginFiles(new PluginFileFilter());
+            File[] pluginFiles = pluginsDir.listFiles(pluginFilter);
             //
             if(pluginFiles.length != lastModifiedCache.size()) {
                 modified = true;
@@ -100,7 +86,7 @@ public class PluginManager {
                 lastModifiedCache = tmpLastModifiedCache;
                 //
                 for(File pluginFile : pluginFiles) {
-                    pluginUrlList.add(pluginFile.toURI().toURL());
+                    pluginUrlList.add(pluginFile);
                 }
             }
             //
@@ -108,24 +94,19 @@ public class PluginManager {
         }
     };
 
-    public void startup(long delay, long period) {
+    public void startup() {
         monitorTimer.schedule(monitorTask, delay, period);
+        //
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run() {
+                monitorTimer.cancel();
+            }
+        });
     }
 
     public void shutdown() {
         monitorTimer.cancel();
-    }
-
-    private class PluginFileFilter implements FileFilter {
-
-        @Override
-        public boolean accept(File file) {
-            if (!file.canRead() || !file.getName().endsWith(".jar")) {
-                return false;
-            }
-            //
-            return true;
-        }
     }
 
 }

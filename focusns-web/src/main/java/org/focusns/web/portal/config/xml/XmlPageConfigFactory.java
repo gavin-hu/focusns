@@ -68,36 +68,12 @@ public class XmlPageConfigFactory extends AbstractPageConfigFactory implements P
         for (Resource resource : resources) {
             List<PageConfig> pageConfigList = XmlPageConfigParser.parse(resource.getInputStream());
             for (PageConfig pageConfig : pageConfigList) {
-                String key = generateKey(pageConfig);
+                String key = PageConfigKey.generateKey(pageConfig);
                 pageConfigMap.put(key, pageConfig);
-            }
-        }
-        // load page plugins
-        Resource[] pluginResources = rpr.getResources("classpath*:META-INF/focusns-plugin.xml");
-        for(Resource pluginResource : pluginResources) {
-            List<PageConfig> pageConfigPlugins = XmlPageConfigParser.parse(pluginResource.getInputStream());
-            for(PageConfig pageConfigPlugin : pageConfigPlugins) {
-                String key = generateKey(pageConfigPlugin);
-                PageConfig pageConfig = pageConfigMap.get(key);
-                if(pageConfig != null) {
-                    pageConfig.plugin(pageConfigPlugin);
-                    pageConfigMap.put(key, pageConfig);
-                }
             }
         }
         //
         return pageConfigMap;
-    }
-
-    public void loadPluginPages(List<PageConfig> pageConfigList) throws Exception {
-
-    }
-
-    private String generateKey(PageConfig pageConfig) {
-        Map<String, String> paramsMap = new HashMap<String, String>();
-        paramsMap.put("mode", pageConfig.getMode());
-        paramsMap.put("category", pageConfig.getCategory());
-        return generateKey(pageConfig.getPath(), paramsMap);
     }
 
 }

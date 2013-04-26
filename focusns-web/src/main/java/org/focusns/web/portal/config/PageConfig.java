@@ -27,10 +27,11 @@ import java.util.Map;
 
 public class PageConfig {
 
+    private String id;
     private String path;
     private String mode;
     private String category = "default";
-
+    //
     private Map<String, PositionConfig> positionConfigMap = new LinkedHashMap<String, PositionConfig>();
 
     public PageConfig() {
@@ -74,12 +75,4 @@ public class PageConfig {
         this.positionConfigMap.put(positionConfig.getName(), positionConfig);
     }
 
-    public void plugin(PageConfig pageConfigPlugin) {
-        //
-        for(Map.Entry<String, PositionConfig> entry : pageConfigPlugin.getPositionConfigMap().entrySet()) {
-            PositionConfig positionConfig = positionConfigMap.get(entry.getKey());
-            positionConfig.plugin(entry.getValue());
-            this.positionConfigMap.put(entry.getKey(), positionConfig);
-        }
-    }
 }

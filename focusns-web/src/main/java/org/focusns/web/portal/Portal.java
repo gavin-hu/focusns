@@ -37,6 +37,7 @@ import org.focusns.service.core.ProjectFeatureService;
 import org.focusns.service.core.ProjectService;
 import org.focusns.web.portal.config.PageConfig;
 import org.focusns.web.portal.config.PageConfigFactory;
+import org.focusns.web.portal.config.PageConfigKey;
 import org.focusns.web.portal.config.PositionConfig;
 import org.focusns.web.portal.config.WidgetConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,10 +46,13 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ServletContextAware;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.ServletContext;
+
 @Controller
-public class Portal {
+public class Portal implements ServletContextAware {
 
     private static final Log log = LogFactory.getLog(Portal.class);
 
@@ -60,11 +64,17 @@ public class Portal {
     private ProjectCategoryService categoryService;
     @Autowired
     private PageConfigFactory pageConfigFactory;
+    //
+    private ServletContext servletContext;
+
+    @Override
+    public void setServletContext(ServletContext servletContext) {
+        this.servletContext = servletContext;
+    }
 
     @RequestMapping("/portal")
     public String doRender(@RequestParam(required = false) String mode,
-            @RequestParam(required = false) String projectCode, @RequestParam String path, WebRequest webRequest)
-            throws Exception {
+            @RequestParam(required = false) String projectCode, @RequestParam String path, WebRequest webRequest) throws Exception {
         //
         String categoryCode = null;
         // export project
@@ -117,18 +127,30 @@ public class Portal {
     }
 
     protected void processPageConfig(PageConfig pageConfig, WebRequest webRequest) {
-        for (PositionConfig positionConfig : pageConfig.getPositionConfigMap().values()) {
-            Iterator<WidgetConfig> iter = positionConfig.getWidgetConfigList().iterator();
+        //
+        Map<String, PageConfig> pluginPageConfigMap = (Map<String, PageConfig>) servletContext.getAttribute("pluginPageConfigMap");
+        //
+        if(pluginPageConfigMap==null) {
+            return ;
+        }
+        //
+        String key = PageConfigKey.generateKey(pageConfig);
+        PageConfig pluginPageConfig = pluginPageConfigMap.get(key);
+        //
+        if(pluginPageConfig==null) {
+            return ;
+        }
+        //
+        for(String pluginPositionName : pluginPageConfig.getPositionConfigMap().keySet()) {
+            PositionConfig pluginPositionConfig = pluginPageConfig.getPositionConfig(pluginPositionName);
+            PositionConfig positionConfig = pageConfig.getPositionConfig(pluginPositionName);
             //
-            while (iter.hasNext()) {
-                WidgetConfig widgetConfig = iter.next();
+            for(WidgetConfig widgetConfig : pluginPositionConfig.getWidgetConfigList()) {
                 //
-                boolean needRemove = false;
-                //
-                if (needRemove) {
-                    iter.remove();
-                }
+                positionConfig.addWidgetConfig(widgetConfig);
             }
+            // call order
+            positionConfig.order();
         }
     }
 

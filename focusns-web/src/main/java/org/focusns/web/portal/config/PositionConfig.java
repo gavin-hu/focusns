@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,19 +96,17 @@ public class PositionConfig {
         this.widgetConfigMap = widgetConfigMap;
     }
 
-    public void plugin(PositionConfig positionConfigPlugin) {
-        for(WidgetConfig widgetConfigPlugin : positionConfigPlugin.getWidgetConfigList()) {
-            this.widgetConfigMap.put(widgetConfigPlugin.getId(), widgetConfigPlugin);
-        }
-    }
-
     public void order() {
+
+        //
         List<WidgetConfig> widgetConfigList = new ArrayList<WidgetConfig>(widgetConfigMap.values());
         Collections.sort(widgetConfigList, OrderComparator.INSTANCE);
         //
-        this.widgetConfigMap.clear();
+        Map<String, WidgetConfig> map = new LinkedHashMap<String, WidgetConfig>();
         for(WidgetConfig widgetConfig : widgetConfigList) {
-            addWidgetConfig(widgetConfig);
+            map.put(widgetConfig.getId(), widgetConfig);
         }
+        //
+        this.widgetConfigMap = map;
     }
 }
