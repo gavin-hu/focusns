@@ -57,10 +57,10 @@ public class ProjectLinkWidget {
     }
 
     @RequestMapping("/link-list")
-    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL })
     public String doList(@WidgetPref(defaultValue = "6") Integer limit,
-            @WidgetPref(defaultValue = "false") Boolean reverse,
-            @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
+            @WidgetPref(defaultValue = "false") Boolean reverse, @WidgetPref(defaultValue = "people") String category,
+            @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if (reverse.booleanValue()) {
@@ -75,7 +75,7 @@ public class ProjectLinkWidget {
     }
 
     @RequestMapping("/link-list-detail")
-    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL })
     public String doListDetail(@WidgetPref(defaultValue = "10") Integer pageSize,
             @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //

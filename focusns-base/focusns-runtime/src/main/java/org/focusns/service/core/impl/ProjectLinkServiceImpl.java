@@ -64,11 +64,11 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     }
 
     public void removeProjectLink(ProjectLink link) {
-        if(link.getId()>0) {
+        if (link.getId() > 0) {
             linkDao.delete(link.getId());
         } else {
-            Assert.isTrue(link.getFromProjectId()>0);
-            Assert.isTrue(link.getToProjectId()>0);
+            Assert.isTrue(link.getFromProjectId() > 0);
+            Assert.isTrue(link.getToProjectId() > 0);
             linkDao.deleteByFromAndToProjectId(link.getFromProjectId(), link.getToProjectId());
         }
         //
@@ -103,14 +103,14 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     }
 
     private ProjectLink fillProjectLink(ProjectLink projectLink) {
-        if(projectLink==null) {
+        if (projectLink == null) {
             return projectLink;
         }
-        if(projectLink.getFromProject()==null && projectLink.getFromProjectId()>0) {
+        if (projectLink.getFromProject() == null && projectLink.getFromProjectId() > 0) {
             Project fromProject = projectDao.select(projectLink.getFromProjectId());
             projectLink.setFromProject(fromProject);
         }
-        if(projectLink.getToProject()==null && projectLink.getToProjectId()>0) {
+        if (projectLink.getToProject() == null && projectLink.getToProjectId() > 0) {
             Project toProject = projectDao.select(projectLink.getToProjectId());
             projectLink.setToProject(toProject);
         }

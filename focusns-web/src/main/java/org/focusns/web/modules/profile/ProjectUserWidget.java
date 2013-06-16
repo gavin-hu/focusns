@@ -22,6 +22,9 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import java.io.File;
+import java.io.IOException;
+
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
@@ -46,9 +49,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-
 @Controller
 @RequestMapping("/project")
 public class ProjectUserWidget implements ResourceLoaderAware {
@@ -66,7 +66,7 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-edit")
-    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL })
     public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(project.getId(), projectUser.getId());
@@ -85,7 +85,7 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-view")
-    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL })
     public String doView(@WidgetAttribute(required = false) ProjectUser projectUser, @WidgetAttribute Project project,
             Model model) {
         //
@@ -104,8 +104,10 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar")
-    public @ResponseBody byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
-            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension) throws IOException {
+    public @ResponseBody
+    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
+            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension)
+            throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         if (isTempFile != null && isTempFile.booleanValue()) {

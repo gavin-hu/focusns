@@ -73,7 +73,7 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
 
     public List<BlogCategory> getBlogCategories(long projectId) {
         List<BlogCategory> categories = categoryDao.selectByProjectId(projectId);
-        for(BlogCategory category : categories) {
+        for (BlogCategory category : categories) {
             fillBlogCategory(category);
         }
         return categories;
@@ -82,21 +82,21 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
     @Override
     public List<BlogCategory> getBlogCategories() {
         List<BlogCategory> categories = categoryDao.selectByProjectId(0);
-        for(BlogCategory category : categories) {
+        for (BlogCategory category : categories) {
             fillBlogCategory(category);
         }
         return categories;
     }
 
     private BlogCategory fillBlogCategory(BlogCategory blogCategory) {
-        if(blogCategory==null) {
+        if (blogCategory == null) {
             return blogCategory;
         }
-        if(blogCategory.getProject()==null && blogCategory.getProjectId()>0) {
+        if (blogCategory.getProject() == null && blogCategory.getProjectId() > 0) {
             Project project = projectDao.select(blogCategory.getProjectId());
             blogCategory.setProject(project);
         }
-        if(blogCategory.getCreatedBy()==null && blogCategory.getCreatedById()>0) {
+        if (blogCategory.getCreatedBy() == null && blogCategory.getCreatedById() > 0) {
             ProjectUser createdBy = projectUserDao.select(blogCategory.getCreatedById());
             blogCategory.setCreatedBy(createdBy);
         }

@@ -22,8 +22,6 @@ package org.focusns.event.blog;
  * #L%
  */
 
-import java.beans.Introspector;
-
 import org.focusns.event.AbstractEventTest;
 import org.focusns.event.blog.impl.BlogPostEventSubscriber;
 import org.focusns.model.blog.BlogPost;
@@ -31,7 +29,6 @@ import org.focusns.service.blog.BlogPostService;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Ignore

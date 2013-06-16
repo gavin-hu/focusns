@@ -24,12 +24,12 @@ package org.focusns.web.modules.blog;
 
 import java.util.List;
 
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
-import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.service.core.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

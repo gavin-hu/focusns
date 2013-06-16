@@ -22,6 +22,8 @@ package org.focusns.web.site;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.core.ProjectFeature;
@@ -32,8 +34,6 @@ import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Widget
 @RequestMapping("site")

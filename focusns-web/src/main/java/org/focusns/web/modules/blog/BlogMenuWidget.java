@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BlogMenuWidget {
 
     @RequestMapping("/menu-view")
-    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL })
     public String doView() {
         return "modules/blog/menu-view";
     }

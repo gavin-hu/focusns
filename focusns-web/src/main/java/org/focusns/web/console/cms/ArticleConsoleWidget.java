@@ -22,6 +22,8 @@ package org.focusns.web.console.cms;
  * #L%
  */
 
+import java.util.List;
+
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.blog.BlogCategory;
@@ -34,8 +36,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.List;
 
 @Widget
 @RequestMapping("/console/cms")

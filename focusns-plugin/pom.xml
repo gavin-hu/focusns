@@ -14,7 +14,6 @@
     <name>FocusSNS Plugin</name>
 
     <modules>
-        <module>demo-focusns-plugin</module>
         <module>sample-focusns-plugin</module>
     </modules>
 

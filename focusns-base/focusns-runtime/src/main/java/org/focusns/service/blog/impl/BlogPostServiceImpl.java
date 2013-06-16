@@ -102,18 +102,18 @@ public class BlogPostServiceImpl implements BlogPostService {
     }
 
     private BlogPost fillBlogPost(BlogPost blogPost) {
-        if(blogPost==null) {
-            return  blogPost;
+        if (blogPost == null) {
+            return blogPost;
         }
-        if(blogPost.getProject()==null && blogPost.getProjectId()>0) {
+        if (blogPost.getProject() == null && blogPost.getProjectId() > 0) {
             Project project = projectDao.select(blogPost.getProjectId());
             blogPost.setProject(project);
         }
-        if(blogPost.getCreatedBy()==null && blogPost.getCreatedById()>0) {
+        if (blogPost.getCreatedBy() == null && blogPost.getCreatedById() > 0) {
             ProjectUser createdBy = projectUserDao.select(blogPost.getCreatedById());
             blogPost.setCreatedBy(createdBy);
         }
-        if(blogPost.getModifiedBy()==null && blogPost.getModifiedById()>0) {
+        if (blogPost.getModifiedBy() == null && blogPost.getModifiedById() > 0) {
             ProjectUser modifiedBy = projectUserDao.select(blogPost.getModifiedById());
             blogPost.setModifiedBy(modifiedBy);
         }

@@ -22,6 +22,10 @@ package org.focusns.common.xml;
  * #L%
  */
 
+import java.io.InputStream;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
@@ -34,9 +38,6 @@ import org.w3c.dom.Document;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
 
 public final class XmlParser {
 

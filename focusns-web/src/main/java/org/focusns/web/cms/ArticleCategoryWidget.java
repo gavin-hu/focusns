@@ -22,13 +22,13 @@ package org.focusns.web.cms;
  * #L%
  */
 
+import org.focusns.common.web.widget.annotation.bind.WidgetPref;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
-import org.focusns.common.web.widget.annotation.bind.WidgetPref;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -52,7 +52,7 @@ public class PluginWidgetInterceptor extends HandlerInterceptorAdapter implement
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
             ModelAndView modelAndView) throws Exception {
         //
-        if(modelAndView==null) {
+        if (modelAndView == null) {
             return;
         }
         //

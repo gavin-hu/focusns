@@ -22,9 +22,6 @@ package org.focusns.common.html;
  * #L%
  */
 
-import java.util.Iterator;
-
-import net.htmlparser.jericho.Segment;
 import net.htmlparser.jericho.Source;
 
 public abstract class HtmlUtils {

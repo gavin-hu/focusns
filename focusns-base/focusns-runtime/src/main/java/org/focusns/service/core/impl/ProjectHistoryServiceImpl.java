@@ -22,6 +22,9 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
+import java.util.Date;
+import java.util.List;
+
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.dao.core.ProjectUserDao;
@@ -33,9 +36,6 @@ import org.focusns.service.core.ProjectHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.List;
 
 @Service
 @Transactional
@@ -91,14 +91,14 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
     }
 
     private ProjectHistory fillProjectHistory(ProjectHistory projectHistory) {
-        if(projectHistory==null) {
+        if (projectHistory == null) {
             return projectHistory;
         }
-        if(projectHistory.getProject()==null && projectHistory.getProjectId()>0) {
+        if (projectHistory.getProject() == null && projectHistory.getProjectId() > 0) {
             Project project = projectDao.select(projectHistory.getProjectId());
             projectHistory.setProject(project);
         }
-        if(projectHistory.getCreatedBy()==null && projectHistory.getCreatedById()>0) {
+        if (projectHistory.getCreatedBy() == null && projectHistory.getCreatedById() > 0) {
             ProjectUser createBy = projectUserDao.select(projectHistory.getCreatedById());
             projectHistory.setCreatedBy(createBy);
         }

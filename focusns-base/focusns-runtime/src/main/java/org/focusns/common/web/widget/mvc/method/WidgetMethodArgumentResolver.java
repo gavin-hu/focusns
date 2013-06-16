@@ -1,5 +1,27 @@
 package org.focusns.common.web.widget.mvc.method;
 
+/*
+ * #%L
+ * FocusSNS Runtime
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 2.1 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * #L%
+ */
+
 import org.focusns.common.web.page.config.WidgetConfig;
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.annotation.bind.WidgetPref;
@@ -23,9 +45,9 @@ public class WidgetMethodArgumentResolver implements HandlerMethodArgumentResolv
 
     public boolean supportsParameter(MethodParameter parameter) {
         //
-        if(parameter.hasParameterAnnotation(WidgetAttribute.class)) {
+        if (parameter.hasParameterAnnotation(WidgetAttribute.class)) {
             return true;
-        } else if(parameter.hasParameterAnnotation(WidgetPref.class)) {
+        } else if (parameter.hasParameterAnnotation(WidgetPref.class)) {
             return true;
         }
         //
@@ -36,20 +58,18 @@ public class WidgetMethodArgumentResolver implements HandlerMethodArgumentResolv
             NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         //
         Object value = null;
-        if(parameter.hasParameterAnnotation(WidgetAttribute.class)) {
+        if (parameter.hasParameterAnnotation(WidgetAttribute.class)) {
             value = getWidgetAttributeValue(parameter, webRequest);
-        } else if(parameter.hasParameterAnnotation(WidgetPref.class)) {
+        } else if (parameter.hasParameterAnnotation(WidgetPref.class)) {
             value = getWidgetPrefValue(parameter, webRequest);
         }
         //
-        if(value!=null) {
-            ConversionService conversionService = (ConversionService) webRequest
-                    .getAttribute(ConversionService.class.getName(), WebRequest.SCOPE_REQUEST);
-            if(conversionService.canConvert(value.getClass(), parameter.getParameterType())) {
+        if (value != null) {
+            ConversionService conversionService = (ConversionService) webRequest.getAttribute(ConversionService.class.getName(), WebRequest.SCOPE_REQUEST);
+            if (conversionService.canConvert(value.getClass(), parameter.getParameterType())) {
                 value = conversionService.convert(value, parameter.getParameterType());
             } else {
-                throw new ConverterNotFoundException(TypeDescriptor.forObject(value),
-                        TypeDescriptor.valueOf(parameter.getParameterType()));
+                throw new ConverterNotFoundException(TypeDescriptor.forObject(value), TypeDescriptor.valueOf(parameter.getParameterType()));
             }
         }
         //

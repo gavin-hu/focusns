@@ -63,10 +63,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>focusns-maven-plugin</groupId>
                 <artifactId>focusns-maven-plugin</artifactId>
             </plugin>
@@ -97,7 +93,7 @@
                 <plugin>
                     <groupId>javafmt-maven-plugin</groupId>
                     <artifactId>javafmt-maven-plugin</artifactId>
-                    <version>1.0.2</version>
+                    <version>1.0.3</version>
                     <executions>
                         <execution>
                             <id>java-format</id>
@@ -137,11 +133,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>2.4</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
                     <version>2.4</version>
                 </plugin>
                 <plugin>

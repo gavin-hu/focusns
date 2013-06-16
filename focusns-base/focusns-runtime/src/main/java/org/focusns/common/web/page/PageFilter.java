@@ -1,5 +1,34 @@
 package org.focusns.common.web.page;
 
+/*
+ * #%L
+ * FocusSNS Runtime
+ * %%
+ * Copyright (C) 2011 - 2013 FocusSNS
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 2.1 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * #L%
+ */
+
+import java.io.IOException;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.common.web.page.config.PageFactory;
@@ -10,12 +39,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UrlPathHelper;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class PageFilter extends OncePerRequestFilter {
     private static final String DEFAULT_LAYOUT_LOCATION = "/WEB-INF/themes/default/layout.jsp";
@@ -41,7 +64,7 @@ public class PageFilter extends OncePerRequestFilter {
         //
         WebApplicationContext parent = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
         //
-        if(pageContext==null) {
+        if (pageContext == null) {
             XmlWebApplicationContext xmlPageContext = new XmlWebApplicationContext();
             xmlPageContext.setId("pageContext");
             xmlPageContext.setParent(parent);
@@ -61,15 +84,16 @@ public class PageFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
         //
         String lookupPath = this.urlPathHelper.getLookupPathForRequest(request);
-        if(lookupPath.equals("/") || lookupPath.equals("")) {
+        if (lookupPath.equals("/") || lookupPath.equals("")) {
             lookupPath = "/index";
         }
         //
         PageConfig pageConfig = pageFactory.find(lookupPath, WebUtils.getParameterMap(request));
-        if(pageConfig!=null) {
+        if (pageConfig != null) {
             request.setAttribute("pageConfig", pageConfig);
             request.getSession().setAttribute("pageConfig", pageConfig);
             pageEngine.doRender(request, response);
@@ -81,11 +105,11 @@ public class PageFilter extends OncePerRequestFilter {
         }
         //
         String widgetId = request.getParameter("widgetId");
-        if(widgetId!=null) {
+        if (widgetId != null) {
             request.setAttribute("widgetId", widgetId);
             pageEngine.doAction(request, response);
             //
-            return ;
+            return;
         }
         //
         filterChain.doFilter(request, response);

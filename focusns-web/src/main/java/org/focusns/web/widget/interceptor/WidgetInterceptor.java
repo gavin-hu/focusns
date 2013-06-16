@@ -22,6 +22,9 @@ package org.focusns.web.widget.interceptor;
  * #L%
  */
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
@@ -33,9 +36,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class WidgetInterceptor extends HandlerInterceptorAdapter {
 
@@ -53,13 +53,16 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                 }
             }
             //
-//            String positionName = request.getParameter("position");
-//            String widgetId = request.getParameter("widget");
-//            if (StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig != null) {
-//                PositionConfig positionConfig = pageConfig.getPositionConfig(positionName);
-//                WidgetConfig widgetConfig = positionConfig.getWidgetConfig(widgetId);
-//                request.setAttribute("widgetConfig", widgetConfig);
-//            }
+            // String positionName = request.getParameter("position");
+            // String widgetId = request.getParameter("widget");
+            // if (StringUtils.hasText(positionName) &&
+            // StringUtils.hasText(widgetId) && pageConfig != null) {
+            // PositionConfig positionConfig =
+            // pageConfig.getPositionConfig(positionName);
+            // WidgetConfig widgetConfig =
+            // positionConfig.getWidgetConfig(widgetId);
+            // request.setAttribute("widgetConfig", widgetConfig);
+            // }
         }
         //
         return true;

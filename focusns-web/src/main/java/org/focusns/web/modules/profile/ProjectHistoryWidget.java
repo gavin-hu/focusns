@@ -52,7 +52,7 @@ public class ProjectHistoryWidget {
     }
 
     @RequestMapping("/history-edit")
-    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
+    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL })
     public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
         ProjectHistory template = createTemplate(projectUser, project);
