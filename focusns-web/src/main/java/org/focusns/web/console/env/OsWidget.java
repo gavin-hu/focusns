@@ -22,14 +22,14 @@ package org.focusns.web.console.env;
  * #L%
  */
 
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.env.Environment;
 import org.focusns.service.env.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Widget
 @RequestMapping("/console/env")
 public class OsWidget {
 

@@ -22,15 +22,15 @@ package org.focusns.web.site;
  * #L%
  */
 
-import org.springframework.stereotype.Controller;
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Widget
+@RequestMapping("site")
 public class CopyrightWidget {
 
-    @RequestMapping("/site/copyright")
-    public String doShow() {
+    @RequestMapping("copyright")
+    public String doView() {
         return "site/copyright";
-
     }
 }

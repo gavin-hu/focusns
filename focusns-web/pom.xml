@@ -19,10 +19,14 @@
                     <webApp>
                         <contextPath>/focusns</contextPath>
                     </webApp>
-                    <stopKey>focusns</stopKey>
-                    <stopPort>9966</stopPort>
                     <scanIntervalSeconds>2</scanIntervalSeconds>
-                    <war>${project.build.directory}/${project.build.finalName}</war>
+                    <contextHandlers>
+                        <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+                            <war>${basedir}/../focusns-plugin/sample-focusns-plugin/target/sample-focusns-plugin</war>
+                            <extractWAR>true</extractWAR>
+                            <contextPath>/sample</contextPath>
+                        </contextHandler>
+                    </contextHandlers>
                 </configuration>
             </plugin>
         </plugins>
@@ -40,17 +44,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.tuckey</groupId>
-            <artifactId>urlrewritefilter</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
+            <groupId>javax.servlet.jsp.jstl</groupId>
+            <artifactId>jstl-api</artifactId>
         </dependency>
         <dependency>
             <groupId>taglibs</groupId>

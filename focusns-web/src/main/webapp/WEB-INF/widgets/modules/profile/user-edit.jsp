@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-bd>
-        <form action='<c:url value="/project/user-avatar/upload.action" />'
+    <ui:widget-body>
+        <form action='<widget:actionUrl value="/project/user-avatar/upload" />'
               method="post" enctype="multipart/form-data">
             <fieldset>
                 <legend>头像上传</legend>
@@ -19,8 +19,8 @@
 
         <c:if test="${hasTempFile}">
             <div class="cropper-wrapper temp-avatar">
-                <img id="cropper" class="thumbnail" src='<c:url value="/project/user-avatar.action?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />' alt="Avatar" />
-                <form action='<c:url value="/project/user-avatar/crop.action"/>' method="post">
+                <img id="cropper" class="thumbnail" src='<widget:actionUrl value="/project/user-avatar?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />' alt="Avatar" />
+                <form action='<widget:actionUrl value="/project/user-avatar/crop"/>' method="post">
                     <input type="hidden" id="x" name="x" />
                     <input type="hidden" id="y" name="y" />
                     <input type="hidden" id="w" name="w" />
@@ -31,5 +31,5 @@
                 </form>
             </div>
         </c:if>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>

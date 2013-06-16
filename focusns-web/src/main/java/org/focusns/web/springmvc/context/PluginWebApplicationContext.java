@@ -1,11 +1,14 @@
+/*
 package org.focusns.web.springmvc.context;
 
 import org.focusns.common.plugin.PluginClassLoader;
 import org.focusns.common.plugin.PluginListener;
+import org.focusns.web.helper.RuntimeHelper;
 import org.focusns.web.portal.config.PageConfig;
 import org.focusns.web.portal.config.PageConfigKey;
 import org.focusns.web.portal.config.xml.XmlPageConfigParser;
 import org.springframework.core.io.Resource;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 import java.io.File;
@@ -21,8 +24,6 @@ public class PluginWebApplicationContext extends XmlWebApplicationContext implem
     public void changed(File[] pluginFiles) {
         //
         try {
-            //
-            unloadPluginPages();
             //
             preparePluginClassLoader(pluginFiles);
             //
@@ -45,13 +46,15 @@ public class PluginWebApplicationContext extends XmlWebApplicationContext implem
         setClassLoader(pluginClassLoader);
     }
 
-    protected void unloadPluginPages() {
+    protected void loadPluginPages() throws Exception {
+        // clean
+        File pluginsDir = getResourceByPath("/WEB-INF/plugins").getFile();
+        for(File file : pluginsDir.listFiles()) {
+            FileSystemUtils.deleteRecursively(file);
+        }
         //
         getServletContext().removeAttribute("pluginPageConfigMap");
-    }
-
-    protected void loadPluginPages() throws Exception {
-        //
+        // load
         Map<String, PageConfig> pluginPageConfigMap = new HashMap<String, PageConfig>();
         Resource[] resources = getResources("classpath*:/META-INF/focusns-plugin.xml");
         for(Resource resource : resources) {
@@ -66,3 +69,4 @@ public class PluginWebApplicationContext extends XmlWebApplicationContext implem
     }
 
 }
+*/

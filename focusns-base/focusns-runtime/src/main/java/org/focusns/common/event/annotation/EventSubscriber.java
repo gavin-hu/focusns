@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Service
+@Component
 public @interface EventSubscriber {
 
     String value() default "";

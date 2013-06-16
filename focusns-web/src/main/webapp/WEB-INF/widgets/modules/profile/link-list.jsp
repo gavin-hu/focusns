@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-hd>
+    <ui:widget-head>
         <c:choose>
             <c:when test="${reverse}">
                 <h3>粉丝</h3>
@@ -11,8 +11,8 @@
                 <h3>关注</h3>
             </c:otherwise>
         </c:choose>
-    </ui:widget-hd>
-    <ui:widget-bd>
+    </ui:widget-head>
+    <ui:widget-body>
         <c:choose>
             <c:when test="${empty page.results}">
                 <c:choose>
@@ -35,12 +35,12 @@
                         <c:choose>
                             <c:when test="${reverse}">
                                 <a href='<c:url value="/${link.fromProject.code}/profile" />'>
-                                    <t:img-avatar dimension="60" projectId="${link.fromProject.id}" projectUserId="${link.fromProject.createById}" />
+                                    <tool:img-avatar dimension="60" projectId="${link.fromProject.id}" projectUserId="${link.fromProject.createdById}" />
                                 </a>
                             </c:when>
                             <c:otherwise>
                                 <a href='<c:url value="/${link.toProject.code}/profile" />'>
-                                    <t:img-avatar dimension="60" projectId="${link.toProject.id}" projectUserId="${link.toProject.createById}" />
+                                    <tool:img-avatar dimension="60" projectId="${link.toProject.id}" projectUserId="${link.toProject.createById}" />
                                 </a>
                             </c:otherwise>
                         </c:choose>
@@ -49,10 +49,10 @@
                 </ul>
             </c:otherwise>
         </c:choose>
-    </ui:widget-bd>
-    <ui:widget-ft>
+    </ui:widget-body>
+    <ui:widget-foot>
         <c:if test="${page.hasNext()}">
             <a class="btn" href="/">更多 &gt;&gt;</a>
         </c:if>
-    </ui:widget-ft>
+    </ui:widget-foot>
 </ui:widget>

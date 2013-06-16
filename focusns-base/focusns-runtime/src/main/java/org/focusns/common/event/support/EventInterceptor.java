@@ -112,6 +112,7 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
         } catch (Throwable throwable) {
             //
             triggerEvent(Event.Point.AFTER_THROWING, method, args, result, throwable);
+            throw throwable;
         }
         //
         return result;

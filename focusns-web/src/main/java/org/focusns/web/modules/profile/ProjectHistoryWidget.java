@@ -22,15 +22,16 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
+import org.focusns.common.web.widget.annotation.bind.WidgetPref;
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectHistory;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectHistoryService;
 import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.annotation.Constraints;
-import org.focusns.web.widget.annotation.WidgetAttribute;
-import org.focusns.web.widget.annotation.WidgetPreference;
+import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,24 +47,26 @@ public class ProjectHistoryWidget {
     @RequestMapping("/history-create")
     public void doCreate(ProjectHistory history) {
         historyService.createProjectHistory(history);
+        //
+        Navigator.get().withAttribute("projectHistory", history).navigateTo("history-created");
     }
 
     @RequestMapping("/history-edit")
-    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
-    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser user, Model model) {
+    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
+    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
-        ProjectHistory template = createTemplate(user, project);
+        ProjectHistory template = createTemplate(projectUser, project);
         model.addAttribute("template", template);
         //
         return "modules/profile/history-edit";
     }
 
     @RequestMapping("/history-list")
-    public String doList(@WidgetPreference(required = false, defaultValue = "10") Integer limit,
-            @WidgetAttribute(required = false) ProjectUser user, @WidgetAttribute Project project, Model model) {
+    public String doList(@WidgetPref(required = false, defaultValue = "10") Integer limit,
+            @WidgetAttribute(required = false) ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
         //
-        if (user != null) {
-            ProjectHistory template = createTemplate(user, project);
+        if (projectUser != null) {
+            ProjectHistory template = createTemplate(projectUser, project);
             model.addAttribute("template", template);
         }
         //
@@ -74,12 +77,12 @@ public class ProjectHistoryWidget {
         return "modules/profile/history-list";
     }
 
-    private ProjectHistory createTemplate(ProjectUser user, Project project) {
+    private ProjectHistory createTemplate(ProjectUser projectUser, Project project) {
         ProjectHistory template = new ProjectHistory();
         template.setProjectId(project.getId());
         template.setTargetId(project.getId());
         template.setTargetType("project");
-        template.setCreatedById(user.getId());
+        template.setCreatedById(projectUser.getId());
         return template;
     }
 

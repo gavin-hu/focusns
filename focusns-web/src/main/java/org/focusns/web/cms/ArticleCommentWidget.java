@@ -22,24 +22,24 @@ package org.focusns.web.cms;
  * #L%
  */
 
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.service.blog.BlogCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/cms")
+@Widget
+@RequestMapping("cms")
 public class ArticleCommentWidget {
 
     @Autowired
     private BlogCommentService blogCommentService;
 
-    @RequestMapping("/comment-list")
+    @RequestMapping("comment-list")
     public String doList() {
         return "cms/comment-list";
     }
 
-    @RequestMapping("/comment-edit")
+    @RequestMapping("comment-edit")
     public String doEdit() {
         return "cms/comment-edit";
     }

@@ -22,27 +22,22 @@ package org.focusns.web.widget.interceptor;
  * #L%
  */
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.codec.binary.Base64;
+import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
-import org.focusns.web.portal.config.PageConfig;
-import org.focusns.web.portal.config.PositionConfig;
-import org.focusns.web.portal.config.WidgetConfig;
+import org.focusns.web.Keys;
 import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.annotation.Constraints;
-import org.springframework.util.StringUtils;
+import org.focusns.web.widget.Constraints;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
-public class WidgetInterceptor extends HandlerInterceptorAdapter {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    private Base64 base64 = new Base64();
+public class WidgetInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -58,13 +53,13 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                 }
             }
             //
-            String positionName = request.getParameter("position");
-            String widgetId = request.getParameter("widget");
-            if (StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig != null) {
-                PositionConfig positionConfig = pageConfig.getPositionConfig(positionName);
-                WidgetConfig widgetConfig = positionConfig.getWidgetConfig(widgetId);
-                request.setAttribute("widgetConfig", widgetConfig);
-            }
+//            String positionName = request.getParameter("position");
+//            String widgetId = request.getParameter("widget");
+//            if (StringUtils.hasText(positionName) && StringUtils.hasText(widgetId) && pageConfig != null) {
+//                PositionConfig positionConfig = pageConfig.getPositionConfig(positionName);
+//                WidgetConfig widgetConfig = positionConfig.getWidgetConfig(widgetId);
+//                request.setAttribute("widgetConfig", widgetConfig);
+//            }
         }
         //
         return true;
@@ -75,21 +70,21 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
         if (constraints != null) {
             for (Constraint constraint : constraints.value()) {
                 //
-                if (Constraint.PROJECT_REQUIRED == constraint) {
-                    if (request.getAttribute(Project.KEY) == null) {
+                if (Constraint.PROJECT_NOT_NULL == constraint) {
+                    if (request.getAttribute(Keys.REQUEST_PROJECT) == null) {
                         return true;
                     }
-                } else if (Constraint.PROJECT_USER_REQUIRED == constraint) {
-                    if (request.getAttribute(ProjectUser.KEY) == null) {
+                } else if (Constraint.PROJECT_USER_NOT_NULL == constraint) {
+                    if (request.getAttribute(Keys.REQUEST_PROJECT_USER) == null) {
                         return true;
                     }
-                } else if (Constraint.PROJECT_USER_NOT_REQUIRED == constraint) {
-                    if (request.getAttribute(ProjectUser.KEY) != null) {
+                } else if (Constraint.PROJECT_USER_IS_NULL == constraint) {
+                    if (request.getAttribute(Keys.REQUEST_PROJECT_USER) != null) {
                         return true;
                     }
                 } else if (Constraint.PROJECT_NOT_MY_PROFILE == constraint) {
-                    Project project = (Project) request.getAttribute(Project.KEY);
-                    ProjectUser projectUser = (ProjectUser) request.getAttribute(ProjectUser.KEY);
+                    Project project = (Project) request.getAttribute(Keys.REQUEST_PROJECT);
+                    ProjectUser projectUser = (ProjectUser) request.getAttribute(Keys.SESSION_PROJECT_USER);
                     if (project == null || projectUser == null || projectUser.getProjectId() == project.getId()) {
                         return true;
                     }
@@ -112,22 +107,6 @@ public class WidgetInterceptor extends HandlerInterceptorAdapter {
                 //
                 processConstraintsAfterHandle(handlerMethod, modelAndView);
             }
-        }
-        //
-        String redirect = request.getParameter("redirect");
-        //
-        if (StringUtils.hasText(redirect)) {
-            // decode first
-            if (!redirect.contains("/")) {
-                redirect = new String(base64.decode(redirect));
-            }
-            //
-            String contextPath = request.getContextPath();
-            if (redirect.startsWith(contextPath)) {
-                redirect = redirect.substring(contextPath.length());
-            }
-            //
-            modelAndView.setViewName("redirect:".concat(redirect));
         }
     }
 

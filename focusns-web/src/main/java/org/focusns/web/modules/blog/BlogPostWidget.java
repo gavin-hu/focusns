@@ -24,6 +24,7 @@ package org.focusns.web.modules.blog;
 
 import java.util.List;
 
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
@@ -31,7 +32,7 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
-import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,20 +49,20 @@ public class BlogPostWidget {
     private BlogCategoryService blogCategoryService;
 
     @RequestMapping("/post-edit")
-    public String doEdit(@RequestParam(required = false) Long id, @RequestParam(required = false) Long categoryId,
+    public String doEdit(@RequestParam(required = false) Long postId, @RequestParam(required = false) Long categoryId,
             @WidgetAttribute ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
         //
         List<BlogCategory> blogCategories = blogCategoryService.getBlogCategories(project.getId());
         //
         BlogPost blogPost = null;
-        if (id == null) {
+        if (postId == null) {
             blogPost = new BlogPost();
             blogPost.setProjectId(project.getId());
             blogPost.setCreatedById(projectUser.getId());
             blogPost.setModifiedById(projectUser.getId());
             blogPost.setCategoryId(categoryId != null ? categoryId : 0);
         } else {
-            blogPost = blogPostService.getBlogPost(id);
+            blogPost = blogPostService.getBlogPost(postId);
         }
         //
         model.addAttribute("blogPost", blogPost);
@@ -72,9 +73,9 @@ public class BlogPostWidget {
     }
 
     @RequestMapping("/post-view")
-    public String doView(@RequestParam Long id, Model model) {
+    public String doView(@RequestParam Long postId, Model model) {
         //
-        BlogPost blogPost = blogPostService.getBlogPost(id);
+        BlogPost blogPost = blogPostService.getBlogPost(postId);
         model.addAttribute("blogPost", blogPost);
         //
         return "modules/blog/post-view";
@@ -97,10 +98,13 @@ public class BlogPostWidget {
 
     @RequestMapping("/post-modify")
     public void doModify(BlogPost blogPost) {
+        Navigator.get().withAttribute("blogPost", blogPost);
         if (blogPost.getId() > 0) {
             blogPostService.modifyBlogPost(blogPost);
+            Navigator.get().navigateTo("post-modified");
         } else {
             blogPostService.createBlogPost(blogPost);
+            Navigator.get().navigateTo("post-created");
         }
     }
 

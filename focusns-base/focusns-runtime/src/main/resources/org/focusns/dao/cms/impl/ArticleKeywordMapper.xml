@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.focusns.dao.cms.ArticleKeywordDao">
 
+    <cache />
+
 	<resultMap id="BaseResultMap" type="org.focusns.model.cms.ArticleKeyword">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="label" property="label" jdbcType="VARCHAR" />

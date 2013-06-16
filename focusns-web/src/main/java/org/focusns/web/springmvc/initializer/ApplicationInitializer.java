@@ -1,5 +1,7 @@
+/*
 package org.focusns.web.springmvc.initializer;
 
+*/
 /*
  * #%L
  * FocusSNS Web
@@ -20,7 +22,8 @@ package org.focusns.web.springmvc.initializer;
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
- */
+ *//*
+
 
 import org.focusns.web.helper.RuntimeHelper;
 import org.springframework.context.ApplicationContextInitializer;
@@ -39,3 +42,4 @@ public class ApplicationInitializer implements ApplicationContextInitializer<Con
         }
     }
 }
+*/

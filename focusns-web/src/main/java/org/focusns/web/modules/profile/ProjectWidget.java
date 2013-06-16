@@ -55,11 +55,11 @@ public class ProjectWidget {
         return "modules/profile/project-status";
     }
 
-    public String action(Map<String, Object> model, ProjectUser user, Project project) {
+    public String action(Map<String, Object> model, ProjectUser projectUser, Project project) {
         //
-        ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
+        ProjectLink projectLink = projectLinkService.getProjectLink(projectUser.getProjectId(), project.getId());
         model.put("projectLink", projectLink);
-        model.put("fromProject", user.getProject());
+        model.put("fromProject", projectUser.getProject());
         model.put("toProject", project);
         //
         return "modules/profile/project-action";

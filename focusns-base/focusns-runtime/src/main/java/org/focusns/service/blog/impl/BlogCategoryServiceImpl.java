@@ -26,7 +26,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.focusns.dao.blog.BlogCategoryDao;
+import org.focusns.dao.core.ProjectDao;
+import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.blog.BlogCategory;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,11 +41,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class BlogCategoryServiceImpl implements BlogCategoryService {
 
     @Autowired
+    private ProjectDao projectDao;
+    @Autowired
+    private ProjectUserDao projectUserDao;
+    @Autowired
     private BlogCategoryDao categoryDao;
 
     @Override
     public BlogCategory getBlogCategory(long categoryId) {
-        return categoryDao.select(categoryId);
+        BlogCategory category = categoryDao.select(categoryId);
+        return fillBlogCategory(category);
     }
 
     public void createBlogCategory(BlogCategory category) {
@@ -49,10 +58,13 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
             category.setCreatedAt(new Date());
         }
         categoryDao.insert(category);
+        //
+        fillBlogCategory(category);
     }
 
     public void modifyBlogCategory(BlogCategory category) {
         categoryDao.update(category);
+        fillBlogCategory(category);
     }
 
     public void removeBlogCategory(BlogCategory category) {
@@ -60,12 +72,35 @@ public class BlogCategoryServiceImpl implements BlogCategoryService {
     }
 
     public List<BlogCategory> getBlogCategories(long projectId) {
-        return categoryDao.selectByProjectId(projectId);
+        List<BlogCategory> categories = categoryDao.selectByProjectId(projectId);
+        for(BlogCategory category : categories) {
+            fillBlogCategory(category);
+        }
+        return categories;
     }
 
     @Override
     public List<BlogCategory> getBlogCategories() {
-        return categoryDao.selectByProjectId(0);
+        List<BlogCategory> categories = categoryDao.selectByProjectId(0);
+        for(BlogCategory category : categories) {
+            fillBlogCategory(category);
+        }
+        return categories;
+    }
+
+    private BlogCategory fillBlogCategory(BlogCategory blogCategory) {
+        if(blogCategory==null) {
+            return blogCategory;
+        }
+        if(blogCategory.getProject()==null && blogCategory.getProjectId()>0) {
+            Project project = projectDao.select(blogCategory.getProjectId());
+            blogCategory.setProject(project);
+        }
+        if(blogCategory.getCreatedBy()==null && blogCategory.getCreatedById()>0) {
+            ProjectUser createdBy = projectUserDao.select(blogCategory.getCreatedById());
+            blogCategory.setCreatedBy(createdBy);
+        }
+        return blogCategory;
     }
 
 }

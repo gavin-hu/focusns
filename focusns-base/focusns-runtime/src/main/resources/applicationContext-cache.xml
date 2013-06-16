@@ -11,15 +11,7 @@
     <bean id="cacheManager" class="org.springframework.cache.concurrent.ConcurrentMapCacheManager">
         <property name="cacheNames">
             <list>
-                <!-- core -->
-                <value>UserCache</value>
-                <value>ProjectCache</value>
-                <value>ProjectCategoryCache</value>
-                
-                <!-- blog -->
-                <value>BlogTagCache</value>
-                <value>BlogPostCache</value>
-                <value>BlogCommentCache</value>
+                <value>WidgetCache</value>
             </list>
         </property>
     </bean>

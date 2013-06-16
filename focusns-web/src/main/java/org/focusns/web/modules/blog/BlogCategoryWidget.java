@@ -24,11 +24,13 @@ package org.focusns.web.modules.blog;
 
 import java.util.List;
 
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.blog.BlogCategory;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogCategoryService;
-import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
+import org.focusns.service.core.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,16 +75,21 @@ public class BlogCategoryWidget {
 
     @RequestMapping({ "/category-create", "/category-modify" })
     public void doModify(BlogCategory blogCategory) {
+        Navigator.get().withAttribute("blogCategory", blogCategory);
         if (blogCategory.getId() > 0) {
             blogCategoryService.modifyBlogCategory(blogCategory);
+            Navigator.get().navigateTo("category-modified");
         } else {
             blogCategoryService.createBlogCategory(blogCategory);
+            Navigator.get().navigateTo("category-created");
         }
     }
 
     @RequestMapping("/category-remove")
     public void doRemove(BlogCategory blogCategory) {
+        blogCategory = blogCategoryService.getBlogCategory(blogCategory.getId());
         blogCategoryService.removeBlogCategory(blogCategory);
+        Navigator.get().withAttribute("blogCategory", blogCategory).navigateTo("category-removed");
     }
 
 }

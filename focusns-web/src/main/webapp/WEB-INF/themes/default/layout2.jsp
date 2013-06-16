@@ -47,7 +47,7 @@
             </button>
             <a class="brand" href='<c:url value="/" />'>FocusSNS</a>
             <div class="nav-collapse collapse">
-                <l:position2 name="headerBar" />
+                <l:positionRender name="headerBar" />
             </div><!--/.nav-collapse -->
         </div>
     </div>
@@ -56,21 +56,22 @@
 <div class="container">
 
     <div class="row">
-        <l:positionExists2 name="leftColumn">
+        <l:positionExists name="leftColumn">
         <div class="${leftColumnClass}">
-            <l:position2 name="leftColumn" />
+            <l:positionRender name="leftColumn" />
+            
         </div>
-        </l:positionExists2>
-        <l:positionExists2 name="mainColumn">
+        </l:positionExists>
+        <l:positionExists name="mainColumn">
             <div class="${mainColumnClass}">
-                <l:position2 name="mainColumn" />
+                <l:positionRender name="mainColumn" />
             </div>
-        </l:positionExists2>
-        <l:positionExists2 name="rightColumn">
+        </l:positionExists>
+        <l:positionExists name="rightColumn">
             <div class="${rightColumnClass}">
-                <l:position2 name="rightColumn" />
+                <l:positionRender name="rightColumn" />
             </div>
-        </l:positionExists2>
+        </l:positionExists>
     </div>
 
     <hr>

@@ -22,15 +22,14 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-import org.focusns.common.event.Event;
 import org.focusns.dao.core.ProjectDao;
-import org.focusns.model.common.Caches;
+import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectCategory;
+import org.focusns.model.core.ProjectUser;
+import org.focusns.service.core.ProjectCategoryService;
 import org.focusns.service.core.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,27 +39,35 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private ProjectDao projectDao;
+    @Autowired
+    private ProjectUserDao projectUserDao;
+    @Autowired
+    private ProjectCategoryService projectCategoryService;
 
-    @Cacheable(value = Caches.PROJECT, key = "#id")
     public Project getProject(long id) {
         return projectDao.select(id);
     }
 
-    @Cacheable(value = Caches.PROJECT, key = "#code")
     public Project getProject(String code) {
-        return projectDao.selectByCode(code);
+        Project project = projectDao.selectByCode(code);
+        ProjectUser createBy = projectUserDao.select(project.getCreatedById());
+        ProjectUser modifiedBy = projectUserDao.select(project.getModifiedById());
+        ProjectCategory projectCategory = projectCategoryService.getCategory(project.getCategoryId());
+        project.setCreatedBy(createBy);
+        project.setModifiedBy(modifiedBy);
+        project.setCategory(projectCategory);
+        //
+        return project;
     }
 
     public void createProject(Project project) {
         projectDao.insert(project);
     }
 
-    @Caching(evict = { @CacheEvict(value = Caches.PROJECT, key = "#project.id"), @CacheEvict(value = Caches.PROJECT, key = "#project.code") })
     public void removeProject(Project project) {
         projectDao.delete(project.getId());
     }
 
-    @Caching(evict = { @CacheEvict(value = Caches.PROJECT, key = "#project.id"), @CacheEvict(value = Caches.PROJECT, key = "#project.code") })
     public void modifyProject(Project project) {
         projectDao.update(project);
     }

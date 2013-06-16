@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="webPageEngine" class="org.focusns.common.web.page.engine.widget.WidgetPageEngine">
+        <property name="pageRenderInterceptors">
+            <list>
+                <bean class="org.focusns.web.page.interceptor.PageRenderParameterResolver" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pageFactory" class="org.focusns.common.web.page.config.xml.XmlPageFactory">
+        <property name="pageKeyGenerator">
+            <bean class="org.focusns.web.page.config.SimplePageKeyGenerator" />
+        </property>
+    </bean>
+
+</beans>

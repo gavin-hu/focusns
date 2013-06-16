@@ -24,22 +24,24 @@ package org.focusns.web.site;
 
 import java.util.List;
 
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectFeature;
 import org.focusns.service.core.ProjectFeatureService;
-import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Widget
+@RequestMapping("site")
 public class SubMenuWidget {
 
     @Autowired
     private ProjectFeatureService featureService;
 
-    @RequestMapping("site/menu-sub")
+    @RequestMapping("menu-sub")
     public String doView(@WidgetAttribute Project project, Model model) {
         //
         List<ProjectFeature> features = featureService.getProjectFeatures(project.getId());

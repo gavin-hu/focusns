@@ -35,11 +35,17 @@ public class BlogPostEventSubscriber {
 
     @Event(on = "CREATE_BLOG_POST", point = Event.Point.AFTER)
     public void afterCreateBlogPost(EventContext eventContext) {
-        BlogPost blogPost = (BlogPost) eventContext.getArguments()[0];
+        //
+        generateSummary(eventContext);
     }
 
     @Event(on = "MODIFY_BLOG_POST", point = Event.Point.AFTER)
     public void afterModifyBlogPost(EventContext eventContext) {
+        //
+        generateSummary(eventContext);
+    }
+
+    private void generateSummary(EventContext eventContext) {
         BlogPostDao blogPostDao = eventContext.getApplicationContext().getBean(BlogPostDao.class);
         BlogPost blogPost = (BlogPost) eventContext.getArguments()[0];
         String text = HtmlUtils.extractText(blogPost.getContent());

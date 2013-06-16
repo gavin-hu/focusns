@@ -22,6 +22,7 @@ package org.focusns.web.cms;
  * #L%
  */
 
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
@@ -31,7 +32,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+@Widget
 @RequestMapping("/cms")
 public class ArticleWidget {
 

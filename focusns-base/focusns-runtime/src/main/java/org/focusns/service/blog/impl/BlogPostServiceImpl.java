@@ -25,9 +25,11 @@ package org.focusns.service.blog.impl;
 import java.util.Date;
 
 import org.focusns.dao.blog.BlogPostDao;
+import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
+import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.blog.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +43,13 @@ public class BlogPostServiceImpl implements BlogPostService {
     @Autowired
     private BlogPostDao postDao;
     @Autowired
+    private ProjectDao projectDao;
+    @Autowired
     private ProjectUserDao projectUserDao;
 
     public BlogPost getBlogPost(long postId) {
-        return postDao.select(postId);
+        BlogPost blogPost = postDao.select(postId);
+        return fillBlogPost(blogPost);
     }
 
     public void createBlogPost(BlogPost post) {
@@ -61,39 +66,58 @@ public class BlogPostServiceImpl implements BlogPostService {
         }
         //
         postDao.insert(post);
+        //
+        fillBlogPost(post);
     }
 
     public void modifyBlogPost(BlogPost post) {
         post.setModifiedAt(new Date());
         postDao.update(post);
+        //
+        fillBlogPost(post);
     }
 
     public void removeBlogPost(BlogPost post) {
         postDao.delete(post.getId());
+        //
+        fillBlogPost(post);
     }
 
     public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId) {
         page = postDao.fetchByProjectAndCategoryId(page, projectId, categoryId);
         //
-        return associateObjects(page);
+        for (BlogPost blogPost : page.getResults()) {
+            fillBlogPost(blogPost);
+        }
+        return page;
     }
 
     public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {
         page = postDao.fetchByProjectAndCategoryId(page, projectId, null);
         //
-        return associateObjects(page);
+        for (BlogPost blogPost : page.getResults()) {
+            fillBlogPost(blogPost);
+        }
+        return page;
     }
 
-    private Page<BlogPost> associateObjects(Page<BlogPost> page) {
-        for (BlogPost blogPost : page.getResults()) {
-            ProjectUser createBy = projectUserDao.selectWithProject(blogPost.getCreatedById());
-            blogPost.setCreatedBy(createBy);
-            //
-            ProjectUser modifyBy = projectUserDao.selectWithProject(blogPost.getModifiedById());
-            blogPost.setModifiedBy(modifyBy);
+    private BlogPost fillBlogPost(BlogPost blogPost) {
+        if(blogPost==null) {
+            return  blogPost;
         }
-        //
-        return page;
+        if(blogPost.getProject()==null && blogPost.getProjectId()>0) {
+            Project project = projectDao.select(blogPost.getProjectId());
+            blogPost.setProject(project);
+        }
+        if(blogPost.getCreatedBy()==null && blogPost.getCreatedById()>0) {
+            ProjectUser createdBy = projectUserDao.select(blogPost.getCreatedById());
+            blogPost.setCreatedBy(createdBy);
+        }
+        if(blogPost.getModifiedBy()==null && blogPost.getModifiedById()>0) {
+            ProjectUser modifiedBy = projectUserDao.select(blogPost.getModifiedById());
+            blogPost.setModifiedBy(modifiedBy);
+        }
+        return blogPost;
     }
 
 }

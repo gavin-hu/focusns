@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page extends="project-profile" path="/profile" category="people">
+        <position name="mainColumn">
+            <widget styleClass="history-edit" target="/project/history-edit">
+                <navigation>
+                    <event on="history-created">/profile;p=#{projectHistory.code}</event>
+                </navigation>
+            </widget>
+            <widget styleClass="history-list" target="/project/history-list">
+                <navigation>
+                    <event on="history-created">/profile;p=#{projectHistory.code}</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+    <page extends="project-profile" path="/profile" category="people" mode="edit">
+        <position name="mainColumn">
+            <widget styleClass="user-edit" target="/project/user-edit">
+                <navigation>
+                    <event on="avatar-uploaded">/profile;p=#{projectUser.project.code},m=edit</event>
+                    <event on="avatar-cropped">/profile;p=#{projectUser.project.code},m=edit</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+    <page extends="project-profile" path="/profile" category="people" mode="link-list">
+        <position name="mainColumn">
+            <widget target="/project/link-list-detail" />
+        </position>
+    </page>
+</pages>

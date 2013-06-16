@@ -2,29 +2,28 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-bd>
+    <ui:widget-body>
         <div class="thumbnail">
-            <t:img-avatar dimension="260" projectId="${project.id}" projectUserId="${projectUser.id}" />
+            <tool:img-avatar dimension="260" projectId="${project.id}" projectUserId="${projectUser.id}" />
             <div class="caption">
                 <h3>${projectUser.username}</h3>
                 <p>
-                    <c:if test="${not empty sessionScope.user}">
-                    <a href='<c:url value="/${project.code}/${projectFeature.code}?mode=edit" />' class="btn">编辑</a>
+                    <c:if test="${not empty sessionScope.projectUser}">
+                        <a href='<c:url value="/${projectFeature.code};p=${project.code},m=edit" />' class="btn">编辑</a>
 
-                    <c:if test="${user.projectId != project.id}">
-                        <c:url value="${currentPath}" var="redirectTo" />
-                        <c:choose>
-                            <c:when test="${empty projectLink}">
-                                <a class="btn" href='<c:url value="/project/link/create.action?fromProjectId=${fromProject.id}&toProjectId=${toProject.id}&redirect=${redirectTo}" />'>添加关注</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a class="btn" href='<c:url value="/project/link/remove.action?fromProjectId=${projectLink.fromProjectId}&toProjectId=${projectLink.toProjectId}&redirect=${redirectTo}" />'>取消关注</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:if>
+                        <c:if test="${user.projectId != project.id}">
+                            <c:choose>
+                                <c:when test="${empty projectLink}">
+                                    <a class="btn" href='<widget:actionUrl value="/project/link-create?fromProjectId=${fromProject.id}&toProjectId=${toProject.id}" />'>添加关注</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="btn" href='<widget:actionUrl value="/project/link-remove?fromProjectId=${projectLink.fromProjectId}&toProjectId=${projectLink.toProjectId}" />'>取消关注</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:if>
                     </c:if>
                 </p>
             </div>
         </div>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>

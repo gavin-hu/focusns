@@ -31,18 +31,18 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/site")
+@RequestMapping("site")
 public class RegisterWidget {
 
     @Autowired
     private ProjectUserService projectUserService;
 
-    @RequestMapping("/register-form")
+    @RequestMapping("register-form")
     public String doEdit() {
         return "site/register-form";
     }
 
-    @RequestMapping("/register-user")
+    @RequestMapping("register-user")
     public String doCreate(@Validated(Register.class) ProjectUser user) {
         //
         projectUserService.createUser(user);

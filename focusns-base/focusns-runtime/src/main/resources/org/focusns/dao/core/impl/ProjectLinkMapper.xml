@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.focusns.dao.core.ProjectLinkDao">
 
+    <cache />
+
 	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectLink">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="from_project_id" property="fromProjectId" jdbcType="VARCHAR" />

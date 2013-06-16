@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-bd>
-        <form action='<c:url value="/widget/project/history-create" />' method="post">
+    <ui:widget-body>
+        <form action='<widget:actionUrl value="/project/history-create" />' method="post">
             <fieldset>
                 <legend>说说</legend>
                 <textarea name="content"></textarea>
@@ -16,5 +16,5 @@
                 <button class="btn btn-primary pull-right" type="submit">分享</button>
             </fieldset>
         </form>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>

@@ -24,22 +24,22 @@ package org.focusns.web.site;
 
 import java.util.List;
 
+import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.service.core.ProjectCategoryService;
-import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.annotation.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Widget
+@RequestMapping("site")
 public class MainMenuWidget {
 
     @Autowired
     private ProjectCategoryService categoryService;
 
-    @RequestMapping("/site/menu-main")
+    @RequestMapping("menu-main")
     public String doShow(Model model) {
         List<ProjectCategory> categories = categoryService.listCategories(true);
         model.addAttribute("categories", categories);

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page path="/index" extends="site">
+        <position name="mainColumn">
+            <!--<widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>5</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>6</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>7</categoryId>
+                </preference>
+            </widget>
+            <widget target="/cms/category-view">
+                <preference>
+                    <limit>5</limit>
+                    <categoryId>8</categoryId>
+                </preference>
+            </widget>-->
+        </position>
+    </page>
+    <page path="/login" extends="site">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/site/login-form">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+    <page path="/register">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar">
+                <navigation>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainColumn">
+            <widget target="/site/register-form" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+
+    <page path="/people" extends="site">
+
+    </page>
+</pages>

@@ -2,10 +2,10 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-hd>
+    <ui:widget-head>
         <h3>${blogPost.title}</h3>
-    </ui:widget-hd>
-    <ui:widget-bd>
+    </ui:widget-head>
+    <ui:widget-body>
         <p>${blogPost.content}</p>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>

@@ -1,5 +1,7 @@
+/*
 package org.focusns.web.springmvc.initializer;
 
+*/
 /*
  * #%L
  * FocusSNS Web
@@ -20,7 +22,8 @@ package org.focusns.web.springmvc.initializer;
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
- */
+ *//*
+
 
 import org.focusns.common.plugin.PluginFilter;
 import org.focusns.common.plugin.PluginListener;
@@ -45,10 +48,11 @@ public class PluginApplicationContextInitializer implements
             FileFilter pluginFilter = new PluginFilter();
             PluginListener pluginListener = (PluginListener) webApplicationContext;
             //
-            PluginMonitor pluginMonitor = new SimplePluginMonitor(10000, 10000, pluginDirs, pluginFilter, pluginListener);
+            PluginMonitor pluginMonitor = new SimplePluginMonitor(5000, 10000, pluginDirs, pluginFilter, pluginListener);
             //
             pluginMonitor.startup();
         }
 
     }
 }
+*/

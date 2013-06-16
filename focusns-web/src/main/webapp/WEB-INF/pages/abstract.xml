@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page abstract="site">
+        <position name="headerBar">
+            <widget target="/site/menu-main" cache="3600" />
+            <widget target="/site/login-bar" cache="3600">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget styleClass="menu-user" target="/site/menu-user" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" cache="3600" />
+        </position>
+    </page>
+    <page abstract="cms">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page abstract="project">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub" />
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page abstract="project-profile">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="userMenu">
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainMenu">
+            <widget target="/site/menu-main" />
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/project/user-view">
+                <navigation>
+                    <event on="link-created">/profile;p=#{projectLink.fromProject.code}</event>
+                    <event on="link-removed">/profile;p=#{projectLink.fromProject.code}</event>
+                </navigation>
+            </widget>
+            <widget context="/sample" target="/hello-world" />
+            <widget target="/project/link-list" />
+            <widget target="/project/link-list">
+                <preference>
+                    <reverse>true</reverse>
+                </preference>
+            </widget>
+        </position>
+        <position name="copyright">
+            <widget target="/site/copyright" />
+        </position>
+    </page>
+    <page abstract="project-blog">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar" />
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="leftColumn">
+            <widget target="/blog/menu-view" />
+            <widget target="/blog/category-list" />
+        </position>
+    </page>
+</pages>

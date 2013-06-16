@@ -25,6 +25,8 @@ package org.focusns.model.blog;
 import java.util.Date;
 
 import org.focusns.model.common.Id;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 
 public class BlogCategory extends Id {
 
@@ -33,6 +35,9 @@ public class BlogCategory extends Id {
     //
     private long createdById;
     private long projectId;
+    //
+    private Project project;
+    private ProjectUser createdBy;
 
     public BlogCategory() {
     }
@@ -72,5 +77,21 @@ public class BlogCategory extends Id {
 
     public void setCreatedById(long createdById) {
         this.createdById = createdById;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public ProjectUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
     }
 }

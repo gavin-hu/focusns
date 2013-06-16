@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page extends="project-blog" path="/blog" category="people">
+        <position name="mainColumn">
+            <widget target="/blog/post-list" />
+        </position>
+    </page>
+    <page extends="project-blog" path="/blog/post-edit" category="people">
+        <position name="mainColumn">
+            <widget target="/blog/post-edit" >
+                <navigation>
+                    <event on="post-created">/blog/post-view;p=#{blogPost.project.code}?postId=#{blogPost.id}</event>
+                    <event on="post-modified">/blog/post-view;p=#{blogPost.project.code}?postId=#{blogPost.id}</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+    <page extends="project-blog" path="/blog/post-view" category="people">
+        <position name="mainColumn">
+            <widget target="/blog/post-view" />
+        </position>
+    </page>
+    <page extends="project-blog" path="/blog/category-edit" category="people">
+        <position name="mainColumn">
+            <widget target="/blog/category-edit">
+                <navigation>
+                    <event on="category-created">/blog/category-edit;p=#{blogCategory.project.code}</event>
+                    <event on="category-modified">/blog/category-edit;p=#{blogCategory.project.code}</event>
+                    <event on="category-removed">/blog/category-edit;p=#{blogCategory.project.code}</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+</pages>

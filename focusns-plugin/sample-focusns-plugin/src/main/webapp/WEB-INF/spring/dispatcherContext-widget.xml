@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:component-scan base-package="org.focusns.plugin.sample">
+    	<context:include-filter type="annotation" expression="org.focusns.common.web.widget.stereotype.Widget"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:argument-resolvers>
+            <bean class="org.focusns.common.web.widget.mvc.method.WidgetMethodArgumentResolverComposite" />
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+            <constructor-arg ref="conversionService" />
+        </bean>
+        <bean class="org.focusns.common.web.widget.interceptor.WidgetCacheInterceptor" />
+    </mvc:interceptors>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+
+  <!--  <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>-->
+
+    <bean id="freeMarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/" />
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="number_format">0.######</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="template_update_delay">0</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="widgetViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="contentType" value="text/html;encoding=UTF-8" />
+        <property name="prefix" value="/WEB-INF/widgets/" />
+        <property name="suffix" value=".jsp" />
+        <property name="cache" value="false" />
+    </bean>
+
+</beans>

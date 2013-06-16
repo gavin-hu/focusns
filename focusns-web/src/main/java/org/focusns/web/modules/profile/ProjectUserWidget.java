@@ -22,11 +22,10 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
@@ -35,8 +34,7 @@ import org.focusns.service.core.ProjectUserService;
 import org.focusns.web.helper.Coordinate;
 import org.focusns.web.helper.RuntimeHelper;
 import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.annotation.Constraints;
-import org.focusns.web.widget.annotation.WidgetAttribute;
+import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
@@ -47,6 +45,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/project")
@@ -65,7 +66,7 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-edit")
-    @Constraints({ Constraint.PROJECT_REQUIRED, Constraint.PROJECT_USER_REQUIRED })
+    @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
     public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(project.getId(), projectUser.getId());
@@ -84,18 +85,18 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-view")
-    @Constraints({ Constraint.PROJECT_REQUIRED })
-    public String doView(@WidgetAttribute(required = false) ProjectUser sessionUser, @WidgetAttribute Project project,
+    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    public String doView(@WidgetAttribute(required = false) ProjectUser projectUser, @WidgetAttribute Project project,
             Model model) {
         //
-        ProjectUser projectUser = projectUserService.getUser(project.getCreatedById());
-        model.addAttribute("projectUser", projectUser);
+        ProjectUser dbUser = projectUserService.getUser(project.getCreatedById());
+        model.addAttribute("projectUser", dbUser);
         model.addAttribute("project", project);
         //
-        if (sessionUser != null) {
-            ProjectLink projectLink = projectLinkService.getProjectLink(sessionUser.getProjectId(), project.getId());
+        if (projectUser != null) {
+            ProjectLink projectLink = projectLinkService.getProjectLink(projectUser.getProjectId(), project.getId());
             model.addAttribute("projectLink", projectLink);
-            model.addAttribute("fromProject", sessionUser.getProject());
+            model.addAttribute("fromProject", projectUser.getProject());
             model.addAttribute("toProject", project);
         }
         //
@@ -103,10 +104,8 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar")
-    public @ResponseBody
-    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
-            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension)
-            throws IOException {
+    public @ResponseBody byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
+            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension) throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         if (isTempFile != null && isTempFile.booleanValue()) {
@@ -138,6 +137,8 @@ public class ProjectUserWidget implements ResourceLoaderAware {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         RuntimeHelper.setTempFile(avatarCoordinate, file.getInputStream());
+        //
+        Navigator.get().navigateTo("avatar-uploaded");
     }
 
     @RequestMapping("/user-avatar/crop")
@@ -149,6 +150,8 @@ public class ProjectUserWidget implements ResourceLoaderAware {
         File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
         File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
         ImageUtils.crop(tempFile, targetFile, rectangle);
+        //
+        Navigator.get().navigateTo("avatar-cropped");
     }
 
     private Coordinate getAvatarCoordinate(Object projectId, Object userId) {

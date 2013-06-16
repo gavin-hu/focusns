@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-bd>
-        <form action='<c:url value="/site/login.action"/>' method="post">
+    <ui:widget-body>
+        <form action='<c:url value="/site/login?widgetId=${widgetConfig.id}"/>' method="post">
             <fieldset>
                 <legend>登录</legend>
                 <label>用户名</label>
@@ -17,5 +17,5 @@
                 <button type="reset" class="btn">重置</button>
             </fieldset>
         </form>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>

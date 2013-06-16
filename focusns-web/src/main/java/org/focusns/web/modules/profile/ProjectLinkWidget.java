@@ -22,15 +22,16 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
+import org.focusns.common.web.widget.annotation.bind.WidgetPref;
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectLinkService;
 import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.annotation.Constraints;
-import org.focusns.web.widget.annotation.WidgetAttribute;
-import org.focusns.web.widget.annotation.WidgetPreference;
+import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,21 +46,21 @@ public class ProjectLinkWidget {
 
     @RequestMapping("/link-edit")
     @Constraints({ Constraint.PROJECT_NOT_MY_PROFILE })
-    public String doEdit(@WidgetAttribute ProjectUser user, @WidgetAttribute Project project, Model model) {
+    public String doEdit(@WidgetAttribute ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
         //
-        ProjectLink projectLink = projectLinkService.getProjectLink(user.getProjectId(), project.getId());
+        ProjectLink projectLink = projectLinkService.getProjectLink(projectUser.getProjectId(), project.getId());
         model.addAttribute("projectLink", projectLink);
-        model.addAttribute("fromProject", user.getProject());
+        model.addAttribute("fromProject", projectUser.getProject());
         model.addAttribute("toProject", project);
         //
         return "modules/profile/link-edit";
     }
 
     @RequestMapping("/link-list")
-    @Constraints({ Constraint.PROJECT_REQUIRED })
-    public String doList(@WidgetPreference(defaultValue = "6") Integer limit,
-            @WidgetPreference(defaultValue = "false") Boolean reverse,
-            @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    public String doList(@WidgetPref(defaultValue = "6") Integer limit,
+            @WidgetPref(defaultValue = "false") Boolean reverse,
+            @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if (reverse.booleanValue()) {
@@ -74,9 +75,9 @@ public class ProjectLinkWidget {
     }
 
     @RequestMapping("/link-list-detail")
-    @Constraints({ Constraint.PROJECT_REQUIRED })
-    public String doListDetail(@WidgetPreference(defaultValue = "10") Integer pageSize,
-            @WidgetPreference(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
+    @Constraints({ Constraint.PROJECT_NOT_NULL})
+    public String doListDetail(@WidgetPref(defaultValue = "10") Integer pageSize,
+            @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(pageSize);
         page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
@@ -85,7 +86,7 @@ public class ProjectLinkWidget {
         return "modules/profile/link-list-detail";
     }
 
-    @RequestMapping("/link/create")
+    @RequestMapping("/link-create")
     public void doCreate(ProjectLink link) {
         ProjectLink reverseProjectLink = projectLinkService.getProjectLink(link.getToProjectId(), link.getFromProjectId());
         if (reverseProjectLink != null) {
@@ -96,9 +97,11 @@ public class ProjectLinkWidget {
         }
         //
         projectLinkService.createProjectLink(link);
+        //
+        Navigator.get().withAttribute("projectLink", link).navigateTo("link-created");
     }
 
-    @RequestMapping("/link/remove")
+    @RequestMapping("/link-remove")
     public void doRemove(ProjectLink link) {
         //
         ProjectLink reverseProjectLink = projectLinkService.getProjectLink(link.getToProjectId(), link.getFromProjectId());
@@ -107,7 +110,9 @@ public class ProjectLinkWidget {
             projectLinkService.modifyProjectLink(reverseProjectLink);
         }
         //
-        projectLinkService.removeProjectLink(link.getFromProjectId(), link.getToProjectId());
+        projectLinkService.removeProjectLink(link);
+        //
+        Navigator.get().withAttribute("projectLink", link).navigateTo("link-removed");
     }
 
 }

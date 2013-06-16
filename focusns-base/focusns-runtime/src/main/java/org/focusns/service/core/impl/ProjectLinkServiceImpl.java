@@ -31,6 +31,7 @@ import org.focusns.service.core.ProjectLinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 @Service
 @Transactional
@@ -42,13 +43,15 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
     private ProjectLinkDao linkDao;
 
     public ProjectLink getProjectLink(long id) {
-        return linkDao.select(id);
+        ProjectLink projectLink = linkDao.select(id);
+        return fillProjectLink(projectLink);
     }
 
     public void createProjectLink(ProjectLink link) {
         ProjectLink dbLink = linkDao.selectByFromAndToProjectId(link.getFromProjectId(), link.getToProjectId());
         if (dbLink == null) {
             linkDao.insert(link);
+            fillProjectLink(link);
         } else {
             throw new RuntimeException("The link already exist!");
         }
@@ -56,18 +59,25 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     public void modifyProjectLink(ProjectLink link) {
         linkDao.update(link);
+        //
+        fillProjectLink(link);
     }
 
     public void removeProjectLink(ProjectLink link) {
-        linkDao.delete(link.getId());
-    }
-
-    public void removeProjectLink(long fromProjectId, long toProjectId) {
-        linkDao.deleteByFromAndToProjectId(fromProjectId, toProjectId);
+        if(link.getId()>0) {
+            linkDao.delete(link.getId());
+        } else {
+            Assert.isTrue(link.getFromProjectId()>0);
+            Assert.isTrue(link.getToProjectId()>0);
+            linkDao.deleteByFromAndToProjectId(link.getFromProjectId(), link.getToProjectId());
+        }
+        //
+        fillProjectLink(link);
     }
 
     public ProjectLink getProjectLink(long fromProjectId, long toProjectId) {
-        return linkDao.selectByFromAndToProjectId(fromProjectId, toProjectId);
+        ProjectLink projectLink = linkDao.selectByFromAndToProjectId(fromProjectId, toProjectId);
+        return fillProjectLink(projectLink);
     }
 
     public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
@@ -76,7 +86,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         //
         Project toProject = projectDao.select(toProjectId);
         for (ProjectLink projectLink : page.getResults()) {
-            projectLink.setToProject(toProject);
+            fillProjectLink(projectLink);
         }
         return page;
     }
@@ -87,9 +97,24 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         //
         Project fromProject = projectDao.select(fromProjectId);
         for (ProjectLink projectLink : page.getResults()) {
-            projectLink.setFromProject(fromProject);
+            fillProjectLink(projectLink);
         }
         return page;
+    }
+
+    private ProjectLink fillProjectLink(ProjectLink projectLink) {
+        if(projectLink==null) {
+            return projectLink;
+        }
+        if(projectLink.getFromProject()==null && projectLink.getFromProjectId()>0) {
+            Project fromProject = projectDao.select(projectLink.getFromProjectId());
+            projectLink.setFromProject(fromProject);
+        }
+        if(projectLink.getToProject()==null && projectLink.getToProjectId()>0) {
+            Project toProject = projectDao.select(projectLink.getToProjectId());
+            projectLink.setToProject(toProject);
+        }
+        return projectLink;
     }
 
 }

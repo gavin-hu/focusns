@@ -56,6 +56,9 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         if (user.getProjectId() > 0) {
             Project project = projectDao.select(user.getProjectId());
             user.setProject(project);
+            //
+            ProjectCategory projectCategory = projectCategoryDao.select(project.getCategoryId());
+            project.setCategory(projectCategory);
         }
         //
         return user;

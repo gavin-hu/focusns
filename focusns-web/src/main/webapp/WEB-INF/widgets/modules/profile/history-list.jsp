@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
-    <ui:widget-bd>
+    <ui:widget-body>
         <ul class="nav nav-tabs">
             <li class="active">
                 <a href="#">全部</a>
@@ -22,26 +22,26 @@
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href='<c:url value="/${history.createdBy.project.code}/profile" />'>
-                                <t:img-avatar styleClass="media-object" dimension="50" projectId="${history.createdBy.projectId}" projectUserId="${history.createdBy.id}" />
+                                <tool:img-avatar styleClass="media-object" dimension="50" projectId="${history.createdBy.projectId}" projectUserId="${history.createdBy.id}" />
                             </a>
                             <div class="media-body">
                                 <!--<h4 class="media-heading">Media heading</h4>-->
                                 <p>${history.content}</p>
-                                <t:abbr-date value="${history.createdAt}" />
+                                <tool:abbr-date value="${history.createdAt}" />
                                 <!-- Nested media object -->
                                 <c:forEach items="${history.children}" var="childHistory">
                                     <div class="media">
                                         <a class="pull-left" href='<c:url value="/${childHistory.createdBy.project.code}/profile" />'>
-                                            <t:img-avatar styleClass="media-object" dimension="50" projectId="${childHistory.createdBy.projectId}" projectUserId="${childHistory.createdBy.id}" />
+                                            <tool:img-avatar styleClass="media-object" dimension="50" projectId="${childHistory.createdBy.projectId}" projectUserId="${childHistory.createdBy.id}" />
                                         </a>
                                         <p>${childHistory.content}</p>
-                                        <t:abbr-date value="${childHistory.createdAt}" />
+                                        <tool:abbr-date value="${childHistory.createdAt}" />
                                     </div>
                                 </c:forEach>
                             </div>
 
-                            <c:if test="${not empty sessionScope.user}">
-                                <form action='<c:url value="/widget/project/history-create" />' method="post">
+                            <c:if test="${not empty sessionScope.projectUser}">
+                                <form action='<widget:actionUrl value="/project/history-create" />' method="post">
 
                                     <textarea name="content"></textarea>
 
@@ -60,5 +60,5 @@
                 </c:forEach>
             </c:otherwise>
         </c:choose>
-    </ui:widget-bd>
+    </ui:widget-body>
 </ui:widget>
