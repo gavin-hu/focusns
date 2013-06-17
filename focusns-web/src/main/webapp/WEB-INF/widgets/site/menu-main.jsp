@@ -2,12 +2,13 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ul class="nav">
-    <li <c:if test="${'/index' eq param.path}">class="active"</c:if> >
+    <li <c:if test="${fn:startsWith(pageConfig.path, '/index')}">class="active"</c:if> >
         <a href='<c:url value="/index" />'>首页</a>
     </li>
-    <c:forEach items="${requestScope.categories}" var="category">
-    <li <c:if test="${'/'.concat(category.code) eq param.path}">class="active"</c:if> >
-        <a href='<c:url value="/${category.code}"/> '>${category.label}</a>
+    <c:forEach items="${categories}" var="category">
+    <c:set var="categoryPath" value="/${category.code}"/>
+    <li <c:if test="${fn:startsWith(pageConfig.path, categoryPath)}">class="active"</c:if>>
+        <a href="<c:url value="/${category.code}"/>">${category.label}</a>
     <li>
     </c:forEach>
 </ul>

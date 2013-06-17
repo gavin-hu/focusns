@@ -4,12 +4,12 @@
         <position name="mainColumn">
             <widget styleClass="history-edit" target="/project/history-edit">
                 <navigation>
-                    <event on="history-created">/profile;p=#{projectHistory.code}</event>
+                    <event on="history-created">/profile;p=#{projectHistory.project.code}</event>
                 </navigation>
             </widget>
             <widget styleClass="history-list" target="/project/history-list">
                 <navigation>
-                    <event on="history-created">/profile;p=#{projectHistory.code}</event>
+                    <event on="history-created">/profile;p=#{projectHistory.project.code}</event>
                 </navigation>
             </widget>
         </position>
