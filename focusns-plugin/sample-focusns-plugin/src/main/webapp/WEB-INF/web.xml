@@ -2,10 +2,20 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <!-- Web Application Name -->
+    <!-- Web Plugin Application Name -->
     <display-name>Sample FocusSNS Plugin</display-name>
 
-    <!-- MVC Dispatcher -->
+    <!-- Web Plugin Application Context Parameters -->
+    <context-param>
+        <param-name>parentContextKey</param-name>
+        <param-value>applicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext-web-plugin.xml</param-value>
+    </context-param>
+
+    <!-- Plugin MVC Dispatcher -->
     <servlet>
         <servlet-name>widgetDispatcherServlet</servlet-name>
         <servlet-class>org.focusns.common.web.widget.WidgetDispatcherServlet</servlet-class>
@@ -14,6 +24,11 @@
         <servlet-name>widgetDispatcherServlet</servlet-name>
         <url-pattern>/widget/*</url-pattern>
     </servlet-mapping>
+
+    <!-- Plugin Web Application Listener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <jsp-config>
         <jsp-property-group>

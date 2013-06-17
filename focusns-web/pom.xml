@@ -28,6 +28,13 @@
                         </contextHandler>
                     </contextHandlers>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.focusns</groupId>
+                        <artifactId>focusns-runtime</artifactId>
+                        <version>${project.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -36,11 +43,13 @@
         <dependency>
             <groupId>org.focusns</groupId>
             <artifactId>focusns-runtime</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -56,14 +65,6 @@
             <artifactId>standard</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-        </dependency>
     </dependencies>
 
     <profiles>

@@ -7,8 +7,12 @@
 
     <!-- Web Application Context Parameters -->
     <context-param>
+        <param-name>parentContextKey</param-name>
+        <param-value>applicationContext</param-value>
+    </context-param>
+    <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath*:applicationContext.xml</param-value>
+        <param-value>classpath:applicationContext-web.xml</param-value>
     </context-param>
     <context-param>
         <param-name>log4jConfigLocation</param-name>
@@ -43,20 +47,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
- <!--   <filter>
-        <filter-name>UrlRewriteFilter</filter-name>
-        <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-        <init-param>
-            <param-name>confReloadCheckInterval</param-name>
-            <param-value>0</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>UrlRewriteFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>-->
     <filter>
         <filter-name>pageFilter</filter-name>
         <filter-class>org.focusns.common.web.page.PageFilter</filter-class>
@@ -71,7 +61,7 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
-    <!-- Resource Servlet -->
+    <!-- Static Dispatcher -->
     <servlet>
         <servlet-name>staticDispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -96,47 +86,6 @@
         <servlet-name>widgetDispatcherServlet</servlet-name>
         <url-pattern>/widget/*</url-pattern>
     </servlet-mapping>
-    <!--<servlet>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <param-name>contextConfigLocation</param-name>
-            <param-value>/WEB-INF/spring/dispatcherContext-static.xml</param-value>
-        </init-param>
-        <init-param>
-            <param-name>contextInitializerClasses</param-name>
-            <param-value>
-                org.focusns.web.springmvc.initializer.ApplicationInitializer,
-            </param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/portal</url-pattern>
-    </servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>widgetDispatcherServlet</servlet-name>-->
-        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
-        <!--<init-param>-->
-            <!--<param-name>contextConfigLocation</param-name>-->
-            <!--<param-value>/WEB-INF/spring/dispatcherContext-plugin.xml</param-value>-->
-        <!--</init-param>-->
-        <!--<init-param>-->
-            <!--<param-name>contextClass</param-name>-->
-            <!--<param-value>org.focusns.web.springmvc.context.PluginWebApplicationContext</param-value>-->
-        <!--</init-param>-->
-        <!--<init-param>-->
-            <!--<param-name>contextInitializerClasses</param-name>-->
-            <!--<param-value>-->
-                <!--org.focusns.web.springmvc.initializer.PluginApplicationContextInitializer-->
-            <!--</param-value>-->
-        <!--</init-param>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>widgetDispatcherServlet</servlet-name>-->
-        <!--<url-pattern>/widget/*</url-pattern>-->
-    <!--</servlet-mapping>-->
 
     <!-- Web Application Listener -->
     <listener>

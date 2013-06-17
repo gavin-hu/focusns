@@ -14,6 +14,7 @@
         <dependency>
             <groupId>org.focusns</groupId>
             <artifactId>focusns-runtime</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

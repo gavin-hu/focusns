@@ -81,7 +81,7 @@
                     <event on="link-removed">/profile;p=#{projectLink.fromProject.code}</event>
                 </navigation>
             </widget>
-            <widget context="/sample" target="/hello-world" />
+            <widget context="/sample" target="/project-info" />
             <widget target="/project/link-list" />
             <widget target="/project/link-list">
                 <preference>
