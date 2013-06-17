@@ -2,7 +2,7 @@
 <pages>
     <page abstract="site">
         <position name="headerBar">
-            <widget target="/site/menu-main" cache="3600" />
+            <widget target="/site/menu-main"/>
             <widget target="/site/login-bar" cache="3600">
                 <navigation>
                     <event on="auth-failure">/login</event>
