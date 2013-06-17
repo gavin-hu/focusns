@@ -6,3 +6,4 @@
 # directories #
 target/
 .idea/
+dist/
