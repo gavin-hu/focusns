@@ -8,7 +8,7 @@
             <fieldset>
                 <legend>头像上传</legend>
 
-                <input type="file" name="file" title="选择文件..." />
+                <input type="file" name="file" title="本地浏览..." />
 
                 <input type="hidden" name="projectId" value="${project.id}" />
                 <input type="hidden" name="userId" value="${projectUser.id}" />
