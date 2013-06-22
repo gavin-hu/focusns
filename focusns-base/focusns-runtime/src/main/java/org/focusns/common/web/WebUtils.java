@@ -57,6 +57,9 @@ public abstract class WebUtils {
     public static <T> ResponseEntity<T> getResponseEntity(T body, MediaType mediaType) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(mediaType);
+        if(body instanceof byte[]) {
+            httpHeaders.setContentLength(((byte[])body).length);
+        }
         return new ResponseEntity<T>(body, httpHeaders, HttpStatus.OK);
     }
 

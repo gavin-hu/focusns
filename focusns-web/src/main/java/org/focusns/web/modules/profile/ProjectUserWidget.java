@@ -38,6 +38,7 @@ import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -45,6 +46,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
@@ -68,7 +70,7 @@ public class ProjectUserWidget {
     public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) throws IOException {
         //
         Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
-        if(storageService.existsTempResource(avatarCoordinates)) {
+        if(storageService.checkTempResource(avatarCoordinates)>0) {
             model.addAttribute("tempExists", true);
         }
         //
@@ -99,19 +101,41 @@ public class ProjectUserWidget {
 
     @RequestMapping("/user-avatar/download")
     public ResponseEntity<byte[]> doAvatar(@RequestParam Long userId, @RequestParam(required = false) Boolean temp,
-            @RequestParam(required = false) Integer width, @RequestParam(required = false) Integer height) throws IOException {
+            @RequestParam(required = false) Integer width, @RequestParam(required = false) Integer height, WebRequest webRequest) throws IOException {
         //
+        boolean notModified = false;
         InputStream inputStream = null;
+        //
         ProjectUser projectUser = projectUserService.getUser(userId);
         Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
         if(temp!=null && temp.booleanValue()) {
-            inputStream = storageService.loadTempResource(avatarCoordinates);
+            long lastModified = storageService.checkTempResource(avatarCoordinates);
+            if(lastModified>0 && webRequest.checkNotModified(lastModified)) {
+                notModified = true;
+            } else {
+                inputStream = storageService.loadTempResource(avatarCoordinates);
+            }
         } else if(width==null || height==null) {
-            inputStream = storageService.loadResource(avatarCoordinates);
+            long lastModified = storageService.checkResource(avatarCoordinates);
+            if(lastModified>0 && webRequest.checkNotModified(lastModified)) {
+                notModified = true;
+            } else {
+                inputStream = storageService.loadResource(avatarCoordinates);
+            }
         } else {
             Object size = width + "x" + height;
-            inputStream = storageService.loadSizedResource(size, avatarCoordinates);
+            long lastModified = storageService.checkSizedResource(size, avatarCoordinates);
+            if(lastModified>0 && webRequest.checkNotModified(lastModified)) {
+                notModified = true;
+            } else {
+                inputStream = storageService.loadSizedResource(size, avatarCoordinates);
+            }
         }
+        //
+        if(notModified) {
+            return new ResponseEntity<byte[]>(HttpStatus.NOT_MODIFIED);
+        }
+        //
         return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(inputStream), MediaType.IMAGE_PNG);
     }
 

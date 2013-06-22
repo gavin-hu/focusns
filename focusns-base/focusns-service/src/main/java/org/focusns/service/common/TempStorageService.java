@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 public interface TempStorageService extends StorageService {
 
-    boolean existsTempResource(Object... coordinates) throws IOException;
+    long checkTempResource(Object... coordinates) throws IOException;
 
     InputStream loadTempResource(Object...coordinates) throws IOException;
 

@@ -14,12 +14,14 @@ import org.focusns.service.photo.AlbumService;
 import org.focusns.service.photo.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -88,16 +90,32 @@ public class PhotoWidget {
 
     @RequestMapping("photo-download")
     public ResponseEntity<byte[]> doDownload(@RequestParam Long photoId, @RequestParam(required = false) Integer width,
-                                             @RequestParam(required = false) Integer height) throws IOException {
+                                             @RequestParam(required = false) Integer height, WebRequest webRequest) throws IOException {
+        //
+        boolean notModified = false;
+        InputStream inputStream = null;
         //
         Photo photo = photoService.getPhoto(photoId);
         Object[] photoCoordinates = CoordinateHelper.getPhotoCoordinates(photo);
-        InputStream inputStream = null;
         if(width==null || height==null) {
-            inputStream = storageService.loadResource(photoCoordinates);
+            long lastModified = storageService.checkResource(photoCoordinates);
+            if(lastModified>0 && webRequest.checkNotModified(lastModified)) {
+                notModified = true;
+            } else {
+                inputStream = storageService.loadResource(photoCoordinates);
+            }
         } else {
             Object size = width + "x" + height;
-            inputStream = storageService.loadSizedResource(size, photoCoordinates);
+            long lastModified = storageService.checkSizedResource(size, photoCoordinates);
+            if(lastModified>0 &&webRequest.checkNotModified(lastModified)) {
+                notModified = true;
+            } else {
+                inputStream = storageService.loadSizedResource(size, photoCoordinates);
+            }
+        }
+        //
+        if(notModified) {
+            return new ResponseEntity<byte[]>(HttpStatus.NOT_MODIFIED);
         }
         //
         return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(inputStream), MediaType.IMAGE_PNG);

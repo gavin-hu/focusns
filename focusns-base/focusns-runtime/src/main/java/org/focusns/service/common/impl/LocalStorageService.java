@@ -23,9 +23,9 @@ public class LocalStorageService implements StorageService {
     protected ResourceLoader resourceLoader = new FileSystemResourceLoader();
 
     @Override
-    public boolean existsResource(Object... coordinates) throws IOException {
+    public long checkResource(Object... coordinates) throws IOException {
         Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
-        return resource.exists();
+        return resource.exists() ? resource.lastModified() : 0;
     }
 
     @Override
@@ -35,6 +35,32 @@ public class LocalStorageService implements StorageService {
             createResource(resource);
         }
         return resource.getInputStream();
+    }
+
+    private int[] parseStringSize(String size) {
+        int[] wh = new int[2];
+        String[] parts = StringUtils.split((String) size, "x");
+        wh[0] = Integer.parseInt(parts[0]);
+        wh[1] = Integer.parseInt(parts[1]);
+        return wh;
+    }
+
+    @Override
+    public long persistResource(InputStream inputStream, Object... coordinates) throws IOException {
+        Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
+        if(!resource.exists()) {
+            createResource(resource);
+        }
+        FileCopyUtils.copy(inputStream, new FileOutputStream(resource.getFile()));
+        return resource.lastModified();
+    }
+
+    @Override
+    public void removeResource(Object... coordinates) throws IOException {
+        Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
+        if(resource.exists()) {
+            resource.getFile().delete();
+        }
     }
 
     @Override
@@ -67,35 +93,16 @@ public class LocalStorageService implements StorageService {
         String fileName = resource.getFilename();
         File fileDir = resource.getFile().getParentFile();
         for(File file : fileDir.listFiles()) {
-           if(file.getName().startsWith(fileName+"_")) {
+            if(file.getName().startsWith(fileName+"_")) {
                 file.delete();
-           }
+            }
         }
-    }
-
-    private int[] parseStringSize(String size) {
-        int[] wh = new int[2];
-        String[] parts = StringUtils.split((String) size, "x");
-        wh[0] = Integer.parseInt(parts[0]);
-        wh[1] = Integer.parseInt(parts[1]);
-        return wh;
     }
 
     @Override
-    public void persistResource(InputStream inputStream, Object... coordinates) throws IOException {
-        Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
-        if(!resource.exists()) {
-            createResource(resource);
-        }
-        FileCopyUtils.copy(inputStream, new FileOutputStream(resource.getFile()));
-    }
-
-    @Override
-    public void removeResource(Object... coordinates) throws IOException {
-        Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
-        if(resource.exists()) {
-            resource.getFile().delete();
-        }
+    public long checkSizedResource(Object size, Object... coordinates) throws IOException {
+        Resource sizedResource = resourceLoader.getResource(getSizedResourceLocation(size, coordinates));
+        return sizedResource.exists()?sizedResource.lastModified() : 0;
     }
 
     private void createResource(Resource resource) throws IOException {

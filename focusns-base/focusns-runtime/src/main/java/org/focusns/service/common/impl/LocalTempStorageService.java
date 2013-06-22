@@ -10,8 +10,8 @@ import java.io.InputStream;
 public class LocalTempStorageService extends LocalStorageService implements TempStorageService {
 
     @Override
-    public boolean existsTempResource(Object... coordinates) throws IOException {
-        return super.existsResource(getTempCoordinates(coordinates));
+    public long checkTempResource(Object... coordinates) throws IOException {
+        return super.checkResource(getTempCoordinates(coordinates));
     }
 
     @Override
