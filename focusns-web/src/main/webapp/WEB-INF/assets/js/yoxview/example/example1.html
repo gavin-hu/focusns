@@ -1,14 +1,22 @@
 <html>
 	<head>
 		<title>Example1</title>
+	
+		<!--
 		<link href="../yoxview.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 		<script src="../yox.js"></script>
 		<script src="../jquery.yoxview.js"></script>
+		-->
+		
+		<script src="../yox.js"></script>
+		<script type="text/javascript" src="../yoxview-init.js"></script>
+		<script type="text/javascript" src="../jquery.yoxthumbs.js"></script>
 		<script type="text/javascript">
 		$(function(){
 			$('.yoxview').yoxview({
-				lang: 'zh-cn'
+				lang: 'zh-cn',
+				skin: 'top_menu'
 			});
 		});
 		</script>
@@ -16,7 +24,10 @@
 	<body>
 		<div class="yoxview">
 			<a href="images/Koala.jpg">
-				<img src="images/koala.PNG" />
+				<img title="Koala" src="images/koala.PNG" />
+			</a>
+			<a href="images/Penguins.jpg">
+				<img title="Penguins" src="images/Penguins.PNG" />
 			</a>
 		</div>
 	</body>
