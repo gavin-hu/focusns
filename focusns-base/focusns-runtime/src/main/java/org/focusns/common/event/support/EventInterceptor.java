@@ -154,7 +154,7 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
             Object[] args = joinPoint.getArgs();
             String methodName = signature.getName();
             Class<?> classType = joinPoint.getTarget().getClass();
-            for (Method method : classType.getDeclaredMethods()) {
+            for (Method method : classType.getMethods()) {
                 if (isSameMethod(method, methodName, args)) {
                     // cache and return
                     methodCache.put(key, method);

@@ -39,6 +39,9 @@ public class Photo extends Id {
     private Album album;
     private Project project;
     private ProjectUser createdBy;
+    // helpers
+    private int width;
+    private int height;
 
     public long getAlbumId() {
         return albumId;
@@ -94,5 +97,21 @@ public class Photo extends Id {
 
     public void setCreatedBy(ProjectUser createdBy) {
         this.createdBy = createdBy;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }

@@ -32,6 +32,13 @@ import javax.imageio.ImageIO;
 
 public class ImageUtils {
 
+    /**
+     * 裁剪图片
+     * @param original
+     * @param target
+     * @param rectangle
+     * @throws IOException
+     */
     public static void crop(File original, File target, Rectangle rectangle) throws IOException {
         //
         int x = rectangle.getXInt();
@@ -64,6 +71,21 @@ public class ImageUtils {
         targetFile.createNewFile();
         //
         crop(new FileInputStream(originalFile), new FileOutputStream(targetFile), x, y, w, h, format);
+    }
+
+    /**
+     * 裁剪图片
+     * @param originalStream
+     * @param targetStream
+     * @param rectangle
+     */
+    public static void crop(InputStream originalStream, OutputStream targetStream, Rectangle rectangle) throws IOException {
+        int x = rectangle.getXInt();
+        int y = rectangle.getYInt();
+        int w = rectangle.getWInt();
+        int h = rectangle.getHInt();
+        //
+        ImageUtils.crop(originalStream, targetStream, x, y, w, h, "PNG");
     }
 
     /**

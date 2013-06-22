@@ -1,6 +1,5 @@
 package org.focusns.web.modules.photo;
 
-import org.focusns.common.image.ImageUtils;
 import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.mvc.support.Navigator;
@@ -9,25 +8,22 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.model.photo.Album;
 import org.focusns.model.photo.Photo;
+import org.focusns.service.common.StorageService;
+import org.focusns.service.common.helper.CoordinateHelper;
 import org.focusns.service.photo.AlbumService;
 import org.focusns.service.photo.PhotoService;
-import org.focusns.web.helper.Coordinate;
-import org.focusns.web.helper.RuntimeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Widget
@@ -38,6 +34,8 @@ public class PhotoWidget {
     private PhotoService photoService;
     @Autowired
     private AlbumService albumService;
+    @Autowired@Qualifier("localStorageService")
+    private StorageService storageService;
 
     @RequestMapping("photo-list")
     public String doList(@RequestParam Long albumId, Model model) {
@@ -67,10 +65,10 @@ public class PhotoWidget {
     }
 
     @RequestMapping("photo-remove")
-    public void doRemove(Photo photo) {
+    public void doRemove(Photo photo) throws IOException {
         photoService.removePhoto(photo);
-        Coordinate photoCoordinate = getPhotoCoordinate(photo);
-        RuntimeHelper.cleanTargetFile(photoCoordinate);
+        Object[] photoCoordinates = CoordinateHelper.getPhotoCoordinates(photo);
+        storageService.removeResource(photoCoordinates);
         //
         Navigator.get().withAttribute("photo", photo).navigateTo("photo-removed");
     }
@@ -81,36 +79,28 @@ public class PhotoWidget {
         if(!file.isEmpty()) {
             //
             photoService.createPhoto(photo);
-            Coordinate photoCoordinate = getPhotoCoordinate(photo);
-            RuntimeHelper.cleanTargetFile(photoCoordinate);
-            RuntimeHelper.setTargetFile(photoCoordinate, file.getInputStream());
+            Object[] photoCoordinates = CoordinateHelper.getPhotoCoordinates(photo);
+            storageService.persistResource(file.getInputStream(), photoCoordinates);
             //
             Navigator.get().withAttribute("photo", photo).navigateTo("photo-uploaded");
         }
     }
 
     @RequestMapping("photo-download")
-    public ResponseEntity<byte[]> doDownload(@RequestParam Long photoId, @RequestParam(required = false) Integer dimension)
-            throws IOException {
+    public ResponseEntity<byte[]> doDownload(@RequestParam Long photoId, @RequestParam(required = false) Integer width,
+                                             @RequestParam(required = false) Integer height) throws IOException {
         //
         Photo photo = photoService.getPhoto(photoId);
-        Coordinate photoCoordinate = getPhotoCoordinate(photo);
-        File targetFile = RuntimeHelper.getTargetFile(photoCoordinate);
-        //
-        if(dimension!=null) {
-            photoCoordinate.setDimension(dimension);
-            File resizedTargetFile = RuntimeHelper.getTargetFile(photoCoordinate);
-            if(!resizedTargetFile.exists()) {
-                ImageUtils.resize(targetFile, resizedTargetFile, dimension, dimension, "PNG");
-            }
-            targetFile = resizedTargetFile;
+        Object[] photoCoordinates = CoordinateHelper.getPhotoCoordinates(photo);
+        InputStream inputStream = null;
+        if(width==null || height==null) {
+            inputStream = storageService.loadResource(photoCoordinates);
+        } else {
+            Object size = width + "x" + height;
+            inputStream = storageService.loadSizedResource(size, photoCoordinates);
         }
         //
-        return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(targetFile), MediaType.IMAGE_PNG);
-    }
-
-    private Coordinate getPhotoCoordinate(Photo photo) {
-        return new Coordinate(photo.getProjectId(), "photo", "photo", photo.getId());
+        return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(inputStream), MediaType.IMAGE_PNG);
     }
 
 }

@@ -22,7 +22,7 @@
                     <ul class="media-list">
                         <li class="media">
                             <a class="pull-left" href='<c:url value="/${history.createdBy.project.code}/profile" />'>
-                                <tool:img-avatar styleClass="media-object" dimension="50" projectId="${history.createdBy.projectId}" projectUserId="${history.createdBy.id}" />
+                                <tool:img-avatar styleClass="media-object" projectUserId="${history.createdBy.id}" width="50" height="50" />
                             </a>
                             <div class="media-body">
                                 <!--<h4 class="media-heading">Media heading</h4>-->
@@ -32,7 +32,7 @@
                                 <c:forEach items="${history.children}" var="childHistory">
                                     <div class="media">
                                         <a class="pull-left" href='<c:url value="/${childHistory.createdBy.project.code}/profile" />'>
-                                            <tool:img-avatar styleClass="media-object" dimension="50" projectId="${childHistory.createdBy.projectId}" projectUserId="${childHistory.createdBy.id}" />
+                                            <tool:img-avatar styleClass="media-object" projectUserId="${childHistory.createdBy.id}" width="50" height="50" />
                                         </a>
                                         <p>${childHistory.content}</p>
                                         <tool:abbr-date value="${childHistory.createdAt}" />

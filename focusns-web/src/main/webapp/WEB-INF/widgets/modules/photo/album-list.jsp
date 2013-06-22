@@ -23,7 +23,7 @@
                                             <img alt="260x260" src="<c:url value="/static/themes/default/img/album-no.jpg" />">
                                         </c:when>
                                         <c:otherwise>
-                                            <img src="<widget:actionUrl value="/photo/photo-download?photoId=${album.photoId}&dimension=260" />" />
+                                            <img src="<widget:actionUrl value="/photo/photo-download?photoId=${album.photoId}&width=260&height=200" />" />
                                         </c:otherwise>
                                     </c:choose>
                                 </a>

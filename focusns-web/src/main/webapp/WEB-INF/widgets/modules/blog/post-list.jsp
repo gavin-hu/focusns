@@ -2,6 +2,9 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget>
+    <ui:widget-head>
+        <h3>日志列表</h3>
+    </ui:widget-head>
     <ui:widget-body>
         <c:choose>
             <c:when test="${empty page.results}">
@@ -19,7 +22,7 @@
                 <c:forEach items="${page.results}" var="blogPost">
                     <div class="media">
                         <a class="pull-left" href='<c:url value="/profile;p=${blogPost.createdBy.project.code}" />'>
-                            <tool:img-avatar dimension="64" projectId="${blogPost.projectId}" projectUserId="${blogPost.createdById}" />
+                            <tool:img-avatar projectUserId="${blogPost.createdById}" width="60" height="60" />
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">

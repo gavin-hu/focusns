@@ -5,7 +5,7 @@
     <ui:widget-body>
         <div class="navbar-text pull-right dropdown">
             <a class="navbar-link dropdown-toggle" data-toggle="dropdown" href="#">
-                <tool:img-avatar styleClass="avatar" dimension="24" projectId="${sessionScope.projectUser.projectId}" projectUserId="${sessionScope.projectUser.id}" />
+                <tool:img-avatar styleClass="avatar" projectUserId="${sessionScope.projectUser.id}" width="24" height="24" />
                 ${sessionScope.projectUser.username}
             </a>
             <a class="navbar-link" href="<widget:actionUrl value="/site/logout" />">

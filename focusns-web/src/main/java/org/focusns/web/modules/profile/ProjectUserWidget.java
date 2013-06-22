@@ -22,9 +22,6 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
-import java.io.File;
-import java.io.IOException;
-
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
 import org.focusns.common.web.WebUtils;
@@ -33,15 +30,14 @@ import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
+import org.focusns.service.common.TempStorageService;
+import org.focusns.service.common.helper.CoordinateHelper;
 import org.focusns.service.core.ProjectLinkService;
 import org.focusns.service.core.ProjectUserService;
-import org.focusns.web.helper.Coordinate;
-import org.focusns.web.helper.RuntimeHelper;
 import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -49,36 +45,31 @@ import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 @RequestMapping("/project")
-public class ProjectUserWidget implements ResourceLoaderAware {
+public class ProjectUserWidget {
 
+    @Autowired@Qualifier("localTempStorageService")
+    private TempStorageService storageService;
     @Autowired
     private ProjectUserService projectUserService;
     @Autowired
     private ProjectLinkService projectLinkService;
 
-    private ResourceLoader resourceLoader;
-
-    @Override
-    public void setResourceLoader(ResourceLoader resourceLoader) {
-        this.resourceLoader = resourceLoader;
-    }
-
     @RequestMapping("/user-edit")
     @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL })
-    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
+    public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) throws IOException {
         //
-        Coordinate avatarCoordinate = getAvatarCoordinate(project.getId(), projectUser.getId());
-        if (RuntimeHelper.isTempFileExists(avatarCoordinate)) {
-            model.addAttribute("hasTempFile", true);
-        }
-        //
-        if (RuntimeHelper.isTargetFileExists(avatarCoordinate)) {
-            model.addAttribute("hasTargetFile", true);
+        Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
+        if(storageService.existsTempResource(avatarCoordinates)) {
+            model.addAttribute("tempExists", true);
         }
         //
         model.addAttribute("project", project);
@@ -106,41 +97,31 @@ public class ProjectUserWidget implements ResourceLoaderAware {
         return "modules/profile/user-view";
     }
 
-    @RequestMapping("/user-avatar")
-    public ResponseEntity<byte[]> doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
-            @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension)
-            throws IOException {
+    @RequestMapping("/user-avatar/download")
+    public ResponseEntity<byte[]> doAvatar(@RequestParam Long userId, @RequestParam(required = false) Boolean temp,
+            @RequestParam(required = false) Integer width, @RequestParam(required = false) Integer height) throws IOException {
         //
-        Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
-        if (isTempFile != null && isTempFile.booleanValue()) {
-            File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
-            return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(tempFile), MediaType.IMAGE_PNG);
+        InputStream inputStream = null;
+        ProjectUser projectUser = projectUserService.getUser(userId);
+        Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
+        if(temp!=null && temp.booleanValue()) {
+            inputStream = storageService.loadTempResource(avatarCoordinates);
+        } else if(width==null || height==null) {
+            inputStream = storageService.loadResource(avatarCoordinates);
         } else {
-            File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-            if (targetFile == null || !targetFile.exists()) {
-                targetFile = getDefaultAvatarFile("default");
-            }
-            //
-            if (dimension != null) {
-                avatarCoordinate.setDimension(dimension);
-                File resizedTargetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-                if (!resizedTargetFile.exists()) {
-                    ImageUtils.resize(targetFile, resizedTargetFile, dimension, dimension, "PNG");
-                }
-                //
-                targetFile = resizedTargetFile;
-            }
-            //
-            return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(targetFile), MediaType.IMAGE_PNG);
+            Object size = width + "x" + height;
+            inputStream = storageService.loadSizedResource(size, avatarCoordinates);
         }
+        return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(inputStream), MediaType.IMAGE_PNG);
     }
 
     @RequestMapping("/user-avatar/upload")
     public void doUpload(@RequestParam Long projectId, @RequestParam Long userId, MultipartFile file)
             throws IOException {
         //
-        Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
-        RuntimeHelper.setTempFile(avatarCoordinate, file.getInputStream());
+        ProjectUser projectUser = projectUserService.getUser(userId);
+        Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
+        storageService.persistTempResource(file.getInputStream(), avatarCoordinates);
         //
         Navigator.get().navigateTo("avatar-uploaded");
     }
@@ -148,22 +129,17 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     @RequestMapping("/user-avatar/crop")
     public void doCrop(@RequestParam Long projectId, @RequestParam Long userId, Rectangle rectangle) throws IOException {
         //
-        Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
-        RuntimeHelper.cleanTargetFile(avatarCoordinate);
+        ProjectUser projectUser = projectUserService.getUser(userId);
+        Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
         //
-        File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
-        File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
-        ImageUtils.crop(tempFile, targetFile, rectangle);
+        InputStream tempInputStream = storageService.loadTempResource(avatarCoordinates);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageUtils.crop(tempInputStream, baos, rectangle);
+        // bridge from ByteArrayOutputStream
+        InputStream targetInputStream = new ByteArrayInputStream(baos.toByteArray());
+        storageService.persistResource(targetInputStream, avatarCoordinates);
+        storageService.cleanSizedResource(avatarCoordinates);
         //
         Navigator.get().navigateTo("avatar-cropped");
     }
-
-    private Coordinate getAvatarCoordinate(Object projectId, Object userId) {
-        return new Coordinate(projectId, "profile", "avatar", userId);
-    }
-
-    private File getDefaultAvatarFile(String themeName) throws IOException {
-        return resourceLoader.getResource(String.format("/WEB-INF/themes/%s/img/person_65.png", themeName)).getFile();
-    }
-
 }

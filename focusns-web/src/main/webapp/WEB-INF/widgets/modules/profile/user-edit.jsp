@@ -17,9 +17,9 @@
             </fieldset>
         </form>
 
-        <c:if test="${hasTempFile}">
+        <c:if test="${tempExists}">
             <div class="cropper-wrapper temp-avatar">
-                <img id="cropper" class="thumbnail" src="<widget:actionUrl value="/project/user-avatar?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />" alt="Avatar" />
+                <img id="cropper" src="<widget:actionUrl value="/project/user-avatar/download?projectId=${project.id}&userId=${projectUser.id}&temp=true" />" alt="Avatar" />
                 <form action='<widget:actionUrl value="/project/user-avatar/crop"/>' method="post">
                     <input type="hidden" id="x" name="x" />
                     <input type="hidden" id="y" name="y" />

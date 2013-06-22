@@ -19,7 +19,7 @@
                             <li class="span2">
                                 <div class="thumbnail">
                                     <a href="<widget:actionUrl value="/photo/photo-download?photoId=${photo.id}" />">
-                                        <img src="<widget:actionUrl value="/photo/photo-download?photoId=${photo.id}&dimension=200" />" />
+                                        <img src="<widget:actionUrl value="/photo/photo-download?photoId=${photo.id}&dimension=200x200" />" />
                                     </a>
                                 </div>
                             </li>

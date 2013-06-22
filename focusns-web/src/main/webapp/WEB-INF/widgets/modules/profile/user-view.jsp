@@ -4,7 +4,7 @@
 <ui:widget>
     <ui:widget-body>
         <div class="thumbnail">
-            <tool:img-avatar dimension="260" projectId="${project.id}" projectUserId="${projectUser.id}" />
+            <tool:img-avatar projectUserId="${projectUser.id}" width="260" height="260" />
             <div class="caption">
                 <h3>${projectUser.username}</h3>
                 <p>
