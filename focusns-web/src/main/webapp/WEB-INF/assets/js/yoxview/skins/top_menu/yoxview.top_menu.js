@@ -7,7 +7,7 @@
         if (!options.skinOptions || options.skinOptions.renderButtons !== false)
         {
             var prevBtn = $("<a>", {
-                className: "yoxview_ctlButton yoxview_prevBtn",
+                class: "yoxview_ctlButton yoxview_prevBtn",
                 title: lang.PrevImage,
                 href: "#"
             });
@@ -16,7 +16,7 @@
                 return false;
             });
             var nextBtn = $("<a>", {
-                className: "yoxview_ctlButton yoxview_nextBtn",
+                class: "yoxview_ctlButton yoxview_nextBtn",
                 title: lang.NextImage,
                 href: "#"
             });

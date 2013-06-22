@@ -48,6 +48,6 @@
 	</delete>
 
     <select id="selectList" parameterType="java.lang.Long" resultMap="BaseResultMap">
-       select * from tb_photo where project_id = #{projectId}
+       select * from tb_photo where album_id = #{albumId}
     </select>
 </mapper>

@@ -32,6 +32,7 @@
 
 <!-- yoxview -->
 <script src='<c:url value="/static/assets/js/yoxview/yox.js" />'></script>
+<script src='<c:url value="/static/assets/js/yoxview/jquery.yoxthumbs.js" />'></script>
 <script src='<c:url value="/static/assets/js/yoxview/jquery.yoxview.js" />'></script>
 
 <script type=text/javascript>
@@ -63,4 +64,14 @@ $(function(){
         }
     });
 });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.yoxview').yoxview({
+            lang: 'zh-cn',
+            skin: 'top_menu',
+            allowedUrls: /.*/i
+        });
+    });
 </script>

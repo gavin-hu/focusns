@@ -246,7 +246,7 @@
                             if (data.title && options.thumbnailsOptions && options.thumbnailsOptions.setHeader){
                                 $(options.thumbnailsOptions.headerElement || "<h2>", {
                                     html: data.title,
-                                    className: options.thumbnailsOptions.headerClass
+                                    class: options.thumbnailsOptions.headerClass
                                 }).appendTo(view);
                             }
                             var thumbnailsData = data.isGroup 
@@ -501,7 +501,7 @@
 				    }
     				
                     var flashPanel = $("<div>", {
-                        className: "yoxview_element",
+                        class: "yoxview_element",
                         html: "<div class='yoxview_error'>Please install the latest version of the <a href='http://www.adobe.com/go/getflashplayer' target='_blank'>Flash player</a> to view content</div>"
                     });
                     var flashData = matchFlashVideo 
@@ -607,7 +607,7 @@
                         imageData = {
                             "element": $("<iframe>", {
                                 src: Yox.urlDataToPath(urlData),
-                                className: "yoxview_element"
+                                class: "yoxview_element"
                             }),
                             title: thumbImg.attr("title"),
                             frameborder: "0"
@@ -1061,7 +1061,7 @@
                     "opacity" : "0",
                     "outline" : "0"
                 },
-                className : "yoxview_ctlBtn",
+                class : "yoxview_ctlBtn",
                 href : "#"
             });
             
@@ -1179,7 +1179,7 @@
             });
             
             if (options.skin)
-                popupWrap.attr("className", "yoxview_" + options.skin);
+                popupWrap.attr("class", "yoxview_" + options.skin);
                 
             if (options.backgroundOpacity === 0)
                 popupWrap.css("background", "none")
@@ -1189,13 +1189,13 @@
             popupWrap.appendTo($(top.document.getElementsByTagName("body")[0])).append(popup);
             
 		    panel1 = $("<div>", {
-			    className: "yoxview_imgPanel",
+			    class: "yoxview_imgPanel",
 			    css: {
 				    "z-index": "2"
 			    }
 		    });
 		    panel2 = $("<div>", {
-			    className: "yoxview_imgPanel",
+			    class: "yoxview_imgPanel",
 			    css: {
 				    "z-index": "1",
 				    "display": "none"
@@ -1204,7 +1204,7 @@
             
             // the first image:
             image1 = $("<img />", {
-                className : "yoxview_fadeImg",
+                class : "yoxview_fadeImg",
                 css : {
 				    "display" : "block",
 				    "width" : "100%",
@@ -1214,7 +1214,7 @@
 
             // the second image:
             image2 = $("<img />", {
-                className : "yoxview_fadeImg",
+                class : "yoxview_fadeImg",
                 css : {
 				    "display" : "block",
 				    "width" : "100%",
@@ -1233,7 +1233,7 @@
             if (options.renderMenu !== false)
             {
                 var menuPanelWrap = $("<div>", {
-                    className : "yoxview_popupBarPanel yoxview_top"
+                    class : "yoxview_popupBarPanel yoxview_top"
                 });
 
                 if (options.autoHideMenu !== false)
@@ -1309,7 +1309,7 @@
             // add the ajax loader:
             ajaxLoader = $("<div>", {
                 id: "yoxview_ajaxLoader",
-                className: "yoxview_notification",
+                class: "yoxview_notification",
                 css: { 
                     "display": "none"
                 }
@@ -1330,7 +1330,7 @@
             if (!options.disableNotifications)
             {
                 notification = $("<img>", {
-                    className: "yoxview_notification"
+                    class: "yoxview_notification"
                 });
                 popup.append(notification);
             }
@@ -1417,7 +1417,7 @@
                 {
                     infoPinLinkImg = sprites.getSprite("icons", options.autoHideInfo ? "pin" : "unpin");
                     infoPinLink = $("<a>", {
-                        className: "yoxviewInfoLink",
+                        class: "yoxviewInfoLink",
                         href: "#",
                         title: options.autoHideInfo ? currentLanguage.PinInfo : currentLanguage.UnpinInfo,
                         css: { display: 'inline' },
@@ -1444,14 +1444,14 @@
 				    $.extend($.yoxview.infoButtons, options.infoButtons);
 				    for (infoButton in options.infoButtons)
 				    {
-					    options.infoButtons[infoButton].attr("className", "yoxviewInfoLink").css("display", "block").appendTo(infoPanelContent);
+					    options.infoButtons[infoButton].attr("class", "yoxviewInfoLink").css("display", "block").appendTo(infoPanelContent);
 				    }
 			    }
                 
                 if (options.linkToOriginalContext !== false)
                 {
                     infoPanelLink = $("<a>", {
-                        className: "yoxviewInfoLink",
+                        class: "yoxviewInfoLink",
                         target: "_blank",
                         title: currentLanguage.OriginalContext
                     });
@@ -1467,7 +1467,7 @@
                 if (!options.renderInfoExternally)
                 {
                     infoPanelWrap = $("<div>", {
-                        className : "yoxview_popupBarPanel yoxview_bottom"
+                        class : "yoxview_popupBarPanel yoxview_bottom"
                     });
                     
                     infoPanelWrap.hover(
@@ -1882,7 +1882,7 @@
                     if (media.html)
                     {
                         panelData.element = $("<div>", {
-	                        className: mediaPanelClass
+	                        class: mediaPanelClass
 	                    });
 	                    popup.append(panelData.element);
                     }

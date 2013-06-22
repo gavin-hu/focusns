@@ -40,8 +40,10 @@ public class AlbumServiceTest extends AbstractServiceTest {
     public void createAlbum() {
         Album album = new Album();
         album.setLabel("label");
+        album.setDescription("description");
         album.setCreatedAt(new Date());
         album.setCreatedById(1);
+        album.setModifiedById(1);
         album.setProjectId(1);
         //
         albumService.createAlbum(album);

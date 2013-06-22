@@ -25,14 +25,25 @@ package org.focusns.model.photo;
 import java.util.Date;
 
 import org.focusns.model.common.Id;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 
 public class Album extends Id {
 
     private String label;
+    private String description;
     private Date createdAt;
+    private Date modifiedAt;
     //
-    private long createdById;
+    private long photoId;
     private long projectId;
+    private long createdById;
+    private long modifiedById;
+    //
+    private Photo photo;
+    private Project project;
+    private ProjectUser createdBy;
+    private ProjectUser modifiedBy;
 
     public String getLabel() {
         return label;
@@ -40,6 +51,14 @@ public class Album extends Id {
 
     public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Date getCreatedAt() {
@@ -50,12 +69,20 @@ public class Album extends Id {
         this.createdAt = createdAt;
     }
 
-    public long getCreatedById() {
-        return createdById;
+    public Date getModifiedAt() {
+        return modifiedAt;
     }
 
-    public void setCreatedById(long createdById) {
-        this.createdById = createdById;
+    public void setModifiedAt(Date modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public long getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(long photoId) {
+        this.photoId = photoId;
     }
 
     public long getProjectId() {
@@ -64,5 +91,53 @@ public class Album extends Id {
 
     public void setProjectId(long projectId) {
         this.projectId = projectId;
+    }
+
+    public long getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
+    }
+
+    public long getModifiedById() {
+        return modifiedById;
+    }
+
+    public void setModifiedById(long modifiedById) {
+        this.modifiedById = modifiedById;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public ProjectUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public ProjectUser getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(ProjectUser modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }

@@ -22,14 +22,21 @@ package org.focusns.service.photo.impl;
  * #L%
  */
 
-import java.util.List;
-
+import org.focusns.dao.core.ProjectDao;
+import org.focusns.dao.core.ProjectUserDao;
+import org.focusns.dao.photo.AlbumDao;
 import org.focusns.dao.photo.PhotoDao;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
+import org.focusns.model.photo.Album;
 import org.focusns.model.photo.Photo;
 import org.focusns.service.photo.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -37,20 +44,66 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Autowired
     private PhotoDao photoDao;
+    @Autowired
+    private AlbumDao albumDao;
+    @Autowired
+    private ProjectDao projectDao;
+    @Autowired
+    private ProjectUserDao projectUserDao;
+
+    @Override
+    public Photo getPhoto(long photoId) {
+        Photo photo = photoDao.select(photoId);
+        return fillPhoto(photo);
+    }
 
     public void createPhoto(Photo photo) {
+        if(photo.getCreatedAt()==null) {
+            photo.setCreatedAt(new Date());
+        }
         this.photoDao.insert(photo);
+        fillPhoto(photo);
     }
 
     public void modifyPhoto(Photo photo) {
+        if(photo.getCreatedAt()==null) {
+            photo.setCreatedAt(new Date());
+        }
         this.photoDao.update(photo);
+        fillPhoto(photo);
     }
 
     public void removePhoto(Photo photo) {
         this.photoDao.delete(photo.getId());
+        fillPhoto(photo);
     }
 
     public List<Photo> listPhoto(long albumId) {
-        return photoDao.selectList(albumId);
+        List<Photo> photos = photoDao.selectList(albumId);
+        for(Photo photo : photos) {
+            fillPhoto(photo);
+        }
+        return photos;
+    }
+
+    private Photo fillPhoto(Photo photo) {
+        if(photo==null) {
+            return photo;
+        }
+        //
+        if(photo.getAlbum()==null && photo.getAlbumId()>0) {
+            Album album = albumDao.select(photo.getAlbumId());
+            photo.setAlbum(album);
+        }
+        if(photo.getProject()==null && photo.getProjectId()>0) {
+            Project project = projectDao.select(photo.getProjectId());
+            photo.setProject(project);
+        }
+        if(photo.getCreatedBy()==null && photo.getCreatedById()>0) {
+            ProjectUser createdBy = projectUserDao.select(photo.getCreatedById());
+            photo.setCreatedBy(createdBy);
+        }
+        //
+        return photo;
     }
 }

@@ -7,17 +7,21 @@
 	<resultMap id="BaseResultMap" type="org.focusns.model.photo.Album">
 		<id column="id" property="id" jdbcType="BIGINT" />
 		<result column="label" property="label" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
+        <result column="photo_id" property="photoId" jdbcType="BIGINT" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
         <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
+        <result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
 	</resultMap>
 	
 	<insert id="insert" parameterType="org.focusns.model.photo.Album">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_album (label, created_at, project_id, created_by_id)
-		values (#{label}, #{createdAt}, #{projectId}, #{createdById})
+		insert into tb_album (label, description, created_at, modified_at, project_id, created_by_id, modified_by_id)
+		values (#{label}, #{description}, #{createdAt}, #{modifiedAt}, #{projectId}, #{createdById}, #{modifiedById})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -25,19 +29,31 @@
 	</select>
 	
 	<update id="update" parameterType="org.focusns.model.photo.Album">
-		update tb_blog_comment 
+		update tb_album
 		<set>
 			<if test="label != null" >
 		        label = #{label},
 			</if>
+            <if test="description != null" >
+                description = #{description},
+            </if>
             <if test="createdAt != null" >
                 created_at = #{createdAt},
+            </if>
+            <if test="modifiedAt != null" >
+                modified_at = #{modifiedAt},
+            </if>
+            <if test="photoId > 0" >
+                photo_id = #{photoId},
             </if>
             <if test="projectId > 0" >
                 project_id = #{projectId},
 			</if>
             <if test="createdById > 0" >
                 created_by_id = #{createdById},
+            </if>
+            <if test="modifiedById > 0" >
+                modified_by_id = #{modifiedById},
             </if>
 		</set>
 		where id = #{id}

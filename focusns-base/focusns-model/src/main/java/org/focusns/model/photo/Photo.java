@@ -25,14 +25,28 @@ package org.focusns.model.photo;
 import java.util.Date;
 
 import org.focusns.model.common.Id;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 
 public class Photo extends Id {
 
-    private Date createdAt;
-    private long createdById;
-    //
     private long albumId;
+    private Date createdAt;
+    //
+    private long createdById;
     private long projectId;
+    //
+    private Album album;
+    private Project project;
+    private ProjectUser createdBy;
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(long albumId) {
+        this.albumId = albumId;
+    }
 
     public Date getCreatedAt() {
         return createdAt;
@@ -50,14 +64,6 @@ public class Photo extends Id {
         this.createdById = createdById;
     }
 
-    public long getAlbumId() {
-        return albumId;
-    }
-
-    public void setAlbumId(long albumId) {
-        this.albumId = albumId;
-    }
-
     public long getProjectId() {
         return projectId;
     }
@@ -66,4 +72,27 @@ public class Photo extends Id {
         this.projectId = projectId;
     }
 
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public ProjectUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
+    }
 }

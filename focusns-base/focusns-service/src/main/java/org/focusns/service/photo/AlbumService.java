@@ -28,6 +28,8 @@ import org.focusns.model.photo.Album;
 
 public interface AlbumService {
 
+    Album getAlbum(long albumId);
+
     void createAlbum(Album album);
 
     void modifyAlbum(Album album);

@@ -27,6 +27,7 @@ import java.io.IOException;
 
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
+import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.Project;
@@ -41,6 +42,8 @@ import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -104,15 +107,14 @@ public class ProjectUserWidget implements ResourceLoaderAware {
     }
 
     @RequestMapping("/user-avatar")
-    public @ResponseBody
-    byte[] doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
+    public ResponseEntity<byte[]> doAvatar(@RequestParam Long projectId, @RequestParam Long userId,
             @RequestParam(required = false) Boolean isTempFile, @RequestParam(required = false) Integer dimension)
             throws IOException {
         //
         Coordinate avatarCoordinate = getAvatarCoordinate(projectId, userId);
         if (isTempFile != null && isTempFile.booleanValue()) {
             File tempFile = RuntimeHelper.getTempFile(avatarCoordinate);
-            return FileCopyUtils.copyToByteArray(tempFile);
+            return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(tempFile), MediaType.IMAGE_PNG);
         } else {
             File targetFile = RuntimeHelper.getTargetFile(avatarCoordinate);
             if (targetFile == null || !targetFile.exists()) {
@@ -129,7 +131,7 @@ public class ProjectUserWidget implements ResourceLoaderAware {
                 targetFile = resizedTargetFile;
             }
             //
-            return FileCopyUtils.copyToByteArray(targetFile);
+            return WebUtils.getResponseEntity(FileCopyUtils.copyToByteArray(targetFile), MediaType.IMAGE_PNG);
         }
     }
 

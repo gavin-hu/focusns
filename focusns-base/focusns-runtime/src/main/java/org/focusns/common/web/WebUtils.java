@@ -27,6 +27,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 
 public abstract class WebUtils {
@@ -48,6 +52,12 @@ public abstract class WebUtils {
             }
         }
         return parameterMap;
+    }
+
+    public static <T> ResponseEntity<T> getResponseEntity(T body, MediaType mediaType) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(mediaType);
+        return new ResponseEntity<T>(body, httpHeaders, HttpStatus.OK);
     }
 
 }

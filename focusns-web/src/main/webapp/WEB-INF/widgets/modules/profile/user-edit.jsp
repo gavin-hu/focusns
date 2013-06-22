@@ -19,7 +19,7 @@
 
         <c:if test="${hasTempFile}">
             <div class="cropper-wrapper temp-avatar">
-                <img id="cropper" class="thumbnail" src='<widget:actionUrl value="/project/user-avatar?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />' alt="Avatar" />
+                <img id="cropper" class="thumbnail" src="<widget:actionUrl value="/project/user-avatar?projectId=${project.id}&userId=${projectUser.id}&isTempFile=true" />" alt="Avatar" />
                 <form action='<widget:actionUrl value="/project/user-avatar/crop"/>' method="post">
                     <input type="hidden" id="x" name="x" />
                     <input type="hidden" id="y" name="y" />
@@ -27,7 +27,7 @@
                     <input type="hidden" id="h" name="h" />
                     <input type="hidden" name="projectId" value="${project.id}" />
                     <input type="hidden" name="userId" value="${projectUser.id}" />
-                    <button class="btn btn-primary" type="submit" name="redirect" value="${currentPath}">裁剪</button>
+                    <button class="btn btn-primary" type="submit">裁剪</button>
                 </form>
             </div>
         </c:if>

@@ -28,6 +28,8 @@ import org.focusns.model.photo.Photo;
 
 public interface PhotoService {
 
+    Photo getPhoto(long photoId);
+
     void createPhoto(Photo photo);
 
     void modifyPhoto(Photo photo);
