@@ -298,6 +298,23 @@
                 <scope>provided</scope>
             </dependency>
 
+            <!-- Java Security Framework -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>1.2.2</version>
+            </dependency>
+
             <!-- Bean Validation -->
             <dependency>
                 <groupId>javax.validation</groupId>

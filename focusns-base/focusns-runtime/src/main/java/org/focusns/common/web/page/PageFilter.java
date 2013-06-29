@@ -40,47 +40,25 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UrlPathHelper;
 
-public class PageFilter extends OncePerRequestFilter {
+class PageFilter extends OncePerRequestFilter {
     private static final String DEFAULT_LAYOUT_LOCATION = "/WEB-INF/themes/default/layout.jsp";
-    private static final String DEFAULT_CONFIG_LOCATION = "/WEB-INF/spring/pageContext.xml";
     //
-    private WebApplicationContext pageContext;
     private PageFactory pageFactory;
     private PageEngine pageEngine;
     private UrlPathHelper urlPathHelper = new UrlPathHelper();
     //
     private String defaultLayout = DEFAULT_LAYOUT_LOCATION;
-    private String configLocation = DEFAULT_CONFIG_LOCATION;
 
     public void setDefaultLayout(String defaultLayout) {
         this.defaultLayout = defaultLayout;
     }
 
-    public void setConfigLocation(String configLocation) {
-        this.configLocation = configLocation;
+    public void setPageFactory(PageFactory pageFactory) {
+        this.pageFactory = pageFactory;
     }
 
-    public WebApplicationContext getPageContext() {
-        //
-        WebApplicationContext parent = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-        //
-        if (pageContext == null) {
-            XmlWebApplicationContext xmlPageContext = new XmlWebApplicationContext();
-            xmlPageContext.setId("pageContext");
-            xmlPageContext.setParent(parent);
-            xmlPageContext.setServletContext(getServletContext());
-            xmlPageContext.setConfigLocation(configLocation);
-            xmlPageContext.refresh();
-            pageContext = xmlPageContext;
-        }
-        //
-        return pageContext;
-    }
-
-    @Override
-    protected void initFilterBean() throws ServletException {
-        this.pageFactory = getPageContext().getBean(PageFactory.class);
-        this.pageEngine = getPageContext().getBean(PageEngine.class);
+    public void setPageEngine(PageEngine pageEngine) {
+        this.pageEngine = pageEngine;
     }
 
     @Override

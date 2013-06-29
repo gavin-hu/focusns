@@ -10,5 +10,4 @@
     <mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" cache-period="3600" />
     <mvc:resources mapping="/themes/**" location="/WEB-INF/themes/" cache-period="3600" />
 
-
 </beans>

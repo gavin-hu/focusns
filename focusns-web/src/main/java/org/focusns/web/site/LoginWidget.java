@@ -22,6 +22,8 @@ package org.focusns.web.site;
  * #L%
  */
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.core.ProjectUser;

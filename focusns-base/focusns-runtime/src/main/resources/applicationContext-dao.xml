@@ -71,6 +71,7 @@
                 <value>classpath:/org/focusns/dao/photo/impl/PhotoMapper.xml</value>
 
                 <!-- team -->
+                <value>classpath:/org/focusns/dao/team/impl/TeamRoleMapper.xml</value>
                 <value>classpath:/org/focusns/dao/team/impl/TeamMemberMapper.xml</value>
 
                 <!-- message -->

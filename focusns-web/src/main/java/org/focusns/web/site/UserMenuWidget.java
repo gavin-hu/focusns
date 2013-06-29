@@ -44,7 +44,7 @@ public class UserMenuWidget {
 
     @RequestMapping("/menu-user")
     @Constraints(Constraint.PROJECT_USER_NOT_NULL)
-    public String doShow(@WidgetAttribute ProjectUser projectUser, Model model) {
+    public String doView(@WidgetAttribute ProjectUser projectUser, Model model) {
         //
         Long projectId = projectUser.getProjectId();
         List<ProjectFeature> features = featureService.getProjectFeatures(projectId);

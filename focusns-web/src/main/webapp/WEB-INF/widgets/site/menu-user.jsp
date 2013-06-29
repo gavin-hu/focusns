@@ -8,7 +8,7 @@
                 <tool:img-avatar styleClass="avatar" projectUserId="${sessionScope.projectUser.id}" width="24" height="24" />
                 ${sessionScope.projectUser.username}
             </a>
-            <a class="navbar-link" href="<widget:actionUrl value="/site/logout" />">
+            <a class="navbar-link" href="<c:url value="/logout" />">
                 退出
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">

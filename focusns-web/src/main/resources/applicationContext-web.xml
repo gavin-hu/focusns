@@ -3,4 +3,77 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!--
+      - 安全过滤框架 Apache Shiro
+      - 安全过滤 及 权限控制
+      -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/login" />
+        <property name="successUrl" value="/redirect" />
+        <property name="unauthorizedUrl" value="/login" />
+        <property name="filterChainDefinitions">
+            <value>
+                /login = authc
+                /logout = logout
+                / = user
+                /index = user
+                /people = user
+            </value>
+        </property>
+    </bean>
+
+    <!-- Security Manager -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="authenticator" ref="authenticator" />
+        <property name="realm" ref="defautlRealm" />
+    </bean>
+    <bean id="authenticator" class="org.apache.shiro.authc.pam.ModularRealmAuthenticator">
+        <property name="authenticationListeners">
+            <list>
+                <bean class="org.focusns.security.listener.DefaultAuthenticationListener" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="defautlRealm" class="org.focusns.security.realm.DefaultAuthorizingRealm">
+        <property name="credentialsMatcher" ref="md5CredentialsMatcher" />
+    </bean>
+
+    <bean id="md5CredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+        <property name="hashAlgorithmName" value="MD5" />
+    </bean>
+
+    <!-- Security Lifecycle -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Enable Annotations -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+
+    <!--
+      - 页面组件框架
+      -->
+    <bean id="pageFilter" class="org.focusns.common.web.page.PageFilterFactoryBean">
+        <property name="pageEngine" ref="pageEngine" />
+        <property name="pageFactory" ref="pageFactory" />
+        <property name="defaultLayout" value="/WEB-INF/themes/default/layout2.jsp" />
+    </bean>
+
+    <bean id="pageEngine" class="org.focusns.common.web.page.engine.widget.WidgetPageEngine">
+        <property name="pageRenderInterceptors">
+            <list>
+                <bean class="org.focusns.web.page.interceptor.PageRenderParameterResolver" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="pageFactory" class="org.focusns.common.web.page.config.xml.XmlPageFactory">
+        <property name="pageKeyGenerator">
+            <bean class="org.focusns.web.page.config.SimplePageKeyGenerator" />
+        </property>
+    </bean>
 </beans>
