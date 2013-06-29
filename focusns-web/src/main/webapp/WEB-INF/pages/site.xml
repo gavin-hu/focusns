@@ -45,11 +45,11 @@
     <page path="/register">
         <position name="headerBar">
             <widget target="/site/menu-main" />
-            <widget target="/site/login-bar">
+            <!--<widget target="/site/login-bar">
                 <navigation>
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
-            </widget>
+            </widget>-->
             <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">

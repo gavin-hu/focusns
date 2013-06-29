@@ -13,13 +13,29 @@ ul {
     list-style: none outside none;
 }
 
+/* LoginWidget */
+#id_be15cc2ff8c7ac92ef1b5056ab218d39 .widget-head h3 {
+    padding-left: 130px;
+    border-bottom: 1px solid #EEE;
+}
+#id_be15cc2ff8c7ac92ef1b5056ab218d39 .widget-body {
+    padding-top: 30px;
+}
+/* RegisterWidget */
+#id_0e5c6052ea5a3ea8712e9e03a0046188 .widget-head h3 {
+    padding-left: 130px;
+    border-bottom: 1px solid #EEE;
+}
+#id_0e5c6052ea5a3ea8712e9e03a0046188 .widget-body {
+    padding-top: 30px;
+}
 /* UserMenuWidget */
 #id_8c0211d336b724c9fac3ee538df08515 .avatar {
     max-width: none;
 }
 
 /* ProjectLinkWidget */
-#id_31f672f893e3179261bafc5b353b9c78 .widget-hd {
+#id_31f672f893e3179261bafc5b353b9c78 .widget-head {
     padding-left: 5px;
 }
 #id_31f672f893e3179261bafc5b353b9c78 ul {
@@ -63,7 +79,7 @@ ul {
 }
 
 /* BlogPostWidget list*/
-#id_6f6edf6e4c4d52cd80394d407b4706c6 .widget-bd {
+#id_6f6edf6e4c4d52cd80394d407b4706c6 .widget-head {
     padding-top: 15px;
 }
 
