@@ -2,30 +2,20 @@
 <pages>
     <page path="/index" extends="site">
         <position name="mainColumn">
-            <!--<widget target="/cms/category-view">
+            <widget target="/site/content-view">
                 <preference>
-                    <limit>5</limit>
-                    <categoryId>5</categoryId>
+                    <title>Hello</title>
+                    <content><![CDATA[
+                        <div class="hero-unit">
+                            <h1>FocusSNS</h1>
+                            <p>FocusSNS 是一款开源的主题社会化网络软件(SNS)，可以用于构建各类主题社区、企业社区、协作平台等。</p>
+                            <p>
+                                <a class="btn btn-primary btn-large" href="https://github.com/gavin-hu/focusns" target="blank">了解更多</a>
+                            </p>
+                        </div>
+                    ]]></content>
                 </preference>
             </widget>
-            <widget target="/cms/category-view">
-                <preference>
-                    <limit>5</limit>
-                    <categoryId>6</categoryId>
-                </preference>
-            </widget>
-            <widget target="/cms/category-view">
-                <preference>
-                    <limit>5</limit>
-                    <categoryId>7</categoryId>
-                </preference>
-            </widget>
-            <widget target="/cms/category-view">
-                <preference>
-                    <limit>5</limit>
-                    <categoryId>8</categoryId>
-                </preference>
-            </widget>-->
         </position>
     </page>
     <page path="/login" extends="site">

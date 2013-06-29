@@ -74,10 +74,9 @@
         </l:positionExists>
     </div>
 
-    <hr>
-
+    <hr/>
     <footer>
-        <p>&copy; FocusSNS 2013</p>
+        <p>&copy; FocusSNS 2011~2013</p>
     </footer>
 
 </div> <!-- /container -->

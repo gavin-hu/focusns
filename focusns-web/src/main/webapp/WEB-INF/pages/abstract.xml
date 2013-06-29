@@ -3,12 +3,12 @@
     <page abstract="site">
         <position name="headerBar">
             <widget target="/site/menu-main"/>
-            <widget target="/site/login-bar" cache="3600">
+            <!--<widget target="/site/login-bar" cache="3600">
                 <navigation>
                     <event on="auth-failure">/login</event>
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
-            </widget>
+            </widget>-->
             <widget styleClass="menu-user" target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
