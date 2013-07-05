@@ -18,8 +18,8 @@
                     <li>
                         <span class="title"><a href='<c:url value="/article?id=${article.id}" />'>${article.title}</a></span>
                         <span class="author">
-                            ${article.createById} 发表于
-                            <fmt:formatDate value="${article.createAt}" pattern="yyyy/M/d" />
+                            ${article.createdById} 发表于
+                            <fmt:formatDate value="${article.createdAt}" pattern="yyyy/M/d" />
                         </span>
                     </li>
                     </c:forEach>

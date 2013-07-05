@@ -15,7 +15,7 @@
                     <ul class="">
                     <c:forEach items="${page.results}" var="projectLink">
                         <li url='<c:url value="/${projectLink.toProject.code}/profile"/>'>
-                            <tool:img-avatar projectUserId="${projectLink.toProject.createById}" width="65" height="65"/>
+                            <tool:img-avatar projectUserId="${projectLink.toProject.createdById}" width="65" height="65"/>
                             <h3>
                                 ${projectLink.toProject.title}
                                 <c:choose>

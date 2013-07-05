@@ -40,7 +40,7 @@
                             </c:when>
                             <c:otherwise>
                                 <a href='<c:url value="/${link.toProject.code}/profile" />'>
-                                    <tool:img-avatar projectUserId="${link.toProject.createById}" width="60" height="60" />
+                                    <tool:img-avatar projectUserId="${link.toProject.createdById}" width="60" height="60" />
                                 </a>
                             </c:otherwise>
                         </c:choose>
