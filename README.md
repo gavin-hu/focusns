@@ -11,6 +11,7 @@ FocusSNS 当前正在开发中...
 [https://github.com/gavin-hu/focusns/wiki](https://github.com/gavin-hu/focusns/wiki)
 
 技术讨论
+========
 QQ群：86602861
 
 开源协议
