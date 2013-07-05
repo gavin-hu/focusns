@@ -144,7 +144,7 @@
                 <plugin>
                     <groupId>focusns-maven-plugin</groupId>
                     <artifactId>focusns-maven-plugin</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${project.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
