@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/widgets/widget.jsp"%>
 
-<ui:widget>
+<ui:widget styleId="blog-category-list">
     <ui:widget-head>
         <h3>分类</h3>
     </ui:widget-head>

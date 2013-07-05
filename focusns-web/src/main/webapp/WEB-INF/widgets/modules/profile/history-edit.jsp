@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<ui:widget>
+<ui:widget styleId="project-history-edit">
     <ui:widget-body>
         <form action='<widget:actionUrl value="/project/history-create" />' method="post">
             <fieldset>

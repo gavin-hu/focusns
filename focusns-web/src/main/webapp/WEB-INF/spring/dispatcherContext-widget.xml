@@ -11,7 +11,7 @@
         <context:include-filter type="annotation" expression="org.focusns.common.web.widget.stereotype.Widget"/>
     </context:component-scan>
 
-    <mvc:annotation-driven conversion-service="conversionService">
+    <mvc:annotation-driven validator="beanValidator" conversion-service="conversionService">
         <mvc:argument-resolvers>
             <bean class="org.focusns.common.web.widget.mvc.method.WidgetMethodArgumentResolverComposite" />
         </mvc:argument-resolvers>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<ui:widget>
+<ui:widget styleId="project-user-edit">
     <ui:widget-body>
         <form action='<widget:actionUrl value="/project/user-avatar/upload" />'
               method="post" enctype="multipart/form-data">

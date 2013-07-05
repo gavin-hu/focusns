@@ -9,7 +9,7 @@
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
             </widget>-->
-            <widget styleClass="menu-user" target="/site/menu-user">
+            <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
                 </navigation>
@@ -28,7 +28,7 @@
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
             </widget>
-            <widget styleClass="menu-user" target="/site/menu-user">
+            <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
                 </navigation>
@@ -47,7 +47,7 @@
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
             </widget>
-            <widget styleClass="menu-user" target="/site/menu-user">
+            <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
                 </navigation>
@@ -81,7 +81,7 @@
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
             </widget>
-            <widget styleClass="menu-user" target="/site/menu-user">
+            <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
                 </navigation>
@@ -101,7 +101,7 @@
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
                 </navigation>
             </widget>
-            <widget styleClass="menu-user" target="/site/menu-user">
+            <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
                 </navigation>

@@ -28,6 +28,6 @@ public class WidgetMethodArgumentResolverComposite extends HandlerMethodArgument
 
     public WidgetMethodArgumentResolverComposite() {
         addResolver(new WidgetMethodArgumentResolver());
-        addResolver(new WidgetModelAttributeMethodProcessor());
+        //addResolver(new WidgetModelAttributeMethodProcessor());
     }
 }

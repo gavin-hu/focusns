@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 @Service
 public class LocalStorageService implements StorageService {
@@ -67,11 +64,12 @@ public class LocalStorageService implements StorageService {
     public InputStream loadSizedResource(Object size, Object... coordinates) throws IOException {
         if(size instanceof String && ((String)size).contains("x")) {
             int[] wh = parseStringSize((String)size);
-            Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
+            //
             Resource sizedResource = resourceLoader.getResource(getSizedResourceLocation(size, coordinates));
-            if(!sizedResource.exists()) {
+            if(sizedResource.exists()==false) {
                 createResource(sizedResource);
                 //
+                Resource resource = resourceLoader.getResource(getResourceLocation(coordinates));
                 ImageUtils.resize(resource.getFile(), sizedResource.getFile(), wh[0], wh[1], "PNG");
             }
             return sizedResource.getInputStream();

@@ -3,7 +3,7 @@
 
 <ul class="nav">
     <li <c:if test="${fn:startsWith(pageConfig.path, '/index')}">class="active"</c:if> >
-        <a href='<c:url value="/index" />'>首页</a>
+        <a href='<c:url value="/" />'>首页</a>
     </li>
     <c:forEach items="${categories}" var="category">
     <c:set var="categoryPath" value="/${category.code}"/>

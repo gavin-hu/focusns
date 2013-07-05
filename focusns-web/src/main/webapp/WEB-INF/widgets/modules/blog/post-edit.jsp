@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/widgets/widget.jsp"%>
 
-<ui:widget>
+<ui:widget styleId="blog-post-edit">
     <ui:widget-body>
         <form action="<widget:actionUrl value="/blog/post-modify" />" method="post">
             <fieldset>
@@ -16,7 +16,7 @@
                 <form:input cssClass="span6" path="blogPost.title" />
 
                 <label>内容</label>
-                <form:textarea path="blogPost.content" />
+                <form:textarea path="blogPost.content" cssClass="editor" />
 
                 <button type="submit" class="btn btn-primary" >提交</button>
                 <form:hidden path="blogPost.id" />

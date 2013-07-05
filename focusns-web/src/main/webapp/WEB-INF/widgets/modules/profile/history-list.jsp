@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<ui:widget>
+<ui:widget styleId="project-history-list">
     <ui:widget-body>
         <ul class="nav nav-tabs">
             <li class="active">

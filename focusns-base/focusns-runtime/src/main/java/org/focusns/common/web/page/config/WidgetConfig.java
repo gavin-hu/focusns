@@ -22,10 +22,7 @@ package org.focusns.common.web.page.config;
  * #L%
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.springframework.core.Ordered;
 import org.springframework.util.DigestUtils;
@@ -59,9 +56,6 @@ public class WidgetConfig implements Ordered {
     }
 
     public String getStyleId() {
-        if (!StringUtils.hasText(styleId)) {
-            this.styleId = generateStyleId();
-        }
         return styleId;
     }
 
@@ -165,14 +159,8 @@ public class WidgetConfig implements Ordered {
     }
 
     private String generateId() {
-        StringBuffer sb = new StringBuffer(context + target + mode);
-        sb.append(positionConfig.getName());
-        sb.append(positionConfig.getPageConfig().getPath());
-        //
-        return DigestUtils.md5DigestAsHex(sb.toString().getBytes());
+        String uuidString = UUID.randomUUID().toString();
+        return StringUtils.replace(uuidString, "-", "");
     }
 
-    private String generateStyleId() {
-        return DigestUtils.md5DigestAsHex((context + target + mode).getBytes());
-    }
 }

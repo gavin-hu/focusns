@@ -3,21 +3,21 @@
 <log4j:configuration>
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %n" />
+			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %m%n" />
 		</layout>
 	</appender>
 	<appender name="performance" class="org.apache.log4j.RollingFileAppender">
 		<param name="file" value="${user.home}/.focusns/logs/performance.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %n" />
+			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %m%n" />
 		</layout>
 	</appender>
     <appender name="application" class="org.apache.log4j.DailyRollingFileAppender">
 		<param name="file" value="${user.home}/.focusns/logs/application.log" />
 		<param name="append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %n" />
+			<param name="ConversionPattern" value="[%p] %d{yyyy/MM/dd HH:mm:ss,SSS} %l %m%n" />
 		</layout>
 	</appender>
 
@@ -29,11 +29,11 @@
     </appender>-->
 
     <logger name="org.focusns.common.monitor.filter.PerformanceMonitorFilter">
-        <level value="TRACE" />
+        <level value="INFO" />
         <appender-ref ref="performance" />   
     </logger>
     <logger name="org.springframework">  
-        <level value="DEBUG" />
+        <level value="INFO" />
     </logger>
     <root>
 		<priority value="INFO" />

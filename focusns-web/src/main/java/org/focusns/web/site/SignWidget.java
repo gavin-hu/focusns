@@ -22,32 +22,42 @@ package org.focusns.web.site;
  * #L%
  */
 
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
-import org.focusns.validation.group.Register;
+import org.focusns.web.widget.Constraint;
+import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("site")
-public class RegisterWidget {
+public class SignWidget {
 
     @Autowired
     private ProjectUserService projectUserService;
 
-    @RequestMapping("register-form")
-    public String doEdit() {
-        return "site/register-form";
+    @RequestMapping(value="signin", method = RequestMethod.GET)
+    @Constraints({ Constraint.PROJECT_USER_IS_NULL })
+    public String signIn() {
+        return "site/signin-edit";
     }
 
-    @RequestMapping("register-user")
-    public String doCreate(@Validated(Register.class) ProjectUser user) {
+    @RequestMapping(value="signup", method = RequestMethod.GET)
+    public String signUp() {
+        return "site/signup-edit";
+    }
+
+    @RequestMapping(value="signup", method = RequestMethod.POST)
+    public void doSignUp(@Valid ProjectUser projectUser) {
         //
-        projectUserService.createUser(user);
+        projectUserService.createUser(projectUser);
         //
-        return "redirect:/welcome";
+        Navigator.get().withAttribute("projectUser", projectUser).navigateTo("sign-success");
     }
 
 }

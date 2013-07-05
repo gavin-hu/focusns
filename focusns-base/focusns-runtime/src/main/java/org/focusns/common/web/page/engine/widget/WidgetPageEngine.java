@@ -32,6 +32,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.common.web.page.config.PositionConfig;
 import org.focusns.common.web.page.config.WidgetConfig;
@@ -54,6 +56,8 @@ import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.util.UrlPathHelper;
 
 public class WidgetPageEngine extends WebApplicationObjectSupport implements PageEngine {
+
+    private static final Log log = LogFactory.getLog(WidgetPageEngine.class);
 
     private static final String EVALUATION_CONTEXT_KEY = StandardEvaluationContext.class.getName();
 
@@ -166,6 +170,7 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
                 pageRenderInterceptor.afterRender(request, response);
             }
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new PageEngineException(e.getMessage(), e);
         }
     }
@@ -223,6 +228,7 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
             }
             //
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             throw new PageEngineException(e.getMessage(), e);
         } finally {
             Navigator.reset();

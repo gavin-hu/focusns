@@ -9,18 +9,18 @@
       -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/login" />
-        <property name="successUrl" value="/index" />
-        <property name="unauthorizedUrl" value="/login" />
+        <property name="loginUrl" value="/signin" />
+        <property name="successUrl" value="/" />
+        <property name="unauthorizedUrl" value="/signin" />
         <property name="filterChainDefinitions">
             <value>
                 / = anon
                 /index = anon
-                /register = anon
+                /signup = anon
                 /static/** = anon
                 /widget/** = anon
-                /login = authc
-                /logout = logout
+                /signin = authc
+                /signout = logout
                 /people = user
                 /** = user
             </value>
@@ -64,7 +64,6 @@
     <bean id="pageFilter" class="org.focusns.common.web.page.PageFilterFactoryBean">
         <property name="pageEngine" ref="pageEngine" />
         <property name="pageFactory" ref="pageFactory" />
-        <property name="defaultLayout" value="/WEB-INF/themes/default/layout2.jsp" />
     </bean>
 
     <bean id="pageEngine" class="org.focusns.common.web.page.engine.widget.WidgetPageEngine">

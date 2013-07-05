@@ -18,13 +18,13 @@
             </widget>
         </position>
     </page>
-    <page path="/login" extends="site">
+    <page path="/signin" extends="site">
         <position name="headerBar">
             <widget target="/site/menu-main" />
             <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">
-            <widget target="/site/login-form">
+            <widget styleId="signin" target="/site/signin">
                 <navigation>
                     <event on="auth-failure">/login</event>
                     <event on="login-success">/profile;p=#{projectUser.project.code}</event>
@@ -32,7 +32,7 @@
             </widget>
         </position>
     </page>
-    <page path="/register">
+    <page path="/signup">
         <position name="headerBar">
             <widget target="/site/menu-main" />
             <!--<widget target="/site/login-bar">
@@ -43,10 +43,7 @@
             <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">
-            <widget target="/site/register-form" />
-        </position>
-        <position name="copyright">
-            <widget target="/site/copyright" />
+            <widget styleId="signup" target="/site/signup" />
         </position>
     </page>
 

@@ -46,6 +46,7 @@ public class DefaultAuthenticationListener implements AuthenticationListener, Be
 
     @Override
     public void onFailure(AuthenticationToken token, AuthenticationException ae) {
+        log.warn(ae.getMessage());
     }
 
     @Override
