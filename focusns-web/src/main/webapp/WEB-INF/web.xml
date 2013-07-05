@@ -11,12 +11,12 @@
         <param-value>applicationContext</param-value>
     </context-param>
     <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext-web.xml</param-value>
-    </context-param>
-    <context-param>
         <param-name>log4jConfigLocation</param-name>
         <param-value>/WEB-INF/log4j.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext-web.xml</param-value>
     </context-param>
 
     <!-- Web Application Performance Monitor -->
@@ -98,10 +98,10 @@
 
     <!-- Web Application Listener -->
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
     </listener>
     <listener>
-        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <jsp-config>
