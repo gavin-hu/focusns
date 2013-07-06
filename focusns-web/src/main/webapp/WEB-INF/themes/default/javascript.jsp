@@ -9,9 +9,14 @@
 <script src='<c:url value="/static/assets/validation/jquery.validate.js" />'></script>
 <script src='<c:url value="/static/assets/validation/additional-methods.js" />'></script>
 
-<!-- kindeditor -->
-<script src='<c:url value="/static/assets/kindeditor/kindeditor.js" />'></script>
-<script src='<c:url value="/static/assets/kindeditor/lang/zh_CN.js" />'></script>
+<!-- ueditor -->
+<script type="text/javascript" charset="utf-8">
+    window.UEDITOR_HOME_URL = "<c:url value="/static/assets/ueditor/" />";
+</script>
+<script src='<c:url value="/static/assets/ueditor/ueditor.parse.js" />'></script>
+<script src='<c:url value="/static/assets/ueditor/ueditor.config.js" />'></script>
+<script src='<c:url value="/static/assets/ueditor/ueditor.config.toolbar.js" />'></script>
+<script src='<c:url value="/static/assets/ueditor/ueditor.all.js" />'></script>
 
 <!-- timeago -->
 <script src='<c:url value="/static/assets/timeago/jquery.timeago.js" />'></script>
@@ -35,15 +40,7 @@ $(function() {
 });
 </script>
 
-<script type="text/javascript">
-KindEditor.ready(function(K) {
-    var options = {
-        minWidth:300,
-        minHeight:100
-    }
-    window.editor = K.create('.editor', options);
-});
-</script>
+
 
 <script type="text/javascript">
 $(function(){
@@ -72,15 +69,23 @@ $(function(){
 
 <script type="text/javascript">
     $(function(){
-        $('form.valid').validate({
-            errorClass : 'help-inline',
-            errorElement : 'span',
+        // normal options
+        var options = {
+            ignore : '.ignore',
+            errorElement : 'label',
             errorPlacement: function(error, element){
-                var controlGroup = element.parents('div.control-group');
+                var controlGroup = element.closest('div.control-group');
                 if(controlGroup!=null) {
                     controlGroup.removeClass('success');
                     controlGroup.addClass('error');
                 }
+                error.each(function(){
+                    if('LABEL'==this.tagName) {
+                        $(this).addClass('help-block');
+                    } else if('SPAN'==this.tagName) {
+                        $(this).addClass('help-inline');
+                    }
+                });
                 error.insertAfter(element);
             },
             success : function(success, element) {
@@ -89,7 +94,28 @@ $(function(){
                     controlGroup.addClass('success');
                     controlGroup.removeClass('error');
                 }
+                success.remove();
             }
+        };
+        // inline options
+        var inlineOptions = $.extend(options, {
+            errorElement : 'span'
+        });
+        //
+        $('form.valid').each(function(){
+            $(this).validate(options)
+        });
+        $('form.valid-inline').each(function(){
+            $(this).validate(inlineOptions);
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+        $('.editor').each(function(){
+            var editor = new UE.ui.Editor(editor_simple);
+            editor.render(this);
         });
     });
 </script>

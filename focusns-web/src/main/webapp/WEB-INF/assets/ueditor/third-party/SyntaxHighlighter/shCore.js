@@ -1511,7 +1511,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
     /**
      * Replaces tabs with smart spaces.
      *
-     * @param {String} code    Code to fix the tabs in.
+     * @param {String} code    ExceptionCode to fix the tabs in.
      * @param {Number} tabSize Number of spaces in a column.
      * @return {String}        Returns code with all tabs replaces with roper amount of spaces.
      */
@@ -1657,7 +1657,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
      * Executes given regular expression on provided code and returns all
      * matches that are found.
      *
-     * @param {String} code    Code to execute regular expression on.
+     * @param {String} code    ExceptionCode to execute regular expression on.
      * @param {Object} regex   Regular expression item info from <code>regexList</code> collection.
      * @return {Array}         Returns a list of Match objects.
      */
@@ -2100,7 +2100,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
 
         /**
          * Splits block of text into individual DIV lines.
-         * @param {String} code			Code to highlight.
+         * @param {String} code			ExceptionCode to highlight.
          * @param {Array} lineNumbers	Calculated line numbers.
          * @return {String}				Returns highlighted code in HTML form.
          */
@@ -2287,7 +2287,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
 
         /**
          * Highlights the code and returns complete HTML.
-         * @param {String} code     Code to highlight.
+         * @param {String} code     ExceptionCode to highlight.
          * @return {Element}        Returns container DIV element with all markup.
          */
         getDiv: function(code)

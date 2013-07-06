@@ -44,6 +44,8 @@
                         </div>
                     </div>
                 </c:forEach>
+
+                <tool:pagination page="${page}" />
             </c:otherwise>
         </c:choose>
     </ui:widget-body>

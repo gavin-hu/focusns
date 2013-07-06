@@ -55,7 +55,7 @@ public class BlogCategoryWidget {
     }
 
     @RequestMapping("/category-edit")
-    public String doEdit(@RequestParam(required = false) Long id, @WidgetAttribute ProjectUser projectUser,
+    public String doEdit(@RequestParam(required = false) Long categoryId, @WidgetAttribute ProjectUser projectUser,
             @WidgetAttribute Project project, Model model) {
         //
         Long projectId = project.getId();
@@ -63,12 +63,13 @@ public class BlogCategoryWidget {
         model.addAttribute("blogCategories", blogCategories);
         //
         BlogCategory blogCategory = new BlogCategory();
-        if (id == null) {
+        if (categoryId == null) {
             blogCategory.setProjectId(projectId);
             blogCategory.setCreatedById(projectUser.getId());
         } else {
-            blogCategory = blogCategoryService.getBlogCategory(id);
+            blogCategory = blogCategoryService.getBlogCategory(categoryId);
         }
+        model.addAttribute("blogCategory", blogCategory);
         //
         return "modules/blog/category-edit";
     }

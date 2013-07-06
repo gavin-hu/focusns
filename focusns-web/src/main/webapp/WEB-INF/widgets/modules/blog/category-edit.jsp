@@ -3,24 +3,37 @@
 
 <ui:widget styleId="blog-category-edit">
     <ui:widget-body>
-        <form class="form-inline" action="<widget:actionUrl value="/blog/category-create" />" method="post">
+        <form class="valid-inline form-inline hello" action="<widget:actionUrl value="/blog/category-create" />" method="post">
             <fieldset>
                 <legend><h3>分类编辑</h3></legend>
-                <input name="label" type="text" placeholder="分类名称" />
-                <input type="hidden" name="projectId" value="${project.id}" />
-                <input type="hidden" name="createdById" value="${projectUser.id}" />
+                <div class="control-group">
+                    <label class="control-label">分类名称</label>
+                    <div class="controls">
+                        <form:input path="blogCategory.label" placeholder="分类名称"
+                                    data-rule-required="true" data-msg-required="分类名称不能为空！"/>
+                    </div>
+                </div>
+
+                <form:hidden path="blogCategory.projectId" />
+                <form:hidden path="blogCategory.createdById" />
                 <button type="submit" class="btn btn-primary">添加</button>
             </fieldset>
         </form>
 
-        <c:forEach items="${blogCategories}" var="blogCategory">
-        <form class="form-inline" action="<widget:actionUrl value="/blog/category-modify" />" method="post">
-            <input type="text" name="label" value="${blogCategory.label}" />
-            <input type="hidden" name="id" value="${blogCategory.id}" />
-            <input type="hidden" name="projectId" value="${project.id}" />
-            <input type="hidden" name="createdById" value="${projectUser.id}" />
-            <button type="submit" class="btn btn-primary">修改</button>
-            <a class="btn" href="<widget:actionUrl value="/blog/category-remove?id=${blogCategory.id}" />">删除</a>
+        <c:forEach items="${blogCategories}" var="blogCategory" varStatus="status">
+        <c:set value="${blogCategory}" var="category" scope="request" />
+        <form class="valid-inline form-inline" action="<widget:actionUrl value="/blog/category-modify" />" method="post">
+            <div class="control-group">
+                <div class="controls">
+                    <form:input path="category.label" placeholder="分类名称"
+                                data-rule-required="true" data-msg-required="分类名称不能为空！"/>
+                    <button type="submit" class="btn btn-primary">修改</button>
+                    <a class="btn" href="<widget:actionUrl value="/blog/category-remove?id=${blogCategory.id}" />">删除</a>
+                </div>
+            </div>
+            <form:hidden path="category.id" />
+            <form:hidden path="category.projectId" />
+            <form:hidden path="category.createdById" />
         </form>
         </c:forEach>
     </ui:widget-body>

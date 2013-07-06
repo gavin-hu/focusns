@@ -98,28 +98,29 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
     @Around("@within(org.springframework.stereotype.Service)")
     public Object weave(ProceedingJoinPoint pjp) throws Throwable {
         // MethodInvocation invocation = (MethodInvocation) pjp;
-        Method method = getMethod(pjp);
-        Map<String, Object> args = getArguments(method, pjp.getArgs());
-        //
         Object result = null;
         try {
-            triggerEvent(Event.Point.BEFORE, method, args, null, null);
+            triggerEvent(Event.Point.BEFORE, pjp, null, null);
             //
             result = pjp.proceed();
             //
-            triggerEvent(Event.Point.AFTER, method, args, result, null);
+
+            triggerEvent(Event.Point.AFTER, pjp, result, null);
             //
         } catch (Throwable throwable) {
             //
-            triggerEvent(Event.Point.AFTER_THROWING, method, args, result, throwable);
+            triggerEvent(Event.Point.AFTER_THROWING, pjp, result, throwable);
             throw throwable;
         }
         //
         return result;
     }
 
-    protected void triggerEvent(Event.Point point, Method method, Map<String, Object> arguments, Object returnValue,
+    protected void triggerEvent(Event.Point point, ProceedingJoinPoint pjp, Object returnValue,
             Throwable throwable) throws Exception {
+        //
+        Method method = getMethod(pjp);
+        Map<String, Object> arguments = getArguments(method, pjp.getArgs());
         //
         Event event = getEvent(method, point);
         //

@@ -6,7 +6,7 @@
         <h3>注册</h3>
     </ui:widget-head>
     <ui:widget-body>
-        <form class="valid form-horizontal" action="<widget:actionUrl value="/site/signup" />" method="post">
+        <form class="valid-inline form-horizontal" action="<widget:actionUrl value="/site/signup" />" method="post">
             <div class="control-group">
                 <label class="control-label" for="inputEmail">邮箱</label>
                 <div class="controls">

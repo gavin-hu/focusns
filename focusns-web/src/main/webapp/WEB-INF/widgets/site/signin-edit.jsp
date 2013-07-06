@@ -6,7 +6,12 @@
         <h3>登录</h3>
     </ui:widget-head>
     <ui:widget-body>
-        <form class="valid form-horizontal" action='<c:url value="/signin"/>' method="post">
+        <c:if test="${not empty AuthenticationException}">
+            <div class="alert alert-error">
+                身份验证失败，请重新登录！
+            </div>
+        </c:if>
+        <form class="valid-inline form-horizontal" action='<c:url value="/signin"/>' method="post">
             <div class="control-group">
                 <label class="control-label" for="inputUsername">邮箱</label>
                 <div class="controls">

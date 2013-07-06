@@ -10,8 +10,6 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="/signin" />
-        <property name="successUrl" value="/" />
-        <property name="unauthorizedUrl" value="/signin" />
         <property name="filterChainDefinitions">
             <value>
                 / = anon
@@ -19,13 +17,15 @@
                 /signup = anon
                 /static/** = anon
                 /widget/** = anon
-                /signin = authc
+                /signin = authc, redirect
                 /signout = logout
                 /people = user
                 /** = user
             </value>
         </property>
     </bean>
+
+    <bean id="redirect" class="org.focusns.security.filter.RedirectFilter" />
 
     <!-- Security Manager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -70,6 +70,11 @@
         <property name="pageRenderInterceptors">
             <list>
                 <bean class="org.focusns.web.page.interceptor.PageRenderParameterResolver" />
+            </list>
+        </property>
+        <property name="widgetActionInterceptors">
+            <list>
+                <bean class="org.focusns.web.page.interceptor.WidgetActionParameterResolver" />
             </list>
         </property>
     </bean>

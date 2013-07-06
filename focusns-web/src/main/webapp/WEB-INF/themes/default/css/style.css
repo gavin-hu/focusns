@@ -1,17 +1,26 @@
+/* UEditor */
+.edui-dialog-shadow {
+    top: 80px;
+}
+.control-label {
+    font-weight: bold;
+}
+
 /* Global */
 ul {
     list-style: none outside none;
 }
 /* layout */
-#doc-bd {
+.doc-bd {
     padding-top: 80px;
+    padding-bottom: 40px;
 }
-#doc-ft p {
+.doc-ft p {
     padding: 20px 0;
     border-top: 1px #EEE solid;
 }
-@media (min-width: 768px) and (max-width: 979px) {
-    #doc-bd {
+@media (max-width: 979px) {
+    .doc-bd {
         padding-top: 0;
     }
 }
@@ -74,13 +83,18 @@ ul {
 /* BlogPostWidget edit*/
 #blog-post-edit textarea {
     width: 100%;
-    height: 300px;
+    height: 600px;
+}
+#blog-post-edit div.editor {
+    padding-bottom: 10px;
 }
 #blog-post-edit button {
     margin-top: 10px;
 }
-
-/* BlogPostWidget list*/
-#blog-post-list .widget-head {
-    padding-top: 15px;
+#blog-post-edit .control-label {
+    font-weight: bold;
+}
+/* BlogCategoryWidget edit*/
+#blog-category-edit .control-label {
+    font-weight: bold;
 }

@@ -112,24 +112,24 @@ public class Page<T> {
         return count;
     }
 
-    public boolean hasNext() {
+    public boolean isHasNext() {
         return (pageNo + 1 <= getTotalPages());
     }
 
     public int getNextPage() {
-        if (hasNext()) {
+        if (isHasNext()) {
             return pageNo + 1;
         } else {
             return pageNo;
         }
     }
 
-    public boolean hasPre() {
+    public boolean isHasPre() {
         return (pageNo - 1 >= 1);
     }
 
     public int getPrePage() {
-        if (hasPre()) {
+        if (isHasPre()) {
             return pageNo - 1;
         } else {
             return pageNo;

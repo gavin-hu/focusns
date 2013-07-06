@@ -18,8 +18,11 @@
         <position name="mainColumn">
             <widget styleClass="user-edit" target="/project/user-edit">
                 <navigation>
-                    <event on="avatar-uploaded">/profile;p=#{projectUser.project.code},m=edit</event>
-                    <event on="avatar-cropped">/profile;p=#{projectUser.project.code},m=edit</event>
+                    <event on="pwd-modified">/profile;p=#{projectUser.project.code}</event>
+                    <event on="pwd-modify-failure">/profile;p=#{projectUser.project.code},m=edit?tab=pwd</event>
+                    <event on="user-modified">/profile;p=#{projectUser.project.code},m=edit?tab=user</event>
+                    <event on="avatar-uploaded">/profile;p=#{projectUser.project.code},m=edit?tab=avatar</event>
+                    <event on="avatar-cropped">/profile;p=#{projectUser.project.code},m=edit?tab=avatar</event>
                 </navigation>
             </widget>
         </position>

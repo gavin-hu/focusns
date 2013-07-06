@@ -83,9 +83,10 @@ public class BlogPostWidget {
 
     @RequestMapping("/post-list")
     public String doList(@RequestParam(required = false, defaultValue = "0") Long categoryId,
-            @WidgetAttribute Project project, Model model) {
+            @RequestParam(required = false, defaultValue = "1") Integer pageNo, @WidgetAttribute Project project, Model model) {
         //
-        Page<BlogPost> page = new Page<BlogPost>(20);
+        Page<BlogPost> page = new Page<BlogPost>(10);
+        page.setPageNo(pageNo);
         if (categoryId == 0) {
             page = blogPostService.fetchPageByProjectId(page, project.getId());
         } else {

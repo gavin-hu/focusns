@@ -22,8 +22,8 @@ package org.focusns.service.core.impl;
  * #L%
  */
 
-import java.util.Date;
-
+import org.focusns.common.exception.ServiceException;
+import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectFeatureDao;
@@ -37,6 +37,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
+import org.springframework.util.StringUtils;
+
+import java.util.Date;
 
 @Service
 @Transactional
@@ -136,8 +139,22 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         projectFeatureDao.insert(settingFeature);
     }
 
-    public void modifyUser(ProjectUser user) {
-        projectUserDao.update(user);
+    public void modifyUser(ProjectUser projectUser) {
+        //
+        if(StringUtils.hasText(projectUser.getOldPassword())
+                && StringUtils.hasText(projectUser.getNewPassword())) {
+            String oldHashedPassword = DigestUtils.md5DigestAsHex(projectUser.getOldPassword().getBytes());
+            String newHashedPassword = DigestUtils.md5DigestAsHex(projectUser.getNewPassword().getBytes());
+            //
+            if(oldHashedPassword.equals(projectUser.getPassword())) {
+                projectUser.setPassword(newHashedPassword);
+                projectUserDao.update(projectUser);
+            } else {
+                throw new ServiceException(ServiceExceptionCode.PASSWORD_MISS_MATCH, "新旧密码不匹配！");
+            }
+        } else {
+            projectUserDao.update(projectUser);
+        }
     }
 
     public void removeUser(ProjectUser user) {

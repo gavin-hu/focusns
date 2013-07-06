@@ -22,8 +22,11 @@ package org.focusns.web.modules.profile;
  * #L%
  */
 
+import org.focusns.common.exception.ServiceException;
+import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.common.image.ImageUtils;
 import org.focusns.common.image.Rectangle;
+import org.focusns.common.lang.ObjectUtils;
 import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.mvc.support.Navigator;
@@ -44,7 +47,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,7 +71,7 @@ public class ProjectUserWidget {
     @Autowired
     private ProjectLinkService projectLinkService;
 
-    @RequestMapping("/user-edit")
+    @RequestMapping(value="/user-edit", method = RequestMethod.GET)
     @Constraints({ Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL })
     public String doEdit(@WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) throws IOException {
         //
@@ -82,8 +88,8 @@ public class ProjectUserWidget {
 
     @RequestMapping("/user-view")
     @Constraints({ Constraint.PROJECT_NOT_NULL })
-    public String doView(@WidgetAttribute(required = false) ProjectUser projectUser, @WidgetAttribute Project project,
-            Model model) {
+    public String doView(@WidgetAttribute(required = false) ProjectUser projectUser,
+                         @WidgetAttribute Project project, Model model) {
         //
         ProjectUser dbUser = projectUserService.getUser(project.getCreatedById());
         model.addAttribute("projectUser", dbUser);
@@ -97,6 +103,27 @@ public class ProjectUserWidget {
         }
         //
         return "modules/profile/user-view";
+    }
+
+    @RequestMapping(value = "/user-modify", method = RequestMethod.POST)
+    public void doModify(ProjectUser target, @WidgetAttribute ProjectUser projectUser) {
+        //
+        ObjectUtils.extend(projectUser, target);
+        //
+        Navigator.get().withAttribute("projectUser", projectUser);
+        if(StringUtils.hasText(target.getOldPassword()) && StringUtils.hasText(target.getNewPassword())) {
+            Navigator.get().navigateTo("pwd-modified");
+        } else {
+            Navigator.get().navigateTo("user-modified");
+        }
+        projectUserService.modifyUser(projectUser);
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    public void handleServiceException(ServiceException serviceException) {
+        if(serviceException.getCode().getStatus() == ServiceExceptionCode.PASSWORD_MISS_MATCH.getStatus()) {
+            Navigator.get().withAttribute("serviceException", serviceException).navigateTo("pwd-modify-failure");
+        }
     }
 
     @RequestMapping("/user-avatar/download")

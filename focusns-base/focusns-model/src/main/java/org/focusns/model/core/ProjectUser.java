@@ -47,6 +47,9 @@ public class ProjectUser extends Id {
     //
     private long projectId;
     private Project project;
+    //
+    private String oldPassword;
+    private String newPassword;
 
     public ProjectUser() {
     }
@@ -169,5 +172,21 @@ public class ProjectUser extends Id {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

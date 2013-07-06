@@ -6,7 +6,7 @@
         <div class="thumbnail">
             <tool:img-avatar projectUserId="${projectUser.id}" width="260" height="260" />
             <div class="caption">
-                <h3>${projectUser.username}</h3>
+                <h3>${projectUser.nickname}</h3>
                 <p>
                     <c:if test="${not empty sessionScope.projectUser}">
                         <a href='<c:url value="/${projectFeature.code};p=${project.code},m=edit" />' class="btn">编辑</a>

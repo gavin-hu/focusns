@@ -33,13 +33,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EventSubscriber
 public class BlogPostEventSubscriber {
 
-    @Event(on = "CREATE_BLOG_POST", point = Event.Point.AFTER)
+    @Event(on = "CREATE_BLOG_POST", point = Event.Point.AFTER, async = true)
     public void afterCreateBlogPost(EventContext eventContext) {
         //
         generateSummary(eventContext);
     }
 
-    @Event(on = "MODIFY_BLOG_POST", point = Event.Point.AFTER)
+    @Event(on = "MODIFY_BLOG_POST", point = Event.Point.AFTER, async = true)
     public void afterModifyBlogPost(EventContext eventContext) {
         //
         generateSummary(eventContext);
@@ -48,6 +48,11 @@ public class BlogPostEventSubscriber {
     private void generateSummary(EventContext eventContext) {
         BlogPostDao blogPostDao = eventContext.getApplicationContext().getBean(BlogPostDao.class);
         BlogPost blogPost = (BlogPost) eventContext.getArguments()[0];
+        //
+        if(blogPost.getId()>0==false) {
+            return ;
+        }
+        //
         String text = HtmlUtils.extractText(blogPost.getContent());
         //
         int textLength = text.length();

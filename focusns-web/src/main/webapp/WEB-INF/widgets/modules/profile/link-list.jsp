@@ -51,7 +51,7 @@
         </c:choose>
     </ui:widget-body>
     <ui:widget-foot>
-        <c:if test="${page.hasNext()}">
+        <c:if test="${page.hasNext}">
             <a class="btn" href="/">更多 &gt;&gt;</a>
         </c:if>
     </ui:widget-foot>

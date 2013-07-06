@@ -31,7 +31,7 @@
     </div>
 </div>
 
-<div id="doc-bd">
+<div class="doc-bd">
     <div class="container">
         <div class="row">
             <l:positionExists name="leftColumn">
@@ -53,7 +53,7 @@
     </div>
 </div>
 
-<div id="doc-ft">
+<div class="doc-ft">
     <div class="container">
         <p>&copy; FocusSNS 2011~2013</p>
     </div>
