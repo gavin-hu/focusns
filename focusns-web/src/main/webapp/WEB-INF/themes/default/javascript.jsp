@@ -119,3 +119,9 @@ $(function(){
         });
     });
 </script>
+
+<script type="text/javascript">
+    $('.kaptcha img').click(function() {
+        $(this).attr('src', $(this).attr('src')+'?'+Math.random());
+    });
+</script>

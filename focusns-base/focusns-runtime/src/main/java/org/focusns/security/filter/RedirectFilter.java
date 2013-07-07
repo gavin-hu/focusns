@@ -15,7 +15,7 @@ public class RedirectFilter extends AccessControlFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         //
-        WebSubject webSubject = (WebSubject) SecurityUtils.getSubject();
+        WebSubject webSubject = (WebSubject)getSubject(request, response);
         //
         Object loginFailure = request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
         Object authenticationException = webSubject.getSession().getAttribute(AuthenticationException.class.getName());

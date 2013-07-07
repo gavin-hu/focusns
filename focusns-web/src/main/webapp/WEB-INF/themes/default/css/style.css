@@ -6,6 +6,14 @@
     font-weight: bold;
 }
 
+.kaptcha input {
+    width: 64px;
+}
+.kaptcha img {
+    height: 30px;
+    cursor: hand;
+    cursor: pointer;
+}
 /* Global */
 ul {
     list-style: none outside none;

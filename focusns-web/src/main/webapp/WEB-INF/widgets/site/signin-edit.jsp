@@ -11,6 +11,11 @@
                 身份验证失败，请重新登录！
             </div>
         </c:if>
+        <c:if test="${not empty AuthCodeException}">
+            <div class="alert alert-error">
+                验证码不匹配，请重新登录！
+            </div>
+        </c:if>
         <form class="valid-inline form-horizontal" action='<c:url value="/signin"/>' method="post">
             <div class="control-group">
                 <label class="control-label" for="inputUsername">邮箱</label>
@@ -26,6 +31,14 @@
                     <input type="password" id="inputPassword" name="password" placeholder="Password"
                            data-rule-required="true" data-msg-required="密码不能为空！"
                            data-rule-minlength="6" data-msg-minlength="密码长度必须大于6个字符！">
+                </div>
+            </div>
+            <div class="control-group kaptcha">
+                <label class="control-label" for="inputAuthCode">验证码</label>
+                <div class="controls">
+                    <input type="text" class="span1" id="inputAuthCode" name="authcode" placeholder="AuthCode"
+                           data-rule-required="true" data-msg-required="验证码不能为空！">
+                    <img src="<c:url value="/kaptcha" />" />
                 </div>
             </div>
             <div class="control-group">

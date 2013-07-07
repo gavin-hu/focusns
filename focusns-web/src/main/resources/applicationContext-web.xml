@@ -15,9 +15,10 @@
                 / = anon
                 /index = anon
                 /signup = anon
+                /kaptcha = kaptcha
                 /static/** = anon
                 /widget/** = anon
-                /signin = authc, redirect
+                /signin = kaptcha, authc, redirect
                 /signout = logout
                 /people = user
                 /** = user
@@ -25,6 +26,7 @@
         </property>
     </bean>
 
+    <bean id="kaptcha" class="org.focusns.security.filter.KaptchaFilter" />
     <bean id="redirect" class="org.focusns.security.filter.RedirectFilter" />
 
     <!-- Security Manager -->
