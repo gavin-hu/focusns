@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd" >
+
+    <!-- 校验支持-->
+    <bean id="beanValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:/constraint/core-model.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 缓存支持 -->
+    <cache:annotation-driven cache-manager="cacheManager"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.concurrent.ConcurrentMapCacheManager">
+        <property name="cacheNames">
+            <list>
+                <value>WidgetCache</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 异步任务及定时任务支持 -->
+    <task:annotation-driven executor="taskExecutor" />
+
+    <task:executor id="taskExecutor" pool-size="5" />
+
+</beans>

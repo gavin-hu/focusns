@@ -3,18 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:context="http://www.springframework.org/schema/context"
     xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
-		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<context:component-scan base-package="org.focusns.event">
         <context:include-filter type="annotation" expression="org.focusns.common.event.annotation.EventSubscriber" />
 	</context:component-scan>
 
-	<task:executor id="taskExecutor" pool-size="50" />
-    
     <aop:aspectj-autoproxy>
         <aop:include name="eventInterceptor" />
     </aop:aspectj-autoproxy>
@@ -24,7 +20,11 @@
 
     <!-- Event Multicaster -->
     <bean id="applicationEventMulticaster" class="org.focusns.common.event.support.EventMulticaster">
-        <property name="taskExecutor" ref="taskExecutor" />
+        <property name="taskExecutor">
+            <bean class="org.springframework.scheduling.config.TaskExecutorFactoryBean">
+                <property name="poolSize" value="5" />
+            </bean>
+        </property>
     </bean>
     
 </beans>
