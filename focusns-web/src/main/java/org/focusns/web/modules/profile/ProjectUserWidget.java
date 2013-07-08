@@ -91,7 +91,7 @@ public class ProjectUserWidget {
     public String doView(@WidgetAttribute(required = false) ProjectUser projectUser,
                          @WidgetAttribute Project project, Model model) {
         //
-        ProjectUser dbUser = projectUserService.getUser(project.getCreatedById());
+        ProjectUser dbUser = projectUserService.getProjectUser(project.getCreatedById());
         model.addAttribute("projectUser", dbUser);
         model.addAttribute("project", project);
         //
@@ -116,7 +116,7 @@ public class ProjectUserWidget {
         } else {
             Navigator.get().navigateTo("user-modified");
         }
-        projectUserService.modifyUser(projectUser);
+        projectUserService.modifyProjectUser(projectUser);
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -133,7 +133,7 @@ public class ProjectUserWidget {
         boolean notModified = false;
         InputStream inputStream = null;
         //
-        ProjectUser projectUser = projectUserService.getUser(userId);
+        ProjectUser projectUser = projectUserService.getProjectUser(userId);
         Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
         if(temp!=null && temp.booleanValue()) {
             long lastModified = storageService.checkTempResource(avatarCoordinates);
@@ -170,7 +170,7 @@ public class ProjectUserWidget {
     public void doUpload(@RequestParam Long projectId, @RequestParam Long userId, MultipartFile file)
             throws IOException {
         //
-        ProjectUser projectUser = projectUserService.getUser(userId);
+        ProjectUser projectUser = projectUserService.getProjectUser(userId);
         Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
         storageService.persistTempResource(file.getInputStream(), avatarCoordinates);
         //
@@ -180,7 +180,7 @@ public class ProjectUserWidget {
     @RequestMapping("/user-avatar/crop")
     public void doCrop(@RequestParam Long projectId, @RequestParam Long userId, Rectangle rectangle) throws IOException {
         //
-        ProjectUser projectUser = projectUserService.getUser(userId);
+        ProjectUser projectUser = projectUserService.getProjectUser(userId);
         Object[] avatarCoordinates = CoordinateHelper.getAvatarCoordinates(projectUser);
         //
         InputStream tempInputStream = storageService.loadTempResource(avatarCoordinates);

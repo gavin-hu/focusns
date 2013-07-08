@@ -26,15 +26,17 @@ import org.focusns.model.core.ProjectUser;
 
 public interface ProjectUserService {
 
-    ProjectUser getUser(String username);
+    ProjectUser getProjectUser(String username);
 
-    ProjectUser getUser(long userId);
+    ProjectUser getProjectUser(long userId);
 
-    void createUser(ProjectUser user);
+    void activeProjectUser(ProjectUser projectUser);
 
-    void removeUser(ProjectUser user);
+    void createProjectUser(ProjectUser projectUser);
 
-    void modifyUser(ProjectUser user);
+    void removeProjectUser(ProjectUser projectUser);
+
+    void modifyProjectUser(ProjectUser projectUser);
 
     void assignRole(long projectId, long userId, long roleId);
 

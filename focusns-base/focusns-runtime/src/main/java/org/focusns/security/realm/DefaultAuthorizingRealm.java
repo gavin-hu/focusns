@@ -32,7 +32,7 @@ public class DefaultAuthorizingRealm extends AuthorizingRealm implements BeanFac
         ProjectUserService projectUserService = beanFactory.getBean(ProjectUserService.class);
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
         Assert.hasText(usernamePasswordToken.getUsername(), "Username can not be null!");
-        ProjectUser projectUser = projectUserService.getUser(usernamePasswordToken.getUsername());
+        ProjectUser projectUser = projectUserService.getProjectUser(usernamePasswordToken.getUsername());
         //
         Assert.notNull(projectUser,String.format("User not found for username %s", usernamePasswordToken.getUsername()));
         //

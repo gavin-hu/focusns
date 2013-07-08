@@ -22,14 +22,11 @@ package org.focusns.web.site;
  * #L%
  */
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.auth.AuthenticationException;
 import org.focusns.service.auth.AuthenticationService;
-import org.focusns.service.core.ProjectService;
 import org.focusns.service.core.ProjectUserService;
 import org.focusns.web.Keys;
 import org.focusns.web.widget.Constraint;
@@ -64,7 +61,7 @@ public class LoginWidget {
         //
         authenticationService.authenticate(user);
         //
-        ProjectUser dbUser = projectUserService.getUser(user.getUsername());
+        ProjectUser dbUser = projectUserService.getProjectUser(user.getUsername());
         webRequest.setAttribute(Keys.SESSION_PROJECT_USER, dbUser, WebRequest.SCOPE_SESSION);
         //
         Navigator.get().navigateTo("login-success");

@@ -55,7 +55,7 @@ public class SignWidget {
     @RequestMapping(value="signup", method = RequestMethod.POST)
     public void doSignUp(@Valid ProjectUser projectUser) {
         //
-        projectUserService.createUser(projectUser);
+        projectUserService.createProjectUser(projectUser);
         //
         Navigator.get().withAttribute("projectUser", projectUser).navigateTo("sign-success");
     }

@@ -10,11 +10,9 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<context:component-scan base-package="org.focusns.event">
-		<context:include-filter type="annotation" expression="org.focusns.common.event.annotation.EventSubscriber" />
+        <context:include-filter type="annotation" expression="org.focusns.common.event.annotation.EventSubscriber" />
 	</context:component-scan>
-    
-    <task:annotation-driven executor="taskExecutor" />
-    
+
 	<task:executor id="taskExecutor" pool-size="50" />
     
     <aop:aspectj-autoproxy>

@@ -29,7 +29,16 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.common.event.annotation.Event;
+import org.focusns.common.event.annotation.EventSubscriber;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.CannotLoadBeanClassException;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 public class EventListener implements ApplicationListener<EventContext> {
@@ -42,7 +51,12 @@ public class EventListener implements ApplicationListener<EventContext> {
         //
         log.debug(String.format("Event %s triggered!", event.on()));
         // invoke event handle method
+
         Object eventSubscriber = eventContext.getEventSubscriber();
+
+        AutowireCapableBeanFactory beanFactory = eventContext.getApplicationContext().getAutowireCapableBeanFactory();
+
+        beanFactory.autowireBeanProperties(eventSubscriber, AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, true);
         Method eventHandler = eventContext.getEventHandler();
         ReflectionUtils.invokeMethod(eventHandler, eventSubscriber, eventContext);
     }

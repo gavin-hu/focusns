@@ -38,10 +38,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @EventSubscriber
 public class BlogCategoryEventSubscriber {
 
-    @Autowired
     private ProjectDao projectDao;
-    @Autowired
     private ProjectUserDao projectUserDao;
+
+    @Autowired
+    public void setProjectDao(ProjectDao projectDao) {
+        this.projectDao = projectDao;
+    }
+
+    @Autowired
+    public void setProjectUserDao(ProjectUserDao projectUserDao) {
+        this.projectUserDao = projectUserDao;
+    }
 
     @Event(on = "CREATE_BLOG_CATEGORY", point = Event.Point.AFTER)
     public void afterCreateBlogCategory(EventContext eventContext) {

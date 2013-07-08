@@ -25,10 +25,13 @@ package org.focusns.common.event.support;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -36,7 +39,12 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.focusns.common.event.annotation.Event;
 import org.focusns.common.event.annotation.EventSubscriber;
+import org.focusns.dao.core.ProjectUserDao;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.CannotLoadBeanClassException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -59,7 +67,7 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
 
     private Map<String, Event> eventMapping = new HashMap<String, Event>();
 
-    private Map<String, Method> eventMethodMapping = new HashMap<String, Method>();
+    private Map<String, Set<Method>> eventMethodsMapping = new HashMap<String, Set<Method>>();
 
     private Map<String, String> eventSubscriberMapping = new HashMap<String, String>();
 
@@ -73,24 +81,36 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         //
-        Map<String, Object> beansMap = beanFactory.getBeansWithAnnotation(EventSubscriber.class);
-        for (Map.Entry<String, Object> entry : beansMap.entrySet()) {
-            String beanName = entry.getKey();
-            Object beanObject = entry.getValue();
-            Class<?> beanClass = beanObject.getClass();
+        for(String beanDefinitionName : beanFactory.getBeanDefinitionNames()) {
+            BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanDefinitionName);
             //
-            Method[] declearedMethods = beanClass.getDeclaredMethods();
-            for (Method declearedMethod : declearedMethods) {
-                //
-                Event event = AnnotationUtils.getAnnotation(declearedMethod, Event.class);
-                if (event == null) {
-                    log.warn(String.format("Event Subscribe method %s must be annotated with @Event(\"xxx\")", declearedMethod));
-                } else {
-                    String eventKey = generateEventKey(event);
-                    eventMapping.put(eventKey, event);
-                    eventMethodMapping.put(eventKey, declearedMethod);
-                    eventSubscriberMapping.put(eventKey, beanName);
+            String beanName = beanDefinitionName;
+            String beanClassName = beanDefinition.getBeanClassName();
+            try {
+                Class<?> beanClass = ClassUtils.forName(beanClassName, beanFactory.getBeanClassLoader());
+                if(AnnotationUtils.isAnnotationDeclaredLocally(EventSubscriber.class, beanClass)) {
+                    Method[] declearedMethods = beanClass.getDeclaredMethods();
+                    for (Method declearedMethod : declearedMethods) {
+                        //
+                        Event event = AnnotationUtils.getAnnotation(declearedMethod, Event.class);
+                        if (event == null) {
+                            log.warn(String.format("Event Subscribe method %s must be annotated with @Event(\"xxx\")", declearedMethod));
+                        } else {
+                            String eventKey = generateEventKey(event);
+                            eventMapping.put(eventKey, event);
+                            eventSubscriberMapping.put(eventKey, beanName);
+                            //
+                            Set<Method> methodSet = eventMethodsMapping.get(eventKey);
+                            if(methodSet==null) {
+                                methodSet = new LinkedHashSet<Method>();
+                            }
+                            methodSet.add(declearedMethod);
+                            eventMethodsMapping.put(eventKey, methodSet);
+                        }
+                    }
                 }
+            } catch (ClassNotFoundException e) {
+                throw new CannotLoadBeanClassException(EventInterceptor.class.getName(), beanName, beanClassName, e);
             }
         }
     }
@@ -104,7 +124,6 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
             //
             result = pjp.proceed();
             //
-
             triggerEvent(Event.Point.AFTER, pjp, result, null);
             //
         } catch (Throwable throwable) {
@@ -126,23 +145,26 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
         //
         if (event != null) {
             //
-            EventContext eventContext = null;
-            if (point == Event.Point.BEFORE) {
-                eventContext = new EventContext(appContext, method, arguments);
-            } else if (point == Event.Point.AFTER) {
-                eventContext = new EventContext(appContext, method, arguments, returnValue);
-            } else if (point == Event.Point.AFTER_THROWING) {
-                eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
-            }
-            //
             String eventKey = generateEventKey(event);
             String subscriberName = eventSubscriberMapping.get(eventKey);
             Object eventSubscriber = appContext.getBean(subscriberName);
-            Method eventHandler = eventMethodMapping.get(eventKey);
-            eventContext.setEventHandler(eventHandler);
-            eventContext.setEventSubscriber(eventSubscriber);
             //
-            appContext.publishEvent(eventContext);
+            Set<Method> eventHandlers = eventMethodsMapping.get(eventKey);
+            for(Method eventHandler : eventHandlers) {
+                //
+                EventContext eventContext = null;
+                if (point == Event.Point.BEFORE) {
+                    eventContext = new EventContext(appContext, method, arguments);
+                } else if (point == Event.Point.AFTER) {
+                    eventContext = new EventContext(appContext, method, arguments, returnValue);
+                } else if (point == Event.Point.AFTER_THROWING) {
+                    eventContext = new EventContext(appContext, method, arguments, returnValue, throwable);
+                }
+                //
+                eventContext.setEventHandler(eventHandler);
+                eventContext.setEventSubscriber(eventSubscriber);
+                appContext.publishEvent(eventContext);
+            }
         }
     }
 

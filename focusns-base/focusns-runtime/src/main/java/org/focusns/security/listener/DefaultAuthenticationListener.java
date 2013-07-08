@@ -40,7 +40,7 @@ public class DefaultAuthenticationListener implements AuthenticationListener, Be
         Session session = webSubject.getSession();
         //
         UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
-        ProjectUser projectUser = getProjectUserService().getUser(usernamePasswordToken.getUsername());
+        ProjectUser projectUser = getProjectUserService().getProjectUser(usernamePasswordToken.getUsername());
         session.setAttribute("projectUser", projectUser);
     }
 

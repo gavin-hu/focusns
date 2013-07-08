@@ -54,7 +54,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     @Autowired
     private ProjectCategoryDao projectCategoryDao;
 
-    public ProjectUser getUser(String username) {
+    public ProjectUser getProjectUser(String username) {
         ProjectUser user = projectUserDao.selectByUsername(username);
         if (user.getProjectId() > 0) {
             Project project = projectDao.select(user.getProjectId());
@@ -67,79 +67,24 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         return user;
     }
 
-    public ProjectUser getUser(long userId) {
+    public ProjectUser getProjectUser(long userId) {
         return projectUserDao.select(userId);
     }
 
-    public void createUser(ProjectUser user) {
-        //
-        String md5Password = DigestUtils.md5DigestAsHex(user.getPassword().getBytes());
-        user.setPassword(md5Password);
-        //
-        projectUserDao.insert(user);
-        //
-        ProjectCategory category = projectCategoryDao.selectByCode("people");
-        //
-        Date now = new Date();
-        Project project = new Project();
-        project.setCode(user.getUsername());
-        project.setTitle(user.getUsername());
-        project.setDescription("");
-        project.setCategoryId(category.getId());
-        project.setCreatedAt(now);
-        project.setModifiedAt(now);
-        project.setCreatedById(user.getId());
-        project.setModifiedById(user.getId());
-        //
-        projectDao.insert(project);
-        user.setProjectId(project.getId());
-        projectUserDao.update(user);
-        //
-        ProjectFeature profileFeature = new ProjectFeature();
-        profileFeature.setLabel("主页");
-        profileFeature.setCode("profile");
-        profileFeature.setLevel(5);
-        profileFeature.setProjectId(project.getId());
-        //
-        ProjectFeature blogFeature = new ProjectFeature();
-        blogFeature.setLabel("日志");
-        blogFeature.setCode("blog");
-        blogFeature.setLevel(10);
-        blogFeature.setProjectId(project.getId());
-        //
-        ProjectFeature photoFeature = new ProjectFeature();
-        photoFeature.setLabel("相册");
-        photoFeature.setCode("photo");
-        photoFeature.setLevel(15);
-        photoFeature.setProjectId(project.getId());
-        //
-        ProjectFeature teamFeature = new ProjectFeature();
-        teamFeature.setLabel("人脉");
-        teamFeature.setCode("team");
-        teamFeature.setLevel(20);
-        teamFeature.setProjectId(project.getId());
-        //
-        ProjectFeature msgFeature = new ProjectFeature();
-        msgFeature.setLabel("私信");
-        msgFeature.setCode("msg");
-        msgFeature.setLevel(25);
-        msgFeature.setProjectId(project.getId());
-        //
-        ProjectFeature settingFeature = new ProjectFeature();
-        settingFeature.setLabel("设置");
-        settingFeature.setCode("admin");
-        settingFeature.setLevel(30);
-        settingFeature.setProjectId(project.getId());
-        //
-        projectFeatureDao.insert(profileFeature);
-        projectFeatureDao.insert(blogFeature);
-        projectFeatureDao.insert(photoFeature);
-        projectFeatureDao.insert(teamFeature);
-        projectFeatureDao.insert(msgFeature);
-        projectFeatureDao.insert(settingFeature);
+    @Override
+    public void activeProjectUser(ProjectUser projectUser) {
+
     }
 
-    public void modifyUser(ProjectUser projectUser) {
+    public void createProjectUser(ProjectUser projectUser) {
+        //
+        String md5Password = DigestUtils.md5DigestAsHex(projectUser.getPassword().getBytes());
+        projectUser.setPassword(md5Password);
+        //
+        projectUserDao.insert(projectUser);
+    }
+
+    public void modifyProjectUser(ProjectUser projectUser) {
         //
         if(StringUtils.hasText(projectUser.getOldPassword())
                 && StringUtils.hasText(projectUser.getNewPassword())) {
@@ -157,7 +102,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         }
     }
 
-    public void removeUser(ProjectUser user) {
+    public void removeProjectUser(ProjectUser user) {
         projectUserDao.delete(user.getId());
     }
 

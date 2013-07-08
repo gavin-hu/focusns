@@ -37,7 +37,7 @@ public class LoginNotifyTaskTest extends AbstractEventTest {
 
     @Test
     public void testDo() {
-        ProjectUser user = projectUserService.getUser("admin");
+        ProjectUser user = projectUserService.getProjectUser("admin");
         System.out.println(user.getEmail());
     }
 }

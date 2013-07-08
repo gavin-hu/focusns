@@ -49,7 +49,7 @@ public class ProjectHistoryServiceTest extends AbstractServiceTest {
         Project project = projectService.getProject("admin");
         Assert.assertNotNull(project);
         //
-        ProjectUser user = projectUserService.getUser("admin");
+        ProjectUser user = projectUserService.getProjectUser("admin");
         Assert.assertNotNull(user);
         //
         ProjectHistory history = new ProjectHistory();

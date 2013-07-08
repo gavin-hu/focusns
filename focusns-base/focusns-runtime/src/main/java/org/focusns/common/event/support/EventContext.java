@@ -26,12 +26,15 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.focusns.common.event.annotation.Event;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ApplicationContextEvent;
 import org.springframework.util.ClassUtils;
 
 public class EventContext extends ApplicationContextEvent {
 
+    private Event event;
+    //
     private Method eventHandler;
     private Object eventSubscriber;
     //

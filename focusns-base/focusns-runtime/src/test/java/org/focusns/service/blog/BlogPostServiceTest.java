@@ -60,7 +60,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         //
         tagService.createBlogCategory(blogTag);
         //
-        ProjectUser user = projectUserService.getUser("admin");
+        ProjectUser user = projectUserService.getProjectUser("admin");
         Assert.assertNotNull(user);
         //
         Date now = new Date();
