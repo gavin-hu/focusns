@@ -6,6 +6,11 @@ public enum ServiceExceptionCode implements ExceptionCode {
         public int getStatus() {
             return 1000;
         }
+    },
+    MAIL_SEND_EXCEPTION() {
+        public int getStatus() {
+            return 2000;
+        }
     }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/applicationContext-support.xml")
 public class MailServiceTest {
@@ -19,8 +18,8 @@ public class MailServiceTest {
     private MailService mailService;
 
     @Test
-    public void send() {
-        mailService.send("text", new HashMap<String, Object>());
+    public void send() throws Exception {
+        mailService.send("test", new HashMap<String, Object>());
     }
 
 }

@@ -72,26 +72,34 @@ public class XmlMailFactory extends AbstractMailFactory implements ResourceLoade
             // from
             Element fromEle = DomUtils.getChildElementByTagName(messageEle, "from");
             String from = DomUtils.getTextValue(fromEle).trim();
-            // cc
-            String[] ccArray = new String[0];
-            List<Element> ccEles = DomUtils.getChildElementsByTagName(messageEle, "cc");
-            for(Element ccEle : ccEles) {
-                String cc = DomUtils.getTextValue(ccEle).trim();
-                StringUtils.addStringToArray(ccArray, cc);
-            }
             // to
             String[] toArray = new String[0];
             List<Element> toEles = DomUtils.getChildElementsByTagName(messageEle, "to");
             for(Element toEle : toEles) {
                 String to = DomUtils.getTextValue(toEle).trim();
-                StringUtils.addStringToArray(toArray, to);
+                toArray = StringUtils.addStringToArray(toArray, to);
             }
+            // cc
+            String[] ccArray = new String[0];
+            List<Element> ccEles = DomUtils.getChildElementsByTagName(messageEle, "cc");
+            for(Element ccEle : ccEles) {
+                String cc = DomUtils.getTextValue(ccEle).trim();
+                ccArray = StringUtils.addStringToArray(ccArray, cc);
+            }
+            // subject
+            Element subjectEle = DomUtils.getChildElementByTagName(messageEle, "subject");
+            String subject = DomUtils.getTextValue(subjectEle).trim();
+            // content
+            Element contentEle = DomUtils.getChildElementByTagName(messageEle, "content");
+            String content = DomUtils.getTextValue(contentEle).trim();
             //
             MailConfig mailConfig = new MailConfig();
             mailConfig.setMessageId(messageId);
             mailConfig.setFrom(from);
             mailConfig.setTo(toArray);
             mailConfig.setCc(ccArray);
+            mailConfig.setSubject(subject);
+            mailConfig.setContent(content);
             //
             mailConfigHolder.add(mailConfig);
         }

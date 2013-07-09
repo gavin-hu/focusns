@@ -3,6 +3,7 @@ package org.focusns.common.mail;
 import org.focusns.common.mail.config.xml.XmlMailFactory;
 import org.springframework.beans.factory.config.AbstractFactoryBean;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.util.StringUtils;
 
 import java.util.Properties;
 
@@ -56,12 +57,16 @@ public class MailServiceFactoryBean extends AbstractFactoryBean {
         XmlMailFactory mailFactory = new XmlMailFactory(mailConfigLocation);
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(host);
-        mailSender.setPort(port);
-        mailSender.setProtocol(protocol);
         mailSender.setUsername(username);
         mailSender.setPassword(password);
         mailSender.setDefaultEncoding("UTF-8");
         mailSender.setJavaMailProperties(mailProperties);
+        if(port>0) {
+            mailSender.setPort(port);
+        }
+        if(StringUtils.hasText(protocol)) {
+            mailSender.setProtocol(protocol);
+        }
         //
         DefaultMailService mailService = new DefaultMailService();
         mailService.setMailSender(mailSender);
