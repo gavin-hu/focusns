@@ -298,6 +298,13 @@
                 <scope>provided</scope>
             </dependency>
 
+            <!-- Javax Mail -->
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>1.4.3</version>
+            </dependency>
+
             <!-- Java Security Framework -->
             <dependency>
                 <groupId>org.apache.shiro</groupId>
@@ -383,6 +390,14 @@
                 <artifactId>lucene-core</artifactId>
                 <version>3.6.2</version>
             </dependency>
+
+            <!-- 图形验证码 -->
+            <dependency>
+                <groupId>com.github.axet</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>0.0.7</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

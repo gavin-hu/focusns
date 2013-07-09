@@ -22,13 +22,7 @@ package org.focusns.common.web.page.config.xml;
  * #L%
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.focusns.common.web.page.config.PageConfig;
-import org.focusns.common.web.page.config.PageConfigKey;
 import org.focusns.common.web.page.config.PositionConfig;
 import org.focusns.common.web.page.config.WidgetConfig;
 import org.focusns.common.xml.XmlParser;
@@ -43,6 +37,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class XmlPageFactory extends AbstractPageFactory implements ResourceLoaderAware {
 

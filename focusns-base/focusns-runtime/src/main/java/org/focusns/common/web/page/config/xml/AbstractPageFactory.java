@@ -22,16 +22,14 @@ package org.focusns.common.web.page.config.xml;
  * #L%
  */
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.common.web.page.config.PageConfigException;
-import org.focusns.common.web.page.config.PageConfigKey;
 import org.focusns.common.web.page.config.PageFactory;
 import org.focusns.common.web.page.config.PageKeyGenerator;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractPageFactory implements PageFactory {
 
@@ -52,19 +50,19 @@ public abstract class AbstractPageFactory implements PageFactory {
     public PageConfig find(String name, Map<String, String> params) throws PageConfigException {
         try {
             String pageKey = pageKeyGenerator.generate(name, params);
-            if (cacheable && cache.containsKey(pageKey)) {
-                return cache.get(pageKey);
-            }
             //
-            List<PageConfig> pageConfigList = loadPages();
-            for (PageConfig pageConfig : pageConfigList) {
-                String tmpPageKey = pageKeyGenerator.generate(pageConfig.getPath(), pageConfig.getParameters());
-                this.cache.put(tmpPageKey, pageConfig);
+            if (cacheable==false || cache.isEmpty()) {
+                //
+                List<PageConfig> pageConfigList = loadPages();
+                for (PageConfig pageConfig : pageConfigList) {
+                    String tmpPageKey = pageKeyGenerator.generate(pageConfig.getPath(), pageConfig.getParameters());
+                    this.cache.put(tmpPageKey, pageConfig);
+                }
             }
             //
             return cache.get(pageKey);
         } catch (Exception e) {
-            throw new PageConfigException(e.getMessage(), e);
+            throw new PageConfigException("页面组件配置加载异常...", e);
         }
     }
 

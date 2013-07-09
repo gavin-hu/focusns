@@ -33,4 +33,18 @@
 
     <task:executor id="taskExecutor" pool-size="5" />
 
+    <!-- 邮件支持 -->
+    <bean id="mailService" class="org.focusns.common.mail.MailServiceFactoryBean">
+        <property name="host" value="smtp.sina.cn" />
+        <property name="username" value="focusns" />
+        <property name="password" value="focusns" />
+        <property name="mailLocation" value="classpath*:/mails" />
+        <property name="mailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">2000</prop>
+            </props>
+        </property>
+    </bean>
+
 </beans>

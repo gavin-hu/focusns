@@ -43,6 +43,8 @@ public final class XmlParser {
 
     private static final Log log = LogFactory.getLog(XmlParser.class);
 
+    public static final String SCHEMA_MAPPINGS_LOCATION = "META-INF/spring.schemas";
+
     private DocumentBuilderFactory documentBuildFactory = DocumentBuilderFactory.newInstance();
     //
     private DocumentLoader documentLoader = new DefaultDocumentLoader();
@@ -58,7 +60,7 @@ public final class XmlParser {
     }
 
     public XmlParser(ClassLoader classLoader) {
-        this.entityResolver = new PluggableSchemaResolver(classLoader);
+        this.entityResolver = new PluggableSchemaResolver(classLoader, SCHEMA_MAPPINGS_LOCATION);
     }
 
     public Document parse(InputStream inputStream) throws Exception {

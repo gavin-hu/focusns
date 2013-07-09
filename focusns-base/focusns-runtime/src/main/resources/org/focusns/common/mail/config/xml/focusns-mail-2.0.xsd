@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.focusns.org/schema/mail"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.focusns.org/schema/mail"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified">
+
+    <xsd:element name="mail">
+       <xsd:complexType>
+           <xsd:sequence>
+                <xsd:element name="message" type="messageType" minOccurs="1" maxOccurs="unbounded" />
+           </xsd:sequence>
+       </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="messageType">
+        <xsd:sequence>
+            <xsd:element name="from" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="to" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="cc" type="xsd:string" minOccurs="0" maxOccurs="unbounded" />
+            <xsd:element name="subject" type="xsd:string" minOccurs="1" maxOccurs="1" />
+            <xsd:element name="content" type="xsd:string" minOccurs="1" maxOccurs="1" />
+        </xsd:sequence>
+        <xsd:attribute name="id" use="required"/>
+    </xsd:complexType>
+
+</xsd:schema>

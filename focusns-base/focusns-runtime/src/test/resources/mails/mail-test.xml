@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mail xmlns="http://www.focusns.org/schema/mail"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.focusns.org/schema/mail http://www.focusns.org/schema/mail/focusns-mail.xsd">
+
+    <message id="test">
+        <from>focusns@sina.cn|FocusSNS</from>
+        <to>haozhonghu@hotmail.com|HaozhongHu</to>
+        <subject>测试邮件</subject>
+        <content>测试内容</content>
+    </message>
+
+</mail>
