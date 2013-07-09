@@ -43,7 +43,7 @@ public final class XmlParser {
 
     private static final Log log = LogFactory.getLog(XmlParser.class);
 
-    public static final String SCHEMA_MAPPINGS_LOCATION = "META-INF/spring.schemas";
+    public static final String SCHEMA_MAPPINGS_LOCATION = "META-INF/focusns.schemas";
 
     private DocumentBuilderFactory documentBuildFactory = DocumentBuilderFactory.newInstance();
     //
