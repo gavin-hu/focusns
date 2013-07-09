@@ -56,7 +56,7 @@ public class XmlMailFactory extends AbstractMailFactory implements ResourceLoade
         Resource[] resources = rpr.getResources(locationPattern);
         for(Resource resource : resources) {
             //
-            Document xmlDoc = xmlParser.parse(resource.getInputStream());
+            Document xmlDoc = xmlParser.parseAndValidate(resource);
             parse(xmlDoc.getDocumentElement(), mailConfigHolder);
         }
         //

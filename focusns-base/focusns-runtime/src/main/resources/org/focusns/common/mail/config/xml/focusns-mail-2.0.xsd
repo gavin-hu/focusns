@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns="http://www.focusns.org/schema/mail"
             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             targetNamespace="http://www.focusns.org/schema/mail"
-            elementFormDefault="qualified"
-            attributeFormDefault="unqualified">
+            elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <xsd:element name="mail">
        <xsd:complexType>

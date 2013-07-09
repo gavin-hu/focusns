@@ -22,6 +22,7 @@ package org.focusns.common.xml;
  * #L%
  */
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,6 +32,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
 import org.springframework.beans.factory.xml.DocumentLoader;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.xml.SimpleSaxErrorHandler;
 import org.springframework.util.xml.XmlValidationModeDetector;
@@ -63,13 +66,13 @@ public final class XmlParser {
         this.entityResolver = new PluggableSchemaResolver(classLoader, SCHEMA_MAPPINGS_LOCATION);
     }
 
-    public Document parse(InputStream inputStream) throws Exception {
-        return documentBuildFactory.newDocumentBuilder().parse(inputStream);
+    public Document parse(Resource resource) throws Exception {
+        return documentBuildFactory.newDocumentBuilder().parse(resource.getInputStream());
     }
 
-    public Document parseAndValidate(InputStream inputStream) throws Exception {
-        InputSource inputSource = new InputSource(inputStream);
-        int validationMode = validationModeDetector.detectValidationMode(inputStream);
+    public Document parseAndValidate(Resource resource) throws Exception {
+        InputSource inputSource = new InputSource(resource.getInputStream());
+        int validationMode = validationModeDetector.detectValidationMode(resource.getInputStream());
         return documentLoader.loadDocument(inputSource, entityResolver, errorHandler, validationMode, false);
     }
 
