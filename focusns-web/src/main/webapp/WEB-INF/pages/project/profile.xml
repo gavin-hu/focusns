@@ -16,6 +16,9 @@
                 </navigation>
             </widget>
         </position>
+        <position name="rightColumn">
+            <widget context="/sample" target="/project-info" />
+        </position>
     </page>
     <page extends="project-profile" path="/profile" category="people" mode="edit">
         <position name="mainColumn">

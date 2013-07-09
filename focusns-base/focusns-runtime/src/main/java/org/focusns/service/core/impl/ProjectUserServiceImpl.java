@@ -26,11 +26,9 @@ import org.focusns.common.exception.ServiceException;
 import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
-import org.focusns.dao.core.ProjectFeatureDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
-import org.focusns.model.core.ProjectFeature;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +47,6 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     private ProjectDao projectDao;
     @Autowired
     private ProjectUserDao projectUserDao;
-    @Autowired
-    private ProjectFeatureDao projectFeatureDao;
     @Autowired
     private ProjectCategoryDao projectCategoryDao;
 
@@ -72,7 +68,7 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     }
 
     @Override
-    public void activeProjectUser(ProjectUser projectUser) {
+    public void enableProjectUser(ProjectUser projectUser) {
 
     }
 
@@ -80,6 +76,8 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         //
         String md5Password = DigestUtils.md5DigestAsHex(projectUser.getPassword().getBytes());
         projectUser.setPassword(md5Password);
+        projectUser.setUsername(projectUser.getEmail());
+        projectUser.setCreatedAt(new Date());
         //
         projectUserDao.insert(projectUser);
     }

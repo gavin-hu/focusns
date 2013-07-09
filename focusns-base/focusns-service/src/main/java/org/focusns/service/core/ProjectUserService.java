@@ -30,7 +30,7 @@ public interface ProjectUserService {
 
     ProjectUser getProjectUser(long userId);
 
-    void activeProjectUser(ProjectUser projectUser);
+    void enableProjectUser(ProjectUser projectUser);
 
     void createProjectUser(ProjectUser projectUser);
 

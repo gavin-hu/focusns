@@ -10,7 +10,7 @@
     <title>FocusSNS</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
-    <%@include file="stylesheet.jsp"%>
+    <%@include file="stylesheet.jsp" %>
 </head>
 
 <body>
@@ -24,9 +24,11 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="brand" href='<c:url value="/" />'>FocusSNS</a>
+
             <div class="nav-collapse collapse">
-                <l:positionRender name="headerBar" />
-            </div><!--/.nav-collapse -->
+                <l:positionRender name="headerBar"/>
+            </div>
+            <!--/.nav-collapse -->
         </div>
     </div>
 </div>
@@ -35,27 +37,30 @@
     <div class="container">
         <div class="row">
             <l:positionExists name="leftColumn">
-            <div class="${leftColumnClass}">
-                <l:positionRender name="leftColumn" />
-            </div>
+                <div class="${leftColumnClass}">
+                    <l:positionRender name="leftColumn"/>
+                </div>
             </l:positionExists>
             <l:positionExists name="mainColumn">
                 <div class="${mainColumnClass}">
-                    <l:positionRender name="mainColumn" />
+                    <l:positionRender name="mainColumn"/>
                 </div>
             </l:positionExists>
             <l:positionExists name="rightColumn">
                 <div class="${rightColumnClass}">
-                    <l:positionRender name="rightColumn" />
+                    <l:positionRender name="rightColumn"/>
                 </div>
             </l:positionExists>
         </div>
     </div>
 </div>
-
-<div class="doc-ft">
-    <div class="container">
-        <p>&copy; FocusSNS 2011~2013</p>
+<div class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+        <div class="doc-ft">
+            <div class="container">
+                <p>&copy; FocusSNS 2013</p>
+            </div>
+        </div>
     </div>
 </div>
 <%@include file="javascript.jsp" %>

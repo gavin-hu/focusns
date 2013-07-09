@@ -34,16 +34,12 @@ public class ProjectUserEventSubscriber {
         this.projectCategoryDao = projectCategoryDao;
     }
 
-    @Event(on = "ACTIVE_PROJECT_USER", point = Event.Point.AFTER)
-    public void afterActiveProjectUser(EventContext ctx) {
+    @Event(on = "CREATE_PROJECT_USER", point = Event.Point.AFTER)
+    public void afterCreateProjectUser(EventContext ctx) {
         //
         ProjectUser projectUser = (ProjectUser) ctx.getArguments()[0];
-    }
+        long createAtTime = projectUser.getCreatedAt().getTime();
 
-    @Event(on = "ACTIVE_PROJECT_USER", point = Event.Point.AFTER)
-    public void afterActiveProjectUser2(EventContext ctx) {
-        //
-        ProjectUser projectUser = (ProjectUser) ctx.getArguments()[0];
     }
 
     /*protected void createProject(ProjectUser projectUser) {

@@ -28,6 +28,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.web.subject.WebSubject;
 import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.page.engine.PageRenderInterceptor;
 import org.focusns.model.core.Project;
@@ -86,6 +88,7 @@ public class PageRenderParameterResolver implements PageRenderInterceptor, Appli
         if (projectUser != null) {
             request.setAttribute(Keys.REQUEST_PROJECT_USER, projectUser);
         }
+
     }
 
     @Override

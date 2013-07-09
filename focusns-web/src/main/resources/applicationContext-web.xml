@@ -15,19 +15,19 @@
                 / = anon
                 /index = anon
                 /signup = anon
-                /kaptcha = kaptcha
+                /kaptcha = $kaptcha
                 /static/** = anon
                 /widget/** = anon
-                /signin = kaptcha, authc, redirect
+                /signin = $kaptcha, $authc
                 /signout = logout
-                /people = user
-                /** = user
+                /** = $user
             </value>
         </property>
     </bean>
 
-    <bean id="kaptcha" class="org.focusns.security.filter.KaptchaFilter" />
-    <bean id="redirect" class="org.focusns.security.filter.RedirectFilter" />
+    <bean id="$kaptcha" class="org.focusns.security.filter.KaptchaFilter" />
+    <bean id="$user" class="org.focusns.security.filter.UserFilter" />
+    <bean id="$authc" class="org.focusns.security.filter.FormAuthenticationFilter" />
 
     <!-- Security Manager -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">

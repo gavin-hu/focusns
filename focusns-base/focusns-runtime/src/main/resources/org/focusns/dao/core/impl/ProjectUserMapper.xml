@@ -10,6 +10,8 @@
 		<result column="password" property="password" jdbcType="VARCHAR" />
         <result column="nickname" property="nickname" jdbcType="VARCHAR" />
 		<result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="enabled" property="enabled" jdbcType="BOOLEAN" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
         <association property="project" javaType="org.focusns.model.core.Project">
             <id property="id" column="project_id"/>
@@ -25,8 +27,8 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_project_user (username, password, nickname, email)
-		values (#{username}, #{password}, #{nickname}, #{email})
+		insert into tb_project_user (username, password, nickname, email, enabled, created_at)
+		values (#{username}, #{password}, #{nickname}, #{email}, #{enabled}, #{createdAt})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -61,9 +63,15 @@
             <if test="nickname != null" >
                 nickname = #{nickname},
             </if>
-			<if test="email != null" >
-		        email = #{email},
+            <if test="email != null" >
+                email = #{email},
+            </if>
+			<if test="enabled != null" >
+                enabled = #{enabled},
 			</if>
+            <if test="createdAt != null" >
+                created_at = #{createdAt},
+            </if>
             <if test="projectId > 0" >
 		        project_id = #{projectId},
 			</if>

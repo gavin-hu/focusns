@@ -22,28 +22,22 @@ package org.focusns.model.core;
  * #L%
  */
 
-import java.util.Date;
-
 import org.focusns.model.common.Id;
 
-public class ProjectUser extends Id {
+import java.util.Date;
 
-    public static String KEY = ProjectUser.class.getName();
+public class ProjectUser extends Id {
 
     private String username;
     private String password;
     private String nickname;
-    private String realname;
     private String province;
     private String city;
     private String gender;
     private Date birthday;
-    private String bloodType;
-    private float height;
-    private float weight;
-    private String identityNo;
-
     private String email;
+    private Boolean enabled;
+    private Date createdAt;
     //
     private long projectId;
     private Project project;
@@ -78,14 +72,6 @@ public class ProjectUser extends Id {
         this.nickname = nickname;
     }
 
-    public String getRealname() {
-        return realname;
-    }
-
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -118,44 +104,28 @@ public class ProjectUser extends Id {
         this.birthday = birthday;
     }
 
-    public String getBloodType() {
-        return bloodType;
-    }
-
-    public void setBloodType(String bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public float getHeight() {
-        return height;
-    }
-
-    public void setHeight(float height) {
-        this.height = height;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
-    public String getIdentityNo() {
-        return identityNo;
-    }
-
-    public void setIdentityNo(String identityNo) {
-        this.identityNo = identityNo;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public long getProjectId() {
@@ -189,4 +159,5 @@ public class ProjectUser extends Id {
     public void setOldPassword(String oldPassword) {
         this.oldPassword = oldPassword;
     }
+
 }

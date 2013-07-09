@@ -24,8 +24,7 @@ ul {
     padding-bottom: 40px;
 }
 .doc-ft p {
-    padding: 20px 0;
-    border-top: 1px #EEE solid;
+    padding: 10px 0;
 }
 @media (max-width: 979px) {
     .doc-bd {
