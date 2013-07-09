@@ -1,24 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages>
+<pages xmlns="http://www.focusns.org/schema/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.focusns.org/schema/pages http://www.focusns.org/schema/pages/focusns-pages.xsd">
+
     <page path="/index" extends="site">
         <position name="mainColumn">
-            <widget target="/site/content-view">
-                <preference>
-                    <title>Hello</title>
-                    <content><![CDATA[
-                        <div class="hero-unit">
-                            <h1>FocusSNS</h1>
-                            <p>FocusSNS 是一款开源的主题社会化网络软件(SNS)，可以用于构建各类主题社区、企业社区、协作平台等。</p>
-                            <br>
-                            <p>
-                                <a class="btn btn-primary btn-large" href="/focusns/signin">登录</a>
-                                <a class="btn btn-primary btn-large" href="/focusns/signup">注册</a>
-                                <a class="btn btn-large" href="https://github.com/gavin-hu/focusns" target="blank">Github</a>
-                            </p>
-                        </div>
-                    ]]></content>
-                </preference>
-            </widget>
+            <widget target="/site/about-view" />
         </position>
     </page>
     <page path="/signin" extends="site">
@@ -38,15 +25,23 @@
     <page path="/signup">
         <position name="headerBar">
             <widget target="/site/menu-main" />
-            <!--<widget target="/site/login-bar">
-                <navigation>
-                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
-                </navigation>
-            </widget>-->
             <widget target="/site/menu-user" />
         </position>
         <position name="mainColumn">
-            <widget styleId="signup" target="/site/signup" />
+            <widget styleId="signup" target="/site/signup">
+                <navigation>
+                    <event on="sign-confirm">/signup;m=confirm</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+    <page path="/signup" mode="confirm">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/menu-user" />
+        </position>
+        <position name="mainColumn">
+             <widget target="/site/signup-confirm" />
         </position>
     </page>
 

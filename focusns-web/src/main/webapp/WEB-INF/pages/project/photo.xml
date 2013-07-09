@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pages>
+<pages xmlns="http://www.focusns.org/schema/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.focusns.org/schema/pages http://www.focusns.org/schema/pages/focusns-pages.xsd">
+
     <page extends="project-photo" path="/photo" category="people">
         <position name="mainColumn">
             <widget target="/photo/album-list" />

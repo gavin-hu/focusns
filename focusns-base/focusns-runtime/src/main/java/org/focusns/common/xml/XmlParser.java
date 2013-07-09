@@ -22,9 +22,6 @@ package org.focusns.common.xml;
  * #L%
  */
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.logging.Log;
@@ -32,7 +29,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.xml.DefaultDocumentLoader;
 import org.springframework.beans.factory.xml.DocumentLoader;
 import org.springframework.beans.factory.xml.PluggableSchemaResolver;
-import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.xml.SimpleSaxErrorHandler;

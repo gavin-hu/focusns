@@ -29,6 +29,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.focusns.common.web.WebUtils;
 import org.focusns.common.web.page.config.PageConfig;
 import org.focusns.common.web.page.config.PageFactory;
@@ -41,6 +43,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.UrlPathHelper;
 
 class PageFilter extends OncePerRequestFilter {
+    private static final Log log = LogFactory.getLog(PageFilter.class);
+    //
     private static final String DEFAULT_LAYOUT_LOCATION = "/WEB-INF/themes/default/layout.jsp";
     //
     private PageFactory pageFactory;
@@ -65,29 +69,33 @@ class PageFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         //
-        String lookupPath = this.urlPathHelper.getLookupPathForRequest(request);
-        if (lookupPath.equals("/") || lookupPath.equals("")) {
-            lookupPath = "/index";
-        }
-        //
-        PageConfig pageConfig = pageFactory.find(lookupPath, WebUtils.getParameterMap(request));
-        if (pageConfig != null) {
-            request.setAttribute("pageConfig", pageConfig);
-            request.getSession().setAttribute("pageConfig", pageConfig);
-            pageEngine.doRender(request, response);
+        try {
+            String lookupPath = this.urlPathHelper.getLookupPathForRequest(request);
+            if (lookupPath.equals("/") || lookupPath.equals("")) {
+                lookupPath = "/index";
+            }
             //
-            String layout = !StringUtils.hasText(pageConfig.getLayout()) ? defaultLayout : pageConfig.getLayout();
-            request.getRequestDispatcher(layout).forward(request, response);
+            PageConfig pageConfig = pageFactory.find(lookupPath, WebUtils.getParameterMap(request));
+            if (pageConfig != null) {
+                request.setAttribute("pageConfig", pageConfig);
+                request.getSession().setAttribute("pageConfig", pageConfig);
+                pageEngine.doRender(request, response);
+                //
+                String layout = !StringUtils.hasText(pageConfig.getLayout()) ? defaultLayout : pageConfig.getLayout();
+                request.getRequestDispatcher(layout).forward(request, response);
+                //
+                return;
+            }
             //
-            return;
-        }
-        //
-        String widgetId = request.getParameter("widgetId");
-        if (widgetId != null) {
-            request.setAttribute("widgetId", widgetId);
-            pageEngine.doAction(request, response);
-            //
-            return;
+            String widgetId = request.getParameter("widgetId");
+            if (widgetId != null) {
+                request.setAttribute("widgetId", widgetId);
+                pageEngine.doAction(request, response);
+                //
+                return;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         //
         filterChain.doFilter(request, response);

@@ -5,17 +5,6 @@
 
 
     <bean class="org.focusns.model.core.ProjectUser">
-
-        <field name="username">
-            <constraint annotation="org.hibernate.validator.constraints.NotEmpty">
-                <message>用户名不能为空！</message>
-            </constraint>
-        </field>
-        <field name="password">
-            <constraint annotation="org.hibernate.validator.constraints.NotEmpty">
-                <message>密码不能为空！</message>
-            </constraint>
-        </field>
         <field name="email">
             <constraint annotation="org.hibernate.validator.constraints.NotEmpty">
                 <message>电子邮箱不能为空！</message>
@@ -28,6 +17,16 @@
                 <groups>
                     <value>org.focusns.validation.group.Register</value>
                 </groups>
+            </constraint>
+        </field>
+        <field name="password">
+            <constraint annotation="org.hibernate.validator.constraints.NotEmpty">
+                <message>密码不能为空！</message>
+            </constraint>
+        </field>
+        <field name="nickname">
+            <constraint annotation="org.hibernate.validator.constraints.NotEmpty">
+                <message>昵称不能为空！</message>
             </constraint>
         </field>
     </bean>

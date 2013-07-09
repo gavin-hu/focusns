@@ -74,7 +74,7 @@ public class XmlPageFactory extends AbstractPageFactory implements ResourceLoade
         Resource[] resources = rpr.getResources(prefix + "/**/*" + suffix);
         // parse abstract pages
         for (Resource resource : resources) {
-            Document xmlDoc = xmlParser.parse(resource);
+            Document xmlDoc = xmlParser.parseAndValidate(resource);
             Element pagesEle = xmlDoc.getDocumentElement();
             List<Element> pageEles = DomUtils.getChildElementsByTagName(pagesEle, "page");
             for (Element pageEle : pageEles) {
@@ -87,7 +87,7 @@ public class XmlPageFactory extends AbstractPageFactory implements ResourceLoade
         }
         // parse pages
         for (Resource resource : resources) {
-            Document xmlDoc = xmlParser.parse(resource);
+            Document xmlDoc = xmlParser.parseAndValidate(resource);
             Element pagesEle = xmlDoc.getDocumentElement();
             List<Element> pageEles = DomUtils.getChildElementsByTagName(pagesEle, "page");
             for (Element pageEle : pageEles) {

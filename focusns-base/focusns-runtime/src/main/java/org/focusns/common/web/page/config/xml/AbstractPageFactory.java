@@ -62,7 +62,7 @@ public abstract class AbstractPageFactory implements PageFactory {
             //
             return cache.get(pageKey);
         } catch (Exception e) {
-            throw new PageConfigException("页面组件配置加载异常...", e);
+            throw new PageConfigException("页面配置加载异常...", e);
         }
     }
 

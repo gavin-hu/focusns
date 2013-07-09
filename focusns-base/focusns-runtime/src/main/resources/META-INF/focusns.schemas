@@ -1,2 +1,4 @@
+http\://www.focusns.org/schema/pages/focusns-pages.xsd=org/focusns/common/web/page/config/xml/focusns-pages-2.0.xsd
+http\://www.focusns.org/schema/pages/focusns-pages-2.0.xsd=org/focusns/common/web/page/config/xml/focusns-pages-2.0.xsd
 http\://www.focusns.org/schema/mail/focusns-mail.xsd=org/focusns/common/mail/config/xml/focusns-mail-2.0.xsd
 http\://www.focusns.org/schema/mail/focusns-mail-2.0.xsd=org/focusns/common/mail/config/xml/focusns-mail-2.0.xsd
