@@ -1,4 +1,4 @@
-package org.focusns.event;
+package org.focusns.subscriber;
 
 /*
  * #%L

@@ -1,4 +1,4 @@
-package org.focusns.event.blog;
+package org.focusns.subscriber.blog;
 
 /*
  * #%L
@@ -22,10 +22,9 @@ package org.focusns.event.blog;
  * #L%
  */
 
-import org.focusns.event.AbstractEventTest;
-import org.focusns.event.blog.impl.BlogPostEventSubscriber;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.service.blog.BlogPostService;
+import org.focusns.subscriber.AbstractEventTest;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -36,16 +35,12 @@ public class BlogPostEventSubscriberTest extends AbstractEventTest {
 
     @Autowired
     private BlogPostService blogPostService;
-    @Autowired
-    private BlogPostEventSubscriber blogPostEventSubscriber;
 
     @Test
     public void testGetBlogPostEvent() {
         //
         BlogPost blogPost = blogPostService.getBlogPost(1);
         Assert.assertTrue(blogPost.getId() == 1);
-        //
-        Assert.assertNotNull(blogPostEventSubscriber);
     }
 
 }

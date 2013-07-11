@@ -1,4 +1,4 @@
-package org.focusns.event.core;
+package org.focusns.subscriber.core;
 
 /*
  * #%L
@@ -22,9 +22,9 @@ package org.focusns.event.core;
  * #L%
  */
 
-import org.focusns.event.AbstractEventTest;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
+import org.focusns.subscriber.AbstractEventTest;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
