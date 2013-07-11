@@ -1,4 +1,4 @@
-package org.focusns.event.photo.impl;
+package org.focusns.subscriber.photo.impl;
 
 import org.focusns.common.event.annotation.Event;
 import org.focusns.common.event.annotation.EventSubscriber;

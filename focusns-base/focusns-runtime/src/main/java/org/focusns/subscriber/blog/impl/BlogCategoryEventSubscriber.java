@@ -1,4 +1,4 @@
-package org.focusns.event.blog.impl;
+package org.focusns.subscriber.blog.impl;
 
 /*
  * #%L

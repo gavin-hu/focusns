@@ -1,4 +1,4 @@
-package org.focusns.event.core.impl;
+package org.focusns.subscriber.core.impl;
 
 import org.focusns.common.event.annotation.Event;
 import org.focusns.common.event.annotation.EventSubscriber;
