@@ -59,23 +59,23 @@
 		delete from tb_message where id = #{id}
 	</delete>
 
-    <sql id="fetchByProjectIdSql">
+    <sql id="selectByProjectIdSql">
         from tb_message where project_id = #{projectId}
     </sql>
-    <select id="fetchByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
-       select * <include refid="fetchByProjectIdSql" />
+    <select id="selectByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select * <include refid="selectByProjectIdSql" />
     </select>
-    <select id="fetchByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-       select count(1) <include refid="fetchByProjectIdSql" />
+    <select id="selectByProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+       select count(1) <include refid="selectByProjectIdSql" />
     </select>
 
-    <sql id="fetchByToProjectIdSql">
+    <sql id="selectByToProjectIdSql">
         from tb_message where to_project_id = #{toProjectId}
     </sql>
-    <select id="fetchByToProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchByToProjectIdSql" />
+    <select id="selectByToProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="selectByToProjectIdSql" />
     </select>
-    <select id="fetchByToProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByToProjectIdSql" />
+    <select id="selectByToProjectIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="selectByToProjectIdSql" />
     </select>
 </mapper>

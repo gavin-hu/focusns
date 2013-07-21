@@ -24,7 +24,7 @@ package org.focusns.dao.msg.impl;
 
 import java.util.List;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.msg.MessageBoxDao;
 import org.focusns.model.msg.MessageBox;
 import org.springframework.stereotype.Repository;

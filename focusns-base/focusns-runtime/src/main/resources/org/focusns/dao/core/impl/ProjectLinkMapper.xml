@@ -68,7 +68,7 @@
         delete from tb_project_link where from_project_id = #{fromProjectId} and to_project_id = #{toProjectId}
     </delete>
 
-    <sql id="selectPageSql">
+    <sql id="fetchPageSql">
         from tb_project_link a, tb_project b
         <where>
             <if test="category != null">
@@ -85,7 +85,7 @@
             </if>
         </where>
     </sql>
-    <select id="selectPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    <select id="fetchPage" parameterType="java.util.Map" resultMap="BaseResultMap">
         select a.*,
         <if test="toProjectId!=null">
                b.id as from_project_id,
@@ -103,10 +103,10 @@
             b.created_by_id as to_project_created_by_id,
             b.modified_by_id as to_project_modified_by_id
         </if>
-        <include refid="selectPageSql"/>
+        <include refid="fetchPageSql"/>
     </select>
-    <select id="selectPageCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="selectPageSql"/>
+    <select id="fetchPageCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchPageSql"/>
     </select>
 	
 </mapper>

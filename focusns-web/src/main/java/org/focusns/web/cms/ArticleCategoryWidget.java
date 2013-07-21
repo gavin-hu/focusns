@@ -30,7 +30,6 @@ import org.focusns.model.common.Page;
 import org.focusns.service.blog.BlogCategoryService;
 import org.focusns.service.blog.BlogPostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,7 +53,7 @@ public class ArticleCategoryWidget {
         BlogCategory articleCategory = blogCategoryService.getBlogCategory(categoryId);
         //
         Page<BlogPost> page = new Page<BlogPost>(limit);
-        page = blogPostService.selectPageByCategoryId(page, -1, categoryId);
+        page = blogPostService.fetchPageByCategoryId(page, -1, categoryId);
         //
         model.addAttribute("articleCategory", articleCategory);
         model.addAttribute(Page.KEY, page);

@@ -37,6 +37,6 @@ public interface BlogPostDao extends BaseDao<BlogPost> {
      *            #See BlogCategory
      * @return
      */
-    Page<BlogPost> fetchByProjectAndCategoryId(Page<BlogPost> page, Long projectId, Long categoryId);
+    Page<BlogPost> selectByProjectAndCategoryId(Page<BlogPost> page, Long projectId, Long categoryId);
 
 }

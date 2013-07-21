@@ -88,9 +88,9 @@ public class BlogPostWidget {
         Page<BlogPost> page = new Page<BlogPost>(10);
         page.setPageNo(pageNo);
         if (categoryId == 0) {
-            page = blogPostService.selectPageByProjectId(page, project.getId());
+            page = blogPostService.fetchPageByProjectId(page, project.getId());
         } else {
-            page = blogPostService.selectPageByCategoryId(page, project.getId(), categoryId);
+            page = blogPostService.fetchPageByCategoryId(page, project.getId(), categoryId);
         }
         model.addAttribute("page", page);
         //

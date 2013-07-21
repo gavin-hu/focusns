@@ -64,7 +64,7 @@ public class ProjectLinkWidget {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if (reverse.booleanValue()) {
-            page = projectLinkService.selectPageByToProjectId(page, project.getId(), category);
+            page = projectLinkService.fetchPageByToProjectId(page, project.getId(), category);
         } else {
             page = projectLinkService.selectPageByFromProjectId(page, project.getId(), category);
         }

@@ -53,13 +53,13 @@ public class MessageServiceImpl implements MessageService {
         messageDao.delete(message.getId());
     }
 
-    public Page<Message> selectPageByBox(Page<Message> page, String box, long projectId) {
+    public Page<Message> fetchPageByBox(Page<Message> page, String box, long projectId) {
         //
         if ("IN".equalsIgnoreCase(box)) {
-            page = messageDao.fetchByToProjectId(page, projectId);
+            page = messageDao.selectByToProjectId(page, projectId);
         }
         if ("SENT".equalsIgnoreCase(box)) {
-            page = messageDao.fetchByProjectId(page, projectId);
+            page = messageDao.selectByProjectId(page, projectId);
         }
         //
         return page;

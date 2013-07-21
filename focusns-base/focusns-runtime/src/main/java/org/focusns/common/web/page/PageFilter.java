@@ -81,6 +81,9 @@ class PageFilter extends OncePerRequestFilter {
                 request.getSession().setAttribute("pageConfig", pageConfig);
                 pageEngine.doRender(request, response);
                 //
+                if(response.isCommitted()) {
+                    return ;
+                }
                 String layout = !StringUtils.hasText(pageConfig.getLayout()) ? defaultLayout : pageConfig.getLayout();
                 request.getRequestDispatcher(layout).forward(request, response);
                 //

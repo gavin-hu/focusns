@@ -67,7 +67,7 @@ public class ProjectHistoryServiceImpl implements ProjectHistoryService {
         projectHistoryDao.delete(history.getId());
     }
 
-    public Page<ProjectHistory> selectPage(Page<ProjectHistory> page, long projectId) {
+    public Page<ProjectHistory> fetchPage(Page<ProjectHistory> page, long projectId) {
         page = projectHistoryDao.fetchByProjectId(page, projectId);
         // TODO performance tuning
         for (ProjectHistory history : page.getResults()) {

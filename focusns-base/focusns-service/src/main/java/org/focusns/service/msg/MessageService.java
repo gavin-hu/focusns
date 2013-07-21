@@ -35,6 +35,6 @@ public interface MessageService {
 
     void removeMessage(Message message);
 
-    Page<Message> selectPageByBox(Page<Message> page, String box, long projectId);
+    Page<Message> fetchPageByBox(Page<Message> page, String box, long projectId);
 
 }

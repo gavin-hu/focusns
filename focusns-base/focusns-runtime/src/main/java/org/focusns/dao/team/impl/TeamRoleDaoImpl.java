@@ -22,7 +22,7 @@ package org.focusns.dao.team.impl;
  * #L%
  */
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.team.TeamRoleDao;
 import org.focusns.model.team.TeamRole;
 import org.springframework.stereotype.Repository;

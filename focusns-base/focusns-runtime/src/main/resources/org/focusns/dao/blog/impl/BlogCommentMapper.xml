@@ -61,13 +61,13 @@
 		delete from tb_blog_comment where id = #{id}
 	</delete>
 
-    <sql id="fetchByPostIdSql">
+    <sql id="fetchPageByPostIdSql">
         form tb_blog_comment where post_id = #{postId}
     </sql>
-    <select id="fetchByPostId" parameterType="java.util.Map" resultMap="BaseResultMap">
-       select * <include refid="fetchByPostIdSql" />
+    <select id="fetchPageByPostId" parameterType="java.util.Map" resultMap="BaseResultMap">
+       select * <include refid="fetchPageByPostIdSql" />
     </select>
     <select id="fetchByPostIdCount" parameterType="java.util.Map" resultMap="BaseResultMap">
-       select count(1) <include refid="fetchByPostIdSql" />
+       select count(1) <include refid="fetchPageByPostIdSql" />
     </select>
 </mapper>

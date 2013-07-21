@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectHistory;
@@ -39,12 +39,12 @@ public class ProjectHistoryDaoImpl extends MyBatisDaoSupport<ProjectHistory> imp
         return selectList("selectByParentId", parentId);
     }
 
-    public Page<ProjectHistory> selectByProjectId(Page<ProjectHistory> page, long projectId) {
+    public Page<ProjectHistory> fetchByProjectId(Page<ProjectHistory> page, long projectId) {
         //
         Map parameter = new HashMap();
         parameter.put("projectId", projectId);
         //
-        return selectPage("selectByProjectId", page, parameter);
+        return fetchPage("fetchByProjectId", page, parameter);
     }
 
 }

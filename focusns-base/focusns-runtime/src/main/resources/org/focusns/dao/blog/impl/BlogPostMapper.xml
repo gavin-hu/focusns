@@ -80,7 +80,7 @@
 		delete from tb_blog_post where id = #{id}
 	</delete>
 
-    <sql id="fetchByProjectAndCategoryIdSql">
+    <sql id="selectByProjectAndCategoryIdSql">
         <choose>
             <when test="categoryId > 0">
                 from tb_blog_post a, tb_blog_category b
@@ -100,9 +100,9 @@
         </choose>
     </sql>
     <select id="fetchByProjectAndCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchByProjectAndCategoryIdSql"/>
+        select * <include refid="selectByProjectAndCategoryIdSql"/>
     </select>
     <select id="fetchByProjectAndCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByProjectAndCategoryIdSql"/>
+        select count(1) <include refid="selectByProjectAndCategoryIdSql"/>
     </select>
 </mapper>

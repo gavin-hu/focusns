@@ -24,7 +24,7 @@ package org.focusns.dao.photo.impl;
 
 import java.util.List;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.photo.PhotoDao;
 import org.focusns.model.photo.Photo;
 import org.springframework.stereotype.Repository;

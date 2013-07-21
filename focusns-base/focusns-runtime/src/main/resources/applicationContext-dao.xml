@@ -17,12 +17,8 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.mybatis.spring.sample.mapper" />
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-    </bean>
-
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
+    <bean id="sqlSessionFactory" class="org.focusns.common.dao.mybatis.SqlSessionFactoryBean" depends-on="flyway">
+        <property name="mapperBasePackage" value="org.focusns.dao" />
         <property name="dataSource" ref="dataSource" />
     </bean>
 

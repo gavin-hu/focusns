@@ -24,7 +24,7 @@ package org.focusns.dao.core.impl;
 
 import java.util.List;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectAttributeDao;
 import org.focusns.model.core.ProjectAttribute;
 import org.springframework.stereotype.Repository;

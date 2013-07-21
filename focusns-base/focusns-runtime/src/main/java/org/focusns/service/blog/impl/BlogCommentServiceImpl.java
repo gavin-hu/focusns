@@ -50,7 +50,7 @@ public class BlogCommentServiceImpl implements BlogCommentService {
     }
 
     public Page<BlogComment> selectPageByPostId(Page<BlogComment> page, long postId) {
-        return commentDao.fetchByPostId(page, postId);
+        return commentDao.selectByPostId(page, postId);
     }
 
 }

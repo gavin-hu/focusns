@@ -35,8 +35,8 @@ public interface BlogPostService {
 
     void removeBlogPost(BlogPost post);
 
-    Page<BlogPost> selectPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId);
+    Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId);
 
-    Page<BlogPost> selectPageByProjectId(Page<BlogPost> page, long projectId);
+    Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId);
 
 }

@@ -1,4 +1,4 @@
-package org.focusns.common.dao;
+package org.focusns.common.dao.mybatis;
 
 /*
  * #%L
@@ -81,7 +81,7 @@ public abstract class MyBatisDaoSupport<M> extends SqlSessionDaoSupport implemen
         return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
     }
 
-    public Page<M> selectPage(String selectId, Page<M> page, Map<String, Object> model) {
+    public Page<M> fetchPage(String selectId, Page<M> page, Map<String, Object> model) {
         //
         if (page.isAutoCount()) {
             String countId = selectId.concat("Count");

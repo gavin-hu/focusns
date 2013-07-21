@@ -61,7 +61,7 @@ public class ArticleConsoleWidget {
             }
             //
             Page<BlogPost> page = new Page<BlogPost>(10);
-            page = blogPostService.selectPageByCategoryId(page, 0, articleCategory.getId());
+            page = blogPostService.fetchPageByCategoryId(page, 0, articleCategory.getId());
             //
             model.addAttribute("articleCategories", articleCategories);
             model.addAttribute("articleCategory", articleCategory);

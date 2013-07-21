@@ -73,7 +73,7 @@
 		delete from tb_article where id = #{id}
 	</delete>
 
-    <sql id="fetchByProjectAndCategoryIdSql">
+    <sql id="selectByProjectAndCategoryIdSql">
         <choose>
             <when test="categoryId > 0">
                 from tb_article a, tb_blog_category b
@@ -87,10 +87,10 @@
             </otherwise>
         </choose>
     </sql>
-    <select id="fetchByProjectAndCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
-        select * <include refid="fetchByProjectAndCategoryIdSql"/>
+    <select id="selectByProjectAndCategoryId" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * <include refid="selectByProjectAndCategoryIdSql"/>
     </select>
-    <select id="fetchByProjectAndCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
-        select count(1) <include refid="fetchByProjectAndCategoryIdSql"/>
+    <select id="selectByProjectAndCategoryIdCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="selectByProjectAndCategoryIdSql"/>
     </select>
 </mapper>

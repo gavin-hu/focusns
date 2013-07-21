@@ -33,6 +33,6 @@ public interface ProjectHistoryService {
 
     void removeProjectHistory(ProjectHistory history);
 
-    Page<ProjectHistory> selectPage(Page<ProjectHistory> page, long projectId);
+    Page<ProjectHistory> fetchPage(Page<ProjectHistory> page, long projectId);
 
 }

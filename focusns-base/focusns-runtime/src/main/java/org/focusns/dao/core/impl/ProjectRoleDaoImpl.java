@@ -25,7 +25,7 @@ package org.focusns.dao.core.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectRoleDao;
 import org.focusns.model.core.ProjectRole;
 import org.springframework.stereotype.Repository;

@@ -25,7 +25,7 @@ package org.focusns.dao.core.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
@@ -53,7 +53,7 @@ public class ProjectLinkDaoImpl extends MyBatisDaoSupport<ProjectLink> implement
         //
         Map parameter = createParameter(null, toProjectId, category, mutual);
         //
-        return selectPage("selectPage", page, parameter);
+        return fetchPage("fetchPage", page, parameter);
     }
 
     public Page<ProjectLink> selectByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category,
@@ -61,7 +61,7 @@ public class ProjectLinkDaoImpl extends MyBatisDaoSupport<ProjectLink> implement
         //
         Map parameter = createParameter(fromProjectId, null, category, mutual);
         //
-        return selectPage("selectPage", page, parameter);
+        return fetchPage("fetchPage", page, parameter);
     }
 
     private Map createParameter(Long fromProjectId, Long toProjectId, String category, Boolean mutual) {

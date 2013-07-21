@@ -25,7 +25,7 @@ package org.focusns.dao.msg.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.msg.MessageDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.msg.Message;
@@ -34,18 +34,18 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MessageDaoImpl extends MyBatisDaoSupport<Message> implements MessageDao {
 
-    public Page<Message> fetchByProjectId(Page<Message> page, long projectId) {
+    public Page<Message> selectByProjectId(Page<Message> page, long projectId) {
         //
         Map parameter = createParameter(projectId, null);
         //
-        return selectPage("fetchByProjectId", page, parameter);
+        return fetchPage("selectByProjectId", page, parameter);
     }
 
-    public Page<Message> fetchByToProjectId(Page<Message> page, long toProjectId) {
+    public Page<Message> selectByToProjectId(Page<Message> page, long toProjectId) {
         //
         Map parameter = createParameter(null, toProjectId);
         //
-        return selectPage("fetchByToProjectId", page, parameter);
+        return fetchPage("selectByToProjectId", page, parameter);
     }
 
     private Map createParameter(Long projectId, Long toProjectId) {

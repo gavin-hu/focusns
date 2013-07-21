@@ -47,7 +47,7 @@ public class ProjectLinkDaoTest extends AbstractDaoTest {
     @Test
     public void testFetchByFromProjectId() {
         Page<ProjectLink> page = new Page<ProjectLink>(10);
-        page = projectLinkDao.fetchByFromProjectId(page, 2L, "people", null);
+        page = projectLinkDao.selectByFromProjectId(page, 2L, "people", null);
         System.out.println(page.getResults().size());
     }
 }

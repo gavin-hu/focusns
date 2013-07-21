@@ -81,7 +81,7 @@ public class BlogPostServiceTest extends AbstractServiceTest {
         Assert.assertNotNull(project);
         //
         Page<BlogPost> page = new Page<BlogPost>(10);
-        page = postService.selectPageByProjectId(page, project.getId());
+        page = postService.fetchPageByProjectId(page, project.getId());
         for (BlogPost post : page.getResults()) {
             postService.removeBlogPost(post);
         }

@@ -51,9 +51,9 @@ public class MessageServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testselectPage() {
+    public void testFetchPage() {
         Page<Message> page = new Page(10);
-        page = messageService.selectPageByBox(page, "in", 1);
+        page = messageService.fetchPageByBox(page, "in", 1);
         System.out.println(page.getTotalCount());
     }
 

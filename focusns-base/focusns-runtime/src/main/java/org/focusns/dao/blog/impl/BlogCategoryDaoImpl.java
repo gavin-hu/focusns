@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.blog.BlogCategoryDao;
 import org.focusns.model.blog.BlogCategory;
 import org.springframework.stereotype.Repository;

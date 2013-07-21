@@ -71,7 +71,7 @@ public class ProjectHistoryWidget {
         }
         //
         Page<ProjectHistory> page = new Page<ProjectHistory>(limit);
-        page = historyService.selectPage(page, project.getId());
+        page = historyService.fetchPage(page, project.getId());
         model.addAttribute("page", page);
         //
         return "modules/profile/history-list";

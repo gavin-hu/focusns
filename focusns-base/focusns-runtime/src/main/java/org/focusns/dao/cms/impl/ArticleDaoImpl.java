@@ -22,7 +22,7 @@ package org.focusns.dao.cms.impl;
  * #L%
  */
 
-import org.focusns.common.dao.MyBatisDaoSupport;
+import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.cms.ArticleDao;
 import org.focusns.model.cms.Article;
 import org.springframework.stereotype.Repository;

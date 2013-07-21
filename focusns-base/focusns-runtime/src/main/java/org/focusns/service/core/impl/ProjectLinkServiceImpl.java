@@ -80,9 +80,9 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         return fillProjectLink(projectLink);
     }
 
-    public Page<ProjectLink> selectPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
+    public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
         //
-        page = linkDao.fetchByToProjectId(page, toProjectId, category, null);
+        page = linkDao.selectByToProjectId(page, toProjectId, category, null);
         //
         Project toProject = projectDao.select(toProjectId);
         for (ProjectLink projectLink : page.getResults()) {
@@ -93,7 +93,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     public Page<ProjectLink> selectPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
         //
-        page = linkDao.fetchByFromProjectId(page, fromProjectId, category, null);
+        page = linkDao.selectByFromProjectId(page, fromProjectId, category, null);
         //
         Project fromProject = projectDao.select(fromProjectId);
         for (ProjectLink projectLink : page.getResults()) {
