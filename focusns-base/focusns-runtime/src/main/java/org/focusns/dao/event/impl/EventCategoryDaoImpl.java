@@ -22,11 +22,11 @@ package org.focusns.dao.event.impl;
  * #L%
  */
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.event.EventCategoryDao;
 import org.focusns.model.calendar.EventCategory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class EventCategoryDaoImpl extends MyBatisBaseDao<EventCategory> implements EventCategoryDao {
+public class EventCategoryDaoImpl extends MyBatisDaoSupport<EventCategory> implements EventCategoryDao {
 }

@@ -22,11 +22,11 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectAuthorityDao;
 import org.focusns.model.core.ProjectAuthority;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProjectAuthorityDaoImpl extends MyBatisBaseDao<ProjectAuthority> implements ProjectAuthorityDao {
+public class ProjectAuthorityDaoImpl extends MyBatisDaoSupport<ProjectAuthority> implements ProjectAuthorityDao {
 }

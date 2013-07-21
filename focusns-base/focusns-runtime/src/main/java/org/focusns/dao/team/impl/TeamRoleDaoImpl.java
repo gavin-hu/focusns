@@ -22,11 +22,11 @@ package org.focusns.dao.team.impl;
  * #L%
  */
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.team.TeamRoleDao;
 import org.focusns.model.team.TeamRole;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TeamRoleDaoImpl extends MyBatisBaseDao<TeamRole> implements TeamRoleDao {
+public class TeamRoleDaoImpl extends MyBatisDaoSupport<TeamRole> implements TeamRoleDao {
 }

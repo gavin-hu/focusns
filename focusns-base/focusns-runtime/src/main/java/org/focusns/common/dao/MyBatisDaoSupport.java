@@ -1,4 +1,4 @@
-package org.focusns.dao.common.impl;
+package org.focusns.common.dao;
 
 /*
  * #%L
@@ -32,43 +32,55 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
-public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements BaseDao<M> {
+public abstract class MyBatisDaoSupport<M> extends SqlSessionDaoSupport implements BaseDao<M> {
 
     protected String NAMESPACE;
 
-    public MyBatisBaseDao() {
+    public MyBatisDaoSupport() {
         inspectNamespace();
     }
 
     public M select(long id) {
-        return getSqlSession().selectOne(NAMESPACE.concat(".select"), id);
+        return selectOne("select", id);
     }
 
     public int insert(M model) {
-        return getSqlSession().insert(NAMESPACE.concat(".insert"), model);
+        return insert("insert", model);
     }
 
     public int update(M model) {
-        return getSqlSession().update(NAMESPACE.concat(".update"), model);
+        return update("update", model);
     }
 
     public int delete(long id) {
-        return getSqlSession().delete(NAMESPACE.concat(".delete"), id);
+        return delete("delete", id);
     }
 
-    public List<M> select(M model) {
-        return getSqlSession().selectList(NAMESPACE.concat(".selectList"), model);
+    public int insert(String insertId, Object parameter)  {
+        return getSqlSession().insert(NAMESPACE.concat(insertId), parameter);
+    }
+
+    public int update(String updateId, Object parameter)  {
+        return getSqlSession().update(NAMESPACE.concat(updateId), parameter);
+    }
+
+    public int delete(String deleteId, Object parameter)  {
+        return getSqlSession().delete(NAMESPACE.concat(deleteId), parameter);
+    }
+
+    public <M> M selectOne(String selectId, Object parameter) {
+        return getSqlSession().selectOne(NAMESPACE.concat(selectId), parameter);
     }
 
     public List<M> selectList(String selectId, Object parameter) {
         return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
     }
 
-    public Page<M> fetchPage(String selectId, Page<M> page, Map<String, Object> model) {
+    public Page<M> selectPage(String selectId, Page<M> page, Map<String, Object> model) {
         //
         if (page.isAutoCount()) {
             String countId = selectId.concat("Count");
-            long totalCount = fetchPageCount(countId, model);
+            long totalCount = selectPageCount(countId, model);
             page.setTotalCount(totalCount);
         }
         //
@@ -78,7 +90,7 @@ public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements 
         return page.setResults(results);
     }
 
-    public long fetchPageCount(String countId, Map<String, Object> model) {
+    public long selectPageCount(String countId, Map<String, Object> model) {
         Long count = getSqlSession().selectOne(NAMESPACE.concat(countId), model);
         return count;
     }
@@ -92,6 +104,8 @@ public abstract class MyBatisBaseDao<M> extends SqlSessionDaoSupport implements 
         }
         //
         Assert.notNull(NAMESPACE, "Custom dao interface must implements BaseDao interface");
+        //
+        this.NAMESPACE += ".";
     }
 
 }

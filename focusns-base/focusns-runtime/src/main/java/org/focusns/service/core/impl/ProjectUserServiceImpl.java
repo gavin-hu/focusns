@@ -50,6 +50,12 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     @Autowired
     private ProjectCategoryDao projectCategoryDao;
 
+    @Override
+    public boolean existProjectUser(ProjectUser projectUser) {
+
+        return false;
+    }
+
     public ProjectUser getProjectUser(String username) {
         ProjectUser user = projectUserDao.selectByUsername(username);
         if (user.getProjectId() > 0) {
@@ -73,6 +79,13 @@ public class ProjectUserServiceImpl implements ProjectUserService {
     }
 
     public void createProjectUser(ProjectUser projectUser) {
+        //
+        ProjectUser dbProjectUser = projectUserDao.selectByUsername(projectUser.getEmail());
+        if(dbProjectUser!=null) {
+            throw new ServiceException(ServiceExceptionCode.PROJECT_USER_ALREADY_EXIST, "用户已经存在！");
+        }
+        //
+        //String md5Password = DigestUtils.md5DigestAsHex(projectUser.getPassword().getBytes());
         //
         String md5Password = DigestUtils.md5DigestAsHex(projectUser.getPassword().getBytes());
         projectUser.setPassword(md5Password);

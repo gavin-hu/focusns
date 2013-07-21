@@ -22,24 +22,24 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.ProjectUser;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Repository
-public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser> implements ProjectUserDao {
+public class ProjectUserDaoImpl extends MyBatisDaoSupport<ProjectUser> implements ProjectUserDao {
 
     @Override
     public ProjectUser selectWithProject(long id) {
-        return getSqlSession().selectOne(NAMESPACE.concat(".selectWithProject"), id);
+        return selectOne("selectWithProject", id);
     }
 
     public ProjectUser selectByUsername(String username) {
-        return getSqlSession().selectOne(NAMESPACE.concat(".selectByUsername"), username);
+        return selectOne("selectByUsername", username);
     }
 
     public void insertRole(long projectId, long userId, long roleId) {
@@ -48,7 +48,7 @@ public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser> implements P
         parameter.put("userId", userId);
         parameter.put("roleId", roleId);
         //
-        getSqlSession().insert(NAMESPACE.concat(".insertRole"), parameter);
+        insert("insertRole", parameter);
     }
 
     public void deleteRole(long projectId, long userId, long roleId) {
@@ -57,7 +57,7 @@ public class ProjectUserDaoImpl extends MyBatisBaseDao<ProjectUser> implements P
         parameter.put("userId", userId);
         parameter.put("roleId", roleId);
         //
-        getSqlSession().delete(NAMESPACE.concat(".deleteRole"), roleId);
+        delete("deleteRole", roleId);
     }
 
 }

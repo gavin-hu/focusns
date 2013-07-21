@@ -26,25 +26,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectHistoryDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectHistory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProjectHistoryDaoImpl extends MyBatisBaseDao<ProjectHistory> implements ProjectHistoryDao {
+public class ProjectHistoryDaoImpl extends MyBatisDaoSupport<ProjectHistory> implements ProjectHistoryDao {
 
     public List<ProjectHistory> selectByParentId(long parentId) {
-        return getSqlSession().selectList(NAMESPACE.concat(".selectByParentId"), parentId);
+        return selectList("selectByParentId", parentId);
     }
 
-    public Page<ProjectHistory> fetchByProjectId(Page<ProjectHistory> page, long projectId) {
+    public Page<ProjectHistory> selectByProjectId(Page<ProjectHistory> page, long projectId) {
         //
         Map parameter = new HashMap();
         parameter.put("projectId", projectId);
         //
-        return fetchPage(".fetchByProjectId", page, parameter);
+        return selectPage("selectByProjectId", page, parameter);
     }
 
 }

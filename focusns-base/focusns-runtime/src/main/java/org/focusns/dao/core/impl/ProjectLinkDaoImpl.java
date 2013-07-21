@@ -25,43 +25,43 @@ package org.focusns.dao.core.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.ProjectLink;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ProjectLinkDaoImpl extends MyBatisBaseDao<ProjectLink> implements ProjectLinkDao {
+public class ProjectLinkDaoImpl extends MyBatisDaoSupport<ProjectLink> implements ProjectLinkDao {
 
     public ProjectLink selectByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //
         Map parameter = createParameter(fromProjectId, toProjectId, null, null);
         //
-        return getSqlSession().selectOne(NAMESPACE.concat(".selectByFromAndToProjectId"), parameter);
+        return selectOne("selectByFromAndToProjectId", parameter);
     }
 
     public void deleteByFromAndToProjectId(long fromProjectId, long toProjectId) {
         //
         Map parameter = createParameter(fromProjectId, toProjectId, null, null);
         //
-        getSqlSession().delete(NAMESPACE.concat(".deleteByFromAndToProjectId"), parameter);
+        delete("deleteByFromAndToProjectId", parameter);
     }
 
-    public Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, String category,
+    public Page<ProjectLink> selectByToProjectId(Page<ProjectLink> page, Long toProjectId, String category,
             Boolean mutual) {
         //
         Map parameter = createParameter(null, toProjectId, category, mutual);
         //
-        return fetchPage(".fetchPage", page, parameter);
+        return selectPage("selectPage", page, parameter);
     }
 
-    public Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category,
+    public Page<ProjectLink> selectByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category,
             Boolean mutual) {
         //
         Map parameter = createParameter(fromProjectId, null, category, mutual);
         //
-        return fetchPage(".fetchPage", page, parameter);
+        return selectPage("selectPage", page, parameter);
     }
 
     private Map createParameter(Long fromProjectId, Long toProjectId, String category, Boolean mutual) {

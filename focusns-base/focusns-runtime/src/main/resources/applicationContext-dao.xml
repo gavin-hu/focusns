@@ -11,11 +11,25 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 	</context:component-scan>
 	
-	<tx:annotation-driven />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.mybatis.spring.sample.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
+        <property name="dataSource" ref="dataSource" />
+        <property name="table" value="TB_SCHEMA_VERSION" />
+    </bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}" />
@@ -25,62 +39,6 @@
 		<property name="initialSize" value="${jdbc.initSize}" />
 		<property name="maxActive" value="${jdbc.maxSize}" />
 		<property name="defaultAutoCommit" value="false" />
-	</bean>
-    
-    <bean id="flyway" class="com.googlecode.flyway.core.Flyway" init-method="migrate">
-        <property name="dataSource" ref="dataSource" />
-        <property name="table" value="TB_SCHEMA_VERSION" />
-    </bean>
-	
-	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" depends-on="flyway">
-		<property name="dataSource" ref="dataSource" />
-		<property name="mapperLocations">
-			<set>
-				<!-- console -->
-                <value>classpath:/org/focusns/dao/console/impl/UserMapper.xml</value>
-                <value>classpath:/org/focusns/dao/console/impl/RoleMapper.xml</value>
-                <value>classpath:/org/focusns/dao/console/impl/AuthorityMapper.xml</value>
-
-				<!-- core -->
-				<value>classpath:/org/focusns/dao/core/impl/ProjectUserMapper.xml</value>
-                <value>classpath:/org/focusns/dao/core/impl/ProjectRoleMapper.xml</value>
-                <value>classpath:/org/focusns/dao/core/impl/ProjectAuthorityMapper.xml</value>
-                <value>classpath:/org/focusns/dao/core/impl/ProjectMapper.xml</value>
-                <value>classpath:/org/focusns/dao/core/impl/ProjectLinkMapper.xml</value>
-				<value>classpath:/org/focusns/dao/core/impl/ProjectFeatureMapper.xml</value>
-				<value>classpath:/org/focusns/dao/core/impl/ProjectAttributeMapper.xml</value>
-				<value>classpath:/org/focusns/dao/core/impl/ProjectHistoryMapper.xml</value>
-                <value>classpath:/org/focusns/dao/core/impl/ProjectCategoryMapper.xml</value>
-                
-                <!-- blog -->
-                <value>classpath:/org/focusns/dao/blog/impl/BlogCategoryMapper.xml</value>
-                <value>classpath:/org/focusns/dao/blog/impl/BlogPostMapper.xml</value>
-                <value>classpath:/org/focusns/dao/blog/impl/BlogCommentMapper.xml</value>
-
-                <!-- forum -->
-                <value>classpath:/org/focusns/dao/forum/impl/ForumCategoryMapper.xml</value>
-                <value>classpath:/org/focusns/dao/forum/impl/ForumTopicMapper.xml</value>
-                <value>classpath:/org/focusns/dao/forum/impl/ForumPostMapper.xml</value>
-
-                <!-- event -->
-                <value>classpath:/org/focusns/dao/event/impl/EventCategoryMapper.xml</value>
-                <value>classpath:/org/focusns/dao/event/impl/EventMapper.xml</value>
-
-                <!-- photo -->
-                <value>classpath:/org/focusns/dao/photo/impl/AlbumMapper.xml</value>
-                <value>classpath:/org/focusns/dao/photo/impl/PhotoMapper.xml</value>
-
-                <!-- team -->
-                <value>classpath:/org/focusns/dao/team/impl/TeamRoleMapper.xml</value>
-                <value>classpath:/org/focusns/dao/team/impl/TeamMemberMapper.xml</value>
-
-                <!-- message -->
-                <value>classpath:/org/focusns/dao/msg/impl/MessageMapper.xml</value>
-                <!--
-                <value>classpath:/org/focusns/dao/msg/impl/MessageBoxMapper.xml</value>
-                -->
-			</set>
-		</property>
 	</bean>
 
 </beans>

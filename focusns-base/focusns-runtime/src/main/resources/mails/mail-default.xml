@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mail xmlns="http://www.focusns.org/schema/mail"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.focusns.org/schema/mail http://www.focusns.org/schema/mail/focusns-mail.xsd">
+
+    <message id="signup-confirm">
+        <from>focusns@sina.cn|FocusSNS</from>
+        <to>#{projectUser.email}</to>
+        <subject>FocusSNS</subject>
+        <content><![CDATA[
+            <a href="http://127.0.0.1:8080/focusns/signup?confirm=email" target="blank">确认<a>
+        ]]></content>
+    </message>
+
+</mail>

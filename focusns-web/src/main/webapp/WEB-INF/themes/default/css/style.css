@@ -21,7 +21,7 @@ ul {
 /* layout */
 .doc-bd {
     padding-top: 80px;
-    padding-bottom: 40px;
+    padding-bottom: 80px;
 }
 .doc-ft p {
     padding: 10px 0;
@@ -78,7 +78,7 @@ ul {
 }
 #project-history-list form textarea {
     display: block;
-    width: 98.3%;
+    width: 97%;
     height: 24px;
 }
 

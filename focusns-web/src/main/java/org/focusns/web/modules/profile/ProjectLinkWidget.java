@@ -64,9 +64,9 @@ public class ProjectLinkWidget {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(limit);
         if (reverse.booleanValue()) {
-            page = projectLinkService.fetchPageByToProjectId(page, project.getId(), category);
+            page = projectLinkService.selectPageByToProjectId(page, project.getId(), category);
         } else {
-            page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
+            page = projectLinkService.selectPageByFromProjectId(page, project.getId(), category);
         }
         model.addAttribute(Page.KEY, page);
         model.addAttribute("reverse", reverse.booleanValue());
@@ -80,7 +80,7 @@ public class ProjectLinkWidget {
             @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(pageSize);
-        page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
+        page = projectLinkService.selectPageByFromProjectId(page, project.getId(), category);
         model.addAttribute(Page.KEY, page);
         //
         return "modules/profile/link-list-detail";

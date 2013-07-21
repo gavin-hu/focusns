@@ -25,14 +25,14 @@ package org.focusns.dao.blog.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.blog.BlogPostDao;
-import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.blog.BlogPost;
 import org.focusns.model.common.Page;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BlogPostDaoImpl extends MyBatisBaseDao<BlogPost> implements BlogPostDao {
+public class BlogPostDaoImpl extends MyBatisDaoSupport<BlogPost> implements BlogPostDao {
 
     public Page<BlogPost> fetchByProjectAndCategoryId(Page<BlogPost> page, Long projectId, Long categoryId) {
         //
@@ -40,6 +40,6 @@ public class BlogPostDaoImpl extends MyBatisBaseDao<BlogPost> implements BlogPos
         parameter.put("projectId", projectId);
         parameter.put("categoryId", categoryId);
         //
-        return fetchPage(".fetchByProjectAndCategoryId", page, parameter);
+        return selectPage("fetchByProjectAndCategoryId", page, parameter);
     }
 }

@@ -40,6 +40,7 @@ public class ProjectUserDaoTest extends AbstractDaoTest {
         ProjectUser user = new ProjectUser();
         user.setUsername("haozhonghu");
         user.setPassword("123456");
+        user.setNickname("HaozhongHu");
         user.setEmail("haozhonghu@hotmail.com");
         //
         projectUserDao.insert(user);

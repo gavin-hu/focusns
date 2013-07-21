@@ -56,7 +56,7 @@ public class MessageWidget {
     public String list(Map<String, Object> model, String box, Project project) {
         //
         Page<Message> page = new Page<Message>(10);
-        page = messageService.fetchPageByBox(page, box, project.getId());
+        page = messageService.selectPageByBox(page, box, project.getId());
         model.put("portal", page);
         //
         return "modules/msg/message-list";

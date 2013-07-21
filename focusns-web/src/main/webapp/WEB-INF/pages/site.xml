@@ -30,12 +30,12 @@
         <position name="mainColumn">
             <widget styleId="signup" target="/site/signup">
                 <navigation>
-                    <event on="sign-confirm">/signup;m=confirm</event>
+                    <event on="sign-confirm">/signup;m=email?userId=#{projectUser.id}</event>
                 </navigation>
             </widget>
         </position>
     </page>
-    <page path="/signup" mode="confirm">
+    <page path="/signup" mode="email">
         <position name="headerBar">
             <widget target="/site/menu-main" />
             <widget target="/site/menu-user" />

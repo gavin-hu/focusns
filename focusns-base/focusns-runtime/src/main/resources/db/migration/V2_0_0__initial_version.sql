@@ -83,6 +83,8 @@ CREATE TABLE TB_PROJECT_USER (
 	  `PASSWORD` VARCHAR(100) NOT NULL ,
     `NICKNAME` VARCHAR(100) NOT NULL ,
     `EMAIL` VARCHAR(100) NOT NULL ,
+    `ENABLED` BOOLEAN DEFAULT FALSE ,
+    `CREATED_AT` TIMESTAMP NOT NULL ,
   	`PROJECT_ID` BIGINT ,
     PRIMARY KEY (`ID`) ,
     UNIQUE INDEX `EMAIL_UNIQUE` (`EMAIL`)
@@ -862,8 +864,8 @@ create procedure init_db()
         # create project features
         #call createProjectFeature(projectId);
 
-        insert into tb_project_user(username, password, nickname, email)
-            values ('test@focusns.org', 'e10adc3949ba59abbe56e057f20f883e', 'Test', 'test@focusns.org');
+        insert into tb_project_user(username, password, nickname, email, enabled, created_at)
+            values ('test@focusns.org', 'e10adc3949ba59abbe56e057f20f883e', 'Test', 'test@focusns.org', true, now());
         # select userId
         select id into userId from tb_project_user where username = 'test@focusns.org';
 

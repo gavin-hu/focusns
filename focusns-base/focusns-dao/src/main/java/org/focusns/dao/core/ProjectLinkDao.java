@@ -32,8 +32,8 @@ public interface ProjectLinkDao extends BaseDao<ProjectLink> {
 
     void deleteByFromAndToProjectId(long fromProjectId, long toProjectId);
 
-    Page<ProjectLink> fetchByToProjectId(Page<ProjectLink> page, Long toProjectId, String category, Boolean mutual);
+    Page<ProjectLink> selectByToProjectId(Page<ProjectLink> page, Long toProjectId, String category, Boolean mutual);
 
-    Page<ProjectLink> fetchByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category, Boolean mutual);
+    Page<ProjectLink> selectByFromProjectId(Page<ProjectLink> page, Long fromProjectId, String category, Boolean mutual);
 
 }

@@ -49,7 +49,7 @@ public class BlogCommentServiceImpl implements BlogCommentService {
         commentDao.delete(comment.getId());
     }
 
-    public Page<BlogComment> fetchPageByPostId(Page<BlogComment> page, long postId) {
+    public Page<BlogComment> selectPageByPostId(Page<BlogComment> page, long postId) {
         return commentDao.fetchByPostId(page, postId);
     }
 

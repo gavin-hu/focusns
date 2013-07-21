@@ -1,7 +1,7 @@
 <%@page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
-<ui:widget>
+<ui:widget styleId="signup">
     <ui:widget-head>
         <h3>注册</h3>
     </ui:widget-head>
@@ -26,7 +26,7 @@
             <div class="control-group">
                 <label class="control-label" for="inputNickname">昵称</label>
                 <div class="controls">
-                    <input type="password" id="inputNickname" name="nickname" placeholder="Nickname"
+                    <input type="text" id="inputNickname" name="nickname" placeholder="Nickname"
                            data-rule-required="true" data-msg-required="昵称不能为空！">
                 </div>
             </div>

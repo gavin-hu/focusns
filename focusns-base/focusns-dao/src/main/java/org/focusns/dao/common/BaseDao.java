@@ -22,6 +22,8 @@ package org.focusns.dao.common;
  * #L%
  */
 
+import java.util.List;
+
 public interface BaseDao<M> {
 
     M select(long id);

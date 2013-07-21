@@ -39,8 +39,8 @@ public interface ProjectLinkService {
 
     ProjectLink getProjectLink(long fromProjectId, long toProjectId);
 
-    Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category);
+    Page<ProjectLink> selectPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category);
 
-    Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category);
+    Page<ProjectLink> selectPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category);
 
 }

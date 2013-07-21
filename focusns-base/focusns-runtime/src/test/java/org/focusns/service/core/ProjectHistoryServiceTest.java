@@ -65,9 +65,9 @@ public class ProjectHistoryServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void testFetchPage() {
+    public void testselectPage() {
         Page<ProjectHistory> page = new Page<ProjectHistory>(10);
-        page = projectHistoryService.fetchPage(page, 2);
+        page = projectHistoryService.selectPage(page, 2);
         System.out.println(page.getTotalCount());
     }
 

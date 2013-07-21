@@ -22,6 +22,7 @@ package org.focusns.web.site;
  * #L%
  */
 
+import org.focusns.common.mail.MailService;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
@@ -29,15 +30,21 @@ import org.focusns.web.widget.Constraint;
 import org.focusns.web.widget.Constraints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("site")
 public class SignWidget {
 
+    @Autowired
+    private MailService mailService;
     @Autowired
     private ProjectUserService projectUserService;
 
@@ -55,9 +62,27 @@ public class SignWidget {
     @RequestMapping(value="signup", method = RequestMethod.POST)
     public void doSignUp(@Valid ProjectUser projectUser) {
         //
-        projectUserService.createProjectUser(projectUser);
+        ProjectUser user = projectUserService.getProjectUser(projectUser.getEmail());
+        if(user!=null) {
+
+        } else {
+            projectUserService.createProjectUser(projectUser);
+        }
         //
-        Navigator.get().withAttribute("projectUser", projectUser).navigateTo("sign-success");
+        Map<String, Object> ctx = new HashMap<String, Object>();
+        ctx.put("projectUser", projectUser);
+        mailService.send("", ctx);
+        //
+        Navigator.get().withAttribute("projectUser", projectUser).navigateTo("sign-confirm");
+    }
+
+    @RequestMapping(value="signup", params = "confirm=email", method = RequestMethod.GET)
+    public String confirm(@RequestParam Long userId, Model model) {
+        //
+        ProjectUser projectUser = projectUserService.getProjectUser(userId);
+        model.addAttribute("projectUser", projectUser);
+        //
+        return "site/signup-confirm";
     }
 
 }

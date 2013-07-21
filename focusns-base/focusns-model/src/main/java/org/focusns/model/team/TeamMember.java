@@ -25,15 +25,25 @@ package org.focusns.model.team;
 import java.util.Date;
 
 import org.focusns.model.common.Id;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectUser;
 
 public class TeamMember extends Id {
 
     private Date createdAt;
     private Date modifiedAt;
     //
-    private long userId;
     private long roleId;
+    private long userId;
     private long projectId;
+    private long createdById;
+    private long modifiedById;
+    //
+    private TeamRole role;
+    private ProjectUser user;
+    private Project project;
+    private ProjectUser createdBy;
+    private ProjectUser modifiedBy;
 
     public Date getCreatedAt() {
         return createdAt;
@@ -51,14 +61,6 @@ public class TeamMember extends Id {
         this.modifiedAt = modifiedAt;
     }
 
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
     public long getRoleId() {
         return roleId;
     }
@@ -67,11 +69,75 @@ public class TeamMember extends Id {
         this.roleId = roleId;
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
     public long getProjectId() {
         return projectId;
     }
 
     public void setProjectId(long projectId) {
         this.projectId = projectId;
+    }
+
+    public long getCreatedById() {
+        return createdById;
+    }
+
+    public void setCreatedById(long createdById) {
+        this.createdById = createdById;
+    }
+
+    public long getModifiedById() {
+        return modifiedById;
+    }
+
+    public void setModifiedById(long modifiedById) {
+        this.modifiedById = modifiedById;
+    }
+
+    public TeamRole getRole() {
+        return role;
+    }
+
+    public void setRole(TeamRole role) {
+        this.role = role;
+    }
+
+    public ProjectUser getUser() {
+        return user;
+    }
+
+    public void setUser(ProjectUser user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public ProjectUser getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(ProjectUser createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public ProjectUser getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(ProjectUser modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 }

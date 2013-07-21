@@ -22,11 +22,11 @@ package org.focusns.dao.forum.impl;
  * #L%
  */
 
-import org.focusns.dao.common.impl.MyBatisBaseDao;
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.forum.ForumPostDao;
 import org.focusns.model.forum.ForumPost;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ForumPostDaoImpl extends MyBatisBaseDao<ForumPost> implements ForumPostDao {
+public class ForumPostDaoImpl extends MyBatisDaoSupport<ForumPost> implements ForumPostDao {
 }

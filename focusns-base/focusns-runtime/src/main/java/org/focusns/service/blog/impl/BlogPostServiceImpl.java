@@ -83,7 +83,7 @@ public class BlogPostServiceImpl implements BlogPostService {
         fillBlogPost(post);
     }
 
-    public Page<BlogPost> fetchPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId) {
+    public Page<BlogPost> selectPageByCategoryId(Page<BlogPost> page, long projectId, long categoryId) {
         page = postDao.fetchByProjectAndCategoryId(page, projectId, categoryId);
         //
         for (BlogPost blogPost : page.getResults()) {
@@ -92,7 +92,7 @@ public class BlogPostServiceImpl implements BlogPostService {
         return page;
     }
 
-    public Page<BlogPost> fetchPageByProjectId(Page<BlogPost> page, long projectId) {
+    public Page<BlogPost> selectPageByProjectId(Page<BlogPost> page, long projectId) {
         page = postDao.fetchByProjectAndCategoryId(page, projectId, null);
         //
         for (BlogPost blogPost : page.getResults()) {

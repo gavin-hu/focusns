@@ -33,5 +33,5 @@ public interface BlogCommentService {
 
     void removeBlogComment(BlogComment comment);
 
-    Page<BlogComment> fetchPageByPostId(Page<BlogComment> page, long postId);
+    Page<BlogComment> selectPageByPostId(Page<BlogComment> page, long postId);
 }

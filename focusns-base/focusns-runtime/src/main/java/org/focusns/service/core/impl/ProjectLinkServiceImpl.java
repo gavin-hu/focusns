@@ -80,7 +80,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         return fillProjectLink(projectLink);
     }
 
-    public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
+    public Page<ProjectLink> selectPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
         //
         page = linkDao.fetchByToProjectId(page, toProjectId, category, null);
         //
@@ -91,7 +91,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
         return page;
     }
 
-    public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
+    public Page<ProjectLink> selectPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
         //
         page = linkDao.fetchByFromProjectId(page, fromProjectId, category, null);
         //

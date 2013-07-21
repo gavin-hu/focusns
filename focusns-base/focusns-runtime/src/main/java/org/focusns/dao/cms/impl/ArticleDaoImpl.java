@@ -22,11 +22,11 @@ package org.focusns.dao.cms.impl;
  * #L%
  */
 
+import org.focusns.common.dao.MyBatisDaoSupport;
 import org.focusns.dao.cms.ArticleDao;
-import org.focusns.dao.common.impl.MyBatisBaseDao;
 import org.focusns.model.cms.Article;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ArticleDaoImpl extends MyBatisBaseDao<Article> implements ArticleDao {
+public class ArticleDaoImpl extends MyBatisDaoSupport<Article> implements ArticleDao {
 }
