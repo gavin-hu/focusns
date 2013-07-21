@@ -76,6 +76,11 @@ public abstract class MyBatisDaoSupport<M> extends SqlSessionDaoSupport implemen
         return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
     }
 
+    public List<M> selectLimitedList(String selectId, int limit, Object parameter) {
+        RowBounds rowBounds = new RowBounds(0, limit);
+        return getSqlSession().selectList(NAMESPACE.concat(selectId), parameter);
+    }
+
     public Page<M> selectPage(String selectId, Page<M> page, Map<String, Object> model) {
         //
         if (page.isAutoCount()) {
