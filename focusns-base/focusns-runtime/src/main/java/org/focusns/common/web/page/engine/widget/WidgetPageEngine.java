@@ -22,16 +22,6 @@ package org.focusns.common.web.page.engine.widget;
  * #L%
  */
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.focusns.common.web.page.config.PageConfig;
@@ -54,6 +44,15 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.support.WebApplicationObjectSupport;
 import org.springframework.web.util.UrlPathHelper;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WidgetPageEngine extends WebApplicationObjectSupport implements PageEngine {
 
@@ -119,33 +118,6 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
                             continue;
                         }
                     }
-                    //
-                    /*
-                     * if(StringUtils.hasText(widgetConfig.getValidationTarget())
-                     * ) { // Map<String, Object> context = new HashMap<String,
-                     * Object>(); // Class<?> targetClass =
-                     * ClassUtils.forName(widgetConfig.getValidationTarget());
-                     * Class<?>[] groupClasses = new Class[]{};
-                     * if(!widgetConfig.getValidationGroups().isEmpty()) {
-                     * List<Class<?>> groupClassList = new
-                     * ArrayList<Class<?>>(); for(String validationGroup :
-                     * widgetConfig.getValidationGroups()) {
-                     * groupClassList.add(ClassUtils.forName(validationGroup));
-                     * } groupClassList.add(Default.class); groupClasses =
-                     * groupClassList.toArray(new Class[groupClassList.size()]);
-                     * } ValidatorFactory validatorFactory =
-                     * getApplicationContext().getBean(ValidatorFactory.class);
-                     * ValidatedBean validatedBean =
-                     * ValidationHelper.createForClass(validatorFactory,
-                     * targetClass, groupClasses); context.put("validatedBean",
-                     * validatedBean); // context.put("widgetConfig",
-                     * widgetConfig); String validationDir =
-                     * getServletContext().
-                     * getRealPath("/WEB-INF/generate/validation"); OutputStream
-                     * output = new FileOutputStream(new File(validationDir,
-                     * widgetConfig.getValidationTarget()+".js")); //
-                     * validationJsGenerator.generate(context, output); }
-                     */
                     //
                     for (WidgetRenderInterceptor widgetRenderInterceptor : widgetRenderInterceptors) {
                         widgetRenderInterceptor.beforeRender(request, response);

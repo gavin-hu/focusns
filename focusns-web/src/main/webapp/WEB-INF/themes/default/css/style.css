@@ -24,6 +24,7 @@ ul {
     padding-bottom: 80px;
 }
 .doc-ft p {
+    margin: 0;
     padding: 10px 0;
 }
 @media (max-width: 979px) {
@@ -95,8 +96,9 @@ ul {
 #blog-post-edit div.editor {
     padding-bottom: 10px;
 }
-#blog-post-edit button {
+#blog-post-edit button[type=submit] {
     margin-top: 10px;
+    display: block;
 }
 #blog-post-edit .control-label {
     font-weight: bold;

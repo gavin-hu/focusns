@@ -86,7 +86,12 @@ $(function(){
                         $(this).addClass('help-inline');
                     }
                 });
-                error.insertAfter(element);
+                var fileInputWrapper = element.closest('a.file-input-wrapper');
+                if(fileInputWrapper==null) {
+                    error.insertAfter(element);
+                } else {
+                    error.insertAfter(fileInputWrapper);
+                }
             },
             success : function(success, element) {
                 var controlGroup = success.parents('div.control-group');
@@ -98,15 +103,24 @@ $(function(){
             }
         };
         // inline options
-        var inlineOptions = $.extend(options, {
+        var inlineOptions = {};
+        $.extend(inlineOptions, options, {
             errorElement : 'span'
         });
         //
         $('form.valid').each(function(){
-            $(this).validate(options)
+            var form = $(this);
+            form.validate(options);
+            $(this).find('input[type=file]').change(function(){
+                form.valid();
+            });
         });
         $('form.valid-inline').each(function(){
-            $(this).validate(inlineOptions);
+            var form = $(this);
+            form.validate(inlineOptions);
+            $(this).find('input[type=file]').change(function(){
+                form.valid();
+            });
         });
     });
 </script>

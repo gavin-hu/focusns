@@ -19,17 +19,19 @@
         <div class="tab-content">
             <div id="user" class="tab-pane <c:if test="${empty param.tab or param.tab=='user'}">active</c:if>" >
                 <widget:actionUrl var="actionUrl" value="/project/user-modify" />
-                <form:form commandName="projectUser" cssClass="valid-inline form-horizontal" action="${actionUrl}">
+                <form class="valid-inline form-horizontal" action="${actionUrl}" method="post">
                     <div class="control-group">
-                        <label class="control-label">昵称</label>
+                        <label class="control-label">称昵</label>
                         <div class="controls">
-                            <form:input path="nickname" />
+                            <input type="text" name="nickname" value="${projectUser.nickname}"
+                                        data-rule-required="true" data-msg-required="昵称不能为空！" />
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">邮箱</label>
                         <div class="controls">
-                            <form:input path="email" />
+                            <input type="email" readonly="readonly" name="email" value="${projectUser.email}"
+                                   data-rule-required="true" data-msg-required="邮箱不能为空！" />
                         </div>
                     </div>
                     <div class="control-group">
@@ -37,7 +39,7 @@
                             <button type="submit" class="btn btn-primary">提交</button>
                         </div>
                     </div>
-                </form:form>
+                </form>
             </div>
             <div id="pwd" class="tab-pane <c:if test="${param.tab=='pwd'}">active</c:if>" >
                 <c:if test="${not empty serviceException}">
@@ -46,7 +48,7 @@
                 </div>
                 </c:if>
                 <widget:actionUrl var="actionUrl" value="/project/user-modify"/>
-                <form:form commandName="projectUser" cssClass="valid-inline form-horizontal" action="${actionUrl}">
+                <form class="valid-inline form-horizontal" action="${actionUrl}" method="post">
                     <div for="inputOldPassword" class="control-group">
                         <label class="control-label">旧密码</label>
                         <div class="controls">
@@ -77,7 +79,7 @@
                             <button class="btn btn-primary">修改</button>
                         </div>
                     </div>
-                </form:form>
+                </form>
             </div>
             <div id="avatar" class="tab-pane <c:if test="${param.tab=='avatar'}">active</c:if>" >
                 <form class="valid-inline" method="post" enctype="multipart/form-data"

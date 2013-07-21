@@ -22,7 +22,7 @@
     <!-- Web Application Performance Monitor -->
     <filter>
         <filter-name>performanceMonitorFilter</filter-name>
-        <filter-class>org.focusns.common.monitor.filter.PerformanceMonitorFilter</filter-class>
+        <filter-class>org.focusns.common.web.performance.MonitorFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>performanceMonitorFilter</filter-name>

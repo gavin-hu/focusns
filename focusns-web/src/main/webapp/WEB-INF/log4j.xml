@@ -28,7 +28,7 @@
         <appender-ref ref="application" />
     </appender>-->
 
-    <logger name="org.focusns.common.monitor.filter.PerformanceMonitorFilter">
+    <logger name="org.focusns.common.web.performance.MonitorFilter">
         <level value="INFO" />
         <appender-ref ref="performance" />   
     </logger>

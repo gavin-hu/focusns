@@ -13,19 +13,27 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <form action='<widget:actionUrl value="/photo/photo-upload" />'
+                <form class="valid-inline" action='<widget:actionUrl value="/photo/photo-upload" />'
                       method="post" enctype="multipart/form-data">
-                    <label>相册</label>
-                    <form:select path="photo.albumId">
-                        <form:options items="${albums}" itemValue="id" itemLabel="label" />
-                    </form:select>
-                    <label>照片</label>
-                    <input type="file" name="file" title="本地浏览..." />
+                    <div class="control-group">
+                        <label class="control-label">相册</label>
+                        <div class="controls">
+                            <form:select path="photo.albumId">
+                                <form:options items="${albums}" itemValue="id" itemLabel="label" />
+                            </form:select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">照片</label>
+                        <div class="controls">
+                            <input type="file" name="file" title="本地浏览..."
+                                   data-rule-required="true" data-msg-required="请从本地选择要上传的照片！"/>
+                            <button type="submit" class="btn btn-primary">上传</button>
+                        </div>
+                    </div>
 
                     <form:hidden path="photo.projectId" />
                     <form:hidden path="photo.createdById" />
-
-                    <button type="submit" class="btn btn-primary">上传</button>
                 </form>
             </c:otherwise>
         </c:choose>

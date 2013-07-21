@@ -1,4 +1,4 @@
-package org.focusns.common.monitor.filter;
+package org.focusns.common.web.performance;
 
 /*
  * #%L
@@ -35,9 +35,9 @@ import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-public class PerformanceMonitorFilter extends OncePerRequestFilter {
+public class MonitorFilter extends OncePerRequestFilter {
 
-    private static final Log log = LogFactory.getLog(PerformanceMonitorFilter.class);
+    private static final Log log = LogFactory.getLog(MonitorFilter.class);
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

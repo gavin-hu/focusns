@@ -7,22 +7,27 @@
     </ui:widget-head>
     <ui:widget-body>
 
-        <form action="<widget:actionUrl value="/photo/album-modify" />" method="post">
-            <fieldset>
-                <label>名称</label>
-                <form:input path="album.label" />
-                <label>描述</label>
-                <form:textarea path="album.description" />
+        <form class="valid" action="<widget:actionUrl value="/photo/album-modify" />" method="post">
+            <div class="control-group">
+                <label class="control-label">名称</label>
+                <div class="controls">
+                    <input type="text" name="label" value="${album.label}"
+                           data-rule-required="true" data-msg-required="相册名称不能为空！"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">描述</label>
+                <div class="controls">
+                    <textarea name="description">${album.description}</textarea>
+                </div>
+            </div>
 
-                <form:hidden path="album.id" />
-                <form:hidden path="album.projectId" />
-                <form:hidden path="album.createdById" />
-                <form:hidden path="album.modifiedById" />
+            <button class="btn btn-primary">提交</button>
 
-                <label>
-                    <button class="btn btn-primary">提交</button>
-                </label>
-            </fieldset>
+            <form:hidden path="album.id" />
+            <form:hidden path="album.projectId" />
+            <form:hidden path="album.createdById" />
+            <form:hidden path="album.modifiedById" />
         </form>
 
     </ui:widget-body>
