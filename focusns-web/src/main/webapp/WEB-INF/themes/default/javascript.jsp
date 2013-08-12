@@ -75,7 +75,7 @@ $(function(){
             errorElement : 'label',
             errorPlacement: function(error, element){
                 var controlGroup = element.closest('div.control-group');
-                if(controlGroup!=null) {
+                if(controlGroup.size()>0) {
                     controlGroup.removeClass('success');
                     controlGroup.addClass('error');
                 }
@@ -87,15 +87,15 @@ $(function(){
                     }
                 });
                 var fileInputWrapper = element.closest('a.file-input-wrapper');
-                if(fileInputWrapper==null) {
+                if(fileInputWrapper.size()==0) {
                     error.insertAfter(element);
                 } else {
                     error.insertAfter(fileInputWrapper);
                 }
             },
             success : function(success, element) {
-                var controlGroup = success.parents('div.control-group');
-                if(controlGroup!=null) {
+                var controlGroup = success.closest('div.control-group');
+                if(controlGroup.size()>0) {
                     controlGroup.addClass('success');
                     controlGroup.removeClass('error');
                 }
