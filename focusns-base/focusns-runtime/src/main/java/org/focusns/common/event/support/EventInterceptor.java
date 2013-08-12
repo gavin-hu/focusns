@@ -93,9 +93,7 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
                     for (Method declearedMethod : declearedMethods) {
                         //
                         Event event = AnnotationUtils.getAnnotation(declearedMethod, Event.class);
-                        if (event == null) {
-                            log.warn(String.format("Event Subscribe method %s must be annotated with @Event(\"xxx\")", declearedMethod));
-                        } else {
+                        if (event != null) {
                             String eventKey = generateEventKey(event);
                             eventMapping.put(eventKey, event);
                             eventSubscriberMapping.put(eventKey, beanName);
@@ -106,6 +104,10 @@ public class EventInterceptor implements BeanFactoryPostProcessor, ApplicationCo
                             }
                             methodSet.add(declearedMethod);
                             eventMethodsMapping.put(eventKey, methodSet);
+                            //
+                            if(log.isInfoEnabled()) {
+                                log.info(String.format("Found event subscribe method [%s]", declearedMethod.getName()));
+                            }
                         }
                     }
                 }
