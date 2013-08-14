@@ -8,7 +8,7 @@
         <to>#{projectUser.email}</to>
         <subject>FocusSNS</subject>
         <content><![CDATA[
-            <a href="http://127.0.0.1:8080/focusns/signup?confirm=email" target="blank">确认<a>
+            <a href="http://127.0.0.1:8080/focusns/signup?confirm=email" target="_blank">确认<a>
         ]]></content>
     </message>
 
