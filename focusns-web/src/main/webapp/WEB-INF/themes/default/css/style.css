@@ -32,7 +32,9 @@ ul {
         padding-top: 0;
     }
 }
-
+.alert {
+    padding: 14px 8px;
+}
 /* SignWidget */
 #signin .widget-head h3 {
     padding-left: 130px;
@@ -106,4 +108,33 @@ ul {
 /* BlogCategoryWidget edit*/
 #blog-category-edit .control-label {
     font-weight: bold;
+}
+
+
+/* Environment */
+.summary-os .table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+.summary-os .table th {
+    width: 120px;
+    text-align: right;
+}
+
+.summary-jre .table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+.summary-jre .table th {
+    width: 140px;
+    text-align: right;
+}
+
+.summary-db .table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+.summary-db .table th {
+    width: 120px;
+    text-align: right;
 }
