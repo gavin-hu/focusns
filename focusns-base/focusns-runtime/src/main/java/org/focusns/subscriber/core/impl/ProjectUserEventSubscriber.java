@@ -1,23 +1,55 @@
 package org.focusns.subscriber.core.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.focusns.common.event.annotation.Event;
 import org.focusns.common.event.annotation.EventSubscriber;
 import org.focusns.common.event.support.EventContext;
+import org.focusns.common.exception.ServiceException;
+import org.focusns.common.exception.ServiceExceptionCode;
+import org.focusns.common.xml.XmlParser;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectFeatureDao;
 import org.focusns.dao.core.ProjectUserDao;
+import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectAttribute;
+import org.focusns.model.core.ProjectCategory;
+import org.focusns.model.core.ProjectFeature;
+import org.focusns.model.core.ProjectTemplate;
 import org.focusns.model.core.ProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.context.ResourceLoaderAware;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+import org.springframework.util.xml.DomUtils;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import java.util.Date;
+import java.util.List;
 
 @EventSubscriber
+@Transactional
 public class ProjectUserEventSubscriber {
-
+    private static final String RESOURCE_PATTERN = "classpath:projects/project-%s.xml";
+    //
     private ProjectDao projectDao;
     private ProjectUserDao projectUserDao;
     private ProjectFeatureDao projectFeatureDao;
     private ProjectCategoryDao projectCategoryDao;
+    //
+    private XmlParser xmlParser = new XmlParser();
+    private ResourceLoader resourceLoader = new DefaultResourceLoader();
+
+    @Autowired
+    public void setProjectDao(ProjectDao projectDao) {
+        this.projectDao = projectDao;
+    }
 
     @Autowired
     public void setProjectUserDao(ProjectUserDao projectUserDao) {
@@ -35,73 +67,87 @@ public class ProjectUserEventSubscriber {
     }
 
     @Event(on = "CREATE_PROJECT_USER", point = Event.Point.AFTER)
-    public void afterCreateProjectUser(EventContext ctx) {
+    public void afterCreateProjectUser(EventContext ctx) throws Exception {
         //
         ProjectUser projectUser = (ProjectUser) ctx.getArguments()[0];
-        long createAtTime = projectUser.getCreatedAt().getTime();
-
-    }
-
-    /*protected void createProject(ProjectUser projectUser) {
         ProjectCategory category = projectCategoryDao.selectByCode("people");
+        ProjectTemplate projectTemplate = getProjectTemplate(category.getCode());
+        //
+        String projectCode = String.valueOf(10000000 + projectUser.getId());
         //
         Date now = new Date();
         Project project = new Project();
-        project.setCode(user.getUsername());
-        project.setTitle(user.getUsername());
-        project.setDescription("");
+        project.setCode(projectCode);
+        project.setTitle(projectUser.getUsername());
+        project.setDescription(projectTemplate.getDescription());
         project.setCategoryId(category.getId());
         project.setCreatedAt(now);
         project.setModifiedAt(now);
-        project.setCreatedById(user.getId());
-        project.setModifiedById(user.getId());
+        project.setCreatedById(projectUser.getId());
+        project.setModifiedById(projectUser.getId());
         //
         projectDao.insert(project);
-        user.setProjectId(project.getId());
-        projectUserDao.update(user);
+        // 更新 注册用户的 project id
+        projectUser.setProjectId(project.getId());
+        projectUserDao.update(projectUser);
         //
-        ProjectFeature profileFeature = new ProjectFeature();
-        profileFeature.setLabel("主页");
-        profileFeature.setCode("profile");
-        profileFeature.setLevel(5);
-        profileFeature.setProjectId(project.getId());
+        for(ProjectFeature projectFeature : projectTemplate.getProjectFeatures()) {
+            projectFeature.setProjectId(project.getId());
+            projectFeatureDao.insert(projectFeature);
+        }
+
+    }
+
+    public ProjectTemplate getProjectTemplate(String categoryCode) throws Exception {
         //
-        ProjectFeature blogFeature = new ProjectFeature();
-        blogFeature.setLabel("日志");
-        blogFeature.setCode("blog");
-        blogFeature.setLevel(10);
-        blogFeature.setProjectId(project.getId());
+        Assert.hasText(categoryCode);
+        String resourceLocation = String.format(RESOURCE_PATTERN, categoryCode);
+        Resource resource = resourceLoader.getResource(resourceLocation);
         //
-        ProjectFeature photoFeature = new ProjectFeature();
-        photoFeature.setLabel("相册");
-        photoFeature.setCode("photo");
-        photoFeature.setLevel(15);
-        photoFeature.setProjectId(project.getId());
+        if(resource.exists()==false) {
+            throw new ServiceException(ServiceExceptionCode.PROJECT_CATEGORY_UNSUPPORTED,
+                    String.format("Unsupported project category %s", categoryCode));
+        }
         //
-        ProjectFeature teamFeature = new ProjectFeature();
-        teamFeature.setLabel("人脉");
-        teamFeature.setCode("team");
-        teamFeature.setLevel(20);
-        teamFeature.setProjectId(project.getId());
+        return parse(resource);
+    }
+
+    protected ProjectTemplate parse(Resource resource) throws Exception {
+        Document xmlDoc = xmlParser.parse(resource);
+        Element projectEle = xmlDoc.getDocumentElement();
         //
-        ProjectFeature msgFeature = new ProjectFeature();
-        msgFeature.setLabel("私信");
-        msgFeature.setCode("msg");
-        msgFeature.setLevel(25);
-        msgFeature.setProjectId(project.getId());
+        ProjectTemplate projectTemplate = new ProjectTemplate();
+        Element descriptionEle = DomUtils.getChildElementByTagName(projectEle, "description");
+        projectTemplate.setDescription(DomUtils.getTextValue(descriptionEle));
+        // project features
+        Element featuresEle = DomUtils.getChildElementByTagName(projectEle, "features");
+        List<Element> featureEles = DomUtils.getChildElementsByTagName(featuresEle, "feature");
+        for(Element featureEle : featureEles) {
+            ProjectFeature projectFeature = new ProjectFeature();
+            projectFeature.setCode(featureEle.getAttribute("code"));
+            projectFeature.setLabel(featureEle.getAttribute("label"));
+            String level = featureEle.getAttribute("level");
+            if(StringUtils.hasText(level)) {
+                projectFeature.setLevel(Integer.parseInt(level));
+            }
+            projectTemplate.addProjectFeature(projectFeature);
+        }
+        // project attributes
+        Element attributesEle = DomUtils.getChildElementByTagName(projectEle, "attributes");
+        List<Element> attributeEles = DomUtils.getChildElementsByTagName(featuresEle, "attribute");
+        for(Element attributeEle : attributeEles) {
+            ProjectAttribute projectAttribute = new ProjectAttribute();
+            projectAttribute.setName(attributeEle.getAttribute("name"));
+            projectAttribute.setValue(attributeEle.getAttribute("value"));
+            projectAttribute.setType(attributeEle.getAttribute("type"));
+            String level = attributeEle.getAttribute("level");
+            if(StringUtils.hasText(level)) {
+                projectAttribute.setLevel(Integer.parseInt(level));
+            }
+            projectTemplate.addProjectAttribute(projectAttribute);
+        }
         //
-        ProjectFeature settingFeature = new ProjectFeature();
-        settingFeature.setLabel("设置");
-        settingFeature.setCode("admin");
-        settingFeature.setLevel(30);
-        settingFeature.setProjectId(project.getId());
-        //
-        projectFeatureDao.insert(profileFeature);
-        projectFeatureDao.insert(blogFeature);
-        projectFeatureDao.insert(photoFeature);
-        projectFeatureDao.insert(teamFeature);
-        projectFeatureDao.insert(msgFeature);
-        projectFeatureDao.insert(settingFeature);
-    }*/
+        return projectTemplate;
+    }
 
 }

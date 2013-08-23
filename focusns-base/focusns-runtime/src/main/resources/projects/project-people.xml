@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <description><![CDATA[欢迎加入FocusSNS！]]></description>
+    <features>
+        <feature code="profile" label="主页" level="5" />
+        <feature code="blog" label="日志" level="10" />
+        <feature code="photo" label="相册" level="15" />
+        <feature code="team" label="好友" level="20" />
+        <feature code="msg" label="消息" level="25" />
+        <feature code="admin" label="管理" level="30" />
+    </features>
+</project>

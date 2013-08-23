@@ -17,7 +17,11 @@ public enum ServiceExceptionCode implements ExceptionCode {
         public int getStatus() {
             return 2000;
         }
+    },
+    PROJECT_CATEGORY_UNSUPPORTED() {
+        public int getStatus() {
+            return 2000;
+        }
     }
-
 
 }

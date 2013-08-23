@@ -30,7 +30,7 @@
         <position name="mainColumn">
             <widget styleId="signup" target="/site/signup">
                 <navigation>
-                    <event on="sign-confirm">/signup;m=email?userId=#{projectUser.id}</event>
+                    <event on="signup-success">/signin</event>
                 </navigation>
             </widget>
         </position>
