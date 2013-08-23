@@ -9,11 +9,11 @@
         <ul>
             <li>
                 <i class="icon-edit"> </i>
-                <a href="<c:url value="/blog/post-edit;p=${project.code}" />">发表日志</a>
+                <a href="<c:url value="/blog/post;p=${project.code},m=edit" />">发表日志</a>
             </li>
             <li>
                 <i class="icon-folder-close"></i>
-                <a href="<c:url value="/blog/category-edit;p=${project.code}" />">分类管理</a>
+                <a href="<c:url value="/blog/category;p=${project.code},m=edit" />">分类管理</a>
             </li>
         </ul>
     </ui:widget-body>

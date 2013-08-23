@@ -114,4 +114,20 @@
             <widget target="/photo/menu-view" />
         </position>
     </page>
+    <page abstract="project-team">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/login-bar">
+                <navigation>
+                    <event on="auth-failure">/login</event>
+                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
+                </navigation>
+            </widget>
+            <widget target="/site/menu-user">
+                <navigation>
+                    <event on="logout-success">/index</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
 </pages>

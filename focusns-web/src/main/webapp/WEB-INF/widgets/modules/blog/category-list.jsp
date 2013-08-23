@@ -14,14 +14,14 @@
             <c:forEach items="${blogCategories}" var="blogCategory">
                 <li>
                     <i class="icon-folder-close"></i>
-                    <a href="<c:url value="/blog;p=${project.code}?categoryId=${blogCategory.id}" />">
+                    <a href="<c:url value="/blog;p=${project.code},categoryId=${blogCategory.id}" />">
                         ${blogCategory.label}
                     </a>
                 </li>
             </c:forEach>
             <li>
                 <i class="icon-folder-close"></i>
-                <a href="<c:url value="/blog;p=${project.code}?categoryId=-1" />">未分类</a>
+                <a href="<c:url value="/blog;p=${project.code},categoryId=-1" />">未分类</a>
             </li>
         </ul>
     </ui:widget-body>

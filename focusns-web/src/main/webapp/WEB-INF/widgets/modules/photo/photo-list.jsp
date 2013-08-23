@@ -9,7 +9,7 @@
         <c:choose>
             <c:when test="${empty photos}">
                 <div class="alert alert-info">
-                    当前还没有上传照片，现在就来 <a href="<c:url value="/photo/photo-edit;p=${project.code}?albumId=${album.id}" />">上传</a> 吧？
+                    当前还没有上传照片，现在就来 <a href="<c:url value="/photo;p=${project.code},m=edit,albumId=${album.id}" />">上传</a> 吧？
                 </div>
             </c:when>
             <c:otherwise>

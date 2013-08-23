@@ -14,7 +14,7 @@
             <c:forEach items="${albums}" var="album">
             <li>
                 <i class="icon-folder-close"></i>
-                <a href="<c:url value="/photo/photo-list;p=${project.code}?albumId=${album.id}" />">${album.label}</a>
+                <a href="<c:url value="/photo;p=${project.code},m=list,albumId=${album.id}" />">${album.label}</a>
             </li>
             </c:forEach>
         </ul>

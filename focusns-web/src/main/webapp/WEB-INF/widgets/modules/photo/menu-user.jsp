@@ -11,16 +11,16 @@
                 <i class="icon-upload"></i>
                 <c:choose>
                     <c:when test="${not empty param.albumId}">
-                        <a href="<c:url value="/photo/photo-edit;p=${project.code}?albumId=${param.albumId}" />">上传照片</a>
+                        <a href="<c:url value="/photo;p=${project.code},m=edit,albumId=${param.albumId}" />">上传照片</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="<c:url value="/photo/photo-edit;p=${project.code}" />">上传照片</a>
+                        <a href="<c:url value="/photo;p=${project.code},m=edit" />">上传照片</a>
                     </c:otherwise>
                 </c:choose>
             </li>
             <li>
                 <i class="icon-folder-close"></i>
-                <a href="<c:url value="/photo/album-edit;p=${project.code}" />">新建相册</a>
+                <a href="<c:url value="/photo/album;p=${project.code},m=edit" />">新建相册</a>
             </li>
         </ul>
     </ui:widget-body>

@@ -8,16 +8,21 @@
             <widget target="/photo/album-list" />
         </position>
     </page>
-    <page extends="project-photo" path="/photo/photo-edit" category="people">
+    <page extends="project-photo" path="/photo" category="people" mode="list">
+        <position name="mainColumn">
+            <widget target="/photo/photo-list" />
+        </position>
+    </page>
+    <page extends="project-photo" path="/photo" category="people" mode="edit">
         <position name="mainColumn">
             <widget target="/photo/photo-edit">
                 <navigation>
-                    <event on="photo-uploaded">/photo/photo-list;p=#{photo.project.code}?albumId=#{photo.albumId}</event>
+                    <event on="photo-uploaded">/photo;p=#{photo.project.code},m=list,albumId=#{photo.albumId}</event>
                 </navigation>
             </widget>
         </position>
     </page>
-    <page extends="project-photo" path="/photo/album-edit" category="people">
+    <page extends="project-photo" path="/photo/album" category="people" mode="edit">
         <position name="mainColumn">
             <widget target="/photo/album-edit">
                 <navigation>
@@ -25,11 +30,6 @@
                     <event on="album-modified">/photo;p=#{album.project.code}</event>
                 </navigation>
             </widget>
-        </position>
-    </page>
-    <page extends="project-photo" path="/photo/photo-list" category="people">
-        <position name="mainColumn">
-            <widget target="/photo/photo-list" />
         </position>
     </page>
 </pages>

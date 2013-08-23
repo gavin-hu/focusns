@@ -1,7 +1,5 @@
 package org.focusns.subscriber.core.impl;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.focusns.common.event.annotation.Event;
 import org.focusns.common.event.annotation.EventSubscriber;
 import org.focusns.common.event.support.EventContext;
@@ -19,7 +17,6 @@ import org.focusns.model.core.ProjectFeature;
 import org.focusns.model.core.ProjectTemplate;
 import org.focusns.model.core.ProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -126,6 +123,7 @@ public class ProjectUserEventSubscriber {
             ProjectFeature projectFeature = new ProjectFeature();
             projectFeature.setCode(featureEle.getAttribute("code"));
             projectFeature.setLabel(featureEle.getAttribute("label"));
+            projectFeature.setEnabled(true);
             String level = featureEle.getAttribute("level");
             if(StringUtils.hasText(level)) {
                 projectFeature.setLevel(Integer.parseInt(level));

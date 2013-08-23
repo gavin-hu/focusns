@@ -10,10 +10,10 @@
             <c:when test="${empty page.results}">
                 <div class="alert alert-info">
                     <c:if test="${not empty param.categoryId}">
-                        <c:url var="redirectTo" value="/${projectFeature.code}/post-edit;p=${project.code}?categoryId=${param.categoryId}" />
+                        <c:url var="redirectTo" value="/${projectFeature.code}/post;p=${project.code},m=edit,categoryId=${param.categoryId}" />
                     </c:if>
                     <c:if test="${empty param.categoryId}">
-                        <c:url var="redirectTo" value="/${projectFeature.code}/post-edit;p=${project.code}?categoryId=${param.categoryId}" />
+                        <c:url var="redirectTo" value="/${projectFeature.code}/post;p=${project.code},m=edit,categoryId=${param.categoryId}" />
                     </c:if>
                     当前分类没有内容，赶快 <a href='${redirectTo}'>添加</a> 吧！
                 </div>
@@ -26,10 +26,10 @@
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">
-                                <a href='<c:url value="/${projectFeature.code}/post-view;p=${project.code}?postId=${blogPost.id}" />'>
+                                <a href='<c:url value="/${projectFeature.code}/post;p=${project.code},m=view,postId=${blogPost.id}" />'>
                                         ${blogPost.title}
                                 </a>
-                                <a href='<c:url value="/${projectFeature.code}/post-edit;p=${project.code}?postId=${blogPost.id}" />'>
+                                <a href='<c:url value="/${projectFeature.code}/post;p=${project.code},m=edit,postId=${blogPost.id}" />'>
                                     <small>编辑 </small>
                                 </a>
                             </h4>
