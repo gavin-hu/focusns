@@ -7,7 +7,7 @@
     </div>
     <div class="widget-bd">
         <div class="summary-os">
-            <table>
+            <table class="table table-bordered">
                 <tr>
                     <th>操作系统名称</th>
                     <td>${envOS.osName}</td>

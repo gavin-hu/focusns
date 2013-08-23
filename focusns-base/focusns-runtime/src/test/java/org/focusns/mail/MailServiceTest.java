@@ -1,6 +1,7 @@
 package org.focusns.mail;
 
 import org.focusns.common.mail.MailService;
+import org.focusns.model.core.ProjectUser;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +22,15 @@ public class MailServiceTest {
 
     @Test
     public void send() throws Exception {
-        mailService.send("test", new HashMap<String, Object>());
+        //
+        ProjectUser projectUser = new ProjectUser();
+        projectUser.setEmail("focusns@sina.cn");
+        //
+        Map<String, Object> ctx = new HashMap<String, Object>();
+        ctx.put("projectUser", projectUser);
+        //
+        mailService.send("signup-confirm", ctx);
+
     }
 
 }

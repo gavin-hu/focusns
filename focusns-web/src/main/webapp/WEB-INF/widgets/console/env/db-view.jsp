@@ -7,7 +7,7 @@
     </div>
     <div class="widget-bd">
         <div class="summary-db">
-            <table>
+            <table class="table table-bordered">
                 <tr>
                     <th>数据库名称</th>
                     <td>${envDB.databaseName}</td>

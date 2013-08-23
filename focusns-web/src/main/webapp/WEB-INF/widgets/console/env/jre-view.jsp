@@ -7,7 +7,7 @@
     </div>
     <div class="widget-bd">
         <div class="summary-jre">
-            <table>
+            <table class="table table-bordered">
                 <tr>
                     <th>Java运行时名称</th>
                     <td>${envJava.javaRuntimeName}</td>

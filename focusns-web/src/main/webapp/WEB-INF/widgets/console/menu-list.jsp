@@ -2,13 +2,12 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <div class="widget">
-    <div class="widget-hd">
-        <h3>控制台</h3>
-    </div>
     <div class="widget-bd">
-        <div class="console-menu">
-            <h3>站点管理</h3>
-            <ul>
+        <div class="well console-menu">
+            <ul class="nav nav-list">
+                <li class="nav-header">
+                    站点管理
+                </li>
                 <li>
                     <a href='#'>首页管理</a>
                 </li>
@@ -18,9 +17,10 @@
                 <li>
                     <a href='#'>版权管理</a>
                 </li>
-            </ul>
-            <h3>内容管理</h3>
-            <ul>
+
+                <li class="nav-header">
+                    内容管理
+                </li>
                 <li>
                     <a href='<c:url value="/console/cms?mode=category-list" />'>栏目管理</a>
                 </li>
@@ -30,26 +30,27 @@
                 <li>
                     <a href='<c:url value="/console/cms?mode=comment-list" />'>评论管理</a>
                 </li>
-            </ul>
-            <h3>安全管理</h3>
-            <ul>
+
+                <li class="nav-header">
+                    安全管理
+                </li>
                 <li>
                     <a href='#'>系统权限管理</a>
                 </li>
                 <li>
                     <a href='#'>分类权限管理</a>
                 </li>
-            </ul>
-            <h3>环境信息</h3>
-            <ul class="last">
-                <li>
-                    <a href='<c:url value="/console/environment?mode=os" />'>系统环境</a>
+                <li class="nav-header">
+                    环境信息
                 </li>
-                <li>
-                    <a href='<c:url value="/console/environment?mode=jre" />'>Java环境</a>
+                <li <c:if test="${fn:contains(pageContext.request.requestURI, 'm=os')}">class="active"</c:if>>
+                    <a href='<c:url value="/console/environment;m=os" />'>系统环境</a>
                 </li>
-                <li>
-                    <a href='<c:url value="/console/environment?mode=db" />'>数据库环境</a>
+                <li <c:if test="${fn:contains(pageContext.request.requestURI, 'm=jre')}">class="active"</c:if>>
+                    <a href='<c:url value="/console/environment;m=jre" />'>Java环境</a>
+                </li>
+                <li <c:if test="${fn:contains(pageContext.request.requestURI, 'm=db')}">class="active"</c:if> >
+                    <a href='<c:url value="/console/environment;m=db" />'>数据库环境</a>
                 </li>
             </ul>
         </div>
