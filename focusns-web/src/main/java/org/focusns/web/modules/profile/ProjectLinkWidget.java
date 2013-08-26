@@ -7,16 +7,16 @@ package org.focusns.web.modules.profile;
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
+ *
+ * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
@@ -66,7 +66,7 @@ public class ProjectLinkWidget {
         if (reverse.booleanValue()) {
             page = projectLinkService.fetchPageByToProjectId(page, project.getId(), category);
         } else {
-            page = projectLinkService.selectPageByFromProjectId(page, project.getId(), category);
+            page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
         }
         model.addAttribute(Page.KEY, page);
         model.addAttribute("reverse", reverse.booleanValue());
@@ -80,7 +80,7 @@ public class ProjectLinkWidget {
             @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //
         Page<ProjectLink> page = new Page<ProjectLink>(pageSize);
-        page = projectLinkService.selectPageByFromProjectId(page, project.getId(), category);
+        page = projectLinkService.fetchPageByFromProjectId(page, project.getId(), category);
         model.addAttribute(Page.KEY, page);
         //
         return "modules/profile/link-list-detail";

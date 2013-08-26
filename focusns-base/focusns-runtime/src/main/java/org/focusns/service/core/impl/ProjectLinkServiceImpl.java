@@ -7,21 +7,23 @@ package org.focusns.service.core.impl;
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
+ *
+ * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
 
+import org.focusns.common.exception.ServiceException;
+import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectLinkDao;
 import org.focusns.model.common.Page;
@@ -53,7 +55,7 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
             linkDao.insert(link);
             fillProjectLink(link);
         } else {
-            throw new RuntimeException("The link already exist!");
+            throw new ServiceException(ServiceExceptionCode.PROJECT_LINK_ALREADY_EXIST, "The project link already exist!");
         }
     }
 
@@ -82,20 +84,18 @@ public class ProjectLinkServiceImpl implements ProjectLinkService {
 
     public Page<ProjectLink> fetchPageByToProjectId(Page<ProjectLink> page, long toProjectId, String category) {
         //
-        page = linkDao.selectByToProjectId(page, toProjectId, category, null);
+        page = linkDao.fetchByToProjectId(page, toProjectId, category, null);
         //
-        Project toProject = projectDao.select(toProjectId);
         for (ProjectLink projectLink : page.getResults()) {
             fillProjectLink(projectLink);
         }
         return page;
     }
 
-    public Page<ProjectLink> selectPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
+    public Page<ProjectLink> fetchPageByFromProjectId(Page<ProjectLink> page, long fromProjectId, String category) {
         //
-        page = linkDao.selectByFromProjectId(page, fromProjectId, category, null);
+        page = linkDao.fetchByFromProjectId(page, fromProjectId, category, null);
         //
-        Project fromProject = projectDao.select(fromProjectId);
         for (ProjectLink projectLink : page.getResults()) {
             fillProjectLink(projectLink);
         }
