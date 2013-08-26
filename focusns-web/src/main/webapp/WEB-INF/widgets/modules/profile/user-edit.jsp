@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/widgets/widget.jsp" %>
 
 <ui:widget styleId="project-user-edit">
-    <ui:widget>
+    <ui:widget-head>
         <ul class="nav nav-tabs">
             <li <c:if test="${empty param.tab or param.tab=='user'}">class="active"</c:if>>
                 <a href="#user" data-toggle="tab">个人档案</a>
@@ -14,7 +14,7 @@
                 <a href="#avatar" data-toggle="tab">头像上传</a>
             </li>
         </ul>
-    </ui:widget>
+    </ui:widget-head>
     <ui:widget-body>
         <div class="tab-content">
             <div id="user" class="tab-pane <c:if test="${empty param.tab or param.tab=='user'}">active</c:if>" >
