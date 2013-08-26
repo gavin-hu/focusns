@@ -10,20 +10,12 @@ import org.springframework.util.ClassUtils;
 
 public class SqlSessionFactoryBean extends org.mybatis.spring.SqlSessionFactoryBean implements ResourceLoaderAware {
 
-    private static final String MAPPER_LOCATION_PATTERN = "classpath*:*/**/*Mapper.xml";
-
     private String mapperBasePackage;
-    //private String mapperLocationPattern = MAPPER_LOCATION_PATTERN;
     private ResourcePatternResolver resourcePatternResolver;
-
 
     public void setMapperBasePackage(String mapperBasePackage) {
         this.mapperBasePackage = mapperBasePackage;
     }
-
-    /*public void setMapperLocationPattern(String mapperLocationPattern) {
-        this.mapperLocationPattern = mapperLocationPattern;
-    }*/
 
     @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -35,7 +27,8 @@ public class SqlSessionFactoryBean extends org.mybatis.spring.SqlSessionFactoryB
         //
         Assert.hasText(mapperBasePackage, "Mapper base package can not be null!");
         //
-        String mapperLocationPattern = ClassUtils.convertClassNameToResourcePath(mapperBasePackage) + "/**/*Mapper.xml";
+        String mapperLocationPattern = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +
+                ClassUtils.convertClassNameToResourcePath(mapperBasePackage) + "/**/*Mapper.xml";
         Resource[] mapperLocations = resourcePatternResolver.getResources(mapperLocationPattern);
         Assert.notEmpty(mapperLocations, String.format("Mapper Locations is empty under package %s!", mapperBasePackage));
         //
