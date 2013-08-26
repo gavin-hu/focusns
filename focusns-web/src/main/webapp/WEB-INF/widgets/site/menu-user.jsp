@@ -11,7 +11,7 @@
             <a class="navbar-link" href="<c:url value="/signout" />">
                 退出
             </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+            <ul class="dropdown-menu">
                 <c:forEach items="${features}" var="feature">
                     <li>
                         <a href='<c:url value="/${feature.code};p=${projectUser.project.code}" />'>${feature.label}</a>

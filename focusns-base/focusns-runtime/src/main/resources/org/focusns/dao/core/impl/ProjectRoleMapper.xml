@@ -9,20 +9,22 @@
 		<result column="label" property="label" jdbcType="VARCHAR" />
 		<result column="level" property="level" jdbcType="INTEGER" />
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
-        <result column="category_id" property="categoryId" jdbcType="BIGINT" />
 	</resultMap>
-	
+
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectRole">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-		insert into tb_project_role (label, level, project_id, category_id)
-		values (#{label}, #{level}, #{projectId}, #{categoryId})
+		insert into tb_project_role (label, level, project_id)
+		values (#{label}, #{level}, #{projectId})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_project_role where id = #{id}
 	</select>
+    <select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from tb_project_role where project_id = #{projectId}
+    </select>
 
 	<update id="update" parameterType="org.focusns.model.core.ProjectRole">
 		update tb_project_role
@@ -36,13 +38,10 @@
 			<if test="projectId > 0" >
 		        project_id = #{projectId},
 			</if>
-            <if test="categoryId > 0" >
-		        category_id = #{categoryId},
-			</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project_role where id = #{id}
 	</delete>

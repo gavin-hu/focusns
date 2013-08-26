@@ -7,16 +7,16 @@ package org.focusns.model.core;
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
+ *
+ * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
@@ -30,7 +30,8 @@ public class ProjectRole extends Id {
     private int level;
     //
     private long projectId;
-    private long categoryId;
+    //
+    private Project project;
 
     public String getLabel() {
         return label;
@@ -56,11 +57,11 @@ public class ProjectRole extends Id {
         this.projectId = projectId;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Project getProject() {
+        return project;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

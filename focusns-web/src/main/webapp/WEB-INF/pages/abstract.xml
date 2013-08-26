@@ -129,5 +129,9 @@
                 </navigation>
             </widget>
         </position>
+        <position name="leftColumn">
+            <widget target="/team/menu-view" />
+            <widget target="/team/role-list" />
+        </position>
     </page>
 </pages>

@@ -34,12 +34,12 @@
                         <li>
                         <c:choose>
                             <c:when test="${reverse}">
-                                <a href='<c:url value="/${link.fromProject.code}/profile" />'>
+                                <a href='<c:url value="/profile;p=${link.fromProject.code}" />'>
                                     <tool:img-avatar projectUserId="${link.fromProject.createdById}" width="60" height="60" />
                                 </a>
                             </c:when>
                             <c:otherwise>
-                                <a href='<c:url value="/${link.toProject.code}/profile" />'>
+                                <a href='<c:url value="/profile;p=${link.toProject.code}" />'>
                                     <tool:img-avatar projectUserId="${link.toProject.createdById}" width="60" height="60" />
                                 </a>
                             </c:otherwise>

@@ -9,7 +9,8 @@
         <c:choose>
             <c:when test="${empty albums}">
                 <div class="alert alert-info">
-                    当前还没有相册，现在就来 <a href="<c:url value="/photo/album;p=${project.code},m=edit" />">添加</a> 吧？
+                    当前还没有相册，现在就来 <a href="<c:url value="/photo/album;p=${project.code},m=edit" />">
+                    <span class="badge badge-info">添加</span></a> 吧？
                 </div>
             </c:when>
             <c:otherwise>

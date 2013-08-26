@@ -27,6 +27,7 @@ import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectUserDao;
+import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectUser;
@@ -106,11 +107,20 @@ public class ProjectUserServiceImpl implements ProjectUserService {
                 projectUser.setPassword(newHashedPassword);
                 projectUserDao.update(projectUser);
             } else {
-                throw new ServiceException(ServiceExceptionCode.PASSWORD_MISS_MATCH, "新旧密码不匹配！");
+                throw new ServiceException(ServiceExceptionCode.PASSWORD_MISS_MATCH, "新老密码不匹配！");
             }
         } else {
             projectUserDao.update(projectUser);
         }
+    }
+
+    @Override
+    public Page<ProjectUser> fetchPage(Page<ProjectUser> page) {
+        page = projectUserDao.fetch(page);
+        for(ProjectUser projectUser : page.getResults()) {
+            fillProjectUser(projectUser);
+        }
+        return page;
     }
 
     public void removeProjectUser(ProjectUser user) {
@@ -123,6 +133,19 @@ public class ProjectUserServiceImpl implements ProjectUserService {
 
     public void unassignRole(long projectId, long userId, long roleId) {
         projectUserDao.deleteRole(projectId, userId, roleId);
+    }
+
+    protected ProjectUser fillProjectUser(ProjectUser projectUser) {
+        if(projectUser==null) {
+            return projectUser;
+        }
+        //
+        if(projectUser.getProject()==null && projectUser.getProjectId()>0) {
+            Project project = projectDao.select(projectUser.getProjectId());
+            projectUser.setProject(project);
+        }
+        //
+        return projectUser;
     }
 
 }

@@ -3,14 +3,25 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.focusns.org/schema/pages http://www.focusns.org/schema/pages/focusns-pages.xsd">
 
-    <page path="/team" category="people">
-        <position name="headerBar">
-            <widget target="/site/menu-main" />
-            <widget target="/site/login-bar" />
-            <widget target="/site/menu-user" />
+    <page extends="project-team" path="/team" category="people">
+        <position name="mainColumn">
+            <widget target="/team/member-list" />
         </position>
-        <position name="copyright">
-            <widget target="/site/copyright" />
+    </page>
+    <page extends="project-team" path="/team/member" category="people" mode="edit">
+        <position name="mainColumn">
+            <widget target="/team/member-edit" />
+        </position>
+    </page>
+    <page extends="project-team" path="/team/role" category="people" mode="edit">
+        <position name="mainColumn">
+            <widget target="/team/role-edit">
+                <navigation>
+                    <event on="role-created">/team/role;p=#{projectRole.project.code},m=edit</event>
+                    <event on="role-modified">/team/role;p=#{projectRole.project.code},m=edit</event>
+                    <event on="role-removed">/team/role;p=#{projectRole.project.code},m=edit</event>
+                </navigation>
+            </widget>
         </position>
     </page>
 </pages>

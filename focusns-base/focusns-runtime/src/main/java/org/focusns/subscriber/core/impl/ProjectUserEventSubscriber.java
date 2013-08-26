@@ -75,7 +75,7 @@ public class ProjectUserEventSubscriber {
         Date now = new Date();
         Project project = new Project();
         project.setCode(projectCode);
-        project.setTitle(projectUser.getUsername());
+        project.setTitle(projectUser.getNickname());
         project.setDescription(projectTemplate.getDescription());
         project.setCategoryId(category.getId());
         project.setCreatedAt(now);

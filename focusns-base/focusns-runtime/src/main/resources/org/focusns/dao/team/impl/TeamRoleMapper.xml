@@ -13,7 +13,7 @@
         <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
         <result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
 	</resultMap>
-	
+
 	<insert id="insert" parameterType="org.focusns.model.team.TeamRole">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
@@ -25,7 +25,11 @@
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_team_role where id = #{id}
 	</select>
-	
+
+    <select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from tb_team_role where project_id = #{projectId}
+    </select>
+
 	<update id="update" parameterType="org.focusns.model.team.TeamRole">
 		update tb_team_role
 		<set>
@@ -50,7 +54,7 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_team_role where id = #{id}
 	</delete>

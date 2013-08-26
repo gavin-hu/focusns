@@ -22,7 +22,7 @@
             <result property="modifiedById" column="project_modified_by_id"/>
         </association>
 	</resultMap>
-	
+
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectUser">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
@@ -50,7 +50,7 @@
 	<select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from tb_project_user where username = #{username}
 	</select>
-	
+
 	<update id="update" parameterType="org.focusns.model.core.ProjectUser">
 		update tb_project_user
 		<set>
@@ -78,7 +78,25 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
+    <sql id="fetchPageSql">
+        from tb_project_user a, tb_project b
+        where a.project_id = b.id
+    </sql>
+    <select id="fetchPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select a.*,
+                b.id as project_id,
+                b.code as project_code,
+                b.title as project_title,
+                b.description as project_description,
+                b.created_by_id as project_created_by_id,
+                b.modified_by_id as project_modified_by_id
+                <include refid="fetchPageSql"/>
+    </select>
+    <select id="fetchPageCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) <include refid="fetchPageSql"/>
+    </select>
+
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project_user where id = #{id}
 	</delete>
