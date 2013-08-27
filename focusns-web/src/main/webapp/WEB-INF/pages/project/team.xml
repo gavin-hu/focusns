@@ -10,7 +10,13 @@
     </page>
     <page extends="project-team" path="/team/member" category="people" mode="edit">
         <position name="mainColumn">
-            <widget target="/team/member-edit" />
+            <widget target="/team/member-edit">
+                <navigation>
+                    <event on="member-created">/team;p=#{teamMember.project.code}</event>
+                    <event on="member-modified">/team;p=#{teamMember.project.code}</event>
+                    <event on="member-removed">/team;p=#{teamMember.project.code}</event>
+                </navigation>
+            </widget>
         </position>
     </page>
     <page extends="project-team" path="/team/role" category="people" mode="edit">

@@ -27,13 +27,53 @@ import org.focusns.model.team.TeamMember;
 
 public interface TeamMemberService {
 
+    /**
+     * 根据成员 ID 获取成员
+     * @param memberId
+     * @return
+     */
     TeamMember getTeamMember(long memberId);
 
+    /**
+     * 创建新成员
+     * @param member
+     */
     void createTeamMember(TeamMember member);
 
+    /**
+     * 修改成员
+     * @param member
+     */
     void modifyTeamMember(TeamMember member);
 
+    /**
+     * 移除成员
+     * @param member
+     */
     void removeTeamMember(TeamMember member);
 
+    /**
+     * 获取成员列表
+     * @param page
+     * @param projectId
+     * @return
+     */
     Page<TeamMember> fetchPage(Page<TeamMember> page, long projectId);
+
+    /**
+     * 获取成员列表
+     * @param page
+     * @param projectId
+     * @param roleId
+     * @return
+     */
+    Page<TeamMember> fetchPage(Page<TeamMember> page, long projectId, long roleId);
+
+    /**
+     * 获取潜在在成员列表
+     * @param page
+     * @return
+     */
+    Page<TeamMember> fetchPagePotentially(Page<TeamMember> page);
+
 }

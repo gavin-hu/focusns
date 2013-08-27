@@ -35,12 +35,18 @@ import java.util.Map;
 public class TeamMemberDaoImpl extends MyBatisDaoSupport<TeamMember> implements TeamMemberDao {
 
     @Override
-    public Page<TeamMember> fetchByProjectId(Page<TeamMember> page, long projectId) {
+    public Page<TeamMember> fetchByProjectId(Page<TeamMember> page, long projectId, long roleId) {
         //
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("projectId", projectId);
+        model.put("roleId", roleId);
         //
         return fetchPage("fetchByProjectId", page, model);
+    }
+
+    @Override
+    public Page<TeamMember> fetchPotentially(Page<TeamMember> page) {
+        return fetchPage("fetchPotentially", page, new HashMap<String, Object>());
     }
 
 }

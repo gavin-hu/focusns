@@ -24,15 +24,15 @@ package org.focusns.web.modules.team;
 
 import org.focusns.common.web.widget.annotation.bind.WidgetAttribute;
 import org.focusns.common.web.widget.annotation.bind.WidgetPref;
+import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.common.web.widget.stereotype.Widget;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectRole;
-import org.focusns.model.core.ProjectUser;
+import org.focusns.model.team.TeamMember;
 import org.focusns.service.core.ProjectLinkService;
 import org.focusns.service.core.ProjectRoleService;
-import org.focusns.service.core.ProjectUserService;
 import org.focusns.service.team.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -42,6 +42,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Widget
 @RequestMapping("/team")
@@ -49,8 +50,6 @@ public class TeamMemberWidget {
 
     @Autowired
     private TeamMemberService teamMemberService;
-    @Autowired
-    private ProjectUserService projectUserService;
     @Autowired
     private ProjectRoleService projectRoleService;
     @Autowired
@@ -61,9 +60,9 @@ public class TeamMemberWidget {
                          @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
         //
         if("users".equals(tab)) {
-            Page<ProjectUser> userPage = new Page<ProjectUser>(pageSize);
-            userPage = projectUserService.fetchPage(userPage);
-            model.addAttribute("userPage", userPage);
+            Page<TeamMember> teamMemberPage = new Page<TeamMember>(pageSize);
+            teamMemberPage = teamMemberService.fetchPagePotentially(teamMemberPage);
+            model.addAttribute("teamMemberPage", teamMemberPage);
         }
         if("link1".equals(tab)) {
             Page<ProjectLink> linkPage = new Page<ProjectLink>(pageSize);
@@ -85,12 +84,30 @@ public class TeamMemberWidget {
     }
 
     @RequestMapping(value="/member-list", method = GET)
-    public String doList(@RequestParam(required = false) Long roleId, @WidgetAttribute Project project,
+    public String doList(@RequestParam(defaultValue = "0") Long roleId, @WidgetAttribute Project project,
                          @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
         //
-
+        List<ProjectRole> projectRoles = projectRoleService.listProjectRoles(project.getId());
+        model.addAttribute("projectRoles", projectRoles);
+        //
+        Page<TeamMember> teamMemberPage = new Page<TeamMember>(pageSize);
+        teamMemberPage = teamMemberService.fetchPage(teamMemberPage, project.getId(), roleId);
+        model.addAttribute("teamMemberPage", teamMemberPage);
         //
         return "modules/team/member-list";
+    }
+
+    @RequestMapping(value = {"/member-create", "member-modify"}, method = {GET, POST})
+    public void doModify(TeamMember teamMember) {
+        //
+        Navigator.get().withAttribute("teamMember", teamMember);
+        if(teamMember.getId()>0) {
+            teamMemberService.modifyTeamMember(teamMember);
+            Navigator.get().navigateTo("member-modified");
+        } else {
+            teamMemberService.createTeamMember(teamMember);
+            Navigator.get().navigateTo("member-created");
+        }
     }
 
 }

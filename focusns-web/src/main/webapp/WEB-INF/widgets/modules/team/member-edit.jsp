@@ -19,35 +19,53 @@
         <div class="tab-content">
             <div id="users" class="tab-pane <c:if test="${empty param.tab}">active</c:if> ">
                 <ul class="thumbnails">
-                    <c:forEach items="${userPage.results}" var="projectUser">
+                    <c:forEach items="${teamMemberPage.results}" var="teamMember">
                         <li class="thumbnail span3">
                             <div class="media">
-                                <a href="<c:url value="/profile;p=${projectUser.project.code}" />" class="pull-left">
-                                    <tool:img-avatar projectUserId="${projectUser.id}" styleClass="media-object" width="80" height="80" />
+                                <a href="<c:url value="/profile;p=${teamMember.user.project.code}" />" class="pull-left">
+                                    <tool:img-avatar projectUserId="${teamMember.user.id}" styleClass="media-object" width="80" height="80" />
                                 </a>
                                 <div class="media-body">
                                     <h3 class="media-heading">
-                                        <a href="<c:url value="/profile;p=${projectUser.project.code}" />">
-                                                ${projectUser.nickname}
+                                        <a href="<c:url value="/profile;p=${teamMember.user.project.code}" />">
+                                            ${teamMember.user.nickname}
                                         </a>
-                                        <span class="pull-right badge badge-important">已关注</span>
+                                        <%--<span class="pull-right badge badge-important">已关注</span>--%>
                                     </h3>
-                                    <p>${projectUser.project.description}</p>
+                                    <p>${teamMember.user.project.description}</p>
                                 </div>
                             </div>
+                            <c:if test="${true or teamMember.user.id != project.createdById && teamMember.user.id != projectUser.id}">
                             <div class="pull-right btn-group dropup">
                                 <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
                                     加为好友
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <c:forEach items="${projectRoles}" var="projectRole">
-                                    <li>
-                                        <a href="#">${projectRole.label}</a>
-                                    </li>
-                                    </c:forEach>
+                                    <c:choose>
+                                        <c:when test="${empty projectRoles}">
+                                            <li>
+                                                <a href="<c:url value="/team/role;p=${project.code},m=edit" />">暂无好友分组，现在就来添加...</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:forEach items="${projectRoles}" var="projectRole">
+                                                <li>
+                                                    <a href="#" onclick="javascript:document.getElementById('member${teamMember.user.id}').submit()">${projectRole.label}</a>
+                                                    <form id="member${teamMember.user.id}" style="display: none" method="post" action="<widget:actionUrl value="/team/member-create" />">
+                                                        <input type="hidden" name="projectId" value="${project.id}" />
+                                                        <input type="hidden" name="userId" value="${projectUser.id}" />
+                                                        <input type="hidden" name="roleId" value="${projectRole.id}" />
+                                                        <input type="hidden" name="createdById" value="${projectUser.id}" />
+                                                        <input type="hidden" name="modifiedById" value="${projectUser.id}" />
+                                                    </form>
+                                                </li>
+                                            </c:forEach>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
+                            </c:if>
                         </li>
                     </c:forEach>
                 </ul>

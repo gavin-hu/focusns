@@ -28,6 +28,7 @@ import org.focusns.model.team.TeamMember;
 
 public interface TeamMemberDao extends BaseDao<TeamMember> {
 
-    Page<TeamMember> fetchByProjectId(Page<TeamMember> page, long projectId);
+    Page<TeamMember> fetchByProjectId(Page<TeamMember> page, long projectId, long roleId);
 
+    Page<TeamMember> fetchPotentially(Page<TeamMember> page);
 }

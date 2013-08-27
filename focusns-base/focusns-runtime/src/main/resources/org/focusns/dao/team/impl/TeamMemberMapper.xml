@@ -62,6 +62,9 @@
 
     <sql id="fetchByProjectIdSql">
         from tb_team_member a where a.project_id = #{projectId}
+        <if test="roleId > 0">
+            and a.role_id = #{roleId}
+        </if>
     </sql>
     <select id="fetchByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select a.* <include refid="fetchByProjectIdSql" />
@@ -70,5 +73,16 @@
         select count(1) <include refid="fetchByProjectIdSql" />
     </select>
 
+    <sql id="fetchPotentiallySql">
+        from (select a.id as user_id, b.project_id as project_id from tb_project_user a left join tb_team_member b on a.id = b.user_id) c
+        where c.project_id is null
+    </sql>
+    <select id="fetchPotentially" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select c.user_id
+        <include refid="fetchPotentiallySql" />
+    </select>
+    <select id="fetchPotentiallyCount" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select count(1) <include refid="fetchPotentiallySql" />
+    </select>
 
 </mapper>

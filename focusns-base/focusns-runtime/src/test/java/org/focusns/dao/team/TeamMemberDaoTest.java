@@ -23,6 +23,7 @@ package org.focusns.dao.team;
  */
 
 import org.focusns.dao.AbstractDaoTest;
+import org.focusns.model.common.Page;
 import org.focusns.model.team.TeamMember;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,12 @@ public class TeamMemberDaoTest extends AbstractDaoTest {
         member.setModifiedById(1);
         //
         this.teamMemberDao.insert(member);
+    }
+
+    @Test
+    public void testFetch() {
+        Page<TeamMember> page = new Page<TeamMember>(5);
+        page = teamMemberDao.fetchPotentially(page);
+        System.out.println(page.getTotalCount());
     }
 }

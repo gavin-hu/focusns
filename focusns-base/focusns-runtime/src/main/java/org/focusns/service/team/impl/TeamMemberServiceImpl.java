@@ -23,18 +23,20 @@ package org.focusns.service.team.impl;
  */
 
 import org.focusns.dao.core.ProjectDao;
+import org.focusns.dao.core.ProjectRoleDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.dao.team.TeamMemberDao;
-import org.focusns.dao.team.TeamRoleDao;
 import org.focusns.model.common.Page;
 import org.focusns.model.core.Project;
+import org.focusns.model.core.ProjectRole;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.model.team.TeamMember;
-import org.focusns.model.team.TeamRole;
 import org.focusns.service.team.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Service
 @Transactional
@@ -47,27 +49,62 @@ public class TeamMemberServiceImpl implements TeamMemberService {
     @Autowired
     private ProjectUserDao projectUserDao;
     @Autowired
-    private TeamRoleDao teamRoleDao;
+    private ProjectRoleDao projectRoleDao;
+
 
     public TeamMember getTeamMember(long memberId) {
-        return teamMemberDao.select(memberId);
+        TeamMember teamMember = teamMemberDao.select(memberId);
+        return fillTeamMember(teamMember);
     }
 
-    public void createTeamMember(TeamMember member) {
-        this.teamMemberDao.insert(member);
+    public void createTeamMember(TeamMember teamMember) {
+        //
+        Date now = new Date();
+        if(teamMember.getCreatedAt()==null) {
+            teamMember.setCreatedAt(now);
+        }
+        if(teamMember.getModifiedAt()==null) {
+            teamMember.setModifiedAt(now);
+        }
+        //
+        this.teamMemberDao.insert(teamMember);
+        fillTeamMember(teamMember);
     }
 
-    public void modifyTeamMember(TeamMember member) {
-        this.teamMemberDao.update(member);
+    public void modifyTeamMember(TeamMember teamMember) {
+        //
+        teamMember.setModifiedAt(new Date());
+        //
+        this.teamMemberDao.update(teamMember);
+        fillTeamMember(teamMember);
     }
 
-    public void removeTeamMember(TeamMember member) {
-        this.teamMemberDao.delete(member.getId());
+    public void removeTeamMember(TeamMember teamMember) {
+        this.teamMemberDao.delete(teamMember.getId());
+        fillTeamMember(teamMember);
     }
 
     @Override
     public Page<TeamMember> fetchPage(Page<TeamMember> page, long projectId) {
-        return teamMemberDao.fetchByProjectId(page, projectId);
+        return fetchPage(page, projectId, 0);
+    }
+
+    @Override
+    public Page<TeamMember> fetchPage(Page<TeamMember> page, long projectId, long roleId) {
+        page = teamMemberDao.fetchByProjectId(page, projectId, roleId);
+        for(TeamMember teamMember : page.getResults()) {
+            fillTeamMember(teamMember);
+        }
+        return page;
+    }
+
+    @Override
+    public Page<TeamMember> fetchPagePotentially(Page<TeamMember> page) {
+        page = teamMemberDao.fetchPotentially(page);
+        for(TeamMember teamMember : page.getResults()) {
+            fillTeamMember(teamMember);
+        }
+        return page;
     }
 
     protected TeamMember fillTeamMember(TeamMember teamMember) {
@@ -80,17 +117,21 @@ public class TeamMemberServiceImpl implements TeamMemberService {
             teamMember.setProject(project);
         }
         if(teamMember.getCreatedBy()==null && teamMember.getCreatedById()>0) {
-            ProjectUser createBy = projectUserDao.select(teamMember.getCreatedById());
+            ProjectUser createBy = projectUserDao.selectWithProject(teamMember.getCreatedById());
             teamMember.setCreatedBy(createBy);
         }
         if(teamMember.getModifiedBy()==null && teamMember.getModifiedById()>0) {
-            ProjectUser modifiedBy = projectUserDao.select(teamMember.getModifiedById());
+            ProjectUser modifiedBy = projectUserDao.selectWithProject(teamMember.getModifiedById());
             teamMember.setModifiedBy(modifiedBy);
         }
-        /*if(teamMember.getRole()==null && teamMember.getRoleId()>0) {
-            TeamRole teamRole = teamRoleDao.select(teamMember.getRoleId());
-            teamMember.setRole(teamRole);
-        }*/
+        if(teamMember.getUser()==null && teamMember.getUserId()>0) {
+            ProjectUser projectUser = projectUserDao.selectWithProject(teamMember.getUserId());
+            teamMember.setUser(projectUser);
+        }
+        if(teamMember.getRole()==null && teamMember.getRoleId()>0) {
+            ProjectRole projectRole = projectRoleDao.select(teamMember.getRoleId());
+            teamMember.setRole(projectRole);
+        }
         //
         return teamMember;
     }
