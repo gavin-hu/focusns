@@ -109,13 +109,6 @@ ul {
 #blog-category-edit .control-label {
     font-weight: bold;
 }
-/* TeamMemberWidget edit */
-.team-member-edit .thumbnails .thumbnail {
-    background-color: #bce8f1;
-}
-.team-member-edit .tab-content {
-    overflow: visible;
-}
 
 /* Environment */
 .summary-os .table {

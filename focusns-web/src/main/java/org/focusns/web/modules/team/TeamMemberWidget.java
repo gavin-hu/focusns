@@ -56,22 +56,25 @@ public class TeamMemberWidget {
     private ProjectLinkService projectLinkService;
 
     @RequestMapping(value="/member-edit", method = GET)
-    public String doEdit(@RequestParam(defaultValue = "users") String tab, @WidgetAttribute Project project,
-                         @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
+    public String doEdit(@RequestParam(defaultValue = "users") String tab, @RequestParam(defaultValue = "1") Integer pageNo,
+                         @WidgetAttribute Project project, @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
         //
         if("users".equals(tab)) {
             Page<TeamMember> teamMemberPage = new Page<TeamMember>(pageSize);
+            teamMemberPage.setPageNo(pageNo);
             teamMemberPage = teamMemberService.fetchPagePotentially(teamMemberPage);
             model.addAttribute("teamMemberPage", teamMemberPage);
         }
         if("link1".equals(tab)) {
             Page<ProjectLink> linkPage = new Page<ProjectLink>(pageSize);
+            linkPage.setPageNo(pageNo);
             linkPage = projectLinkService.fetchPageByFromProjectId(
                     linkPage, project.getId(), project.getCategory().getCode());
             model.addAttribute("linkPage", linkPage);
         }
         if("link2".equals(tab)) {
             Page<ProjectLink> reversedLinkPage = new Page<ProjectLink>(pageSize);
+            reversedLinkPage.setPageNo(pageNo);
             reversedLinkPage = projectLinkService.fetchPageByToProjectId(
                     reversedLinkPage, project.getId(), project.getCategory().getCode());
             model.addAttribute("reversedLinkPage", reversedLinkPage);
@@ -84,13 +87,14 @@ public class TeamMemberWidget {
     }
 
     @RequestMapping(value="/member-list", method = GET)
-    public String doList(@RequestParam(defaultValue = "0") Long roleId, @WidgetAttribute Project project,
-                         @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
+    public String doList(@RequestParam(defaultValue = "0") Long roleId, @RequestParam(defaultValue = "1") Integer pageNo,
+                         @WidgetAttribute Project project, @WidgetPref(defaultValue = "12") Integer pageSize, Model model) {
         //
         List<ProjectRole> projectRoles = projectRoleService.listProjectRoles(project.getId());
         model.addAttribute("projectRoles", projectRoles);
         //
         Page<TeamMember> teamMemberPage = new Page<TeamMember>(pageSize);
+        teamMemberPage.setPageNo(pageNo);
         teamMemberPage = teamMemberService.fetchPage(teamMemberPage, project.getId(), roleId);
         model.addAttribute("teamMemberPage", teamMemberPage);
         //

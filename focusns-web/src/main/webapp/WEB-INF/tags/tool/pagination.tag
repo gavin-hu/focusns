@@ -17,11 +17,11 @@
 </c:if>
 
 <c:choose>
-    <c:when test="${fn:contains(pageLink, '?')}">
-        <c:set var="pageLink" value="${pageLink}&pageNo=" />
+    <c:when test="${fn:contains(pageLink, ';')}">
+        <c:set var="pageLink" value="${pageLink},pageNo=" />
     </c:when>
     <c:otherwise>
-        <c:set var="pageLink" value="${pageLink}?pageNo=" />
+        <c:set var="pageLink" value="${pageLink};pageNo=" />
     </c:otherwise>
 </c:choose>
 <c:if test="${page.totalPages>1}">
