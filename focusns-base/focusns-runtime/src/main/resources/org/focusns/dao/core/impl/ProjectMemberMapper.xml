@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.focusns.dao.core.ProjectMemberDao">
+
+    <cache />
+
+	<resultMap id="BaseResultMap" type="org.focusns.model.core.ProjectMember">
+		<id column="id" property="id" jdbcType="BIGINT" />
+        <result column="project_id" property="projectId" jdbcType="BIGINT" />
+        <result column="project_user_id" property="projectUserId" jdbcType="BIGINT" />
+        <result column="project_role_id" property="projectRoleId" jdbcType="BIGINT" />
+        <result column="created_by_id" property="createdById" jdbcType="BIGINT" />
+        <result column="modified_by_id" property="modifiedById" jdbcType="BIGINT" />
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP" />
+        <result column="modified_at" property="modifiedAt" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<insert id="insert" parameterType="org.focusns.model.core.ProjectMember">
+		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+			select last_insert_id()
+		</selectKey>
+        insert into tb_project_member (project_id, project_user_id, project_role_id, created_by_id, modified_by_id, created_at, modified_at)
+        values (#{projectId}, #{projectUserId}, #{projectRoleId}, #{createdById}, #{modifiedById}, #{createdAt}, #{modifiedAt})
+	</insert>
+
+	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from tb_project_member where id = #{id}
+	</select>
+
+	<update id="update" parameterType="org.focusns.model.core.ProjectMember">
+		update tb_project_member
+		<set>
+			<if test="projectId > 0" >
+		        project_id = #{projectId},
+			</if>
+            <if test="projectUserId > 0" >
+                project_authority_id = #{projectUserId},
+            </if>
+			<if test="projectRoleId > 0" >
+                project_role_id = #{projectRoleId},
+			</if>
+            <if test="createdById > 0" >
+                created_by_id = #{createdById},
+            </if>
+            <if test="modifiedById > 0" >
+                modified_by_id = #{modifiedById},
+            </if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Long">
+		delete from tb_project_member where id = #{id}
+	</delete>
+
+</mapper>

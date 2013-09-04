@@ -16,7 +16,7 @@
 		<result column="category_id" property="categoryId" jdbcType="BIGINT" />
 		<result column="private" property="private" jdbcType="BOOLEAN" />
 	</resultMap>
-	
+
 	<insert id="insert" parameterType="org.focusns.model.core.Project">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
@@ -32,9 +32,9 @@
 	<select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select * from tb_project where code = #{code}
 	</select>
-	
+
 	<update id="update" parameterType="org.focusns.model.core.Project">
-		update tb_project 
+		update tb_project
 		<set>
 			<if test="code != null" >
 		        code = #{code},
@@ -51,22 +51,19 @@
 			<if test="modifiedAt != null" >
 		        modified_at = #{modifiedAt},
 			</if>
-			<if test="private != null" >
-		        private = #{private},
-			</if>
-			<if test="createdById != null" >
+			<if test="createdById  > 0" >
 		        created_by_id = #{createdById},
 			</if>
-			<if test="modifiedById != null" >
+			<if test="modifiedById  > 0" >
 		        modified_by_id = #{modifiedById},
 			</if>
-			<if test="categoryId != null" >
+			<if test="categoryId > 0" >
 		        category_id = #{categoryId},
 			</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project where id = #{id}
 	</delete>
