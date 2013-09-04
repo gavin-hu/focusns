@@ -92,7 +92,7 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
                     Object value = redirectAttributes.get(name);
                     request.setAttribute(name, value);
                 }
-                // request.getSession().removeAttribute("redirectAttributes");
+                //request.getSession().removeAttribute("redirectAttributes");
             }
             //
             Map<String, WidgetRequest> widgetRequestMap = new HashMap<String, WidgetRequest>();
@@ -172,8 +172,7 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
             widgetRequest.setAttribute("requestType", "action");
             widgetRequest.setAttribute("widgetConfig", widgetConfig);
             //
-            Navigator navigator = Navigator.get();
-            widgetRequest.setAttribute("navigator", navigator);
+            Navigator navigator = Navigator.reset();
             //
             for (WidgetActionInterceptor actionInterceptor : widgetActionInterceptors) {
                 actionInterceptor.beforeAction(request, response);
