@@ -43,7 +43,7 @@
                         </executions>
                     </plugin>
                 </plugins>
-                <finalName>${parent.artifactId}</finalName>
+                <finalName>${project.parent.artifactId}</finalName>
             </build>
         </profile>
     </profiles>
