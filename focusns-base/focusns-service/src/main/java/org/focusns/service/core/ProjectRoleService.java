@@ -39,8 +39,4 @@ public interface ProjectRoleService {
 
     List<ProjectRole> listProjectRoles(long projectId);
 
-    void authorizeAuthority(long projectId, long roleId, long authorityId);
-
-    void deauthorizeAuthority(long projectId, long roleId, long authorityId);
-
 }

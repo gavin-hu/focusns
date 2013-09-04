@@ -72,14 +72,6 @@ public class ProjectRoleServiceImpl implements ProjectRoleService {
         return projectRoles;
     }
 
-    public void authorizeAuthority(long projectId, long roleId, long authorityId) {
-        this.projectRoleDao.insertAuthority(projectId, roleId, authorityId);
-    }
-
-    public void deauthorizeAuthority(long projectId, long roleId, long authorityId) {
-        this.projectRoleDao.deleteAuthority(projectId, roleId, authorityId);
-    }
-
     protected ProjectRole fillProjectRole(ProjectRole projectRole) {
         if(projectRole==null) {
             return projectRole;

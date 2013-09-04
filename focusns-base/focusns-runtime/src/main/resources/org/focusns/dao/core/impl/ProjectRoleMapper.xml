@@ -46,14 +46,4 @@
 		delete from tb_project_role where id = #{id}
 	</delete>
 
-    <insert id="insertAuthority" parameterType="java.util.Map">
-        insert into tb_project_role_authority (project_id, role_id, authority_id)
-        values (#{projectId}, #{roleId}, #{authorityId})
-    </insert>
-
-    <delete id="deleteAuthority" parameterType="java.util.Map">
-        delete from tb_project_role_authority
-        where project_id = #{projectId} and role_id = #{roleId} and authority_id = #{authorityId}
-    </delete>
-
 </mapper>

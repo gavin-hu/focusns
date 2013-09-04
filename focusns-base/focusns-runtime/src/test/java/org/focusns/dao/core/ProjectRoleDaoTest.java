@@ -44,13 +44,4 @@ public class ProjectRoleDaoTest extends AbstractDaoTest {
         this.projectRoleDao.insert(role);
     }
 
-    @Test
-    public void testInsertAuthority() {
-        this.projectRoleDao.insertAuthority(1, 1, 1);
-    }
-
-    @Test
-    public void testDeleteAuthority() {
-        this.projectRoleDao.deleteAuthority(1, 1, 1);
-    }
 }

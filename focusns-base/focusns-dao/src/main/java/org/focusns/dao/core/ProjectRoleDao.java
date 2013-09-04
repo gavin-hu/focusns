@@ -31,9 +31,4 @@ public interface ProjectRoleDao extends BaseDao<ProjectRole> {
 
     List<ProjectRole> selectByProjectId(long projectId);
 
-    void insertAuthority(long projectId, long roleId, long authorityId);
-
-    void deleteAuthority(long projectId, long roleId, long authorityId);
-
-
 }

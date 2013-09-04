@@ -22,14 +22,12 @@ package org.focusns.dao.core.impl;
  * #L%
  */
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.focusns.common.dao.mybatis.MyBatisDaoSupport;
 import org.focusns.dao.core.ProjectRoleDao;
 import org.focusns.model.core.ProjectRole;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class ProjectRoleDaoImpl extends MyBatisDaoSupport<ProjectRole> implements ProjectRoleDao {
@@ -39,21 +37,4 @@ public class ProjectRoleDaoImpl extends MyBatisDaoSupport<ProjectRole> implement
         return selectList("selectByProjectId", projectId);
     }
 
-    public void insertAuthority(long projectId, long roleId, long authorityId) {
-        Map parameter = new HashMap();
-        parameter.put("projectId", projectId);
-        parameter.put("roleId", roleId);
-        parameter.put("authorityId", authorityId);
-        //
-        insert("insertAuthority", parameter);
-    }
-
-    public void deleteAuthority(long projectId, long roleId, long authorityId) {
-        Map parameter = new HashMap();
-        parameter.put("projectId", projectId);
-        parameter.put("roleId", roleId);
-        parameter.put("authorityId", authorityId);
-        //
-        delete("deleteAuthority", parameter);
-    }
 }
