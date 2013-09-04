@@ -49,22 +49,4 @@ public class ProjectUserDaoImpl extends MyBatisDaoSupport<ProjectUser> implement
         return fetchPage("fetchPage", page, new HashMap<String, Object>());
     }
 
-    public void insertRole(long projectId, long userId, long roleId) {
-        Map parameter = new HashMap();
-        parameter.put("projectId", projectId);
-        parameter.put("userId", userId);
-        parameter.put("roleId", roleId);
-        //
-        insert("insertRole", parameter);
-    }
-
-    public void deleteRole(long projectId, long userId, long roleId) {
-        Map parameter = new HashMap();
-        parameter.put("projectId", projectId);
-        parameter.put("userId", userId);
-        parameter.put("roleId", roleId);
-        //
-        delete("deleteRole", roleId);
-    }
-
 }

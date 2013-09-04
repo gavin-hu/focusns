@@ -127,14 +127,6 @@ public class ProjectUserServiceImpl implements ProjectUserService {
         projectUserDao.delete(user.getId());
     }
 
-    public void assignRole(long projectId, long userId, long roleId) {
-        projectUserDao.insertRole(projectId, userId, roleId);
-    }
-
-    public void unassignRole(long projectId, long userId, long roleId) {
-        projectUserDao.deleteRole(projectId, userId, roleId);
-    }
-
     protected ProjectUser fillProjectUser(ProjectUser projectUser) {
         if(projectUser==null) {
             return projectUser;

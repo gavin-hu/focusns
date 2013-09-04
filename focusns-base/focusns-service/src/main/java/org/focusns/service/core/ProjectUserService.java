@@ -43,8 +43,4 @@ public interface ProjectUserService {
 
     Page<ProjectUser> fetchPage(Page<ProjectUser> page);
 
-    void assignRole(long projectId, long userId, long roleId);
-
-    void unassignRole(long projectId, long userId, long roleId);
-
 }

@@ -34,8 +34,4 @@ public interface ProjectUserDao extends BaseDao<ProjectUser> {
 
     Page<ProjectUser> fetch(Page<ProjectUser> page);
 
-    void insertRole(long projectId, long userId, long roleId);
-
-    void deleteRole(long projectId, long userId, long roleId);
-
 }
