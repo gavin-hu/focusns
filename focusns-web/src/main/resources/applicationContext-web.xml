@@ -43,12 +43,15 @@
     </bean>
 
     <bean id="defautlRealm" class="org.focusns.security.realm.DefaultAuthorizingRealm">
+        <property name="cacheManager" ref="cacheManager"/>
         <property name="credentialsMatcher" ref="md5CredentialsMatcher" />
     </bean>
 
     <bean id="md5CredentialsMatcher" class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
         <property name="hashAlgorithmName" value="MD5" />
     </bean>
+
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 
     <!-- Security Lifecycle -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -58,7 +61,6 @@
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>
     </bean>
-
 
     <!--
       - 页面组件框架
