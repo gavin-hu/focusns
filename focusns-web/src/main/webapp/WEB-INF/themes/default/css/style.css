@@ -35,6 +35,11 @@ ul {
 .alert {
     padding: 14px 8px;
 }
+
+.menu-sub h2 {
+    line-height: 20px;
+}
+
 /* SignWidget */
 #signin .widget-head h3 {
     padding-left: 130px;

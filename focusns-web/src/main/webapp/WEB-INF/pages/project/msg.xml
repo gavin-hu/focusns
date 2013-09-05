@@ -9,6 +9,9 @@
             <widget target="/site/login-bar" />
             <widget target="/site/menu-user" />
         </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
+        </position>
         <position name="copyright">
             <widget target="/site/copyright" />
         </position>

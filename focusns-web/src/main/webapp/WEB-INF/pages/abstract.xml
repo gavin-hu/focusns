@@ -6,12 +6,6 @@
     <page abstract="site">
         <position name="headerBar">
             <widget target="/site/menu-main"/>
-            <!--<widget target="/site/login-bar" cache="3600">
-                <navigation>
-                    <event on="auth-failure">/login</event>
-                    <event on="login-success">/profile;p=#{projectUser.project.code}</event>
-                </navigation>
-            </widget>-->
             <widget target="/site/menu-user">
                 <navigation>
                     <event on="logout-success">/index</event>
@@ -56,6 +50,9 @@
                 </navigation>
             </widget>
         </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
+        </position>
         <position name="leftColumn">
             <widget target="/project/user-view">
                 <navigation>
@@ -89,6 +86,9 @@
                 </navigation>
             </widget>
         </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
+        </position>
         <position name="leftColumn">
             <widget target="/blog/menu-view" />
             <widget target="/blog/category-list" />
@@ -108,6 +108,9 @@
                     <event on="logout-success">/index</event>
                 </navigation>
             </widget>
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
         </position>
         <position name="leftColumn">
             <widget target="/photo/menu-user" />
@@ -129,6 +132,9 @@
                 </navigation>
             </widget>
         </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
+        </position>
         <position name="leftColumn">
             <widget target="/team/menu-view" />
             <widget target="/team/role-list" />
@@ -142,6 +148,9 @@
                     <event on="logout-success">/index</event>
                 </navigation>
             </widget>
+        </position>
+        <position name="subMenu">
+            <widget target="/site/menu-sub"></widget>
         </position>
         <position name="leftColumn">
             <widget target="/admin/menu-view" />

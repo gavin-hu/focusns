@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.focusns.org/schema/pages http://www.focusns.org/schema/pages/focusns-pages.xsd">
 
-    <page extends="project-admin" path="/admin" category="people">
+    <page extends="project-admin" path="/admin" category="people" authority="project-admin-view">
 
     </page>
 
@@ -29,7 +29,7 @@
         </position>
     </page>
 
-    <page extends="project-admin" path="/admin/permission" mode="edit" category="people">
+    <page extends="project-admin" path="/admin/permission" mode="edit" category="people" authority="project-admin-view">
         <position name="mainColumn">
             <widget target="/admin/permission-edit">
                 <navigation>
