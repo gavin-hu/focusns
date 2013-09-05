@@ -684,21 +684,21 @@ drop procedure if exists createProjectAuthorities;
 delimiter //
 create procedure createProjectAuthorities()
     begin
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-profile-view', '查看主页模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-profile-edit', '查看主页模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-blog-view', '查看日志模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-blog-edit', '编辑日志模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-photo-view', '查看相册模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-photo-edit', '编辑相册模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-admin-view', '查看管理模块');
-        insert into tb_project_authority(code, description)
+        insert into TB_PROJECT_AUTHORITY(code, description)
             values('project-admin-edit', '编辑管理模块');
     end //
 delimiter ;
@@ -708,17 +708,17 @@ drop procedure if exists createProjectFeature;
 delimiter //
 create procedure createProjectFeatures(in _projectId bigint)
     begin
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('profile', '主页', 0, true, _projectId);
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('blog', '日志', 5, true, _projectId);
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('photo', '相册', 10, true, _projectId);
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('team', '好友', 15, true, _projectId);
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('msg', '消息', 20, true, _projectId);
-        insert into tb_project_feature (code, label, `level`, enabled, project_id)
+        insert into TB_PROJECT_FEATURE (code, label, `level`, enabled, project_id)
             values('admin', '管理', 25, true, _projectId);
     end //
 delimiter ;
@@ -735,13 +735,13 @@ create procedure createProjectCategory(in _code varchar(100),
         set @v_code := _code;
         set @v_label := _label;
         #
-        select count(*) into i_count from tb_project_category where code = @v_code;
+        select count(*) into i_count from TB_PROJECT_CATEGORY where code = @v_code;
         if i_count < 1 then
-            insert into tb_project_category(code, label, enabled, private, `level`)
+            insert into TB_PROJECT_CATEGORY(code, label, enabled, private, `level`)
             values (_code, _label, true, false, 0);
         end if;
         # select categoryId
-        select id into _categoryId from tb_project_category  where code = @v_code;
+        select id into _categoryId from TB_PROJECT_CATEGORY  where code = @v_code;
     end //
 delimiter ;
 
@@ -771,18 +771,18 @@ create procedure init_db()
         # create project features
         #call createProjectFeature(projectId);
 
-        insert into tb_project_user(username, password, nickname, email, enabled, created_at)
+        insert into TB_PROJECT_USER(username, password, nickname, email, enabled, created_at)
             values ('test@focusns.org', 'e10adc3949ba59abbe56e057f20f883e', 'Test', 'test@focusns.org', true, now());
         # select userId
-        select id into userId from tb_project_user where username = 'test@focusns.org';
+        select id into userId from TB_PROJECT_USER where username = 'test@focusns.org';
 
-        insert into tb_project (code, title, description, CREATED_AT, MODIFIED_AT, CREATED_BY_ID, MODIFIED_BY_ID, category_id, private)
+        insert into TB_PROJECT (code, title, description, CREATED_AT, MODIFIED_AT, CREATED_BY_ID, MODIFIED_BY_ID, category_id, private)
             values ('test', 'Test', 'This is test!', now(), now(), userId, userId, categoryId, true);
 
         # select projectId
-        select id into projectId from tb_project where code = 'test';
+        select id into projectId from TB_PROJECT where code = 'test';
         # update user
-        update tb_project_user set project_id = projectId where id = userId;
+        update TB_PROJECT_USER set project_id = projectId where id = userId;
 
         # create project features
         call createProjectFeatures(projectId);
