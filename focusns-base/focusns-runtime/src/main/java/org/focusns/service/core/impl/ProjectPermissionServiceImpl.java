@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -60,6 +63,31 @@ public class ProjectPermissionServiceImpl implements ProjectPermissionService {
             fillProjectPermission(permission);
         }
         return permissions;
+    }
+
+    @Override
+    public Map<ProjectRole, List<ProjectPermission>> listProjectPermissionsAsMap(long projectId) {
+        List<ProjectPermission> projectPermissions = listProjectPermissions(projectId);
+        //
+        ProjectRole prevProjectRole = null;
+        List<ProjectPermission> projectPermissionList = new ArrayList<ProjectPermission>();
+        Map<ProjectRole, List<ProjectPermission>> projectRolePermissionMap = new LinkedHashMap<ProjectRole, List<ProjectPermission>>();
+        for(ProjectPermission projectPermission : projectPermissions) {
+            //
+            if(prevProjectRole!=null && prevProjectRole.getId()!=projectPermission.getProjectRoleId()) {
+                projectRolePermissionMap.put(prevProjectRole, projectPermissionList);
+                projectPermissionList = new ArrayList<ProjectPermission>();
+            }
+            //
+            projectPermissionList.add(projectPermission);
+            prevProjectRole = projectPermission.getProjectRole();
+        }
+        //
+        if(prevProjectRole!=null && projectPermissionList.isEmpty()==false) {
+            projectRolePermissionMap.put(prevProjectRole, projectPermissionList);
+        }
+        //
+        return projectRolePermissionMap;
     }
 
     protected ProjectPermission fillProjectPermission(ProjectPermission permission) {

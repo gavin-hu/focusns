@@ -7,16 +7,16 @@ package org.focusns.service.core.impl;
  * Copyright (C) 2011 - 2013 FocusSNS
  * %%
  * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 2.1 of the
  * License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
+ *
+ * You should have received a copy of the GNU General Lesser Public
  * License along with this program.  If not, see
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
@@ -50,26 +50,44 @@ public class ProjectServiceImpl implements ProjectService {
 
     public Project getProject(String code) {
         Project project = projectDao.selectByCode(code);
-        ProjectUser createBy = projectUserDao.select(project.getCreatedById());
-        ProjectUser modifiedBy = projectUserDao.select(project.getModifiedById());
-        ProjectCategory projectCategory = projectCategoryService.getCategory(project.getCategoryId());
-        project.setCreatedBy(createBy);
-        project.setModifiedBy(modifiedBy);
-        project.setCategory(projectCategory);
         //
-        return project;
+        return fillProject(project);
     }
 
     public void createProject(Project project) {
         projectDao.insert(project);
+        fillProject(project);
     }
 
     public void removeProject(Project project) {
         projectDao.delete(project.getId());
+        fillProject(project);
     }
 
     public void modifyProject(Project project) {
         projectDao.update(project);
+        fillProject(project);
+    }
+
+    protected Project fillProject(Project project) {
+        if(project==null) {
+            return project;
+        }
+        //
+        if(project.getCreatedBy()==null && project.getCreatedById()>0) {
+            ProjectUser createBy = projectUserDao.select(project.getCreatedById());
+            project.setCreatedBy(createBy);
+        }
+        if(project.getModifiedBy()==null && project.getModifiedById()>0) {
+            ProjectUser modifiedBy = projectUserDao.select(project.getModifiedById());
+            project.setModifiedBy(modifiedBy);
+        }
+        if(project.getCategory()==null && project.getCategoryId()>0) {
+            ProjectCategory projectCategory = projectCategoryService.getCategory(project.getCategoryId());
+            project.setCategory(projectCategory);
+        }
+        //
+        return project;
     }
 
 }

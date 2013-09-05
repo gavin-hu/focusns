@@ -9,14 +9,15 @@
         <result column="project_id" property="projectId" jdbcType="BIGINT" />
         <result column="project_role_id" property="projectRoleId" jdbcType="BIGINT" />
         <result column="project_authority_id" property="projectAuthorityId" jdbcType="BIGINT" />
+        <result column="enabled" property="enabled" jdbcType="BOOLEAN" />
 	</resultMap>
 
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectPermission">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
 		</selectKey>
-        insert into tb_project_member (project_id, project_role_id, project_authority_id)
-        values (#{projectId}, #{projectRoleId}, #{projectAuthorityId})
+        insert into tb_project_permission (project_id, project_role_id, project_authority_id, enabled)
+        values (#{projectId}, #{projectRoleId}, #{projectAuthorityId}, #{enabled})
 	</insert>
 
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -27,8 +28,7 @@
         select a.*
         from tb_project_permission a, tb_project_role b
         where a.project_role_id = b.id and a.project_id = #{projectId}
-            group by a.project_role_id
-            order by b.level
+            order by a.project_role_id, b.level
     </select>
 
 	<update id="update" parameterType="org.focusns.model.core.ProjectPermission">
@@ -42,6 +42,9 @@
 			</if>
             <if test="projectAuthorityId > 0" >
                 project_authority_id = #{projectAuthorityId},
+            </if>
+            <if test="true">
+                enabled = #{enabled}
             </if>
 		</set>
 		where id = #{id}

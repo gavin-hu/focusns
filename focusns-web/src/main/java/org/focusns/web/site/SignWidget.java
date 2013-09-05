@@ -36,8 +36,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("site")
@@ -48,13 +46,13 @@ public class SignWidget {
     @Autowired
     private ProjectUserService projectUserService;
 
-    @RequestMapping(value="signin", method = RequestMethod.GET)
+    @RequestMapping(value="signin")
     @Constraints({ Constraint.PROJECT_USER_IS_NULL })
     public String signIn() {
         return "site/signin-edit";
     }
 
-    @RequestMapping(value="signup", method = RequestMethod.GET)
+    @RequestMapping(value="signup")
     public String signUp() {
         return "site/signup-edit";
     }
@@ -76,7 +74,7 @@ public class SignWidget {
         Navigator.get().navigateTo("signup-success");
     }
 
-    @RequestMapping(value="signup", params = "confirm=email", method = RequestMethod.GET)
+    @RequestMapping(value="signup", params = "confirm=email")
     public String confirm(@RequestParam Long userId, Model model) {
         //
         ProjectUser projectUser = projectUserService.getProjectUser(userId);

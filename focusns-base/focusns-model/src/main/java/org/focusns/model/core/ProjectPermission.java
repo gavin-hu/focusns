@@ -8,6 +8,7 @@ public class ProjectPermission extends Id {
     private long projectId;
     private long projectRoleId;
     private long projectAuthorityId;
+    private boolean enabled;
     //
     private Project project;
     private ProjectRole projectRole;
@@ -61,4 +62,11 @@ public class ProjectPermission extends Id {
         this.projectAuthority = projectAuthority;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 }

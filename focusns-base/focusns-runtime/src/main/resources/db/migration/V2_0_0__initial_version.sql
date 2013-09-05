@@ -65,6 +65,7 @@ CREATE TABLE TB_PROJECT_PERMISSION (
     `PROJECT_ID` BIGINT NOT NULL ,
     `PROJECT_ROLE_ID` BIGINT NOT NULL ,
     `PROJECT_AUTHORITY_ID` BIGINT NOT NULL ,
+    `ENABLED` BOOLEAN DEFAULT FALSE ,
     PRIMARY KEY (`ID`)
 );
 
@@ -678,10 +679,34 @@ ALTER TABLE TB_MESSAGE ADD CONSTRAINT FK_TO_PROJECT_ID_TB_MESSAGE
 /**
  * Initial Data
  */
+drop procedure if exists createProjectAuthorities;
+
+delimiter //
+create procedure createProjectAuthorities()
+    begin
+        insert into tb_project_authority(code, description)
+            values('project-profile-view', '查看主页模块');
+        insert into tb_project_authority(code, description)
+            values('project-profile-edit', '查看主页模块');
+        insert into tb_project_authority(code, description)
+            values('project-blog-view', '查看日志模块');
+        insert into tb_project_authority(code, description)
+            values('project-blog-edit', '编辑日志模块');
+        insert into tb_project_authority(code, description)
+            values('project-photo-view', '查看相册模块');
+        insert into tb_project_authority(code, description)
+            values('project-photo-edit', '编辑相册模块');
+        insert into tb_project_authority(code, description)
+            values('project-admin-view', '查看管理模块');
+        insert into tb_project_authority(code, description)
+            values('project-admin-edit', '编辑管理模块');
+    end //
+delimiter ;
+
 drop procedure if exists createProjectFeature;
 
 delimiter //
-create procedure createProjectFeature(in _projectId bigint)
+create procedure createProjectFeatures(in _projectId bigint)
     begin
         insert into tb_project_feature (code, label, `level`, enabled, project_id)
             values('profile', '主页', 0, true, _projectId);
@@ -760,8 +785,9 @@ create procedure init_db()
         update tb_project_user set project_id = projectId where id = userId;
 
         # create project features
-        call createProjectFeature(projectId);
-
+        call createProjectFeatures(projectId);
+        # create project authorities
+        call createProjectAuthorities();
     end //
 delimiter ;
 

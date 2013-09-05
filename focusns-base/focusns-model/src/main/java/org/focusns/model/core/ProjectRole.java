@@ -64,4 +64,5 @@ public class ProjectRole extends Id {
     public void setProject(Project project) {
         this.project = project;
     }
+
 }

@@ -23,7 +23,7 @@
 		select * from tb_project_role where id = #{id}
 	</select>
     <select id="selectByProjectId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select * from tb_project_role where project_id = #{projectId}
+        select * from tb_project_role where project_id = #{projectId} order by level
     </select>
 
 	<update id="update" parameterType="org.focusns.model.core.ProjectRole">

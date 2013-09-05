@@ -6,14 +6,20 @@ import org.focusns.common.event.support.EventContext;
 import org.focusns.common.exception.ServiceException;
 import org.focusns.common.exception.ServiceExceptionCode;
 import org.focusns.common.xml.XmlParser;
+import org.focusns.dao.core.ProjectAuthorityDao;
 import org.focusns.dao.core.ProjectCategoryDao;
 import org.focusns.dao.core.ProjectDao;
 import org.focusns.dao.core.ProjectFeatureDao;
+import org.focusns.dao.core.ProjectPermissionDao;
+import org.focusns.dao.core.ProjectRoleDao;
 import org.focusns.dao.core.ProjectUserDao;
 import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAttribute;
+import org.focusns.model.core.ProjectAuthority;
 import org.focusns.model.core.ProjectCategory;
 import org.focusns.model.core.ProjectFeature;
+import org.focusns.model.core.ProjectPermission;
+import org.focusns.model.core.ProjectRole;
 import org.focusns.model.core.ProjectTemplate;
 import org.focusns.model.core.ProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +33,7 @@ import org.springframework.util.xml.DomUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,33 +42,24 @@ import java.util.List;
 public class ProjectUserEventSubscriber {
     private static final String RESOURCE_PATTERN = "classpath:projects/project-%s.xml";
     //
+    @Autowired
     private ProjectDao projectDao;
+    @Autowired
     private ProjectUserDao projectUserDao;
+    @Autowired
     private ProjectFeatureDao projectFeatureDao;
+    @Autowired
     private ProjectCategoryDao projectCategoryDao;
+    //
+    @Autowired
+    private ProjectRoleDao projectRoleDao;
+    @Autowired
+    private ProjectAuthorityDao projectAuthorityDao;
+    @Autowired
+    private ProjectPermissionDao projectPermissionDao;
     //
     private XmlParser xmlParser = new XmlParser();
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
-
-    @Autowired
-    public void setProjectDao(ProjectDao projectDao) {
-        this.projectDao = projectDao;
-    }
-
-    @Autowired
-    public void setProjectUserDao(ProjectUserDao projectUserDao) {
-        this.projectUserDao = projectUserDao;
-    }
-
-    @Autowired
-    public void setProjectFeatureDao(ProjectFeatureDao projectFeatureDao) {
-        this.projectFeatureDao = projectFeatureDao;
-    }
-
-    @Autowired
-    public void setProjectCategoryDao(ProjectCategoryDao projectCategoryDao) {
-        this.projectCategoryDao = projectCategoryDao;
-    }
 
     @Event(on = "CREATE_PROJECT_USER", point = Event.Point.AFTER)
     public void afterCreateProjectUser(EventContext ctx) throws Exception {
@@ -92,7 +90,24 @@ public class ProjectUserEventSubscriber {
             projectFeature.setProjectId(project.getId());
             projectFeatureDao.insert(projectFeature);
         }
-
+        //
+        for(ProjectRole projectRole : projectTemplate.getProjectRoles()) {
+            // project role
+            projectRole.setProjectId(project.getId());
+            projectRoleDao.insert(projectRole);
+            for(ProjectAuthority projectAuthority : projectTemplate.getProjectAuthorities(projectRole)) {
+                // project authority
+                ProjectAuthority _projectAuthority = projectAuthorityDao.selectByCode(projectAuthority.getCode());
+                // project permission
+                ProjectPermission projectPermission = new ProjectPermission();
+                projectPermission.setProjectId(project.getId());
+                projectPermission.setProjectRoleId(projectRole.getId());
+                projectPermission.setProjectAuthorityId(_projectAuthority.getId());
+                projectPermission.setEnabled(projectAuthority.isEnabled());
+                //
+                projectPermissionDao.insert(projectPermission);
+            }
+        }
     }
 
     public ProjectTemplate getProjectTemplate(String categoryCode) throws Exception {
@@ -143,6 +158,30 @@ public class ProjectUserEventSubscriber {
                 projectAttribute.setLevel(Integer.parseInt(level));
             }
             projectTemplate.addProjectAttribute(projectAttribute);
+        }
+        // project roles
+        Element rolesEle = DomUtils.getChildElementByTagName(projectEle, "roles");
+        List<Element> roleEles = DomUtils.getChildElementsByTagName(rolesEle, "role");
+        for(Element roleEle : roleEles) {
+            // project role
+            ProjectRole projectRole = new ProjectRole();
+            projectRole.setLabel(roleEle.getAttribute("label"));
+            String label = roleEle.getAttribute("level");
+            if(StringUtils.hasText(label)) {
+                projectRole.setLevel(Integer.parseInt(label));
+            }
+            // project authorities
+            List<ProjectAuthority> projectAuthorities = new ArrayList<ProjectAuthority>();
+            List<Element> _authorityEles = DomUtils.getChildElementsByTagName(roleEle, "authority");
+            for(Element authorityEle : _authorityEles) {
+                // project authority
+                ProjectAuthority projectAuthority = new ProjectAuthority();
+                projectAuthority.setCode(authorityEle.getAttribute("code"));
+                projectAuthority.setEnabled("true".equals(authorityEle.getAttribute("enabled")));
+                projectAuthorities.add(projectAuthority);
+            }
+            //
+            projectTemplate.addProjectRoleAuthorities(projectRole, projectAuthorities);
         }
         //
         return projectTemplate;

@@ -134,4 +134,17 @@
             <widget target="/team/role-list" />
         </position>
     </page>
+    <page abstract="project-admin">
+        <position name="headerBar">
+            <widget target="/site/menu-main" />
+            <widget target="/site/menu-user">
+                <navigation>
+                    <event on="logout-success">/index</event>
+                </navigation>
+            </widget>
+        </position>
+        <position name="leftColumn">
+            <widget target="/admin/menu-view" />
+        </position>
+    </page>
 </pages>

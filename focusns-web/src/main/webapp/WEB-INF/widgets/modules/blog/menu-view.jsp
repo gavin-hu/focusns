@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
 <%@include file="/WEB-INF/widgets/widget.jsp"%>
 
-<ui:widget>
+<ui:widget styleClass="blog-menu">
     <ui:widget-head>
         <h3>日志管理</h3>
     </ui:widget-head>

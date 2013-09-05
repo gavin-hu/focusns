@@ -3,14 +3,39 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.focusns.org/schema/pages http://www.focusns.org/schema/pages/focusns-pages.xsd">
 
-    <page path="/admin" category="people">
-        <position name="headerBar">
-            <widget target="/site/menu-main" />
-            <widget target="/site/login-bar" />
-            <widget target="/site/menu-user" />
+    <page extends="project-admin" path="/admin" category="people">
+
+    </page>
+
+    <page extends="project-admin" path="/admin/project" mode="edit" category="people">
+        <position name="mainColumn">
+            <widget target="/admin/project-edit">
+                <navigation>
+                    <event on="project-modified">/admin/project;p=#{project.code},m=edit</event>
+                </navigation>
+            </widget>
         </position>
-        <position name="copyright">
-            <widget target="/site/copyright" />
+    </page>
+
+    <page extends="project-admin" path="/admin/role" mode="edit" category="people">
+        <position name="mainColumn">
+            <widget target="/admin/role-edit">
+                <navigation>
+                    <event on="role-created">/admin/role;p=#{projectRole.project.code},m=edit</event>
+                    <event on="role-modified">/admin/role;p=#{projectRole.project.code},m=edit</event>
+                    <event on="role-removed">/admin/role;p=#{projectRole.project.code},m=edit</event>
+                </navigation>
+            </widget>
+        </position>
+    </page>
+
+    <page extends="project-admin" path="/admin/permission" mode="edit" category="people">
+        <position name="mainColumn">
+            <widget target="/admin/permission-edit">
+                <navigation>
+                    <event on="permissions-modified">/admin/permission;p=#{project.code},m=edit</event>
+                </navigation>
+            </widget>
         </position>
     </page>
 </pages>

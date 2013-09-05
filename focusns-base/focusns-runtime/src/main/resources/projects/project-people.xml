@@ -3,10 +3,53 @@
     <description><![CDATA[欢迎加入FocusSNS！]]></description>
     <features>
         <feature code="profile" label="主页" level="5" />
-        <feature code="blog" label="日志" level="10" />
+        <feature code="blog" label="日志" level="10"  />
         <feature code="photo" label="相册" level="15" />
         <feature code="team" label="好友" level="20" />
         <feature code="msg" label="消息" level="25" />
         <feature code="admin" label="管理" level="30" />
     </features>
+
+    <roles>
+        <role label="主人" level="0">
+            <authority code="project-profile-view" enabled="true" />
+            <authority code="project-profile-edit" enabled="true" />
+            <authority code="project-blog-view" enabled="true" />
+            <authority code="project-blog-edit" enabled="true" />
+            <authority code="project-photo-view" enabled="true" />
+            <authority code="project-photo-edit" enabled="true" />
+            <authority code="project-admin-view" enabled="true" />
+            <authority code="project-admin-edit" enabled="true" />
+        </role>
+        <role label="好友" level="10">
+            <authority code="project-profile-view" enabled="true" />
+            <authority code="project-profile-edit" enabled="false" />
+            <authority code="project-blog-view" enabled="true" />
+            <authority code="project-blog-edit" enabled="false" />
+            <authority code="project-photo-view" enabled="true" />
+            <authority code="project-photo-edit" enabled="false" />
+            <authority code="project-admin-view" enabled="false" />
+            <authority code="project-admin-edit" enabled="false" />
+        </role>
+        <role label="陌生人" level="50">
+            <authority code="project-profile-view" enabled="true" />
+            <authority code="project-profile-edit" enabled="false" />
+            <authority code="project-blog-view" enabled="true" />
+            <authority code="project-blog-edit" enabled="false" />
+            <authority code="project-photo-view" enabled="false" />
+            <authority code="project-photo-edit" enabled="false" />
+            <authority code="project-admin-view" enabled="false" />
+            <authority code="project-admin-edit" enabled="false" />
+        </role>
+        <role label="黑名单" level="100">
+            <authority code="project-profile-view" enabled="false" />
+            <authority code="project-profile-edit" enabled="false" />
+            <authority code="project-blog-view" enabled="false" />
+            <authority code="project-blog-edit" enabled="false" />
+            <authority code="project-photo-view" enabled="false" />
+            <authority code="project-photo-edit" enabled="false" />
+            <authority code="project-admin-view" enabled="false" />
+            <authority code="project-admin-edit" enabled="false" />
+        </role>
+    </roles>
 </project>

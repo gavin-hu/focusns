@@ -9,7 +9,7 @@
 		<result column="code" property="code" jdbcType="VARCHAR" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
 	</resultMap>
-	
+
 	<insert id="insert" parameterType="org.focusns.model.core.ProjectAuthority">
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
 			select last_insert_id()
@@ -21,7 +21,15 @@
 	<select id="select" parameterType="java.lang.Long" resultMap="BaseResultMap">
 		select * from tb_project_authority where id = #{id}
 	</select>
-	
+
+    <select id="selectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from tb_project_authority where code = #{code}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from tb_project_authority
+    </select>
+
 	<update id="update" parameterType="org.focusns.model.core.ProjectAuthority">
 		update tb_project_authority
 		<set>
@@ -34,7 +42,7 @@
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete" parameterType="java.lang.Long">
 		delete from tb_project_authority where id = #{id}
 	</delete>
