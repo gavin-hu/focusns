@@ -4,8 +4,8 @@
 
 <c:choose>
     <c:when test="${leftColumnExists && !rightColumnExists}">
-        <c:set var="leftColumnClass" value="span3" />
-        <c:set var="mainColumnClass" value="span9" />
+        <c:set var="leftColumnClass" value="span2" />
+        <c:set var="mainColumnClass" value="span10" />
     </c:when>
     <c:when test="${!leftColumnExists && rightColumnExists}">
         <c:set var="leftColumnClass" value="span9" />

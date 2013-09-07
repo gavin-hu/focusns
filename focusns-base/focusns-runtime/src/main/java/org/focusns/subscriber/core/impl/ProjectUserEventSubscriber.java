@@ -22,6 +22,7 @@ import org.focusns.model.core.ProjectPermission;
 import org.focusns.model.core.ProjectRole;
 import org.focusns.model.core.ProjectTemplate;
 import org.focusns.model.core.ProjectUser;
+import org.focusns.service.core.ProjectMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
@@ -57,7 +58,9 @@ public class ProjectUserEventSubscriber {
     private ProjectAuthorityDao projectAuthorityDao;
     @Autowired
     private ProjectPermissionDao projectPermissionDao;
-    //
+    @Autowired
+    private ProjectMemberService projectMemberService;
+
     private XmlParser xmlParser = new XmlParser();
     private ResourceLoader resourceLoader = new DefaultResourceLoader();
 
@@ -108,6 +111,8 @@ public class ProjectUserEventSubscriber {
                 projectPermissionDao.insert(projectPermission);
             }
         }
+        //
+
     }
 
     public ProjectTemplate getProjectTemplate(String categoryCode) throws Exception {

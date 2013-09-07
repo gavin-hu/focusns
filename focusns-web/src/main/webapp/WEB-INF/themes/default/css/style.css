@@ -23,6 +23,9 @@ ul {
     padding-top: 80px;
     padding-bottom: 80px;
 }
+.doc-bd .container {
+    max-width: 940px;
+}
 .doc-ft p {
     margin: 0;
     padding: 10px 0;
@@ -86,7 +89,7 @@ ul {
 }
 #project-history-list form textarea {
     display: block;
-    width: 97%;
+    width: 96.2%;
     height: 24px;
 }
 

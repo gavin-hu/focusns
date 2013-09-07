@@ -22,6 +22,7 @@
         <xsd:attribute name="extends" type="xsd:string" use="optional"/>
         <xsd:attribute name="category" type="xsd:string" use="optional"/>
         <xsd:attribute name="mode" type="xsd:string" use="optional"/>
+        <xsd:attribute name="authority" type="xsd:string" use="optional"/>
     </xsd:complexType>
 
     <xsd:complexType name="positionType">

@@ -53,15 +53,6 @@
 
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 
-    <!-- Security Lifecycle -->
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-
-    <!-- Enable Annotations -->
-    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
-    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
-
     <!--
       - 页面组件框架
       -->
@@ -73,6 +64,7 @@
     <bean id="pageEngine" class="org.focusns.common.web.page.engine.widget.WidgetPageEngine">
         <property name="pageRenderInterceptors">
             <list>
+                <bean class="org.focusns.web.page.interceptor.PageSecurityInterceptor" />
                 <bean class="org.focusns.web.page.interceptor.PageRenderParameterResolver" />
             </list>
         </property>
@@ -88,4 +80,14 @@
             <bean class="org.focusns.web.page.config.SimplePageKeyGenerator" />
         </property>
     </bean>
+
+    <!-- Security Lifecycle -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- Enable Annotations -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
 </beans>

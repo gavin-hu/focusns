@@ -7,6 +7,8 @@ import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.authz.permission.AllPermission;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -15,6 +17,7 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectAuthority;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectAuthorityService;
+import org.focusns.service.core.ProjectMemberService;
 import org.focusns.service.core.ProjectRoleService;
 import org.focusns.service.core.ProjectUserService;
 import org.focusns.service.team.TeamMemberService;
@@ -22,6 +25,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
 
 public class DefaultAuthorizingRealm extends AuthorizingRealm implements BeanFactoryAware {
 
@@ -50,20 +58,32 @@ public class DefaultAuthorizingRealm extends AuthorizingRealm implements BeanFac
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         //
-        TeamMemberService teamMemberService = beanFactory.getBean(TeamMemberService.class);
+        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+        //
         ProjectUserService projectUserService = beanFactory.getBean(ProjectUserService.class);
         ProjectRoleService projectRoleService = beanFactory.getBean(ProjectRoleService.class);
+        ProjectMemberService projectMemberService = beanFactory.getBean(ProjectMemberService.class);
         ProjectAuthorityService projectAuthorityService = beanFactory.getBean(ProjectAuthorityService.class);
         //
         Project project = getProjectFromWebSubject();
         ProjectUser projectUser = getProjectUserFromWebSubject();
         if(project==null) {
-
+            authorizationInfo.addObjectPermission(new AllPermission());
+        } else if(project.getCreatedById()==projectUser.getId()) {// owner
+            //
+            List<ProjectAuthority> projectAuthorities = projectAuthorityService.listProjectAuthorities();
+            for(ProjectAuthority projectAuthority : projectAuthorities) {
+                //
+                String authorityCode = projectAuthority.getCode();
+                StringUtils.replace(authorityCode, "-", ":");
+                authorizationInfo.addStringPermission(authorityCode.replaceAll("-", ":"));
+            }
+        } else {
+            //
+            authorizationInfo.addObjectPermission(new AllPermission());
         }
         //
-
-        //
-        return null;
+        return authorizationInfo;
     }
 
     @Override

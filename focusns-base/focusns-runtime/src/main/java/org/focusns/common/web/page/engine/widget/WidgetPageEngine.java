@@ -101,7 +101,9 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
             PageConfig pageConfig = (PageConfig) request.getAttribute("pageConfig");
             //
             for (PageRenderInterceptor pageRenderInterceptor : pageRenderInterceptors) {
-                pageRenderInterceptor.beforeRender(request, response);
+                if(pageRenderInterceptor.beforeRender(request, response)==false){
+                    return ;
+                }
             }
             //
             for (String position : pageConfig.getPositionConfigMap().keySet()) {
@@ -120,7 +122,9 @@ public class WidgetPageEngine extends WebApplicationObjectSupport implements Pag
                     }
                     //
                     for (WidgetRenderInterceptor widgetRenderInterceptor : widgetRenderInterceptors) {
-                        widgetRenderInterceptor.beforeRender(request, response);
+                        if(widgetRenderInterceptor.beforeRender(request, response)==false) {
+                            return ;
+                        }
                     }
                     //
                     String widgetPath = "/widget" + widgetConfig.getTarget();

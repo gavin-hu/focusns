@@ -35,14 +35,14 @@
 
 <div class="doc-bd">
     <div class="container">
-        <div class="row">
+        <div class="row-fluid">
             <div class="span12">
                 <l:positionExists name="subMenu">
                     <l:positionRender name="subMenu" />
                 </l:positionExists>
             </div>
         </div>
-        <div class="row">
+        <div class="row-fluid">
             <l:positionExists name="leftColumn">
                 <div class="${leftColumnClass}">
                     <l:positionRender name="leftColumn"/>

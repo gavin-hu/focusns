@@ -30,8 +30,8 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectLink;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectLinkService;
-import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.Constraints;
+import org.focusns.web.widget.constraint.annotation.RequiresProject;
+import org.focusns.web.widget.constraint.annotation.RequiresProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,8 +44,9 @@ public class ProjectLinkWidget {
     @Autowired
     private ProjectLinkService projectLinkService;
 
+    @RequiresProject
+    @RequiresProjectUser
     @RequestMapping("/link-edit")
-    @Constraints({ Constraint.PROJECT_NOT_MY_PROFILE })
     public String doEdit(@WidgetAttribute ProjectUser projectUser, @WidgetAttribute Project project, Model model) {
         //
         ProjectLink projectLink = projectLinkService.getProjectLink(projectUser.getProjectId(), project.getId());
@@ -56,8 +57,8 @@ public class ProjectLinkWidget {
         return "modules/profile/link-edit";
     }
 
+    @RequiresProject
     @RequestMapping("/link-list")
-    @Constraints({ Constraint.PROJECT_NOT_NULL })
     public String doList(@WidgetPref(defaultValue = "6") Integer limit,
             @WidgetPref(defaultValue = "false") Boolean reverse, @WidgetPref(defaultValue = "people") String category,
             @WidgetAttribute Project project, Model model) {
@@ -74,8 +75,8 @@ public class ProjectLinkWidget {
         return "modules/profile/link-list";
     }
 
+    @RequiresProject
     @RequestMapping("/link-list-detail")
-    @Constraints({ Constraint.PROJECT_NOT_NULL })
     public String doListDetail(@WidgetPref(defaultValue = "10") Integer pageSize,
             @WidgetPref(defaultValue = "people") String category, @WidgetAttribute Project project, Model model) {
         //

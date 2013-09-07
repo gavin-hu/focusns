@@ -41,21 +41,12 @@
                                     <td>${projectPermission.projectAuthority.code}</td>
                                     <td>${projectPermission.projectAuthority.description}</td>
                                     <td>
-                                        <input type="checkbox"
-                                               name="projectPermissions[${projectPermissionCounter}].enabled"
-                                               value="${projectPermission.enabled}"
-                                               <c:if test="${projectPermission.enabled}">checked="true" </c:if> />
-                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].id"
-                                               value="${projectPermission.projectId}"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectId"
-                                               value="${projectPermission.projectId}"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectRoleId"
-                                               value="${projectPermission.projectRoleId}"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectAuthorityId"
-                                               value="${projectPermission.projectAuthorityId}"/>
+                                        <input type="checkbox" name="projectPermissions[${projectPermissionCounter}].enabled"
+                                               value="${projectPermission.enabled}" <c:if test="${projectPermission.enabled}">checked="true" </c:if> />
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].id" value="${projectPermission.projectId}"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectId" value="${projectPermission.projectId}"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectRoleId" value="${projectPermission.projectRoleId}"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectAuthorityId" value="${projectPermission.projectAuthorityId}"/>
                                     </td>
                                 </tr>
                                 <c:set var="projectPermissionCounter" value="${projectPermissionCounter+1}"/>
@@ -73,17 +64,10 @@
                                     <td>${projectAuthority.code}</td>
                                     <td>${projectAuthority.description}</td>
                                     <td>
-                                        <input type="checkbox"
-                                               name="projectPermissions[${projectPermissionCounter}].enabled"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectId"
-                                               value="${project.id}"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectRoleId"
-                                               value="${projectRole.id}"/>
-                                        <input type="hidden"
-                                               name="projectPermissions[${projectPermissionCounter}].projectAuthorityId"
-                                               value="${projectAuthority.id}"/>
+                                        <input type="checkbox" name="projectPermissions[${projectPermissionCounter}].enabled"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectId" value="${project.id}"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectRoleId" value="${projectRole.id}"/>
+                                        <input type="hidden" name="projectPermissions[${projectPermissionCounter}].projectAuthorityId" value="${projectAuthority.id}"/>
                                     </td>
                                 </tr>
                                 <c:set var="projectPermissionCounter" value="${projectPermissionCounter+1}"/>
@@ -94,7 +78,7 @@
                 </tbody>
             </table>
             <button type="submit" class="btn btn-primary">提交</button>
-            <input type="hidden" name="projectId" value="${projectId}">
+            <input type="hidden" name="projectId" value="${project.id}">
         </form>
     </ui:widget-body>
 </ui:widget>

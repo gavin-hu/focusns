@@ -106,6 +106,7 @@ public class XmlPageFactory extends AbstractPageFactory implements ResourceLoade
                 PageConfig abstractPageConfig = abstractPageConfigMap.get(extendsTarget);
                 //
                 PageConfig newPageConfig = new PageConfig(pageConfig.getPath(), pageConfig.getLayout());
+                newPageConfig.setAuthority(pageConfig.getAuthority());
                 newPageConfig.setParameters(pageConfig.getParameters());
                 // add widget from abstract page
                 for (String position : abstractPageConfig.getPositionConfigMap().keySet()) {
@@ -131,9 +132,11 @@ public class XmlPageFactory extends AbstractPageFactory implements ResourceLoade
         //
         String path = pageEle.getAttribute("path");
         String layout = pageEle.getAttribute("layout");
+        String authority = pageEle.getAttribute("authority");
         Map<String, String> parameters = getParameters(pageEle);
         //
         PageConfig pageConfig = new PageConfig(path, layout);
+        pageConfig.setAuthority(authority);
         pageConfig.setParameters(parameters);
         List<Element> positionEles = DomUtils.getChildElementsByTagName(pageEle, "position");
         for (Element positionEle : positionEles) {

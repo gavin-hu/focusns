@@ -21,7 +21,7 @@
         <bean class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
             <constructor-arg ref="conversionService" />
         </bean>
-        <bean class="org.focusns.web.widget.interceptor.WidgetInterceptor" />
+        <bean class="org.focusns.web.widget.interceptor.AnnotationConstraintWidgetInterceptor" />
         <bean class="org.focusns.common.web.widget.interceptor.WidgetCacheInterceptor" />
     </mvc:interceptors>
 
@@ -39,7 +39,7 @@
             </props>
         </property>
     </bean>
-    
+
     <bean id="widgetViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="contentType" value="text/html;encoding=UTF-8" />
         <property name="prefix" value="/WEB-INF/widgets/" />

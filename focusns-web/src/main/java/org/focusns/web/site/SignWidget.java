@@ -26,8 +26,7 @@ import org.focusns.common.mail.MailService;
 import org.focusns.common.web.widget.mvc.support.Navigator;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.service.core.ProjectUserService;
-import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.Constraints;
+import org.focusns.web.widget.constraint.annotation.NotRequiresProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,12 +45,13 @@ public class SignWidget {
     @Autowired
     private ProjectUserService projectUserService;
 
+    @NotRequiresProjectUser
     @RequestMapping(value="signin")
-    @Constraints({ Constraint.PROJECT_USER_IS_NULL })
     public String signIn() {
         return "site/signin-edit";
     }
 
+    @NotRequiresProjectUser
     @RequestMapping(value="signup")
     public String signUp() {
         return "site/signup-edit";

@@ -7,11 +7,10 @@ import org.focusns.model.core.Project;
 import org.focusns.model.core.ProjectUser;
 import org.focusns.model.photo.Album;
 import org.focusns.service.photo.AlbumService;
-import org.focusns.web.widget.Constraint;
-import org.focusns.web.widget.Constraints;
+import org.focusns.web.widget.constraint.annotation.RequiresProject;
+import org.focusns.web.widget.constraint.annotation.RequiresProjectUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,8 +23,8 @@ public class AlbumWidget {
     @Autowired
     private AlbumService albumService;
 
+    @RequiresProject
     @RequestMapping("album-list")
-    @Constraints({Constraint.PROJECT_NOT_NULL})
     public String doList(@WidgetAttribute Project project, Model model) {
         //
         List<Album> albums = albumService.listAlbums(project.getId());
@@ -34,8 +33,9 @@ public class AlbumWidget {
         return "modules/photo/album-list";
     }
 
+    @RequiresProject
+    @RequiresProjectUser
     @RequestMapping("album-edit")
-    @Constraints({Constraint.PROJECT_NOT_NULL, Constraint.PROJECT_USER_NOT_NULL})
     public String doEdit(@RequestParam(required = false) Long albumId, @WidgetAttribute Project project, @WidgetAttribute ProjectUser projectUser, Model model) {
         //
         Album album = new Album();

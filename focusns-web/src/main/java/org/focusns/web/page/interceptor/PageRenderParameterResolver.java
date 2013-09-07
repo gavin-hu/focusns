@@ -55,7 +55,7 @@ public class PageRenderParameterResolver implements PageRenderInterceptor, Appli
     }
 
     @Override
-    public void beforeRender(HttpServletRequest request, HttpServletResponse response) {
+    public boolean beforeRender(HttpServletRequest request, HttpServletResponse response) {
         //
         Map<String, String> parameterMap = WebUtils.getMatrixParameters(request);
         String lookupPath = urlPathHelper.getLookupPathForRequest(request);
@@ -86,7 +86,8 @@ public class PageRenderParameterResolver implements PageRenderInterceptor, Appli
         if (projectUser != null) {
             request.setAttribute(Keys.REQUEST_PROJECT_USER, projectUser);
         }
-
+        //
+        return true;
     }
 
     @Override
